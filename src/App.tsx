@@ -1,5 +1,5 @@
 import ThemeProvider from './studento-library/ThemeProvider';
-import Description from './studento-library/utilities/Description';
+import Sidenote from './studento-library/utilities/Sidenote';
 import SystemState, { StateType } from './studento-library/utilities/SystemState';
 import styled from 'styled-components';
 import { BtnCTAL, BtnCTAM, BtnCTAS } from './studento-library/buttons/components/BtnCTA';
@@ -11,6 +11,8 @@ import { BtnConfirmL, BtnConfirmM } from './studento-library/buttons/components/
 import { BtnDangerL, BtnDangerM } from './studento-library/buttons/components/BtnDanger';
 import { BtnCloseL, BtnCloseM } from './studento-library/buttons/components/BtnClose';
 import PopupBase from './studento-library/popups/base-components/PopupBase';
+import { IconL } from './studento-library/buttons/shared/Icon';
+import PopupSuccess from './studento-library/popups/components/PopupSuccess';
 
 const StyledApp = styled.div`
   font-family: 'Varela Round', sans-serif;
@@ -48,9 +50,9 @@ function App() {
                 <SystemState type={StateType.Success}>
                   Grades added.
                 </SystemState>
-                <Description>
+                <Sidenote>
                   Grades added.
-                </Description>
+                </Sidenote>
                 <BtnCTAL icon={"login"} isAfter={false} onClick={() => console.log("Pressed")}>LOGIN</BtnCTAL>
                 <BtnCTAM icon={"login"} isAfter={false} onClick={() => console.log("Pressed")}>LOGIN</BtnCTAM>
                 <BtnPrimaryL icon={"login"} isAfter={false} onClick={() => console.log("Pressed")}>LOGIN</BtnPrimaryL>
@@ -67,6 +69,7 @@ function App() {
                 <BtnDangerM icon={"login"} isAfter={false} onClick={() => console.log("Pressed")}>LOGIN</BtnDangerM>
                 <BtnCloseL onClick={() => console.log("Pressed")}>LOGIN</BtnCloseL>
                 <BtnCloseM onClick={() => console.log("Pressed")}>LOGIN</BtnCloseM>
+                <PopupSuccess></PopupSuccess>
               </div>
             </ThemeProvider>
           </StyledApp>
