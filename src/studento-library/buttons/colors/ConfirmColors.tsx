@@ -1,9 +1,9 @@
 const ConfirmColors = {
-    shadow: "rgba(71, 153, 37, 0.3)",
+    shadow: "rgba(71, 153, 37, 0.22)",
     txtShadow: "rgba(69, 60, 48, 0.15)",
     Default: {
-        bg1: "#3DB82C",
-        bg2: "#37E01F",
+        bg1: "#4AA33E",
+        bg2: "#5EDB4D",
         txt: "#FFF",
     },
     Hover: {

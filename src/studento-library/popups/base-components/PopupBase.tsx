@@ -1,4 +1,4 @@
-import { createRef, FC, ReactNode, useEffect, useState } from "react";
+import { createRef, FC, ReactNode, useEffect } from "react";
 import { useThemeContext } from "../../ThemeProvider";
 import styled from "styled-components";
 import Sidenote from '../../utilities/Sidenote';
@@ -12,6 +12,10 @@ interface IStyledOpened {
     isOpened: boolean;
 }
 
+interface IStyledPopupWrapper {
+    width?: string;
+}
+
 const StyledBackground = styled.div<IStyledOpened>`
     display: ${props => props.isOpened ? "block" : "none"};
     position: absolute;
@@ -22,13 +26,13 @@ const StyledBackground = styled.div<IStyledOpened>`
     height: 100%;
 `;
 
-const StyledPopupWrapper = styled.div`
+const StyledPopupWrapper = styled.div<IStyledPopupWrapper>`
     display: flex;
     position: absolute;
     flex-flow: column nowrap;
     gap: 16px;
     align-items: center;
-    width: 500px;
+    width: ${props => props.width ? props.width : "400px"};
     height: fit-content;
     top: 25%;
     left: 50%;
@@ -48,30 +52,33 @@ const StyledPopupContent = styled.div<IStyledPopupProps>`
     height: fit-content;
     font-size: 18px;
 
-    button:first-of-type {
+    & > button:first-of-type {
         position: absolute;
-        top: 26px;
-        right: 32px;
+        top: ${props => props.borderRadius};
+        right: ${props => props.borderRadius};
     }
 `;
 
 const StyledTitle = styled.h2`
     font-size: 32px;
+    line-height: 22px;
     margin-top: 0;
-    margin-bottom: 16px;
+    margin-bottom: 24px;
 `;
 
 interface IPopupBaseProps {
     title: string;
     sidenote?: string;
     children: ReactNode;
+    isOpened: boolean;
+    setIsOpened: React.Dispatch<React.SetStateAction<boolean>>;
+    width?: string;
 }
 
 const PopupBase:FC<IPopupBaseProps> = (props) => {
     const { borderRadius } = useThemeContext();
-    const { title, sidenote, children } = props;
+    const { title, sidenote, children, isOpened, setIsOpened } = props;
     const PopupBaseRef = createRef<any>();
-    const [isOpened, setIsOpened] = useState<boolean>(true);
 
     const checkClickOutside = (e: any) => {
         if (!PopupBaseRef.current.contains(e.target)) {

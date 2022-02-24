@@ -1,10 +1,29 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import PopupBase from "../base-components/PopupBase";
+import { BtnConfirmL } from '../../buttons/components/BtnConfirm';
+import styled from "styled-components";
 
-const PopupSuccess:FC = (props) => {
+interface IPopupSuccess {
+    title: string;
+    children?: string;
+    btnText: string;
+}
+
+const StyledButton = styled.div`
+    margin-top: 24px;
+`
+
+const PopupSuccess:FC<IPopupSuccess> = (props) => {
+    const { title, children, btnText } = props;
+    const [ isOpened, setIsOpened ] = useState<boolean>(true);
 
     return (
-        <PopupBase title={"Random"}>Wowoasdad asdasd dsa dassaadsdasadswowow</PopupBase>
+        <PopupBase title={title} isOpened={isOpened} setIsOpened={setIsOpened}>
+            {children}
+            <StyledButton>
+                <BtnConfirmL onClick={() => setIsOpened(false)}>{btnText}</BtnConfirmL>
+            </StyledButton>
+        </PopupBase>
     )
 }
 

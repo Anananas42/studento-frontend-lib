@@ -22,7 +22,7 @@ const StyledConfirm = styled.button<IStyledBtn>`
     text-decoration: none;
     cursor: pointer;
     text-shadow: 2px 2px 8px ${ConfirmColors.txtShadow};
-    box-shadow: 2px 4px 16px -2px ${ConfirmColors.shadow};
+    box-shadow: 2px 4px 8px -2px ${ConfirmColors.shadow};
 
     :hover {
         color: ${ConfirmColors.Hover.txt};

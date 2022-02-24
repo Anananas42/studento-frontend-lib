@@ -8,7 +8,7 @@ const DangerColors = {
         txt: "#fff",
     },
     Active: {
-        bg: "#F7392D",
+        bg: "#F03326",
         txt: "#fff",
     },
     Disabled: {

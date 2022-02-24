@@ -12,8 +12,8 @@ const CTAColors = {
         txt: "#FFF",
     },
     Active: {
-        bg1: "#1C9EFF",
-        bg2: "#2465FF",
+        bg1: "#0A53FF",
+        bg2: "#0A8DFF",
         txt: "#FFF",
     },
     Disabled: {

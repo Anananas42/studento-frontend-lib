@@ -64,12 +64,13 @@ function App() {
                 <BtnOutlineL icon={"login"} isAfter={false} onClick={() => console.log("Pressed")}>LOGIN</BtnOutlineL>
                 <BtnOutlineM icon={"login"} isAfter={false} onClick={() => console.log("Pressed")}>LOGIN</BtnOutlineM>
                 <BtnConfirmL icon={"login"} isAfter={false} onClick={() => console.log("Pressed")}>LOGIN</BtnConfirmL>
+                <BtnPrimaryL icon={"login"} isAfter={false} onClick={() => console.log("Pressed")}>LOGIN</BtnPrimaryL>
                 <BtnConfirmM icon={"login"} isAfter={false} onClick={() => console.log("Pressed")}>LOGIN</BtnConfirmM>
                 <BtnDangerL icon={"login"} isAfter={false} onClick={() => console.log("Pressed")}>LOGIN</BtnDangerL>
                 <BtnDangerM icon={"login"} isAfter={false} onClick={() => console.log("Pressed")}>LOGIN</BtnDangerM>
                 <BtnCloseL onClick={() => console.log("Pressed")}>LOGIN</BtnCloseL>
                 <BtnCloseM onClick={() => console.log("Pressed")}>LOGIN</BtnCloseM>
-                <PopupSuccess></PopupSuccess>
+                <PopupSuccess title={"Good Job!"} btnText={"close"}>Your application has been successful.</PopupSuccess>
               </div>
             </ThemeProvider>
           </StyledApp>
