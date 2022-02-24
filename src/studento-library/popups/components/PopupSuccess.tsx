@@ -6,6 +6,7 @@ import styled from "styled-components";
 interface IPopupSuccess {
     title: string;
     children?: string;
+    sidenote?: string;
     btnText: string;
 }
 
@@ -14,11 +15,11 @@ const StyledButton = styled.div`
 `
 
 const PopupSuccess:FC<IPopupSuccess> = (props) => {
-    const { title, children, btnText } = props;
+    const { title, children, btnText, sidenote } = props;
     const [ isOpened, setIsOpened ] = useState<boolean>(true);
 
     return (
-        <PopupBase title={title} isOpened={isOpened} setIsOpened={setIsOpened}>
+        <PopupBase title={title} isOpened={isOpened} setIsOpened={setIsOpened} sidenote={sidenote}>
             {children}
             <StyledButton>
                 <BtnConfirmL onClick={() => setIsOpened(false)}>{btnText}</BtnConfirmL>

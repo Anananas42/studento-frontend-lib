@@ -7,6 +7,7 @@ import styled from "styled-components";
 interface IPopupDelete {
     title: string;
     children?: string;
+    sidenote?: string;
     event: Function;
 }
 
@@ -20,11 +21,11 @@ const StyledButtons = styled.div`
 `
 
 const PopupDelete:FC<IPopupDelete> = (props) => {
-    const { title, children, event } = props;
+    const { title, children, event, sidenote } = props;
     const [ isOpened, setIsOpened ] = useState<boolean>(true);
 
     return (
-        <PopupBase title={title} isOpened={isOpened} setIsOpened={setIsOpened}>
+        <PopupBase title={title} isOpened={isOpened} setIsOpened={setIsOpened} sidenote={sidenote}>
             {children}
             <StyledButtons>
                 <BtnTertiaryL onClick={() => setIsOpened(false)}>cancel</BtnTertiaryL>
