@@ -13,6 +13,7 @@ import { BtnCloseL, BtnCloseM } from './studento-library/buttons/components/BtnC
 import PopupBase from './studento-library/popups/base-components/PopupBase';
 import { IconL } from './studento-library/buttons/shared/Icon';
 import PopupSuccess from './studento-library/popups/components/PopupSuccess';
+import PopupDelete from './studento-library/popups/components/PopupDelete';
 
 const StyledApp = styled.div`
   font-family: 'Varela Round', sans-serif;
@@ -70,7 +71,7 @@ function App() {
                 <BtnDangerM icon={"login"} isAfter={false} onClick={() => console.log("Pressed")}>LOGIN</BtnDangerM>
                 <BtnCloseL onClick={() => console.log("Pressed")}>LOGIN</BtnCloseL>
                 <BtnCloseM onClick={() => console.log("Pressed")}>LOGIN</BtnCloseM>
-                <PopupSuccess title={"Good Job!"} btnText={"close"}>Your application has been successful.</PopupSuccess>
+                <PopupDelete title={"Good Job!"} event={() => console.log("deleting")}>Your application has been successful.</PopupDelete>
               </div>
             </ThemeProvider>
           </StyledApp>
