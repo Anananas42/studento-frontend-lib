@@ -77,7 +77,7 @@ interface IPopupBaseProps {
 
 const PopupBase:FC<IPopupBaseProps> = (props) => {
     const { borderRadius } = useThemeContext();
-    const { title, sidenote, children, isOpened, setIsOpened } = props;
+    const { title, sidenote, children, isOpened, setIsOpened, width } = props;
     const PopupBaseRef = createRef<any>();
 
     useEffect(() => {
@@ -93,7 +93,7 @@ const PopupBase:FC<IPopupBaseProps> = (props) => {
             window.removeEventListener('click', checkClickOutside);
             return;
         }
-        
+
         if (!PopupBaseRef.current.contains(e.target)) {
             setIsOpened(false);
             window.removeEventListener('click', checkClickOutside);
@@ -102,7 +102,7 @@ const PopupBase:FC<IPopupBaseProps> = (props) => {
 
     return (
         <StyledBackground isOpened={isOpened}>
-            <StyledPopupWrapper ref={PopupBaseRef}>
+            <StyledPopupWrapper ref={PopupBaseRef} width={width}>
                 <StyledPopupContent borderRadius={borderRadius}>
                     <StyledTitle>{title}</StyledTitle>
                     <BtnCloseL onClick={() => setIsOpened(false)}/>
