@@ -8,19 +8,20 @@ interface IPopupConfirm {
     title: string;
     children?: string;
     btnText: string;
+    event: Function;
 }
 
 const StyledButtons = styled.div`
     display: flex;
     flex-flow: row nowrap;
     width: 100%;
-    justify-content: space-between;
+    justify-content: center;
     gap: 16px;
     margin-top: 24px;
 `
 
 const PopupConfirm:FC<IPopupConfirm> = (props) => {
-    const { title, children, btnText } = props;
+    const { title, children, btnText, event } = props;
     const [ isOpened, setIsOpened ] = useState<boolean>(true);
 
     return (
@@ -28,7 +29,7 @@ const PopupConfirm:FC<IPopupConfirm> = (props) => {
             {children}
             <StyledButtons>
                 <BtnTertiaryL onClick={() => setIsOpened(false)}>cancel</BtnTertiaryL>
-                <BtnConfirmL icon={"confirm"} onClick={() => setIsOpened(false)}>{btnText}</BtnConfirmL>
+                <BtnConfirmL icon={"check"} onClick={() => {setIsOpened(false); event()}}>{btnText}</BtnConfirmL>
             </StyledButtons>
         </PopupBase>
     )
