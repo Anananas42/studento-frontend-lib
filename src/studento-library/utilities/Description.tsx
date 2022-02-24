@@ -1,9 +1,10 @@
 import { FC } from 'react';
-import { useThemeContext, colorSet } from '../ThemeProvider';
+import { IColorSet } from '../themes/ThemeColor';
+import { useThemeContext } from '../ThemeProvider';
 import styled from 'styled-components';
 
 interface IDescription {
-    colors: colorSet;
+    colors: IColorSet;
     borderRadius: string;
 }
 
