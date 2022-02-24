@@ -20,7 +20,7 @@ const PopupSuccess:FC<IPopupSuccess> = (props) => {
 
     return (
         <PopupBase title={title} isOpened={isOpened} setIsOpened={setIsOpened} sidenote={sidenote}>
-            {children}
+            <div style={{textAlign: "center"}}>{children}</div>
             <StyledButton>
                 <BtnConfirmL onClick={() => setIsOpened(false)}>{btnText}</BtnConfirmL>
             </StyledButton>

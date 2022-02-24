@@ -72,7 +72,7 @@ function App() {
                 <BtnDangerM icon={"login"} isAfter={false} onClick={() => console.log("Pressed")}>LOGIN</BtnDangerM>
                 <BtnCloseL onClick={() => console.log("Pressed")}>LOGIN</BtnCloseL>
                 <BtnCloseM onClick={() => console.log("Pressed")}>LOGIN</BtnCloseM>
-                <PopupConfirm title={"Good Job!"} event={() => console.log("deleting")} btnText={"lol"}>Your application has been successful.</PopupConfirm>
+                <PopupConfirm title={"Good Job!"} event={() => console.log("deleting")} btnText={"lol"}>Your application has been successful. We are now going to write a few more words to make this text a bit longer.</PopupConfirm>
               </div>
             </ThemeProvider>
           </StyledApp>
