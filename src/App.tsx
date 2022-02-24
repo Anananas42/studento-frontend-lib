@@ -73,7 +73,7 @@ function App() {
                 <BtnDangerM icon={"login"} isAfter={false} onClick={() => console.log("Pressed")}>LOGIN</BtnDangerM>
                 <BtnCloseL onClick={() => console.log("Pressed")}>LOGIN</BtnCloseL>
                 <BtnCloseM onClick={() => console.log("Pressed")}>LOGIN</BtnCloseM>
-                <PopupUpload title={"Upload File"} fileHandler={() => console.log("uploading")} btnText={"Upload"}>Přetáhni, nebo klikni a zvol soubor pro nahrání.</PopupUpload>
+                <PopupUpload title={"Upload File"} fileHandler={() => console.log("uploading")} maxSizeMB={5}/>
               </div>
             </ThemeProvider>
           </StyledApp>
