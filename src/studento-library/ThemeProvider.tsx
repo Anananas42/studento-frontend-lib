@@ -24,7 +24,7 @@ export const useThemeContext = () => {
     const context = useContext(ThemeContext);
 
     if (context === undefined) {
-        throw Error("<ThemeContext.Provider> is missing. Wrap your components to provide the context.");
+        throw Error("<ThemeContext.Provider> is missing. Wrap your App component to provide the context.");
     }
 
     return context;

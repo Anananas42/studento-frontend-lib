@@ -10,6 +10,7 @@ import { BtnSecondaryL, BtnSecondaryM } from './studento-library/buttons/compone
 import { BtnConfirmL, BtnConfirmM } from './studento-library/buttons/components/BtnConfirm';
 import { BtnDangerL, BtnDangerM } from './studento-library/buttons/components/BtnDanger';
 import { BtnCloseL, BtnCloseM } from './studento-library/buttons/components/BtnClose';
+import PopupBase from './studento-library/popups/base-components/PopupBase';
 
 const StyledApp = styled.div`
   font-family: 'Varela Round', sans-serif;
