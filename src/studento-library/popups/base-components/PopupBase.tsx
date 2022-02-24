@@ -8,18 +8,14 @@ interface IStyledPopupProps {
     borderRadius: string;
 }
 
-interface IStyledOpened {
-    isOpened: boolean;
-}
-
 interface IStyledPopupWrapper {
     width?: string;
 }
 
-const StyledBackground = styled.div<IStyledOpened>`
-    display: ${props => props.isOpened ? "block" : "none"};
+const StyledBackground = styled.div`
+    display: block;
     position: absolute;
-    background-color: rgba(69, 65, 59, 0.7);
+    background-color: rgba(69, 65, 59, 0.75);
     top: 0;
     left: 0;
     width: 100%;
@@ -101,16 +97,20 @@ const PopupBase:FC<IPopupBaseProps> = (props) => {
     }
 
     return (
-        <StyledBackground isOpened={isOpened}>
-            <StyledPopupWrapper ref={PopupBaseRef} width={width}>
-                <StyledPopupContent borderRadius={borderRadius}>
-                    <StyledTitle>{title}</StyledTitle>
-                    <BtnCloseL onClick={() => setIsOpened(false)}/>
-                    {children}
-                </StyledPopupContent>
-                {sidenote && <Sidenote>{sidenote}</Sidenote>}
-            </StyledPopupWrapper>
-        </StyledBackground>
+        <>
+            {isOpened &&
+            <StyledBackground>
+                <StyledPopupWrapper ref={PopupBaseRef} width={width}>
+                    <StyledPopupContent borderRadius={borderRadius}>
+                        <StyledTitle>{title}</StyledTitle>
+                        <BtnCloseL onClick={() => setIsOpened(false)}/>
+                        {children}
+                    </StyledPopupContent>
+                    {sidenote && <Sidenote>{sidenote}</Sidenote>}
+                </StyledPopupWrapper>
+            </StyledBackground>}
+        </>
+        
     )
 }
 

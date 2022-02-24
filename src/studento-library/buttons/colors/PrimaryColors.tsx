@@ -17,8 +17,8 @@ const PrimaryColors = {
         txt: "#453C30",
     },
     Disabled: {
-        bg: "#FFE5B5",
-        txt: "#C9B69B",
+        bg: "#ffe5b5b5",
+        txt: "#c9b69bbc",
     }
 }
 

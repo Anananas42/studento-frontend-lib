@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import styled from 'styled-components';
-import { useThemeContext } from '../../ThemeProvider';
+import { useThemeContext } from '../ThemeProvider';
 
 interface IconSizedProps {
     children: string;
@@ -62,6 +62,14 @@ const Icon:FC<IconProps> = (props) => {
                 {props.children}
             </StyledIcon>
         </StyledWrapper>
+    )
+}
+
+export const IconXL:FC<IconSizedProps> = (props) => {
+    return (
+        <Icon {...props} fontSize={'48px'} width={'48px'} height={'48px'}>
+            {props.children}
+        </Icon>
     )
 }
 

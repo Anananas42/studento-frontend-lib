@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { IconL, IconM, IconS } from "../shared/Icon";
+import { IconL, IconM, IconS } from "../../utilities/Icon";
 import BtnSizes from "../shared/ButtonSizes";
 import BtnOutlineBase from "../base-components/BtnOutlineBase";
 

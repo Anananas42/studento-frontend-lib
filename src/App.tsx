@@ -11,7 +11,7 @@ import { BtnConfirmL, BtnConfirmM } from './studento-library/buttons/components/
 import { BtnDangerL, BtnDangerM } from './studento-library/buttons/components/BtnDanger';
 import { BtnCloseL, BtnCloseM } from './studento-library/buttons/components/BtnClose';
 import PopupBase from './studento-library/popups/base-components/PopupBase';
-import { IconL } from './studento-library/buttons/shared/Icon';
+import { IconL } from './studento-library/utilities/Icon';
 import PopupSuccess from './studento-library/popups/components/PopupSuccess';
 import PopupDelete from './studento-library/popups/components/PopupDelete';
 import PopupConfirm from './studento-library/popups/components/PopupConfirm';
@@ -73,7 +73,7 @@ function App() {
                 <BtnDangerM icon={"login"} isAfter={false} onClick={() => console.log("Pressed")}>LOGIN</BtnDangerM>
                 <BtnCloseL onClick={() => console.log("Pressed")}>LOGIN</BtnCloseL>
                 <BtnCloseM onClick={() => console.log("Pressed")}>LOGIN</BtnCloseM>
-                <PopupUpload title={"Upload File"} event={() => console.log("uploading")} btnText={"Upload"}>Your application has been successful. We are now going to write a few more words to make this text a bit longer.</PopupUpload>
+                <PopupUpload title={"Upload File"} fileHandler={() => console.log("uploading")} btnText={"Upload"}>Přetáhni, nebo klikni a zvol soubor pro nahrání.</PopupUpload>
               </div>
             </ThemeProvider>
           </StyledApp>
