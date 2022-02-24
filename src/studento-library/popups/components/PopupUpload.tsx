@@ -33,6 +33,7 @@ const StyledButtons = styled.div`
 `;
 
 const StyledUpload = styled.div<IStyledUpload>`
+    position: relative;
     display: flex;
     flex-flow: column nowrap;
     justify-content: center;
@@ -48,6 +49,13 @@ const StyledUpload = styled.div<IStyledUpload>`
     text-align: "center";
     background-color: ${props => props.isDragOver ? "rgba(69, 65, 59, 0.6)" : "#fff"};
     background-clip: padding-box;
+    overflow: hidden;
+    overflow-wrap: break-word;
+    
+`;
+
+const StyledHiddenInput = styled.input`
+    display: none;
 `;
 
 const PopupUpload:FC<IPopupUpload> = (props) => {
@@ -58,8 +66,13 @@ const PopupUpload:FC<IPopupUpload> = (props) => {
     const [file, setFile] = useState<any>();
 
     const UploadRef = createRef<any>();
+    const HiddenInputRef = createRef<any>();
     const [initWidth, setInitWidth] = useState<number | undefined>();
     const [initHeight, setInitHeight] = useState<number | undefined>();
+
+    const inputClick = (e:any) => {
+        HiddenInputRef.current.click();
+    };
 
     useEffect(() => {
         setInitWidth(UploadRef.current.offsetWidth);
@@ -67,10 +80,11 @@ const PopupUpload:FC<IPopupUpload> = (props) => {
     }, []);
 
     return (
-        <PopupBase title={title} isOpened={isOpened} setIsOpened={setIsOpened} sidenote={sidenote}>
+        <PopupBase title={title} isOpened={isOpened} setIsOpened={setIsOpened} sidenote={"Maximalni velikost souboru je 5MB."}>
             <DragAndDrop setIsDragOver={setIsDragOver} fileHandler={(files:any) => setFile(files[0])}>
-                <StyledUpload ref={UploadRef} borderRadius={borderRadius} fill={colors.fill} isDragOver={isDragOver} width={initWidth} height={initHeight}>
-                    {isDragOver ? `Nahrát soubor...` : children}
+                <StyledUpload ref={UploadRef} borderRadius={borderRadius} fill={colors.fill} isDragOver={isDragOver} width={initWidth} height={initHeight} onClick={inputClick}>
+                    <StyledHiddenInput ref={HiddenInputRef} type="file" name="file" onChange={e => e.target.files && e.target.files.length > 0 && setFile(e.target.files[0])}/>
+                    {isDragOver ? `Nahrát soubor...` : (file ? <span style={{fontWeight: 700}}>{file.name}</span> : children)}
                 </StyledUpload>
             </DragAndDrop>
             <StyledButtons>
