@@ -72,7 +72,6 @@ function App() {
                 <BtnDangerM icon={"login"} isAfter={false} onClick={() => console.log("Pressed")}>LOGIN</BtnDangerM>
                 <BtnCloseL onClick={() => console.log("Pressed")}>LOGIN</BtnCloseL>
                 <BtnCloseM onClick={() => console.log("Pressed")}>LOGIN</BtnCloseM>
-                <PopupDelete title={"Good Job!"} event={() => console.log("deleting")}>Your application has been successful.</PopupDelete>
                 <PopupConfirm title={"Good Job!"} event={() => console.log("deleting")} btnText={"lol"}>Your application has been successful.</PopupConfirm>
               </div>
             </ThemeProvider>

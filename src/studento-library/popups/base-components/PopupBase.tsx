@@ -80,22 +80,26 @@ const PopupBase:FC<IPopupBaseProps> = (props) => {
     const { title, sidenote, children, isOpened, setIsOpened } = props;
     const PopupBaseRef = createRef<any>();
 
+    useEffect(() => {
+        window.addEventListener('click', checkClickOutside);
+        
+        return () => {
+            window.removeEventListener('click', checkClickOutside);
+        }
+    }, []);
+
     const checkClickOutside = (e: any) => {
+        if (PopupBaseRef.current === null) {
+            window.removeEventListener('click', checkClickOutside);
+            return;
+        }
+        
         if (!PopupBaseRef.current.contains(e.target)) {
             setIsOpened(false);
             window.removeEventListener('click', checkClickOutside);
         }
     }
 
-    useEffect(() => {
-        window.addEventListener("click", checkClickOutside);
-        
-        return () => {
-           window.removeEventListener('click', checkClickOutside);
-        }
-    }, []);
-    
-    
     return (
         <StyledBackground isOpened={isOpened}>
             <StyledPopupWrapper ref={PopupBaseRef}>
