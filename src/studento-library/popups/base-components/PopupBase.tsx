@@ -6,6 +6,7 @@ import { BtnCloseL } from '../../buttons/components/BtnClose';
 
 interface IStyledPopupProps {
     borderRadius: string;
+    fill: string;
 }
 
 interface IStyledPopupWrapper {
@@ -41,6 +42,7 @@ const StyledPopupContent = styled.div<IStyledPopupProps>`
     flex-flow: column nowrap;
     align-items: center;
     border-radius: ${props => props.borderRadius};
+    color: ${props => props.fill};
     background-color: #fff;
     box-shadow: 2px 2px 8px -2px rgba(69, 65, 59, 0.26);
     padding: 32px;
@@ -72,7 +74,7 @@ interface IPopupBaseProps {
 }
 
 const PopupBase:FC<IPopupBaseProps> = (props) => {
-    const { borderRadius } = useThemeContext();
+    const { borderRadius, colors } = useThemeContext();
     const { title, sidenote, children, isOpened, setIsOpened, width } = props;
     const PopupBaseRef = createRef<any>();
 
@@ -101,7 +103,7 @@ const PopupBase:FC<IPopupBaseProps> = (props) => {
             {isOpened &&
             <StyledBackground>
                 <StyledPopupWrapper ref={PopupBaseRef} width={width}>
-                    <StyledPopupContent borderRadius={borderRadius}>
+                    <StyledPopupContent borderRadius={borderRadius} fill={colors.fill}>
                         <StyledTitle>{title}</StyledTitle>
                         <BtnCloseL onClick={() => setIsOpened(false)}/>
                         {children}
