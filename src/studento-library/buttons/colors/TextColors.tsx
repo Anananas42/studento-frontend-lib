@@ -1,4 +1,4 @@
-const CloseColors = {
+const TextColors = {
     Default: {
         bg: "#fff",
         txt: "#453C30",
@@ -17,4 +17,4 @@ const CloseColors = {
     }
 }
 
-export default CloseColors;
+export default TextColors;
