@@ -1,6 +1,7 @@
-import { useState, createContext, FC, SetStateAction, useContext } from 'react';
+import { useState, createContext, FC, SetStateAction, useContext, ReactNode } from 'react';
 import { IColorSet, colorsLightMode, colorsDarkMode } from './themes/ThemeColor';
 import { ILanguageSet, LanguageSets } from './themes/ThemeLanguage';
+import SystemNotificationManager, { INotificationEntry } from './utilities/SystemNotificationManager';
 
 type ThemeMode = "light" | "dark";
 type Language = keyof typeof LanguageSets;
@@ -13,14 +14,13 @@ interface ThemeContextValue {
     languageMap: ILanguageSet;
     setLanguage: React.Dispatch<SetStateAction<Language>>;
     colors: IColorSet;
-    SystemNotificationDurationMS: number;
+    pushSystemNotification: {(entry: INotificationEntry): void};
+    clearSystemNotifications: {(): void};
 }
 
 const ThemeContext = createContext<ThemeContextValue | undefined>(undefined);
 
 const borderRadius = "10px";
-const SystemNotificationDurationMS = 5000;
-
 
 export const useThemeContext = () => {
     const context = useContext(ThemeContext);
@@ -32,15 +32,30 @@ export const useThemeContext = () => {
     return context;
 }
 
-const ThemeProvider:FC = (props) => {
+interface IThemeProps {
+    chilren?: ReactNode;
+}
+
+const ThemeProvider:FC<IThemeProps> = (props) => {
     const [mode, setMode] = useState<ThemeMode>("light");
     const [language, setLanguage] = useState<Language>("en");
 
     const colors = mode === "light" ? colorsLightMode : colorsDarkMode;
     const languageMap = LanguageSets[language];
 
+    const [systemNotification, setSystemNotification] = useState<INotificationEntry | null>(null);
+
+    const pushSystemNotification = (entry: INotificationEntry) => {
+        setSystemNotification(entry);
+    }
+
+    const clearSystemNotifications = () => {
+        setSystemNotification(null);
+    }
+
     return (
-        <ThemeContext.Provider value={{ mode, setMode, language, languageMap, setLanguage, colors, borderRadius, SystemNotificationDurationMS }}>
+        <ThemeContext.Provider value={{ mode, setMode, language, languageMap, setLanguage, colors, borderRadius, pushSystemNotification, clearSystemNotifications}}>
+            <SystemNotificationManager newEntry={systemNotification}/>
             { props.children }
         </ThemeContext.Provider>
     )

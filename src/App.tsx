@@ -1,8 +1,5 @@
 import ThemeProvider from './studento-library/ThemeProvider';
-import Sidenote from './studento-library/utilities/Sidenote';
-import SystemNotification, { NotificationType } from './studento-library/utilities/SystemNotification';
 import styled from 'styled-components';
-import { BtnCTAL, BtnCTAM, BtnCTAS } from './studento-library/buttons/components/BtnCTA';
 import { BtnPrimaryL, BtnPrimaryM } from './studento-library/buttons/components/BtnPrimary';
 import { BtnOutlineL, BtnOutlineM } from './studento-library/buttons/components/BtnOutline';
 import { BtnTertiaryL, BtnTertiaryM } from './studento-library/buttons/components/BtnTertiary';
@@ -10,13 +7,8 @@ import { BtnSecondaryL, BtnSecondaryM } from './studento-library/buttons/compone
 import { BtnConfirmL, BtnConfirmM } from './studento-library/buttons/components/BtnConfirm';
 import { BtnDangerL, BtnDangerM } from './studento-library/buttons/components/BtnDanger';
 import { BtnCloseL, BtnCloseM } from './studento-library/buttons/components/BtnClose';
-import PopupBase from './studento-library/popups/base-components/PopupBase';
-import { IconL } from './studento-library/utilities/Icon';
-import PopupSuccess from './studento-library/popups/components/PopupSuccess';
-import PopupDelete from './studento-library/popups/components/PopupDelete';
-import PopupConfirm from './studento-library/popups/components/PopupConfirm';
 import PopupUpload from './studento-library/popups/components/PopupUpload';
-import { useState } from 'react';
+import TestComponent from './studento-library/TestComponentUseless';
 
 const StyledApp = styled.div`
   font-family: 'Varela Round', sans-serif;
@@ -29,7 +21,6 @@ const StyledApp = styled.div`
 `;
 
 function App() {
-  const [isClosed, setIsClosed] = useState<boolean>(false);
 
   return (
       <>
@@ -43,23 +34,7 @@ function App() {
           <StyledApp>
             <ThemeProvider>
               <div style={{display:"flex", flexFlow:"column nowrap", gap:"10px"}}>
-                <SystemNotification type={NotificationType.Error} isForceHidden={isClosed}>
-                  Wow! Oh my god, I can't believe this is really happening. React is such a great tool.
-                </SystemNotification>
-                {/*<SystemNotification type={NotificationType.Warning}>
-                  Notice me finally!
-                </SystemNotification>
-                <SystemNotification type={NotificationType.Error}>
-                  Ah bummer, our server is refusing to work again...
-                </SystemNotification>
-                <SystemNotification type={NotificationType.Success}>
-                  Grades added.
-                </SystemNotification>
-                <Sidenote>
-                  Grades added.
-                </Sidenote>*/}
-                <BtnCTAL icon={"login"} isAfter={false} onClick={() => setIsClosed(true)}>LOGIN</BtnCTAL>
-                <BtnCTAM icon={"login"} isAfter={false} onClick={() => console.log("Pressed")}>LOGIN</BtnCTAM>
+                <TestComponent></TestComponent>
                 <BtnPrimaryL icon={"login"} isAfter={false} onClick={() => console.log("Pressed")}>LOGIN</BtnPrimaryL>
                 <BtnPrimaryM icon={"login"} isAfter={false} onClick={() => console.log("Pressed")}>LOGIN</BtnPrimaryM>
                 <BtnSecondaryL icon={"login"} isAfter={false} onClick={() => console.log("Pressed")}>LOGIN</BtnSecondaryL>

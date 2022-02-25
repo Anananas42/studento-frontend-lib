@@ -1,4 +1,4 @@
-import { FC, ReactNode, useEffect, useState } from 'react';
+import { FC, ReactNode, useEffect, useRef, useState } from 'react';
 import { useThemeContext } from '../ThemeProvider';
 import styled from 'styled-components';
 
@@ -8,12 +8,7 @@ interface IStyledSystemNotification {
 };
 
 const StyledSystemNotification = styled.div<IStyledSystemNotification>`
-    position: absolute;
-    z-index: 9999;
-    left: 50%;
-    top: 40px;
     opacity: 1;
-    transform: translateX(-50%);
     border-radius: ${props => props.borderRadius};
     color: ${props => props.colors.dark};
     background-color: ${props => props.colors.light};
@@ -64,8 +59,7 @@ const StyledSystemNotification = styled.div<IStyledSystemNotification>`
 interface IProps {
     children: ReactNode;
     type: NotificationType;
-    isForceHidden: boolean;
-    isImmediate?: boolean;
+    isFading: boolean;
 }
 
 interface ISystemColors {
@@ -74,45 +68,42 @@ interface ISystemColors {
 }
 
 const SystemNotification:FC<IProps> = (props) => {
-    const outDurationMS = 500;
-    const { isForceHidden, isImmediate } = props;
-    const { colors, borderRadius, SystemNotificationDurationMS } = useThemeContext();
-    const [isUnmounted, setIsUnmounted] = useState<boolean>(false);
+    const { type, isFading } = props;
+    const [isHidden, setIsHidden] = useState<boolean>(true);
     const [isTransitioning, setIsTransitioning] = useState<boolean>(false);
-    
+    const { colors, borderRadius } = useThemeContext();
+    const isMounted = useRef(false);
+
     useEffect(() => {
-        const timer1 = setTimeout(() => {
+        console.log("running");
+        const timer = setTimeout(() => {
             setIsTransitioning(true);
-        }, SystemNotificationDurationMS - outDurationMS);
+        }, 4500);
 
-        const timer2 = setTimeout(() => {
-            setIsUnmounted(true);
-        }, SystemNotificationDurationMS);
-
-        return () => {clearTimeout(timer1); clearTimeout(timer2);}
+        return () => {clearTimeout(timer)};
     }, []);
 
     useEffect(() => {
-        isForceHidden && forceClose(undefined);
-    }, [isForceHidden]);
+        if (isMounted.current){
+            console.log("transitioning");
+            const timer = setTimeout(() => {
+                setIsHidden(false);
+            }, 500);
 
-    const forceClose = (e:React.MouseEvent<HTMLDivElement, MouseEvent> | undefined) => {
-        if (e) {
-            e.preventDefault();
-            e.stopPropagation();
+            return () => {clearTimeout(timer)};
+        }else{
+            isMounted.current = true;
         }
-        setIsTransitioning(true);
-        setTimeout(() => {
-            setIsUnmounted(true);
-        }, isImmediate ? 0 : outDurationMS);
-    }
+        
+    }, [isTransitioning])
 
     return (
         <>
-            {!isUnmounted &&
-            <StyledSystemNotification colors={colors.System[props.type]} borderRadius={borderRadius} className={isTransitioning ? "fadeOut" : ""} onClick={forceClose}>
+        {isHidden &&
+            <StyledSystemNotification colors={colors.System[type]} borderRadius={borderRadius} className={isFading || isTransitioning ? "fadeOut" : ""} onClick={() => setIsTransitioning(true)}>
                 {props.children}
-            </StyledSystemNotification>}
+            </StyledSystemNotification>
+        }
         </>
     )
 }
