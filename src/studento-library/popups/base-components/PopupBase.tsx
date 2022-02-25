@@ -1,4 +1,4 @@
-import { createRef, FC, ReactNode, useEffect } from "react";
+import { FC, ReactNode, useEffect, useRef } from "react";
 import { useThemeContext } from "../../ThemeProvider";
 import styled from "styled-components";
 import Sidenote from '../../utilities/Sidenote';
@@ -76,7 +76,7 @@ interface IPopupBaseProps {
 const PopupBase:FC<IPopupBaseProps> = (props) => {
     const { borderRadius, colors } = useThemeContext();
     const { title, sidenote, children, isOpened, setIsOpened, width } = props;
-    const PopupBaseRef = createRef<any>();
+    const PopupBaseRef = useRef<any>();
 
     useEffect(() => {
         const checkClickOutside = (e: any) => {
