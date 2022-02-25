@@ -2,12 +2,12 @@ import { FC, ReactNode, useEffect, useState } from 'react';
 import { useThemeContext } from '../ThemeProvider';
 import styled from 'styled-components';
 
-interface IStyledSystemState {
+interface IStyledSystemNotification {
     colors: ISystemColors;
     borderRadius: string;
 };
 
-const StyledSystemState = styled.div<IStyledSystemState>`
+const StyledSystemNotification = styled.div<IStyledSystemNotification>`
     position: absolute;
     z-index: 9999;
     left: 50%;
@@ -63,8 +63,9 @@ const StyledSystemState = styled.div<IStyledSystemState>`
 
 interface IProps {
     children: ReactNode;
-    type: StateType;
+    type: NotificationType;
     isForceHidden: boolean;
+    isImmediate?: boolean;
 }
 
 interface ISystemColors {
@@ -72,21 +73,21 @@ interface ISystemColors {
     light: string;  
 }
 
-const SystemState:FC<IProps> = (props) => {
+const SystemNotification:FC<IProps> = (props) => {
     const outDurationMS = 500;
-    const { isForceHidden } = props;
-    const { colors, borderRadius, systemStateDurationMS } = useThemeContext();
+    const { isForceHidden, isImmediate } = props;
+    const { colors, borderRadius, SystemNotificationDurationMS } = useThemeContext();
     const [isUnmounted, setIsUnmounted] = useState<boolean>(false);
     const [isTransitioning, setIsTransitioning] = useState<boolean>(false);
     
     useEffect(() => {
         const timer1 = setTimeout(() => {
             setIsTransitioning(true);
-        }, systemStateDurationMS - outDurationMS);
+        }, SystemNotificationDurationMS - outDurationMS);
 
         const timer2 = setTimeout(() => {
             setIsUnmounted(true);
-        }, systemStateDurationMS);
+        }, SystemNotificationDurationMS);
 
         return () => {clearTimeout(timer1); clearTimeout(timer2);}
     }, []);
@@ -103,24 +104,24 @@ const SystemState:FC<IProps> = (props) => {
         setIsTransitioning(true);
         setTimeout(() => {
             setIsUnmounted(true);
-        }, outDurationMS);
+        }, isImmediate ? 0 : outDurationMS);
     }
 
     return (
         <>
             {!isUnmounted &&
-            <StyledSystemState colors={colors.System[props.type]} borderRadius={borderRadius} className={isTransitioning ? "fadeOut" : ""} onClick={forceClose}>
+            <StyledSystemNotification colors={colors.System[props.type]} borderRadius={borderRadius} className={isTransitioning ? "fadeOut" : ""} onClick={forceClose}>
                 {props.children}
-            </StyledSystemState>}
+            </StyledSystemNotification>}
         </>
     )
 }
 
-export enum StateType {
+export enum NotificationType {
     Error = "Error",
     Neutral = "Neutral",
     Success = "Success",
     Warning = "Warning"
 }
 
-export default SystemState;
+export default SystemNotification;

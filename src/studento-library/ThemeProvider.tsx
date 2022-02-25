@@ -13,13 +13,13 @@ interface ThemeContextValue {
     languageMap: ILanguageSet;
     setLanguage: React.Dispatch<SetStateAction<Language>>;
     colors: IColorSet;
-    systemStateDurationMS: number;
+    SystemNotificationDurationMS: number;
 }
 
 const ThemeContext = createContext<ThemeContextValue | undefined>(undefined);
 
 const borderRadius = "10px";
-const systemStateDurationMS = 8000;
+const SystemNotificationDurationMS = 5000;
 
 
 export const useThemeContext = () => {
@@ -40,7 +40,7 @@ const ThemeProvider:FC = (props) => {
     const languageMap = LanguageSets[language];
 
     return (
-        <ThemeContext.Provider value={{ mode, setMode, language, languageMap, setLanguage, colors, borderRadius, systemStateDurationMS }}>
+        <ThemeContext.Provider value={{ mode, setMode, language, languageMap, setLanguage, colors, borderRadius, SystemNotificationDurationMS }}>
             { props.children }
         </ThemeContext.Provider>
     )

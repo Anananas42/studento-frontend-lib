@@ -1,6 +1,6 @@
 import ThemeProvider from './studento-library/ThemeProvider';
 import Sidenote from './studento-library/utilities/Sidenote';
-import SystemState, { StateType } from './studento-library/utilities/SystemState';
+import SystemNotification, { NotificationType } from './studento-library/utilities/SystemNotification';
 import styled from 'styled-components';
 import { BtnCTAL, BtnCTAM, BtnCTAS } from './studento-library/buttons/components/BtnCTA';
 import { BtnPrimaryL, BtnPrimaryM } from './studento-library/buttons/components/BtnPrimary';
@@ -43,18 +43,18 @@ function App() {
           <StyledApp>
             <ThemeProvider>
               <div style={{display:"flex", flexFlow:"column nowrap", gap:"10px"}}>
-                <SystemState type={StateType.Error} isForceHidden={isClosed}>
+                <SystemNotification type={NotificationType.Error} isForceHidden={isClosed}>
                   Wow! Oh my god, I can't believe this is really happening. React is such a great tool.
-                </SystemState>
-                {/*<SystemState type={StateType.Warning}>
+                </SystemNotification>
+                {/*<SystemNotification type={NotificationType.Warning}>
                   Notice me finally!
-                </SystemState>
-                <SystemState type={StateType.Error}>
+                </SystemNotification>
+                <SystemNotification type={NotificationType.Error}>
                   Ah bummer, our server is refusing to work again...
-                </SystemState>
-                <SystemState type={StateType.Success}>
+                </SystemNotification>
+                <SystemNotification type={NotificationType.Success}>
                   Grades added.
-                </SystemState>
+                </SystemNotification>
                 <Sidenote>
                   Grades added.
                 </Sidenote>*/}

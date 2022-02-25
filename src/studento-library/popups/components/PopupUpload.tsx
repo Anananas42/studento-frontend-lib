@@ -5,7 +5,6 @@ import { BtnTertiaryL } from "../../buttons/components/BtnTertiary";
 import styled from "styled-components";
 import { useThemeContext } from "../../ThemeProvider";
 import DragAndDrop from '../../utilities/DragAndDrop';
-import SystemState, { StateType } from "../../utilities/SystemState";
 
 interface IPopupUpload {
     title: string;
