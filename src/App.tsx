@@ -8,7 +8,8 @@ import { BtnConfirmL, BtnConfirmM } from './studento-library/buttons/components/
 import { BtnDangerL, BtnDangerM } from './studento-library/buttons/components/BtnDanger';
 import { BtnCloseL, BtnCloseM } from './studento-library/buttons/components/BtnClose';
 import PopupUpload from './studento-library/popups/components/PopupUpload';
-import { BtnTextL } from './studento-library/buttons/components/BtnText';
+import { BtnTextL, BtnTextM } from './studento-library/buttons/components/BtnText';
+import { BtnCTAL, BtnCTAM } from './studento-library/buttons/components/BtnCTA';
 
 const StyledApp = styled.div`
   font-family: 'Varela Round', sans-serif;
@@ -33,8 +34,11 @@ function App() {
         <body>
           <StyledApp>
             <ThemeProvider>
-              <div style={{display:"flex", flexFlow:"column nowrap", gap:"10px"}}>
+              <div style={{display:"flex", flexFlow:"row wrap", gap:"10px", maxWidth: "800px"}}>
                 <BtnTextL onClick={() => console.log("Pressed")}>Woah</BtnTextL>
+                <BtnTextM onClick={() => console.log("Pressed")}>Woah</BtnTextM>
+                <BtnCTAL icon={"login"} isAfter={false} onClick={() => console.log("Pressed")}>LOGIN</BtnCTAL>
+                <BtnCTAM icon={"login"} isAfter={true} onClick={() => console.log("Pressed")}>LOGIN</BtnCTAM>
                 <BtnPrimaryL icon={"login"} isAfter={false} onClick={() => console.log("Pressed")}>LOGIN</BtnPrimaryL>
                 <BtnPrimaryM icon={"login"} isAfter={false} onClick={() => console.log("Pressed")}>LOGIN</BtnPrimaryM>
                 <BtnSecondaryL icon={"login"} isAfter={false} onClick={() => console.log("Pressed")}>LOGIN</BtnSecondaryL>
@@ -44,12 +48,11 @@ function App() {
                 <BtnOutlineL icon={"login"} isAfter={false} onClick={() => console.log("Pressed")}>LOGIN</BtnOutlineL>
                 <BtnOutlineM icon={"login"} isAfter={false} onClick={() => console.log("Pressed")}>LOGIN</BtnOutlineM>
                 <BtnConfirmL icon={"login"} isAfter={false} onClick={() => console.log("Pressed")}>LOGIN</BtnConfirmL>
-                <BtnPrimaryL icon={"login"} isAfter={false} onClick={() => console.log("Pressed")}>LOGIN</BtnPrimaryL>
                 <BtnConfirmM icon={"login"} isAfter={false} onClick={() => console.log("Pressed")}>LOGIN</BtnConfirmM>
                 <BtnDangerL icon={"login"} isAfter={false} onClick={() => console.log("Pressed")}>LOGIN</BtnDangerL>
                 <BtnDangerM icon={"login"} isAfter={false} onClick={() => console.log("Pressed")}>LOGIN</BtnDangerM>
-                <BtnCloseL onClick={() => console.log("Pressed")}>LOGIN</BtnCloseL>
-                <BtnCloseM onClick={() => console.log("Pressed")}>LOGIN</BtnCloseM>
+                <BtnCloseL onClick={() => console.log("Pressed")} />
+                <BtnCloseM onClick={() => console.log("Pressed")} />
                 <PopupUpload title={"Upload File"} fileHandler={() => console.log("uploading")} maxSizeMB={5}/>
               </div>
             </ThemeProvider>

@@ -4,6 +4,7 @@ import BtnSizes from "../shared/ButtonSizes";
 import BtnCloseBase from "../base-components/BtnCloseBase";
 
 interface CloseProps {
+    children?: undefined;
     icon?: string;
     onClick: Function;
     isDisabled?: boolean;

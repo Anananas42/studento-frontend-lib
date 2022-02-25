@@ -10,7 +10,12 @@ const CzSet:ILanguageSet = {
     BtnLogin: "přihlásit",
 }
 
-export const LanguageSets = {
+interface ILanguageSets {
+    [key: string]: ILanguageSet;
+}
+
+export const LanguageSets:ILanguageSets = {
     en: EnSet,
     cz: CzSet,
 }
+
