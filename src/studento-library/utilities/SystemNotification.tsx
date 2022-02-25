@@ -38,21 +38,26 @@ const StyledSystemNotification = styled.div<IStyledSystemNotification>`
     }
 
     &.fadeOut {
-        animation-duration: 0.6s;
+        animation-duration: 1s;
         animation-name: fadeOut;
 
         @keyframes fadeOut {
             from {
                 opacity: 1;
             }
+            50% {
+                opacity: 0;
+                margin-top: 0;
+            }
             to {
+                margin-top: -62px;
                 opacity: 0;
             }
         }
     }
 
     :active {
-        opacity: 0.8;
+        filter: saturate(1.6);
     }
 `;
 
@@ -60,6 +65,7 @@ interface IProps {
     children: ReactNode;
     type: NotificationType;
     isFading: boolean;
+    removeCallback: () => void;
 }
 
 interface ISystemColors {
@@ -68,8 +74,8 @@ interface ISystemColors {
 }
 
 const SystemNotification:FC<IProps> = (props) => {
-    const { type, isFading } = props;
-    const [isHidden, setIsHidden] = useState<boolean>(true);
+    const { type, isFading, removeCallback } = props;
+    const [isHidden, setIsHidden] = useState<boolean>(false);
     const [isTransitioning, setIsTransitioning] = useState<boolean>(false);
     const { colors, borderRadius } = useThemeContext();
     const isMounted = useRef(false);
@@ -87,19 +93,20 @@ const SystemNotification:FC<IProps> = (props) => {
         if (isMounted.current){
             console.log("transitioning");
             const timer = setTimeout(() => {
-                setIsHidden(false);
-            }, 500);
+                removeCallback();
+                setIsHidden(true);
+            }, 950);
 
             return () => {clearTimeout(timer)};
         }else{
             isMounted.current = true;
         }
         
-    }, [isTransitioning])
+    }, [isTransitioning, isFading])
 
     return (
         <>
-        {isHidden &&
+        {!isHidden &&
             <StyledSystemNotification colors={colors.System[type]} borderRadius={borderRadius} className={isFading || isTransitioning ? "fadeOut" : ""} onClick={() => setIsTransitioning(true)}>
                 {props.children}
             </StyledSystemNotification>
