@@ -1,10 +1,11 @@
-import { createRef, FC, useEffect, useState } from "react";
+import { createRef, FC, ReactNode, useEffect, useState } from "react";
 import PopupBase from "../base-components/PopupBase";
 import { BtnPrimaryL } from "../../buttons/components/BtnPrimary";
 import { BtnTertiaryL } from "../../buttons/components/BtnTertiary";
 import styled from "styled-components";
 import { useThemeContext } from "../../ThemeProvider";
 import DragAndDrop from '../../utilities/DragAndDrop';
+import SystemState, { StateType } from "../../utilities/SystemState";
 
 interface IPopupUpload {
     title: string;
@@ -45,10 +46,18 @@ const StyledUpload = styled.div<IStyledUpload>`
     cursor: pointer;
     border-radius: ${props => props.borderRadius};
     text-align: "center";
-    background-color: ${props => props.isDragOver ? "rgba(69, 65, 59, 0.6)" : "#fff"};
+    background-color: ${props => props.isDragOver ? "rgba(69, 65, 59, 0.4)" : "#fff"};
     background-clip: padding-box;
     overflow: hidden;
     overflow-wrap: break-word;
+
+    :hover {
+        background-color: rgba(69, 65, 59, 0.2);
+    }
+
+    :active {
+        background-color: rgba(69, 65, 59, 0.4);
+    }
     
 `;
 
@@ -59,9 +68,10 @@ const StyledHiddenInput = styled.input`
 const PopupUpload:FC<IPopupUpload> = (props) => {
     const { borderRadius, colors } = useThemeContext();
     const { title, fileHandler, sidenote, maxSizeMB } = props;
-    const [ isOpened, setIsOpened ] = useState<boolean>(true);
-    const [ isDragOver, setIsDragOver ] = useState<boolean>(false);
+    const [isOpened, setIsOpened] = useState<boolean>(true);
+    const [isDragOver, setIsDragOver] = useState<boolean>(false);
     const [file, setFile] = useState<File>();
+    const [systemState, setSystemState] = useState<ReactNode>();
 
     const UploadRef = createRef<any>();
     const HiddenInputRef = createRef<any>();
@@ -73,7 +83,21 @@ const PopupUpload:FC<IPopupUpload> = (props) => {
     };
 
     const onUploadClick = (file:File) => {
+        if (file.size > maxSizeMB * 1e6) {
+            setSystemState(<SystemState type={StateType.Error}>Uploaded file exceeds size of {maxSizeMB} MB.</SystemState>);
+            setFile(undefined);
+            return;
+        }
 
+        const error = fileHandler(file);
+
+        if (error) {
+            setSystemState(<SystemState type={StateType.Error}>Uploaded file exceeds size of {maxSizeMB} MB.</SystemState>);
+            setFile(undefined);
+            return;
+        }
+
+        setIsOpened(false);
     }
 
     useEffect(() => {
@@ -82,18 +106,20 @@ const PopupUpload:FC<IPopupUpload> = (props) => {
     }, []);
 
     return (
-        <PopupBase title={title} isOpened={isOpened} setIsOpened={setIsOpened} sidenote={sidenote}>
-            <DragAndDrop setIsDragOver={setIsDragOver} fileHandler={(files:any) => setFile(files[0])}>
-                <StyledUpload ref={UploadRef} borderRadius={borderRadius} fill={colors.fill} isDragOver={isDragOver} width={initWidth} height={initHeight} onClick={inputClick}>
-                    <StyledHiddenInput ref={HiddenInputRef} type="file" name="file" onChange={e => e.target.files && e.target.files.length > 0 && setFile(e.target.files[0])}/>
-                    {isDragOver ? `Nahrát soubor...` : (file ? <span style={{fontWeight: 700}}>{file.name}</span> : <span>Přetáhni, nebo klikni a zvol soubor pro nahrání.<br/>(max. {maxSizeMB} MB)</span>)}
-                </StyledUpload>
-            </DragAndDrop>
-            <StyledButtons>
-                <BtnTertiaryL onClick={() => setIsOpened(false)}>cancel</BtnTertiaryL>
-                <BtnPrimaryL icon={"upload"} onClick={onUploadClick} isDisabled={file === undefined}>upload</BtnPrimaryL>
-            </StyledButtons>
-        </PopupBase> 
+        <>{!file && isOpened && systemState}
+            <PopupBase title={title} isOpened={isOpened} setIsOpened={setIsOpened} sidenote={sidenote}>
+                <DragAndDrop setIsDragOver={setIsDragOver} fileHandler={(files:any) => setFile(files[0])}>
+                    <StyledUpload ref={UploadRef} borderRadius={borderRadius} fill={colors.fill} isDragOver={isDragOver} width={initWidth} height={initHeight} onClick={inputClick}>
+                        <StyledHiddenInput ref={HiddenInputRef} type="file" name="file" onChange={e => e.target.files && e.target.files.length > 0 && setFile(e.target.files[0])}/>
+                        {isDragOver ? `Nahrát soubor...` : (file ? <span style={{fontWeight: 700}}>{file.name}</span> : <span>Přetáhni, nebo klikni a zvol soubor pro nahrání.<br/>(max. {maxSizeMB} MB)</span>)}
+                    </StyledUpload>
+                </DragAndDrop>
+                <StyledButtons>
+                    <BtnTertiaryL onClick={() => setIsOpened(false)}>cancel</BtnTertiaryL>
+                    <BtnPrimaryL icon={"upload"} onClick={() => file && onUploadClick(file)} isDisabled={file === undefined}>upload</BtnPrimaryL>
+                </StyledButtons>
+            </PopupBase>
+        </>
     )
 }
 

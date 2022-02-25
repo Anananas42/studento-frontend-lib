@@ -9,8 +9,6 @@ const DragAndDrop:FC<IDragAndDropProps> = (props) => {
     const { setIsDragOver, fileHandler, ...rest } = props;
     const DragAndDropRef = createRef<any>();
 
-    const [dragCount, setDragCount] = useState<number>(0);
-
     const handleDrag = (e: any) => {
         e.preventDefault();
         e.stopPropagation();
@@ -41,7 +39,6 @@ const DragAndDrop:FC<IDragAndDropProps> = (props) => {
 
     useEffect(() => {
         const ref = DragAndDropRef.current;
-        setDragCount(0);
         ref.addEventListener('dragenter', handleDragIn);
         ref.addEventListener('dragleave', handleDragOut);
         ref.addEventListener('dragover', handleDrag);

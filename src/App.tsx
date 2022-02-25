@@ -41,7 +41,7 @@ function App() {
           <StyledApp>
             <ThemeProvider>
               <div style={{display:"flex", flexFlow:"column nowrap", gap:"10px"}}>
-                <SystemState type={StateType.Neutral}>
+                {/*<SystemState type={StateType.Error}>
                   Wow! Oh my god, I can't believe this is really happening. React is such a great tool.
                 </SystemState>
                 <SystemState type={StateType.Warning}>
@@ -55,7 +55,7 @@ function App() {
                 </SystemState>
                 <Sidenote>
                   Grades added.
-                </Sidenote>
+                </Sidenote>*/}
                 <BtnCTAL icon={"login"} isAfter={false} onClick={() => console.log("Pressed")}>LOGIN</BtnCTAL>
                 <BtnCTAM icon={"login"} isAfter={false} onClick={() => console.log("Pressed")}>LOGIN</BtnCTAM>
                 <BtnPrimaryL icon={"login"} isAfter={false} onClick={() => console.log("Pressed")}>LOGIN</BtnPrimaryL>

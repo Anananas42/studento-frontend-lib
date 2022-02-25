@@ -44,8 +44,8 @@ export const colorsLightMode: IColorSet = {
 
     System: {
         Error: {
-            dark: "#EB4438",
-            light: "#FEE2E6"  
+            dark: "#EB2013",
+            light: "#FEC9D1"  
         },
         Warning: {
             dark: "#FA8314",

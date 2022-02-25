@@ -77,24 +77,24 @@ const PopupBase:FC<IPopupBaseProps> = (props) => {
     const PopupBaseRef = createRef<any>();
 
     useEffect(() => {
+        const checkClickOutside = (e: any) => {
+            if (PopupBaseRef.current === null) {
+                window.removeEventListener('click', checkClickOutside);
+                return;
+            }
+    
+            if (!PopupBaseRef.current.contains(e.target)) {
+                setIsOpened(false);
+                window.removeEventListener('click', checkClickOutside);
+            }
+        }
+
         window.addEventListener('click', checkClickOutside);
         
         return () => {
             window.removeEventListener('click', checkClickOutside);
         }
     }, []);
-
-    const checkClickOutside = (e: any) => {
-        if (PopupBaseRef.current === null) {
-            window.removeEventListener('click', checkClickOutside);
-            return;
-        }
-
-        if (!PopupBaseRef.current.contains(e.target)) {
-            setIsOpened(false);
-            window.removeEventListener('click', checkClickOutside);
-        }
-    }
 
     return (
         <>
