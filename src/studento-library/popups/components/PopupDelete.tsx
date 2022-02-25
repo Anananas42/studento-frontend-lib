@@ -25,7 +25,7 @@ const PopupDelete:FC<IPopupDelete> = (props) => {
     const [ isOpened, setIsOpened ] = useState<boolean>(true);
 
     return (
-        <PopupBase title={title} isOpened={isOpened} setIsOpened={setIsOpened} sidenote={sidenote}>
+        <PopupBase title={title} isOpened={isOpened} setIsOpened={setIsOpened} sidenote={sidenote} width={"360px"}>
             <div style={{textAlign: "center"}}>{children}</div>
             <StyledButtons>
                 <BtnTertiaryL onClick={() => setIsOpened(false)}>cancel</BtnTertiaryL>

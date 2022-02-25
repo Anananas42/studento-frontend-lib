@@ -115,7 +115,7 @@ const PopupUpload:FC<IPopupUpload> = (props) => {
                     </StyledUpload>
                 </DragAndDrop>
                 <StyledButtons>
-                    <BtnTertiaryL onClick={() => {setIsOpened(false); clearSystemNotifications()}}>cancel</BtnTertiaryL>
+                    <BtnTertiaryL onClick={() => {setIsOpened(false); clearSystemNotifications()}}>CANCEL</BtnTertiaryL>
                     <BtnPrimaryL icon={"upload"} onClick={() => file && onUploadClick(file)} isDisabled={file === undefined}>upload</BtnPrimaryL>
                 </StyledButtons>
             </PopupBase>

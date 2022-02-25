@@ -29,7 +29,7 @@ const PopupConfirm:FC<IPopupConfirm> = (props) => {
         <PopupBase title={title} isOpened={isOpened} setIsOpened={setIsOpened} sidenote={sidenote}>
             <div style={{textAlign: "center"}}>{children}</div>
             <StyledButtons>
-                <BtnTertiaryL onClick={() => setIsOpened(false)}>cancel</BtnTertiaryL>
+                <BtnTertiaryL onClick={() => setIsOpened(false)}>CANCEL</BtnTertiaryL>
                 <BtnConfirmL icon={"check"} onClick={() => {setIsOpened(false); event()}}>{btnText}</BtnConfirmL>
             </StyledButtons>
         </PopupBase>

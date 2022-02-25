@@ -34,6 +34,7 @@ const StyledPopupWrapper = styled.div<IStyledPopupWrapper>`
     top: 25%;
     left: 50%;
     transform: translateX(-50%);
+    z-index: 100;
 `;
 
 const StyledPopupContent = styled.div<IStyledPopupProps>`
@@ -76,6 +77,7 @@ interface IPopupBaseProps {
 const PopupBase:FC<IPopupBaseProps> = (props) => {
     const { borderRadius, colors } = useThemeContext();
     const { title, sidenote, children, isOpened, setIsOpened, width } = props;
+    
     const PopupBaseRef = useRef<any>();
 
     useEffect(() => {
