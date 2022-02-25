@@ -8,7 +8,7 @@ import { BtnConfirmL, BtnConfirmM } from './studento-library/buttons/components/
 import { BtnDangerL, BtnDangerM } from './studento-library/buttons/components/BtnDanger';
 import { BtnCloseL, BtnCloseM } from './studento-library/buttons/components/BtnClose';
 import PopupUpload from './studento-library/popups/components/PopupUpload';
-import TestComponent from './studento-library/TestComponentUseless';
+import { BtnTextL } from './studento-library/buttons/components/BtnText';
 
 const StyledApp = styled.div`
   font-family: 'Varela Round', sans-serif;
@@ -34,7 +34,7 @@ function App() {
           <StyledApp>
             <ThemeProvider>
               <div style={{display:"flex", flexFlow:"column nowrap", gap:"10px"}}>
-                <TestComponent></TestComponent>
+                <BtnTextL onClick={() => console.log("Pressed")}>Woah</BtnTextL>
                 <BtnPrimaryL icon={"login"} isAfter={false} onClick={() => console.log("Pressed")}>LOGIN</BtnPrimaryL>
                 <BtnPrimaryM icon={"login"} isAfter={false} onClick={() => console.log("Pressed")}>LOGIN</BtnPrimaryM>
                 <BtnSecondaryL icon={"login"} isAfter={false} onClick={() => console.log("Pressed")}>LOGIN</BtnSecondaryL>

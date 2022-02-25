@@ -54,7 +54,7 @@ interface OutlineProps {
 
 const BtnOutlineBase:FC<OutlineProps> = (props) => {
 
-    return <BtnBase {...props} StyledButton={StyledOutline} />
+    return <BtnBase {...props} StyledButton={StyledOutline}/>
 }
 
 export default BtnOutlineBase;

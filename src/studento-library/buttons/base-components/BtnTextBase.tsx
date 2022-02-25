@@ -1,13 +1,13 @@
 import { IBtnSizes } from '../shared/ButtonSizes';
-import TertiaryColors from '../colors/TertiaryColors';
+import CloseColors from '../colors/CloseColors';
 import styled from 'styled-components';
 import { FC, ReactElement } from 'react';
 import BtnBase, { IStyledBtn } from '../shared/BtnBase';
 
-const StyledTertiary = styled.button<IStyledBtn>`
+const StyledText = styled.button<IStyledBtn>`
     border-radius: ${props => props.borderRadius};
-    color: ${TertiaryColors.Default.txt};
-    background-color: ${TertiaryColors.Default.bg};
+    color: ${CloseColors.Default.txt};
+    background-color: ${CloseColors.Default.bg};
     font-family: 'Roboto', sans-serif;
     font-weight: 600;
     font-size: ${props => props.fontSize};
@@ -22,23 +22,23 @@ const StyledTertiary = styled.button<IStyledBtn>`
     border: none;
 
     :hover {
-        color: ${TertiaryColors.Hover.txt};
-        background-color: ${TertiaryColors.Hover.bg};
+        color: ${CloseColors.Hover.txt};
+        background-color: ${CloseColors.Hover.bg};
     }
 
     :active {
-        color: ${TertiaryColors.Active.txt};
-        background-color: ${TertiaryColors.Active.bg};
+        color: ${CloseColors.Active.txt};
+        background-color: ${CloseColors.Active.bg};
     }
 
     :disabled {
-        color: ${TertiaryColors.Disabled.txt};
-        background-color: ${TertiaryColors.Disabled.bg};
+        color: ${CloseColors.Disabled.txt};
+        background-color: ${CloseColors.Disabled.bg};
         pointer-events: none;
     }
 `;
 
-interface TertiaryProps {
+interface TextProps {
     children?: string;
     isAfter?: boolean;
     Icon?: ReactElement;
@@ -47,9 +47,9 @@ interface TertiaryProps {
     isDisabled?: boolean;
 }
 
-const BtnTertiaryBase:FC<TertiaryProps> = (props) => {
+const BtnTextBase:FC<TextProps> = (props) => {
 
-    return <BtnBase {...props} StyledButton={StyledTertiary}/>
+    return <BtnBase {...props} StyledButton={StyledText} />
 }
 
-export default BtnTertiaryBase;
+export default BtnTextBase;

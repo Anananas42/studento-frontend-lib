@@ -19,11 +19,12 @@ interface BtnProps {
     onClick: Function;
     isDisabled?: boolean;
     StyledButton: StyledComponent<"button", any, IStyledBtn, never>;
+    forceUppercase?: boolean;
 }
 
 const BtnBase:FC<BtnProps> = (props) => {
     const { borderRadius } = useThemeContext();
-    const { Icon, isAfter, Sizes, children, onClick, isDisabled, StyledButton } = props;
+    const { Icon, isAfter, Sizes, children, onClick, isDisabled, StyledButton, forceUppercase } = props;
     const padH = Sizes.paddingH;
     const padV = Sizes.paddingV;
 
@@ -33,7 +34,7 @@ const BtnBase:FC<BtnProps> = (props) => {
 
     return(
         <StyledButton borderRadius={borderRadius} padding={padding} fontSize={fontSize} lineHeight={lineHeight} disabled={isDisabled} onClick={onClick}>
-            {Icon && !isAfter && Icon}{children && children.toUpperCase()}{Icon && isAfter && Icon}
+            {Icon && !isAfter && Icon}{children && (forceUppercase ? children.toUpperCase() : children)}{Icon && isAfter && Icon}
         </StyledButton>
     )
 }
