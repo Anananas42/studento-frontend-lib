@@ -5,11 +5,12 @@ import { BtnTertiaryL } from "../../buttons/components/BtnTertiary";
 import styled from "styled-components";
 import { useThemeContext } from "../../ThemeProvider";
 import DragAndDrop from '../../utilities/DragAndDrop';
+import { NotificationType } from "../../utilities/SystemNotification";
 
 interface IPopupUpload {
     title: string;
     sidenote?: string;
-    fileHandler: Function;
+    fileHandler: (file: any) => string | void;
     maxSizeMB: number;
 }
 
@@ -65,7 +66,7 @@ const StyledHiddenInput = styled.input`
 `;
 
 const PopupUpload:FC<IPopupUpload> = (props) => {
-    const { borderRadius, colors } = useThemeContext();
+    const { borderRadius, colors, pushSystemNotification, clearSystemNotifications } = useThemeContext();
     const { title, fileHandler, sidenote, maxSizeMB } = props;
     const [isOpened, setIsOpened] = useState<boolean>(true);
     const [isDragOver, setIsDragOver] = useState<boolean>(false);
@@ -83,7 +84,7 @@ const PopupUpload:FC<IPopupUpload> = (props) => {
 
     const onUploadClick = (file:File) => {
         if (file.size > maxSizeMB * 1e6) {
-            //setSystemState(<SystemState type={StateType.Error}>Uploaded file exceeds size of {maxSizeMB} MB.</SystemState>);
+            pushSystemNotification({text: `Uploaded file exceeds size of ${maxSizeMB} MB.`, type: NotificationType.Error});
             setFile(undefined);
             return;
         }
@@ -91,7 +92,7 @@ const PopupUpload:FC<IPopupUpload> = (props) => {
         const error = fileHandler(file);
 
         if (error) {
-            //setSystemState(<SystemState type={StateType.Error}>Uploaded file exceeds size of {maxSizeMB} MB.</SystemState>);
+            pushSystemNotification({text: error, type: NotificationType.Error});
             setFile(undefined);
             return;
         }
@@ -114,7 +115,7 @@ const PopupUpload:FC<IPopupUpload> = (props) => {
                     </StyledUpload>
                 </DragAndDrop>
                 <StyledButtons>
-                    <BtnTertiaryL onClick={() => setIsOpened(false)}>cancel</BtnTertiaryL>
+                    <BtnTertiaryL onClick={() => {setIsOpened(false); clearSystemNotifications()}}>cancel</BtnTertiaryL>
                     <BtnPrimaryL icon={"upload"} onClick={() => file && onUploadClick(file)} isDisabled={file === undefined}>upload</BtnPrimaryL>
                 </StyledButtons>
             </PopupBase>
