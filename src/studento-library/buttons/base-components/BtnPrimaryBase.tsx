@@ -14,6 +14,7 @@ const StyledPrimary = styled.button<IStyledBtn>`
     font-size: ${props => props.fontSize};
     line-height: ${props => props.lineHeight};
     padding: ${props => props.padding};
+    height: ${props => `calc(${props.lineHeight} + 2*${props.paddingV})`};
     width: fit-content;
     display: flex;
     flex-flow: row;

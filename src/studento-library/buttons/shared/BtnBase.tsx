@@ -8,6 +8,7 @@ export interface IStyledBtn {
     padding: string;
     fontSize: string;
     lineHeight: string;
+    paddingV: string;
     onClick: any;
 }
 
@@ -33,7 +34,7 @@ const BtnBase:FC<BtnProps> = (props) => {
     const lineHeight = Sizes.lineHeight;
 
     return(
-        <StyledButton borderRadius={borderRadius} padding={padding} fontSize={fontSize} lineHeight={lineHeight} disabled={isDisabled} onClick={onClick}>
+        <StyledButton borderRadius={borderRadius} padding={padding} paddingV={padV} fontSize={fontSize} lineHeight={lineHeight} disabled={isDisabled} onClick={onClick}>
             {Icon && !isAfter && Icon}{children && (forceUppercase ? children.toUpperCase() : children)}{Icon && isAfter && Icon}
         </StyledButton>
     )

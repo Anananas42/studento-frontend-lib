@@ -15,6 +15,7 @@ const StyledConfirm = styled.button<IStyledBtn>`
     line-height: ${props => props.lineHeight};
     padding: ${props => props.padding};
     width: fit-content;
+    height: ${props => `calc(${props.lineHeight} + 2*${props.paddingV})`};
     display: flex;
     flex-flow: row;
     align-items: center;
