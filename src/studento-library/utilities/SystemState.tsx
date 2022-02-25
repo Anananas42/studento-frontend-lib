@@ -12,7 +12,7 @@ const StyledSystemState = styled.div<IStyledSystemState>`
     z-index: 9999;
     left: 50%;
     top: 40px;
-    opacity: 0;
+    opacity: 1;
     transform: translateX(-50%);
     border-radius: ${props => props.borderRadius};
     color: ${props => props.colors.dark};
@@ -20,38 +20,51 @@ const StyledSystemState = styled.div<IStyledSystemState>`
     min-width: 260px;
     width: fit-content;
     user-select: none;
+    cursor: pointer;
     font-size: 20px;
     line-height: 14px;
     font-weight: 700;
     text-align: center;
     padding: 18px 36px;
-    border: 3px solid ${props => props.colors.dark};
+    border: 2px solid ${props => props.colors.dark};
     box-shadow: 0 4px 16px -2px ${props => props.colors.dark + "42"};
-    animation-duration: 6s;
-    animation-name: fade;
+    animation-duration: 0.5s;
+    animation-name: fadeIn;
 
-    @keyframes fade {
+    @keyframes fadeIn {
         from {
             opacity: 0;
+            top: 0;
         }
 
-        20% {
+        to {
             opacity: 1;
         }
+    }
 
-        90% {
-            opacity: 1;
-        }
+    &.fadeOut {
+        animation-duration: 0.6s;
+        animation-name: fadeOut;
 
-        100% {
-            opacity: 0;
+        @keyframes fadeOut {
+            from {
+                opacity: 1;
+            }
+            to {
+                opacity: 0;
+            }
         }
+    }
+
+    :active {
+        opacity: 0.8;
     }
 `;
 
 interface IProps {
     children: ReactNode;
-    type: StateType
+    type: StateType;
+    isForceHidden: boolean;
 }
 
 interface ISystemColors {
@@ -60,18 +73,43 @@ interface ISystemColors {
 }
 
 const SystemState:FC<IProps> = (props) => {
-    const { colors, borderRadius } = useThemeContext();
+    const outDurationMS = 500;
+    const { isForceHidden } = props;
+    const { colors, borderRadius, systemStateDurationMS } = useThemeContext();
     const [isUnmounted, setIsUnmounted] = useState<boolean>(false);
+    const [isTransitioning, setIsTransitioning] = useState<boolean>(false);
     
     useEffect(() => {
-        const timer = setTimeout(() => setIsUnmounted(true), 8000);
-        return () => clearTimeout(timer);
+        const timer1 = setTimeout(() => {
+            setIsTransitioning(true);
+        }, systemStateDurationMS - outDurationMS);
+
+        const timer2 = setTimeout(() => {
+            setIsUnmounted(true);
+        }, systemStateDurationMS);
+
+        return () => {clearTimeout(timer1); clearTimeout(timer2);}
     }, []);
+
+    useEffect(() => {
+        isForceHidden && forceClose(undefined);
+    }, [isForceHidden]);
+
+    const forceClose = (e:React.MouseEvent<HTMLDivElement, MouseEvent> | undefined) => {
+        if (e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+        setIsTransitioning(true);
+        setTimeout(() => {
+            setIsUnmounted(true);
+        }, outDurationMS);
+    }
 
     return (
         <>
             {!isUnmounted &&
-            <StyledSystemState colors={colors.System[props.type]} borderRadius={borderRadius}>
+            <StyledSystemState colors={colors.System[props.type]} borderRadius={borderRadius} className={isTransitioning ? "fadeOut" : ""} onClick={forceClose}>
                 {props.children}
             </StyledSystemState>}
         </>

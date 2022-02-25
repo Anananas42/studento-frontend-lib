@@ -84,7 +84,7 @@ const PopupUpload:FC<IPopupUpload> = (props) => {
 
     const onUploadClick = (file:File) => {
         if (file.size > maxSizeMB * 1e6) {
-            setSystemState(<SystemState type={StateType.Error}>Uploaded file exceeds size of {maxSizeMB} MB.</SystemState>);
+            //setSystemState(<SystemState type={StateType.Error}>Uploaded file exceeds size of {maxSizeMB} MB.</SystemState>);
             setFile(undefined);
             return;
         }
@@ -92,7 +92,7 @@ const PopupUpload:FC<IPopupUpload> = (props) => {
         const error = fileHandler(file);
 
         if (error) {
-            setSystemState(<SystemState type={StateType.Error}>Uploaded file exceeds size of {maxSizeMB} MB.</SystemState>);
+            //setSystemState(<SystemState type={StateType.Error}>Uploaded file exceeds size of {maxSizeMB} MB.</SystemState>);
             setFile(undefined);
             return;
         }

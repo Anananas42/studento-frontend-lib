@@ -16,6 +16,7 @@ import PopupSuccess from './studento-library/popups/components/PopupSuccess';
 import PopupDelete from './studento-library/popups/components/PopupDelete';
 import PopupConfirm from './studento-library/popups/components/PopupConfirm';
 import PopupUpload from './studento-library/popups/components/PopupUpload';
+import { useState } from 'react';
 
 const StyledApp = styled.div`
   font-family: 'Varela Round', sans-serif;
@@ -28,6 +29,7 @@ const StyledApp = styled.div`
 `;
 
 function App() {
+  const [isClosed, setIsClosed] = useState<boolean>(false);
 
   return (
       <>
@@ -41,10 +43,10 @@ function App() {
           <StyledApp>
             <ThemeProvider>
               <div style={{display:"flex", flexFlow:"column nowrap", gap:"10px"}}>
-                {/*<SystemState type={StateType.Error}>
+                <SystemState type={StateType.Error} isForceHidden={isClosed}>
                   Wow! Oh my god, I can't believe this is really happening. React is such a great tool.
                 </SystemState>
-                <SystemState type={StateType.Warning}>
+                {/*<SystemState type={StateType.Warning}>
                   Notice me finally!
                 </SystemState>
                 <SystemState type={StateType.Error}>
@@ -56,7 +58,7 @@ function App() {
                 <Sidenote>
                   Grades added.
                 </Sidenote>*/}
-                <BtnCTAL icon={"login"} isAfter={false} onClick={() => console.log("Pressed")}>LOGIN</BtnCTAL>
+                <BtnCTAL icon={"login"} isAfter={false} onClick={() => setIsClosed(true)}>LOGIN</BtnCTAL>
                 <BtnCTAM icon={"login"} isAfter={false} onClick={() => console.log("Pressed")}>LOGIN</BtnCTAM>
                 <BtnPrimaryL icon={"login"} isAfter={false} onClick={() => console.log("Pressed")}>LOGIN</BtnPrimaryL>
                 <BtnPrimaryM icon={"login"} isAfter={false} onClick={() => console.log("Pressed")}>LOGIN</BtnPrimaryM>
