@@ -69,7 +69,6 @@ const SystemNotificationManager:FC<IManagerProps> = (props) => {
         }else{
             displayNotification(entry);
         }
-        console.log("enqueing")
     }
 
 

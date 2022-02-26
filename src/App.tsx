@@ -57,7 +57,7 @@ function App() {
                 <BtnDangerM icon={"login"} isAfter={false} onClick={() => console.log("Pressed")}>LOGIN</BtnDangerM>
                 <BtnCloseL onClick={() => console.log("Pressed")} />
                 <BtnCloseM onClick={() => console.log("Pressed")} />
-                {/*<PopupUpload title={"Upload File"} fileHandler={() => console.log("uploading")} maxSizeMB={5}/>*/}
+                <PopupUpload title={"Upload File"} fileHandler={() => console.log("uploading")} maxSizeMB={5}/>
 
 
                 <PopupSuccess title={"Blabla"} btnText={"YEAH!"} sidenote={"This is a sidenote. Available for all popups."}>Jsi si timhle opravdu jisty?</PopupSuccess>

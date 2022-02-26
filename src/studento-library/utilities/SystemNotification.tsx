@@ -1,10 +1,11 @@
-import { FC, ReactNode, useEffect, useRef, useState } from 'react';
+import { createRef, FC, ReactNode, useEffect, useRef, useState } from 'react';
 import { useThemeContext } from '../ThemeProvider';
 import styled from 'styled-components';
 
 interface IStyledSystemNotification {
     colors: ISystemColors;
     borderRadius: string;
+    animationHeight: number;
 };
 
 const StyledSystemNotification = styled.div<IStyledSystemNotification>`
@@ -50,7 +51,7 @@ const StyledSystemNotification = styled.div<IStyledSystemNotification>`
                 margin-top: 0;
             }
             to {
-                margin-top: -62px;
+                margin-top: ${props => (-8 - props.animationHeight)}px;
                 opacity: 0;
             }
         }
@@ -80,8 +81,11 @@ const SystemNotification:FC<IProps> = (props) => {
     const { colors, borderRadius } = useThemeContext();
     const isMounted = useRef(false);
 
+    const heightRef = createRef<any>();
+    const [initHeight, setInitHeight] = useState<number>(0);
+
     useEffect(() => {
-        console.log("running");
+        setInitHeight(heightRef.current.offsetHeight);
         const timer = setTimeout(() => {
             setIsTransitioning(true);
         }, 4500);
@@ -91,7 +95,6 @@ const SystemNotification:FC<IProps> = (props) => {
 
     useEffect(() => {
         if (isMounted.current){
-            console.log("transitioning");
             const timer = setTimeout(() => {
                 removeCallback();
                 setIsHidden(true);
@@ -107,7 +110,7 @@ const SystemNotification:FC<IProps> = (props) => {
     return (
         <>
         {!isHidden &&
-            <StyledSystemNotification colors={colors.System[type]} borderRadius={borderRadius} className={isFading || isTransitioning ? "fadeOut" : ""} onClick={() => setIsTransitioning(true)}>
+            <StyledSystemNotification ref={heightRef} colors={colors.System[type]} borderRadius={borderRadius} className={isFading || isTransitioning ? "fadeOut" : ""} animationHeight={initHeight} onClick={() => setIsTransitioning(true)}>
                 {props.children}
             </StyledSystemNotification>
         }
