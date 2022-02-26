@@ -1,4 +1,4 @@
-import { createRef, FC, ReactNode, useEffect, useState } from "react";
+import { createRef, FC, useEffect, useRef, useState } from "react";
 import PopupBase from "../base-components/PopupBase";
 import { BtnPrimaryL } from "../../buttons/components/BtnPrimary";
 import { BtnTertiaryL } from "../../buttons/components/BtnTertiary";
@@ -71,10 +71,9 @@ const PopupUpload:FC<IPopupUpload> = (props) => {
     const [isOpened, setIsOpened] = useState<boolean>(true);
     const [isDragOver, setIsDragOver] = useState<boolean>(false);
     const [file, setFile] = useState<File>();
-    const [systemState, setSystemState] = useState<ReactNode>();
 
-    const UploadRef = createRef<any>();
-    const HiddenInputRef = createRef<any>();
+    const UploadRef = useRef<any>();
+    const HiddenInputRef = useRef<any>();
     const [initWidth, setInitWidth] = useState<number | undefined>();
     const [initHeight, setInitHeight] = useState<number | undefined>();
 
@@ -103,10 +102,10 @@ const PopupUpload:FC<IPopupUpload> = (props) => {
     useEffect(() => {
         setInitWidth(UploadRef.current.offsetWidth);
         setInitHeight(UploadRef.current.offsetHeight);
-    }, []);
+    }, [UploadRef]);
 
     return (
-        <>{!file && isOpened && systemState}
+        <>{!file && isOpened}
             <PopupBase title={title} isOpened={isOpened} setIsOpened={setIsOpened} sidenote={sidenote}>
                 <DragAndDrop setIsDragOver={setIsDragOver} fileHandler={(files:any) => setFile(files[0])}>
                     <StyledUpload ref={UploadRef} borderRadius={borderRadius} fill={colors.fill} isDragOver={isDragOver} width={initWidth} height={initHeight} onClick={inputClick}>

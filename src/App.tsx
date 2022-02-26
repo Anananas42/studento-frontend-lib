@@ -10,9 +10,6 @@ import { BtnCloseL, BtnCloseM } from './studento-library/buttons/components/BtnC
 import PopupUpload from './studento-library/popups/components/PopupUpload';
 import { BtnTextL, BtnTextM } from './studento-library/buttons/components/BtnText';
 import { BtnCTAL, BtnCTAM } from './studento-library/buttons/components/BtnCTA';
-import PopupConfirm from './studento-library/popups/components/PopupConfirm';
-import PopupDelete from './studento-library/popups/components/PopupDelete';
-import PopupSuccess from './studento-library/popups/components/PopupSuccess';
 import TextFormBase from './studento-library/forms/base-components/TextFormBase';
 
 const StyledApp = styled.div`
@@ -58,9 +55,6 @@ function App() {
                 <BtnCloseL onClick={() => console.log("Pressed")} />
                 <BtnCloseM onClick={() => console.log("Pressed")} />
                 <PopupUpload title={"Upload File"} fileHandler={() => console.log("uploading")} maxSizeMB={5}/>
-
-
-                <PopupSuccess title={"Blabla"} btnText={"YEAH!"} sidenote={"This is a sidenote. Available for all popups."}>Jsi si timhle opravdu jisty?</PopupSuccess>
                 <TextFormBase label={"First Name"} formId={"First Name"} placeholder={"Wow"} />
 
               </div>

@@ -77,7 +77,7 @@ interface IPopupBaseProps {
 const PopupBase:FC<IPopupBaseProps> = (props) => {
     const { borderRadius, colors } = useThemeContext();
     const { title, sidenote, children, isOpened, setIsOpened, width } = props;
-    
+
     const PopupBaseRef = useRef<any>();
 
     useEffect(() => {
@@ -93,12 +93,12 @@ const PopupBase:FC<IPopupBaseProps> = (props) => {
             }
         }
 
-        window.addEventListener('click', checkClickOutside);
+        PopupBaseRef && window.addEventListener('click', checkClickOutside);
         
         return () => {
             window.removeEventListener('click', checkClickOutside);
         }
-    }, []);
+    }, [setIsOpened]);
 
     return (
         <>

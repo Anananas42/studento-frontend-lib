@@ -107,10 +107,16 @@ const SystemNotification:FC<IProps> = (props) => {
         
     }, [isTransitioning, isFading])
 
+    const onClick = (e:React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+        e.preventDefault();
+        e.stopPropagation();
+        setIsTransitioning(true);
+    }
+
     return (
         <>
         {!isHidden &&
-            <StyledSystemNotification ref={heightRef} colors={colors.System[type]} borderRadius={borderRadius} className={isFading || isTransitioning ? "fadeOut" : ""} animationHeight={initHeight} onClick={() => setIsTransitioning(true)}>
+            <StyledSystemNotification ref={heightRef} colors={colors.System[type]} borderRadius={borderRadius} className={isFading || isTransitioning ? "fadeOut" : ""} animationHeight={initHeight} onClick={onClick}>
                 {props.children}
             </StyledSystemNotification>
         }
