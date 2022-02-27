@@ -72,7 +72,6 @@ const SystemNotificationManager:FC<IManagerProps> = (props) => {
         }
     }
 
-
     const displayNotification = (entry: INotificationEntry) => {
         keyCountRef.current = keyCountRef.current + 1;
         setDisplayed([...displayed, {key: `${keyCountRef.current}`, entry}])
