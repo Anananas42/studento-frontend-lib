@@ -37,50 +37,50 @@ const maxNotificationsAtOnce = 4;
 const SystemNotificationManager:FC<IManagerProps> = (props) => {
     const { newEntry } = props;
     const keyCountRef = useRef<number>(0);
+    const displayedCountRef = useRef<number>(0);
     const queueRef = useRef<Array<INotificationEntry>>([]);
     const [displayed, setDisplayed] = useState<Array<IDisplayedNotification>>([]);
 
     useEffect(() => {
         if (newEntry) {
-            enqueueNotification(newEntry);
+            if (displayedCountRef.current >= maxNotificationsAtOnce) {
+                queueRef.current.push(newEntry);
+            }else{
+                keyCountRef.current = keyCountRef.current + 1;
+                displayedCountRef.current = displayedCountRef.current + 1;
+                setDisplayed(d => [...d, {key: `${keyCountRef.current}`, entry: newEntry}]);
+            }
         }else{
-            clearAll();
+            queueRef.current = [];
+            setDisplayed([]);
         }
     }, [newEntry]);
 
     useEffect(() => {
         const poppedNotifications:Array<INotificationEntry> = [];
-        for (let i = 0; i < maxNotificationsAtOnce - displayed.length; i++) {
+        const newlyDisplayed:Array<IDisplayedNotification> = [];
+        for (let i = 0; i < maxNotificationsAtOnce - displayedCountRef.current; i++) {
             if (queueRef.current[i]) {
-                displayNotification(queueRef.current[i]);
+                keyCountRef.current = keyCountRef.current + 1;
+                displayedCountRef.current = displayedCountRef.current + 1;
+                newlyDisplayed.push({key: `${keyCountRef.current}`, entry: queueRef.current[i]});
                 poppedNotifications.push(queueRef.current[i]);
             } 
         }
+        if (newlyDisplayed.length > 0) setDisplayed([...displayed, ...newlyDisplayed]);
         queueRef.current = queueRef.current.filter(e => !poppedNotifications.includes(e));
     }, [displayed]);
 
-    const clearAll = () => {
-        queueRef.current = [];
-        setDisplayed([]);
-    }
-
-    const enqueueNotification = (entry: INotificationEntry) => {
-        if (displayed && displayed.length >= maxNotificationsAtOnce) {
-            queueRef.current.push(entry);
-        }else{
-            displayNotification(entry);
-        }
-    }
-
-    const displayNotification = (entry: INotificationEntry) => {
-        keyCountRef.current = keyCountRef.current + 1;
-        setDisplayed([...displayed, {key: `${keyCountRef.current}`, entry}])
-    }
+    const removeNotification = (key: string) => {
+        displayedCountRef.current = displayedCountRef.current - 1;
+        setDisplayed(d => d.filter(n => n.key !== key));
+    };
 
     return (
         <StyledManager>
             {displayed.map((n, i) => {
-                return <SystemNotification key={n.key} type={n.entry.type} isFading={false} removeCallback={() => setDisplayed(displayed => displayed.filter(e => e.key !== n.key))}>{n.entry.text}</SystemNotification>;
+                if (!n) {};
+                return <SystemNotification key={n.key} type={n.entry.type} isFading={false} removeCallback={() => removeNotification(n.key)}>{n.entry.text}</SystemNotification>;
             })}
         </StyledManager>
     )
