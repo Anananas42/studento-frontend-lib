@@ -1,4 +1,4 @@
-import { useState, useEffect, FC } from "react";
+import { useState, useEffect, FC, useRef } from "react";
 import styled from "styled-components";
 import SystemNotification, { NotificationType } from "./SystemNotification";
 
@@ -32,11 +32,12 @@ interface IManagerProps {
     newEntry: INotificationEntry | null;
 }
 
+const maxNotificationsAtOnce = 4;
+
 const SystemNotificationManager:FC<IManagerProps> = (props) => {
     const { newEntry } = props;
-    const maxNotificationsAtOnce = 4;
-    const [keyCount, setKeyCount] = useState<number>(0);
-    const [queue, setQueue] = useState<Array<INotificationEntry>>([])
+    const keyCountRef = useRef<number>(0);
+    const queueRef = useRef<Array<INotificationEntry>>([]);
     const [displayed, setDisplayed] = useState<Array<IDisplayedNotification>>([]);
 
     useEffect(() => {
@@ -50,22 +51,22 @@ const SystemNotificationManager:FC<IManagerProps> = (props) => {
     useEffect(() => {
         const poppedNotifications:Array<INotificationEntry> = [];
         for (let i = 0; i < maxNotificationsAtOnce - displayed.length; i++) {
-            if (queue[i]) {
-                displayNotification(queue[i]);
-                poppedNotifications.push(queue[i]);
+            if (queueRef.current[i]) {
+                displayNotification(queueRef.current[i]);
+                poppedNotifications.push(queueRef.current[i]);
             } 
         }
-        setQueue(queue => queue.filter(e => !poppedNotifications.includes(e)))
+        queueRef.current = queueRef.current.filter(e => !poppedNotifications.includes(e));
     }, [displayed]);
 
     const clearAll = () => {
-        setQueue([]);
+        queueRef.current = [];
         setDisplayed([]);
     }
 
     const enqueueNotification = (entry: INotificationEntry) => {
         if (displayed && displayed.length >= maxNotificationsAtOnce) {
-            setQueue([...queue, entry]);
+            queueRef.current.push(entry);
         }else{
             displayNotification(entry);
         }
@@ -73,14 +74,14 @@ const SystemNotificationManager:FC<IManagerProps> = (props) => {
 
 
     const displayNotification = (entry: INotificationEntry) => {
-        setKeyCount(keyCount+1);
-        setDisplayed([...displayed, {key: `${keyCount}`, entry}])
+        keyCountRef.current = keyCountRef.current + 1;
+        setDisplayed([...displayed, {key: `${keyCountRef.current}`, entry}])
     }
 
     return (
         <StyledManager>
             {displayed.map((n, i) => {
-                return <SystemNotification key={n.key} type={n.entry.type} isFading={false} removeCallback={() => setDisplayed(displayed => displayed.filter(d => d.key !== n.key))}>{n.entry.text}</SystemNotification>;
+                return <SystemNotification key={n.key} type={n.entry.type} isFading={false} removeCallback={() => setDisplayed(displayed => displayed.filter(e => e.key !== n.key))}>{n.entry.text}</SystemNotification>;
             })}
         </StyledManager>
     )

@@ -11,6 +11,7 @@ import PopupUpload from './studento-library/popups/components/PopupUpload';
 import { BtnTextL, BtnTextM } from './studento-library/buttons/components/BtnText';
 import { BtnCTAL, BtnCTAM } from './studento-library/buttons/components/BtnCTA';
 import TextFormBase from './studento-library/forms/base-components/TextFormBase';
+import TestComponent from './studento-library/TestComponent';
 
 const StyledApp = styled.div`
   font-family: 'Varela Round', sans-serif;
@@ -56,6 +57,7 @@ function App() {
                 <BtnCloseM onClick={() => console.log("Pressed")} />
                 <PopupUpload title={"Upload File"} fileHandler={() => console.log("uploading")} maxSizeMB={5}/>
                 <TextFormBase label={"First Name"} formId={"First Name"} placeholder={"Wow"} />
+                <TestComponent/>
 
               </div>
             </ThemeProvider>
