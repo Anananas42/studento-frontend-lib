@@ -79,7 +79,6 @@ const SystemNotificationManager:FC<IManagerProps> = (props) => {
     return (
         <StyledManager>
             {displayed.map((n, i) => {
-                if (!n) {};
                 return <SystemNotification key={n.key} type={n.entry.type} isFading={false} removeCallback={() => removeNotification(n.key)}>{n.entry.text}</SystemNotification>;
             })}
         </StyledManager>
