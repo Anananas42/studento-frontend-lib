@@ -1,4 +1,4 @@
-import { FC, ReactNode, useEffect, useRef, useState } from 'react';
+import { FC, memo, ReactNode, useEffect, useRef, useState } from 'react';
 import { useThemeContext } from '../ThemeProvider';
 import styled from 'styled-components';
 
@@ -74,7 +74,7 @@ interface ISystemColors {
     light: string;  
 }
 
-const SystemNotification:FC<IProps> = (props) => {
+const SystemNotification:FC<IProps> = memo((props) => {
     const { type, isFading, removeCallback } = props;
     const [isHidden, setIsHidden] = useState<boolean>(false);
     const [isTransitioning, setIsTransitioning] = useState<boolean>(false);
@@ -96,7 +96,6 @@ const SystemNotification:FC<IProps> = (props) => {
     useEffect(() => {
         if (isMounted.current){
             const timer = setTimeout(() => {
-                removeCallback();
                 setIsHidden(true);
             }, 950);
 
@@ -105,7 +104,11 @@ const SystemNotification:FC<IProps> = (props) => {
             isMounted.current = true;
         }
         
-    }, [isTransitioning, isFading])
+    }, [isTransitioning, isFading]);
+
+    useEffect(() => {
+        isHidden && removeCallback();
+    }, [isHidden, removeCallback]);
 
     const onClick = (e:React.MouseEvent<HTMLDivElement, MouseEvent>) => {
         e.preventDefault();
@@ -122,7 +125,7 @@ const SystemNotification:FC<IProps> = (props) => {
         }
         </>
     )
-}
+})
 
 export enum NotificationType {
     Error = "Error",
