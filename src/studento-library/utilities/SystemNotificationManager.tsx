@@ -47,7 +47,6 @@ const SystemNotificationManager:FC<IManagerProps> = (props) => {
                 queueRef.current.push(newEntry);
             }else{
                 keyCountRef.current = keyCountRef.current + 1;
-                displayedCountRef.current = displayedCountRef.current + 1;
                 setDisplayed(d => [...d, {key: `${keyCountRef.current}`, entry: newEntry}]);
             }
         }else{
@@ -57,12 +56,12 @@ const SystemNotificationManager:FC<IManagerProps> = (props) => {
     }, [newEntry]);
 
     useEffect(() => {
+        displayedCountRef.current = displayed.length;
         const poppedNotifications:Array<INotificationEntry> = [];
         const newlyDisplayed:Array<IDisplayedNotification> = [];
         for (let i = 0; i < maxNotificationsAtOnce - displayedCountRef.current; i++) {
             if (queueRef.current[i]) {
                 keyCountRef.current = keyCountRef.current + 1;
-                displayedCountRef.current = displayedCountRef.current + 1;
                 newlyDisplayed.push({key: `${keyCountRef.current}`, entry: queueRef.current[i]});
                 poppedNotifications.push(queueRef.current[i]);
             } 
@@ -72,7 +71,6 @@ const SystemNotificationManager:FC<IManagerProps> = (props) => {
     }, [displayed]);
 
     const removeNotification = (key: string) => {
-        displayedCountRef.current = displayedCountRef.current - 1;
         setDisplayed(d => d.filter(n => n.key !== key));
     };
 
