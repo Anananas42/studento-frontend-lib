@@ -47,17 +47,6 @@ const SystemNotificationManager:FC<IManagerProps> = (props) => {
         }
     }, [newEntry]);
 
-    useEffect(() => {
-        const poppedNotifications:Array<INotificationEntry> = [];
-        for (let i = 0; i < maxNotificationsAtOnce - displayed.length; i++) {
-            if (queue[i]) {
-                displayNotification(queue[i]);
-                poppedNotifications.push(queue[i]);
-            } 
-        }
-        setQueue(queue => queue.filter(e => !poppedNotifications.includes(e)))
-    }, [displayed]);
-
     const clearAll = () => {
         setQueue([]);
         setDisplayed([]);
@@ -71,16 +60,30 @@ const SystemNotificationManager:FC<IManagerProps> = (props) => {
         }
     }
 
-
     const displayNotification = (entry: INotificationEntry) => {
         setKeyCount(keyCount+1);
         setDisplayed([...displayed, {key: `${keyCount}`, entry}])
     }
 
+    const removeNotification = (key: string) => {
+        setDisplayed(displayed => displayed.filter(d => d.key !== key));
+        const timer = setTimeout(() => {
+            const poppedNotifications:Array<INotificationEntry> = [];
+            for (let i = 0; i < maxNotificationsAtOnce - displayed.length; i++) {
+                if (queue[i]) {
+                    displayNotification(queue[i]);
+                    poppedNotifications.push(queue[i]);
+                } 
+            }
+            setQueue(queue => queue.filter(e => !poppedNotifications.includes(e)));
+        }, 0);
+        clearTimeout(timer);
+    };
+
     return (
         <StyledManager>
             {displayed.map((n, i) => {
-                return <SystemNotification key={n.key} type={n.entry.type} isFading={false} removeCallback={() => setDisplayed(displayed => displayed.filter(d => d.key !== n.key))}>{n.entry.text}</SystemNotification>;
+                return <SystemNotification key={n.key} type={n.entry.type} isFading={false} removeCallback={() => removeNotification(n.key)}>{n.entry.text}</SystemNotification>;
             })}
         </StyledManager>
     )
