@@ -1,4 +1,4 @@
-import { createRef, FC, ReactNode, useEffect, useRef, useState } from 'react';
+import { FC, ReactNode, useEffect, useRef, useState } from 'react';
 import { useThemeContext } from '../ThemeProvider';
 import styled from 'styled-components';
 
@@ -81,7 +81,7 @@ const SystemNotification:FC<IProps> = (props) => {
     const { colors, borderRadius } = useThemeContext();
     const isMounted = useRef(false);
 
-    const heightRef = createRef<any>();
+    const heightRef = useRef<any>();
     const [initHeight, setInitHeight] = useState<number>(0);
 
     useEffect(() => {
