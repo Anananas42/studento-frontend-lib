@@ -4,7 +4,7 @@ import { BtnPrimaryL } from "../../buttons/components/BtnPrimary";
 import { BtnTertiaryL } from "../../buttons/components/BtnTertiary";
 import styled from "styled-components";
 import { useThemeContext } from "../../ThemeProvider";
-import DragAndDrop from '../../utilities/DragAndDrop';
+import FileDragAndDrop from '../../utilities/FileDragAndDrop';
 import { NotificationType } from "../../utilities/SystemNotification";
 
 interface IPopupUpload {
@@ -108,12 +108,12 @@ const PopupUpload:FC<IPopupUpload> = (props) => {
     return (
         <>{!file && isOpened}
             <PopupBase title={title} isOpened={isOpened} setIsOpened={setIsOpened} sidenote={sidenote}>
-                <DragAndDrop setIsDragOver={setIsDragOver} fileHandler={(files:any) => setFile(files[0])}>
+                <FileDragAndDrop setIsDragOver={setIsDragOver} fileHandler={(files:any) => setFile(files[0])}>
                     <StyledUpload ref={UploadRef} borderRadius={borderRadius} fill={colors.fill} isDragOver={isDragOver} width={initWidth} height={initHeight} onClick={inputClick}>
                         <StyledHiddenInput ref={HiddenInputRef} type="file" name="file" onChange={e => e.target.files && e.target.files.length > 0 && setFile(e.target.files[0])}/>
                         {isDragOver ? `Nahrát soubor...` : (file ? <span style={{fontWeight: 700}}>{file.name}</span> : <span>Přetáhni, nebo klikni a zvol soubor pro nahrání.<br/>(max. {maxSizeMB} MB)</span>)}
                     </StyledUpload>
-                </DragAndDrop>
+                </FileDragAndDrop>
                 <StyledButtons>
                     <BtnTertiaryL onClick={() => {setIsOpened(false); clearSystemNotifications()}}>CANCEL</BtnTertiaryL>
                     <BtnPrimaryL icon={"upload"} onClick={() => file && onUploadClick(file)} isDisabled={file === undefined}>upload</BtnPrimaryL>
