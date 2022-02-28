@@ -1,17 +1,10 @@
-import { FC, useEffect, useState } from "react";
+import { FC, ReactElement, useEffect, useState } from "react";
 import styled from "styled-components";
 import { useThemeContext } from "../../ThemeProvider";
 import FormColors, { IFormState, StateType } from "../FormColors";
 
-interface IStyledInput {
-    borderRadius: string;
-    fill: string;
-}
-
-const StyledInput = styled.input<IStyledInput>`
-    border-radius: ${props => props.borderRadius};
+const StyledLabel = styled.label<{fill: string}>`
     color: ${props => props.fill};
-    border: 2px solid ${props => props.fill + "42"};
 `;
 
 interface IStyledWrapper {
@@ -37,7 +30,7 @@ const StyledMessageWrapper = styled.div<IStyledMessageWrapper>`
     }
 `;
 
-interface IFormProps {
+export interface IFormProps {
     isHorizontal?: boolean;
     label: string;
     placeholder?: string;
@@ -46,10 +39,11 @@ interface IFormProps {
     icon?: string;
     errorMessage?: string;
     isDisabled?: boolean;
+    children: ReactElement;
 }
 
-const TextFormBase:FC<IFormProps> = (props) => {
-    const { isHorizontal, label, formId, defaultNote, errorMessage, isDisabled, placeholder } = props;
+const FormBase:FC<IFormProps> = (props) => {
+    const { isHorizontal, label, formId, defaultNote, errorMessage, children } = props;
     const [value, setValue] = useState<string>("");
     const [formState, setFormState] = useState<IFormState>({type: StateType.Default, message: defaultNote});
     const { borderRadius, colors } = useThemeContext();
@@ -60,14 +54,14 @@ const TextFormBase:FC<IFormProps> = (props) => {
         }else{
             setFormState({type: StateType.Default, message: defaultNote});
         }
-    }, [errorMessage])
+    }, [errorMessage, defaultNote]);
 
     return (
         <StyledWrapper isHorizontal={isHorizontal}>
-            <label htmlFor={formId}>{label}</label>
+            <StyledLabel fill={colors.fill} htmlFor={formId}>{label}</StyledLabel>
             <StyledMessageWrapper msgColor={FormColors.Message[formState.type].text}>
                 <StyledIconAnchor>
-                    <StyledInput type={"text"} id={formId} value={value} onChange={(e) => setValue(e.target.value)} borderRadius={borderRadius} fill={colors.fill} disabled={isDisabled} placeholder={placeholder}/>
+                    {children}
                 </StyledIconAnchor>
                 <div>{formState.message}</div>
             </StyledMessageWrapper>
@@ -75,4 +69,4 @@ const TextFormBase:FC<IFormProps> = (props) => {
     )
 }
 
-export default TextFormBase;
+export default FormBase;

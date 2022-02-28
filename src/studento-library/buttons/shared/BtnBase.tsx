@@ -1,7 +1,7 @@
 import { IBtnSizes } from './ButtonSizes';
 import { FC, ReactElement } from 'react';
 import { useThemeContext } from '../../ThemeProvider';
-import { StyledComponent } from 'styled-components';
+import styled, { StyledComponent } from 'styled-components';
 
 export interface IStyledBtn {
     borderRadius: string;
@@ -23,6 +23,10 @@ interface BtnProps {
     forceUppercase?: boolean;
 }
 
+const StyledButtonBase = styled.div`
+    white-space: nowrap;
+`;
+
 const BtnBase:FC<BtnProps> = (props) => {
     const { borderRadius } = useThemeContext();
     const { Icon, isAfter, Sizes, children, onClick, isDisabled, StyledButton, forceUppercase } = props;
@@ -34,9 +38,11 @@ const BtnBase:FC<BtnProps> = (props) => {
     const lineHeight = Sizes.lineHeight;
 
     return(
-        <StyledButton borderRadius={borderRadius} padding={padding} paddingV={padV} fontSize={fontSize} lineHeight={lineHeight} disabled={isDisabled} onClick={onClick}>
-            {Icon && !isAfter && Icon}{children && (forceUppercase ? children.toUpperCase() : children)}{Icon && isAfter && Icon}
-        </StyledButton>
+        <StyledButtonBase>
+            <StyledButton borderRadius={borderRadius} padding={padding} paddingV={padV} fontSize={fontSize} lineHeight={lineHeight} disabled={isDisabled} onClick={onClick}>
+                {Icon && !isAfter && Icon}{children && (forceUppercase ? children.toUpperCase() : children)}{Icon && isAfter && Icon}
+            </StyledButton>
+        </StyledButtonBase>
     )
 }
 

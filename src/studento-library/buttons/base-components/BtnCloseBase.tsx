@@ -5,6 +5,9 @@ import { FC, ReactElement } from 'react';
 import BtnBase, { IStyledBtn } from '../shared/BtnBase';
 
 const StyledClose = styled.button<IStyledBtn>`
+    position: absolute;
+    top: 8px;
+    right: 8px;
     border-radius: ${props => props.borderRadius};
     color: ${CloseColors.Default.txt};
     background-color: ${CloseColors.Default.bg};

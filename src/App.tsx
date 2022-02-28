@@ -10,15 +10,16 @@ import { BtnCloseL, BtnCloseM } from './studento-library/buttons/components/BtnC
 import PopupUpload from './studento-library/popups/components/PopupUpload';
 import { BtnTextL, BtnTextM } from './studento-library/buttons/components/BtnText';
 import { BtnCTAL, BtnCTAM } from './studento-library/buttons/components/BtnCTA';
-import TextFormBase from './studento-library/forms/base-components/TextFormBase';
+import TextFormBase from './studento-library/forms/components/TextForm';
 import TestComponent from './studento-library/TestComponent';
+import TextForm from './studento-library/forms/components/TextForm';
 
 const StyledApp = styled.div`
   font-family: 'Varela Round', sans-serif;
   font-style: 'normal';
   font-weight: 'normal';
 
-  * {
+  *, *::after, *::before {
     box-sizing: border-box;
   }
 `;
@@ -56,7 +57,7 @@ function App() {
                 <BtnCloseL onClick={() => console.log("Pressed")} />
                 <BtnCloseM onClick={() => console.log("Pressed")} />
                 <PopupUpload title={"Upload File"} fileHandler={() => console.log("uploading")} maxSizeMB={5}/>
-                <TextFormBase label={"First Name"} formId={"First Name"} placeholder={"Wow"} />
+                <TextForm label={"First Name"} formId={"First Name"} placeholder={"Wow"} />
                 <TestComponent/>
 
               </div>
