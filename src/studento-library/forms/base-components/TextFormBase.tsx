@@ -62,24 +62,26 @@ interface ITextFormProps {
     defaultNote?: string;
     errorMessage?: string;
     isDisabled?: boolean;
+    isOptional?: boolean;
     placeholder: string;
     width?: string;
     icon?: string;
+    onKeyDown?: React.KeyboardEventHandler<HTMLInputElement>;
 }
 
 const TextForm:FC<ITextFormProps> = (props) => {
-    const { isHorizontal, label, formId, defaultNote, errorMessage, isDisabled, placeholder, width, icon, value, onChange } = props;
+    const { isHorizontal, label, formId, defaultNote, errorMessage, isDisabled, placeholder, width, icon, value, onChange, onKeyDown, isOptional } = props;
     const { borderRadius, colors } = useThemeContext();
 
     return (
-        <FormBase label={label} formId={formId} errorMessage={errorMessage} defaultNote={defaultNote} isHorizontal={isHorizontal} isDisabled={isDisabled}>
+        <FormBase label={label + (isOptional ? " (optional)" : "")} formId={formId} errorMessage={errorMessage} defaultNote={defaultNote} isHorizontal={isHorizontal} isDisabled={isDisabled}>
             {icon && 
                 <StyledIconWrapper>
                     <IconL>{icon}</IconL>
                 </StyledIconWrapper>
             }
 
-            <StyledInput type={"text"} id={formId} value={value} onChange={(e) => onChange(e.target.value)} borderRadius={borderRadius}
+            <StyledInput type={"text"} id={formId} value={value} onChange={(e) => onChange(e.target.value)} onKeyDown={onKeyDown} borderRadius={borderRadius}
              fill={colors.fill} isError={errorMessage} disabled={isDisabled} placeholder={placeholder} width={width} icon={icon}/>
              
         </FormBase>

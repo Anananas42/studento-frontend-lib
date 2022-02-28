@@ -56,7 +56,7 @@ function App() {
                 <BtnDangerL icon={"login"} isAfter={false} onClick={() => console.log("Pressed")}>LOGIN</BtnDangerL>
                 <BtnDangerM icon={"login"} isAfter={false} onClick={() => console.log("Pressed")}>LOGIN</BtnDangerM>
                 <PopupUpload title={"Upload File"} fileHandler={() => console.log("uploading")} maxSizeMB={5}/>
-                <TextFormBase label={"First Name"} formId={"First Name"} placeholder={"First Name"} value={input} onChange={setInput} icon={"email"}/>
+                <TextFormBase label={"First Name"} formId={"First Name"} placeholder={"First Name"} value={input} onChange={setInput} icon={"email"} isOptional={true}/>
                 <TextFormBase label={"Middle Name"} formId={"Middle Name"} placeholder={"Middle Name"} isHorizontal={true} value={input} onChange={setInput} />
                 <TextFormBase label={"Last Name"} formId={"Last Name"} placeholder={"Last Name"} isDisabled={true} value={input} onChange={setInput}/>
                 <TestComponent/>
