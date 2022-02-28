@@ -8,6 +8,7 @@ interface IStyledInput {
     borderRadius: string;
     fill: string;
     isError?: string;
+    width?: string;
 }
 
 const StyledInput = styled.input<IStyledInput>`
@@ -19,7 +20,7 @@ const StyledInput = styled.input<IStyledInput>`
     font-size: 20px;
     padding: 8px ${props => props.borderRadius};
     font-family: 'Varela Round', sans-serif;
-    width: 100%;
+    width: ${props => props.width || "100%"};
 
     ::placeholder {
         color: ${FormColors.Default.placeholder};
@@ -51,16 +52,18 @@ interface ITextFormProps {
     errorMessage?: string;
     isDisabled?: boolean;
     placeholder: string;
+    width?: string;
 }
 
 const TextForm:FC<ITextFormProps> = (props) => {
-    const { isHorizontal, label, formId, defaultNote, errorMessage, isDisabled, placeholder } = props;
+    const { isHorizontal, label, formId, defaultNote, errorMessage, isDisabled, placeholder, width } = props;
     const [value, setValue] = useState<string>("");
     const { borderRadius, colors } = useThemeContext();
 
     return (
         <FormBase label={label} formId={formId} errorMessage={errorMessage} defaultNote={defaultNote} isHorizontal={isHorizontal} isDisabled={isDisabled}>
-            <StyledInput type={"text"} id={formId} value={value} onChange={(e) => setValue(e.target.value)} borderRadius={borderRadius} fill={colors.fill} isError={errorMessage} disabled={isDisabled} placeholder={placeholder}/>
+            <StyledInput type={"text"} id={formId} value={value} onChange={(e) => setValue(e.target.value)} borderRadius={borderRadius}
+             fill={colors.fill} isError={errorMessage} disabled={isDisabled} placeholder={placeholder} width={width}/>
         </FormBase>
     )
 }
