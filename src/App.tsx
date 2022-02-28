@@ -36,7 +36,7 @@ function App() {
         <body>
           <StyledApp>
             <ThemeProvider>
-              <div style={{display:"flex", flexFlow:"row wrap", gap:"10px", maxWidth: "200px"}}>
+              <div style={{display:"flex", flexFlow:"row wrap", gap:"10px", maxWidth: "400px"}}>
                 <BtnTextL onClick={() => console.log("Pressed")}>Woah</BtnTextL>
                 <BtnTextM onClick={() => console.log("Pressed")}>Woah</BtnTextM>
                 <BtnCTAL icon={"login"} isAfter={false} onClick={() => console.log("Pressed")}>LOGIN</BtnCTAL>
@@ -55,7 +55,7 @@ function App() {
                 <BtnDangerM icon={"login"} isAfter={false} onClick={() => console.log("Pressed")}>LOGIN</BtnDangerM>
                 <PopupUpload title={"Upload File"} fileHandler={() => console.log("uploading")} maxSizeMB={5}/>
                 <TextFormBase label={"First Name"} formId={"First Name"} placeholder={"First Name"} />
-                <TextFormBase label={"Middle Name"} formId={"Middle Name"} placeholder={"Middle Name"} />
+                <TextFormBase label={"Middle Name"} formId={"Middle Name"} placeholder={"Middle Name"} isHorizontal={true}/>
                 <TextFormBase label={"Last Name"} formId={"Last Name"} placeholder={"Last Name"} isDisabled={true}/>
                 <TestComponent/>
 

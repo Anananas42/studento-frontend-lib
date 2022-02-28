@@ -13,10 +13,16 @@ interface IStyledLabel {
 const StyledLabel = styled.label<IStyledLabel>`
     color: ${props => props.labelColor};
     padding-left: ${props => props.isHorizontal ? 0 : `${parseInt(props.borderRadius.split("px", 1)[0])/1.5}px`};
+    text-align: ${props => props.isHorizontal ? "right" : "left"};
     font-size: 18px;
     line-height: 12px;
-    width: 100%;
-    padding-bottom: 19px;
+    width: ${props => props.isHorizontal ? "auto" : "100%"};
+    padding-top: ${props => props.isHorizontal ? "13px" : 0};
+    padding-bottom: ${props => props.isHorizontal ? 0 : "19px"};
+    padding-right: ${props => props.isHorizontal ? "16px" : 0};
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: clip;
 `;
 
 interface IStyledWrapper {
@@ -26,6 +32,7 @@ interface IStyledWrapper {
 const StyledWrapper = styled.div<IStyledWrapper>`
     display: flex;
     flex-direction: ${props => props.isHorizontal ? "row" : "column"};
+    justify-content: ${props => props.isHorizontal ? "flex-end" : "flex-start"};
     width: 100%;
 `;
 
