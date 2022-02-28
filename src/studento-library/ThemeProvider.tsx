@@ -1,7 +1,7 @@
 import { useState, createContext, FC, SetStateAction, useContext, ReactNode } from 'react';
 import { IColorSet, colorsLightMode, colorsDarkMode } from './themes/ThemeColor';
 import { ILanguageSet, LanguageSets } from './themes/ThemeLanguage';
-import SystemNotificationManager, { INotificationEntry } from './utilities/SystemNotificationManager';
+import SystemNotificationManager, { INewEntry, INotification } from './utilities/SystemNotificationManager';
 
 type ThemeMode = "light" | "dark";
 type Language = keyof typeof LanguageSets;
@@ -14,7 +14,7 @@ interface ThemeContextValue {
     languageMap: ILanguageSet;
     setLanguage: React.Dispatch<SetStateAction<Language>>;
     colors: IColorSet;
-    pushSystemNotification: {(entry: INotificationEntry): void};
+    pushSystemNotification: {(entry: INotification, isClearBefore: boolean): void};
     clearSystemNotifications: {(): void};
 }
 
@@ -43,10 +43,10 @@ const ThemeProvider:FC<IThemeProps> = (props) => {
     const colors = mode === "light" ? colorsLightMode : colorsDarkMode;
     const languageMap = LanguageSets[language];
 
-    const [systemNotification, setSystemNotification] = useState<INotificationEntry | null>(null);
+    const [systemNotification, setSystemNotification] = useState<INewEntry | null>(null);
 
-    const pushSystemNotification = (entry: INotificationEntry) => {
-        setSystemNotification(entry);
+    const pushSystemNotification = (entry: INotification, isClearBefore: boolean) => {
+        setSystemNotification({notification: entry, isClearBefore: isClearBefore});
     }
 
     const clearSystemNotifications = () => {

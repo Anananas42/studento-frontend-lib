@@ -83,7 +83,7 @@ const PopupUpload:FC<IPopupUpload> = (props) => {
 
     const onUploadClick = (file:File) => {
         if (file.size > maxSizeMB * 1e6) {
-            pushSystemNotification({text: `Uploaded file exceeds size of ${maxSizeMB} MB.`, type: NotificationType.Error});
+            pushSystemNotification({text: `Uploaded file exceeds size of ${maxSizeMB} MB.`, type: NotificationType.Error}, false);
             setFile(undefined);
             return;
         }
@@ -91,11 +91,12 @@ const PopupUpload:FC<IPopupUpload> = (props) => {
         const error = fileHandler(file);
 
         if (error) {
-            pushSystemNotification({text: error, type: NotificationType.Error});
+            pushSystemNotification({text: error, type: NotificationType.Error}, false);
             setFile(undefined);
             return;
         }
 
+        pushSystemNotification({text: "File Uploaded.", type: NotificationType.Success}, true);
         setIsOpened(false);
     }
 
