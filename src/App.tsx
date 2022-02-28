@@ -38,7 +38,7 @@ function App() {
         <body>
           <StyledApp>
             <ThemeProvider>
-              <div style={{display:"flex", flexFlow:"row wrap", gap:"10px", maxWidth: "500px"}}>
+              <div style={{display:"flex", flexFlow:"row wrap", gap:"0px", maxWidth: "500px"}}>
                 <BtnTextL onClick={() => console.log("Pressed")}>Woah</BtnTextL>
                 <BtnTextM onClick={() => console.log("Pressed")}>Woah</BtnTextM>
                 <BtnCTAL icon={"login"} isAfter={false} onClick={() => console.log("Pressed")}>LOGIN</BtnCTAL>
@@ -56,8 +56,10 @@ function App() {
                 <BtnDangerL icon={"login"} isAfter={false} onClick={() => console.log("Pressed")}>LOGIN</BtnDangerL>
                 <BtnDangerM icon={"login"} isAfter={false} onClick={() => console.log("Pressed")}>LOGIN</BtnDangerM>
                 <PopupUpload title={"Upload File"} fileHandler={() => console.log("uploading")} maxSizeMB={5}/>
-                <TextFormBase label={"First Name"} formId={"First Name"} placeholder={"First Name"} value={input} onChange={setInput} icon={"email"} isOptional={true}/>
+                <TextFormBase label={"First Name"} formId={"First Name"} placeholder={"First Name"} isHorizontal={true} value={input} onChange={setInput} icon={"email"} isOptional={true} isCompact={true}/>
                 <TextFormBase label={"Middle Name"} formId={"Middle Name"} placeholder={"Middle Name"} isHorizontal={true} value={input} onChange={setInput} />
+                <TextFormBase label={"Middle Name"} formId={"Middasdle Name"} placeholder={"Middle Name"} isHorizontal={true} value={input} onChange={setInput} />
+                <TextFormBase label={"Middle Name"} formId={"Middlhhe Name"} placeholder={"Middle Name"} isHorizontal={true} value={input} onChange={setInput} />
                 <TextFormBase label={"Last Name"} formId={"Last Name"} placeholder={"Last Name"} isDisabled={true} value={input} onChange={setInput}/>
                 <TestComponent/>
 

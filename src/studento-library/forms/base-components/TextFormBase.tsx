@@ -63,6 +63,7 @@ interface ITextFormProps {
     errorMessage?: string;
     isDisabled?: boolean;
     isOptional?: boolean;
+    isCompact?: boolean;
     placeholder: string;
     width?: string;
     icon?: string;
@@ -70,11 +71,11 @@ interface ITextFormProps {
 }
 
 const TextForm:FC<ITextFormProps> = (props) => {
-    const { isHorizontal, label, formId, defaultNote, errorMessage, isDisabled, placeholder, width, icon, value, onChange, onKeyDown, isOptional } = props;
+    const { label, errorMessage, isDisabled, placeholder, width, icon, value, onChange, onKeyDown, isOptional, isCompact, formId, ...passedProps } = props;
     const { borderRadius, colors } = useThemeContext();
 
     return (
-        <FormBase label={label + (isOptional ? " (optional)" : "")} formId={formId} errorMessage={errorMessage} defaultNote={defaultNote} isHorizontal={isHorizontal} isDisabled={isDisabled}>
+        <FormBase label={label + (isOptional ? " (optional)" : "")} errorMessage={errorMessage} isDisabled={isDisabled} isCompact={isCompact} formId={formId} {...passedProps}>
             {icon && 
                 <StyledIconWrapper>
                     <IconL>{icon}</IconL>

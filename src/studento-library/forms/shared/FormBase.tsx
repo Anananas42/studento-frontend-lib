@@ -22,7 +22,7 @@ const StyledLabel = styled.label<IStyledLabel>`
     padding-right: ${props => props.isHorizontal ? "16px" : 0};
     white-space: nowrap;
     overflow: hidden;
-    text-overflow: clip;
+    text-overflow: ellipsis;
 `;
 
 interface IStyledWrapper {
@@ -44,10 +44,13 @@ const StyledIconAnchor = styled.div`
 interface IStyledMessageWrapper {
     msgColor: string;
     borderRadius: string;
+    isCompact?: boolean;
 }
 
 const StyledMessageWrapper = styled.div<IStyledMessageWrapper>`
-    > div:last-child {
+    padding-bottom: ${props => props.isCompact ? "16px" : 0};
+
+    .message {
         color: ${props => props.msgColor};
         padding-left: ${props => `${parseInt(props.borderRadius.split("px", 1)[0])/1.5}px`};
         padding-top: 8px;
@@ -68,10 +71,11 @@ export interface IFormProps {
     errorMessage?: string;
     isDisabled?: boolean;
     children: ReactNode;
+    isCompact?: boolean;
 }
 
 const FormBase:FC<IFormProps> = (props) => {
-    const { isHorizontal, isDisabled, label, formId, defaultNote, errorMessage, children } = props;
+    const { isHorizontal, isDisabled, label, formId, defaultNote, errorMessage, children, isCompact } = props;
     const [formState, setFormState] = useState<IFormState>({type: isDisabled ? StateType.Disabled : StateType.Default, message: defaultNote});
     const { borderRadius } = useThemeContext();
 
@@ -88,11 +92,11 @@ const FormBase:FC<IFormProps> = (props) => {
     return (
         <StyledWrapper isHorizontal={isHorizontal}>
             <StyledLabel labelColor={FormColors[formState.type].label} borderRadius={borderRadius} isHorizontal={isHorizontal} htmlFor={formId} isDisabled={isDisabled}>{label}</StyledLabel>
-            <StyledMessageWrapper msgColor={FormColors[formState.type].note} borderRadius={borderRadius}>
+            <StyledMessageWrapper msgColor={FormColors[formState.type].note} borderRadius={borderRadius} isCompact={isCompact}>
                 <StyledIconAnchor>
                     {children}
                 </StyledIconAnchor>
-                <div>{formState.message}</div>
+                {!isCompact && <div className={"message"}>{formState.message}</div>}
             </StyledMessageWrapper>
         </StyledWrapper>
     )
