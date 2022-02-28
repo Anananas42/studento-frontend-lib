@@ -1,6 +1,6 @@
 import { useState, useEffect, FC, useRef } from "react";
 import styled from "styled-components";
-import SystemNotification, { NotificationType } from "./SystemNotification";
+import SystemNotification, { NotificationType } from "../utilities/SystemNotification";
 
 const StyledManager = styled.div`
     position: absolute;

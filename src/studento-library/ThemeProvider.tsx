@@ -1,7 +1,7 @@
 import { useState, createContext, FC, SetStateAction, useContext, ReactNode } from 'react';
 import { IColorSet, colorsLightMode, colorsDarkMode } from './themes/ThemeColor';
 import { ILanguageSet, LanguageSets } from './themes/ThemeLanguage';
-import SystemNotificationManager, { INewEntry, INotification } from './utilities/SystemNotificationManager';
+import SystemNotificationManager, { INewEntry, INotification } from './managers/SystemNotificationManager';
 
 type ThemeMode = "light" | "dark";
 type Language = keyof typeof LanguageSets;
