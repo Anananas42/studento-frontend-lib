@@ -1,4 +1,4 @@
-import { createRef, FC, useEffect, useState } from "react";
+import { createRef, FC, useEffect } from "react";
 
 interface IDragAndDropProps {
     setIsDragOver: React.Dispatch<React.SetStateAction<boolean>>;
@@ -53,7 +53,7 @@ const DragAndDrop:FC<IDragAndDropProps> = (props) => {
     }, []);
 
     return (
-        <div ref={DragAndDropRef} {...rest}/>
+        <div ref={DragAndDropRef} style={{width: "100%"}} {...rest}/>
     );
 };
 

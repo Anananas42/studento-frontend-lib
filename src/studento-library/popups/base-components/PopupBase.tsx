@@ -26,11 +26,11 @@ const StyledBackground = styled.div`
 
 const StyledPopupWrapper = styled.div<IStyledPopupWrapper>`
     display: flex;
-    position: absolute;
+    position: fixed;
     flex-flow: column nowrap;
     gap: 16px;
     align-items: center;
-    width: ${props => props.width ? props.width : "400px"};
+    width: min-content;
     height: fit-content;
     top: 25%;
     left: 50%;

@@ -39,7 +39,7 @@ const StyledUpload = styled.div<IStyledUpload>`
     text-align: center;
     padding: 40px;
     border: 2px dashed;
-    width: ${props => props.width ? `${props.width}px` : "auto"};
+    width: 100%;
     height: ${props => props.height ? `${props.height}px` : "auto"};
     color: ${props => props.fill};
     user-select: none;
