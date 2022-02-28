@@ -12,6 +12,7 @@ import { BtnTextL, BtnTextM } from './studento-library/buttons/components/BtnTex
 import { BtnCTAL, BtnCTAM } from './studento-library/buttons/components/BtnCTA';
 import TextFormBase from './studento-library/forms/base-components/TextFormBase';
 import TestComponent from './studento-library/TestComponent';
+import { useState } from 'react';
 
 const StyledApp = styled.div`
   font-family: 'Varela Round', sans-serif;
@@ -24,6 +25,7 @@ const StyledApp = styled.div`
 `;
 
 function App() {
+  const [input, setInput] = useState<string>("");
 
   return (
       <>
@@ -36,7 +38,7 @@ function App() {
         <body>
           <StyledApp>
             <ThemeProvider>
-              <div style={{display:"flex", flexFlow:"row wrap", gap:"10px", maxWidth: "400px"}}>
+              <div style={{display:"flex", flexFlow:"row wrap", gap:"10px", maxWidth: "500px"}}>
                 <BtnTextL onClick={() => console.log("Pressed")}>Woah</BtnTextL>
                 <BtnTextM onClick={() => console.log("Pressed")}>Woah</BtnTextM>
                 <BtnCTAL icon={"login"} isAfter={false} onClick={() => console.log("Pressed")}>LOGIN</BtnCTAL>
@@ -54,9 +56,9 @@ function App() {
                 <BtnDangerL icon={"login"} isAfter={false} onClick={() => console.log("Pressed")}>LOGIN</BtnDangerL>
                 <BtnDangerM icon={"login"} isAfter={false} onClick={() => console.log("Pressed")}>LOGIN</BtnDangerM>
                 <PopupUpload title={"Upload File"} fileHandler={() => console.log("uploading")} maxSizeMB={5}/>
-                <TextFormBase label={"First Name"} formId={"First Name"} placeholder={"First Name"} />
-                <TextFormBase label={"Middle Name"} formId={"Middle Name"} placeholder={"Middle Name"} isHorizontal={true}/>
-                <TextFormBase label={"Last Name"} formId={"Last Name"} placeholder={"Last Name"} isDisabled={true}/>
+                <TextFormBase label={"First Name"} formId={"First Name"} placeholder={"First Name"} value={input} onChange={setInput} icon={"email"}/>
+                <TextFormBase label={"Middle Name"} formId={"Middle Name"} placeholder={"Middle Name"} isHorizontal={true} value={input} onChange={setInput} />
+                <TextFormBase label={"Last Name"} formId={"Last Name"} placeholder={"Last Name"} isDisabled={true} value={input} onChange={setInput}/>
                 <TestComponent/>
 
               </div>

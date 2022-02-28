@@ -1,4 +1,4 @@
-import { FC, ReactElement, useEffect, useState } from "react";
+import { FC, ReactNode, useEffect, useState } from "react";
 import styled from "styled-components";
 import { useThemeContext } from "../../ThemeProvider";
 import FormColors, { IFormState, StateType } from "./FormColors";
@@ -33,6 +33,7 @@ const StyledWrapper = styled.div<IStyledWrapper>`
     display: flex;
     flex-direction: ${props => props.isHorizontal ? "row" : "column"};
     justify-content: ${props => props.isHorizontal ? "flex-end" : "flex-start"};
+    gap: ${props => props.isHorizontal ? "16px" : ""};
     width: 100%;
 `;
 
@@ -46,7 +47,7 @@ interface IStyledMessageWrapper {
 }
 
 const StyledMessageWrapper = styled.div<IStyledMessageWrapper>`
-    div:last-child {
+    > div:last-child {
         color: ${props => props.msgColor};
         padding-left: ${props => `${parseInt(props.borderRadius.split("px", 1)[0])/1.5}px`};
         padding-top: 8px;
@@ -66,7 +67,7 @@ export interface IFormProps {
     formId: string;
     errorMessage?: string;
     isDisabled?: boolean;
-    children: ReactElement;
+    children: ReactNode;
 }
 
 const FormBase:FC<IFormProps> = (props) => {

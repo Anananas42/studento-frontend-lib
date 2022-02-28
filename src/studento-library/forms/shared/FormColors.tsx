@@ -11,6 +11,7 @@ export interface IFormColors {
         label: string;
         note: string;
         innerShadow: string;
+        icon: string;
     },
     Active: {
         border: string;
@@ -38,6 +39,7 @@ const FormColors:IFormColors = {
         label: "#453c30",
         note: "rgba(69, 60, 48, 0.6)",
         innerShadow: "rgba(69, 60, 48, 0.04)",
+        icon: "rgba(69, 60, 48, 0.4)",
     },
     Active: {
         border: "rgb(255, 187, 61)",
