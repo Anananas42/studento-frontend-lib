@@ -15,6 +15,7 @@ import TestComponent from './studento-library/TestComponent';
 import { useState } from 'react';
 import TextAreaFormBase from './studento-library/forms/base-components/TextAreaFormBase';
 import SingleChoiceFormBase from './studento-library/forms/base-components/SingleChoiceFormBase';
+import DropdownFormBase from './studento-library/forms/base-components/DropdownFormBase';
 
 const StyledApp = styled.div`
   font-family: 'Varela Round', sans-serif;
@@ -65,7 +66,7 @@ function App() {
                 <TextFormBase label={"Middle Name"} formId={"Middasdle Name"} placeholder={"Middle Name"} isHorizontal={true} value={input} onChange={setInput} />
                 <TextFormBase label={"Middle Name"} formId={"Middlhhe Name"} placeholder={"Middle Name"} isHorizontal={true} value={input} onChange={setInput} />
                 <TextFormBase label={"Last Name"} formId={"Last Name"} placeholder={"Last Name"} isDisabled={true} value={input} onChange={setInput}/>
-                <SingleChoiceFormBase value={choice} onChange={(e) => setChoice(e.target.value)} label={"Choose"} options={{default: "Choose one", banana: "Banana", haha: "Haha"}}></SingleChoiceFormBase>
+                <DropdownFormBase value={choice} onChange={(e) => setChoice(e.target.value)} label={"Choose"} options={{default: "Choose one", banana: "Banana", haha: "Haha"}}></DropdownFormBase>
                 <TestComponent/>
 
               </div>
