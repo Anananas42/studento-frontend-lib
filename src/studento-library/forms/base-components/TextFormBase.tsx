@@ -67,7 +67,7 @@ interface ITextFormProps {
     placeholder: string; // Placeholder text when form is empty
     width?: string; // Set width manually. Else it's 100%
     icon?: string; // Add icon at the start (never use with icons that might cause confusion)
-    onKeyDown?: React.KeyboardEventHandler<HTMLInputElement>;
+    onKeyDown?: React.KeyboardEventHandler<HTMLInputElement>; // Detect pressed keys while focused on the input (for example confirm something on enter)
 }
 
 const TextForm:FC<ITextFormProps> = (props) => {
