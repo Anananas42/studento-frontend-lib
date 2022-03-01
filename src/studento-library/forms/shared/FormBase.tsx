@@ -16,7 +16,7 @@ const StyledLabel = styled.label<IStyledLabel>`
     text-align: ${props => props.isHorizontal ? "right" : "left"};
     font-size: 18px;
     line-height: 20px;
-    width: ${props => props.isHorizontal ? "auto" : "100%"};
+    width: ${props => props.isHorizontal ? "auto" : "fit-content"};
     padding-top: ${props => props.isHorizontal ? "9px" : 0};
     padding-bottom: ${props => props.isHorizontal ? 0 : "19px"};
     padding-right: ${props => props.isHorizontal ? "16px" : 0};

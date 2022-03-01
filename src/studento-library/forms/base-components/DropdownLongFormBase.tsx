@@ -33,6 +33,10 @@ const StyledAccessibleSelect = styled.select<IStyledSelect>`
 	-webkit-appearance: none;
 	appearance: none;
 
+    option {
+        color: ${props => props.fill};
+    }
+
     :focus {
         box-shadow: inset 0 4px 8px ${FormColors.Active.innerShadow};
         border-color: ${FormColors.Active.border};
