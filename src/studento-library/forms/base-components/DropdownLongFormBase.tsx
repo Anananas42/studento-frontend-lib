@@ -33,10 +33,6 @@ const StyledAccessibleSelect = styled.select<IStyledSelect>`
 	-webkit-appearance: none;
 	appearance: none;
 
-    :hover {
-        color: blue;
-    }
-
     :focus {
         box-shadow: inset 0 4px 8px ${FormColors.Active.innerShadow};
         border-color: ${FormColors.Active.border};
@@ -60,27 +56,20 @@ const StyledCustomDropdown = styled.div<IStyledSelect>`
     line-height: 20px;
     height: 42px;
     padding: 0;
-    border: 1px solid ${props => props.errorMessage ? FormColors.Error.border : FormColors.Default.border};
+    border: 1px solid ${props => props.errorMessage ? FormColors.Error.border : (props.isOpen ? FormColors.Active.border : FormColors.Default.border)};
     border-radius: ${props => props.borderRadius};
-    outline: 0;
-    box-shadow: inset 0 4px 8px ${FormColors.Default.innerShadow};
+    outline: ${props => props.isOpen ? `${FormColors.Active.border} solid 1px` : 0};
+    box-shadow: inset 0 4px 8px ${props => props.isOpen ? FormColors.Active.innerShadow : FormColors.Default.innerShadow};
     background-color: white;
     color: ${props => props.placeholderFill};
     font-family: 'Varela Round', sans-serif;
     margin: 0;
     user-select: none;
+    transition: ${props => props.isOpen ? "box-shadow 0.2s ease-in-out" : ""};
 
     -moz-appearance: none;
 	-webkit-appearance: none;
 	appearance: none;
-
-    &.open {
-        color: pink;
-        box-shadow: inset 0 4px 8px ${FormColors.Active.innerShadow};
-        border-color: ${FormColors.Active.border};
-        outline: ${FormColors.Active.border} solid 1px;
-        transition: box-shadow 0.2s ease-in-out;
-    }
 
     @media (hover: hover) {
         display: block;
@@ -122,10 +111,10 @@ const StyledChevron = styled.div<IStyledSelect>`
     top: -4px;
     right: 0;
     user-select: none;
-    transform: rotate(0deg);
+    transform: ${props => props.isOpen ? "rotate(180deg)" : "rotate(0deg)"};
     transition: transform 0.3s ease-in-out;
     pointer-events: none;
-`
+`;
 
 interface IOptionGroups {
     [key: string]: {title: string, options: IOptions};
@@ -156,7 +145,7 @@ const DropdownLongFormBase:FC<IProps> = (props) => {
     const customDropdownRef = useRef<any>();
 
     const placeholderFill = value === "default" ? FormColors.Default.placeholder : colors.fill;
-    const styleProps = { borderRadius, errorMessage, fill: colors.fill, placeholderFill };
+    const styleProps = { borderRadius, errorMessage, fill: colors.fill, placeholderFill, isOpen };
 
     useEffect(() => {
         const close = () => setIsOpen(false);
