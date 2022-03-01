@@ -92,7 +92,7 @@ const StyledList = styled.div<IStyledSelect>`
     border-top: 0;
     outline: 1px solid ${FormColors.Default.border};
     border-radius: 0 0 ${props => props.borderRadius} ${props => props.borderRadius};
-    box-shadow: 2px 4px 16px -2px ${FormColors.Default.dropdownShadow};
+    box-shadow: 2px 8px 16px -2px ${FormColors.Default.dropdownShadow};
     user-select: none;
     overflow-y: auto;
     max-height: 400px;
@@ -104,7 +104,7 @@ const StyledList = styled.div<IStyledSelect>`
 const StyledOption = styled.div<IStyledSelect>`
     font-size: 20px;
     line-height: 20px;
-    padding: 16px;
+    padding: 12px 16px;
     border-bottom: 1px solid ${FormColors.Default.border};
 
     :hover {
