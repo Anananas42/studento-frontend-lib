@@ -15,9 +15,9 @@ const StyledLabel = styled.label<IStyledLabel>`
     padding-left: ${props => props.isHorizontal ? 0 : `${parseInt(props.borderRadius.split("px", 1)[0])/1.5}px`};
     text-align: ${props => props.isHorizontal ? "right" : "left"};
     font-size: 18px;
-    line-height: 12px;
+    line-height: 20px;
     width: ${props => props.isHorizontal ? "auto" : "100%"};
-    padding-top: ${props => props.isHorizontal ? "13px" : 0};
+    padding-top: ${props => props.isHorizontal ? "9px" : 0};
     padding-bottom: ${props => props.isHorizontal ? 0 : "19px"};
     padding-right: ${props => props.isHorizontal ? "16px" : 0};
     white-space: nowrap;

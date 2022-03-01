@@ -20,9 +20,9 @@ const StyledSelect = styled.select<IStyledSelect>`
     line-height: 20px;
     height: 42px;
     padding: 8px;
-    outline: 0;
     border: 1px solid ${props => props.errorMessage ? FormColors.Error.border : FormColors.Default.border};
     border-radius: ${props => props.borderRadius};
+    outline: 0;
     box-shadow: inset 0 4px 8px ${FormColors.Default.innerShadow};
     background-color: white;
     color: ${props => props.placeholderFill};
@@ -62,7 +62,6 @@ const StyledSelect = styled.select<IStyledSelect>`
 `;
 
 interface IOptions {
-    default: string;
     [key: string]: string; // key in english, value in local language
 }
 
@@ -84,15 +83,17 @@ interface IProps {
 const DropdownFormBase:FC<IProps> = (props) => {
     const { value, onChange, options, formId, isDisabled, errorMessage, label, ...rest } = props;
     const { borderRadius, colors } = useThemeContext();
-    const styleProps = { borderRadius, errorMessage, fill: colors.fill, placeholderFill: value === "default" ? FormColors.Default.placeholder : colors.fill, primaryColor: colors.primary };
-    const selectRef = useRef<any>();
+
+    const placeholderFill = value === "default" ? FormColors.Default.placeholder : colors.fill;
+    const styleProps = { borderRadius, errorMessage, fill: colors.fill, placeholderFill, primaryColor: colors.primary };
+    const dropdownRef = useRef<any>();
 
     return (
         <FormBase formId={formId} label={label} isDisabled={isDisabled} errorMessage={errorMessage} {...rest}>
-            <StyledSelect ref={selectRef} value={value} onChange={onChange} id={formId ? formId : label} disabled={isDisabled} {...styleProps}>
+            <StyledSelect ref={dropdownRef} value={value} onChange={onChange} id={formId ? formId : label} disabled={isDisabled} {...styleProps}>
+                <option value={"default"} onClick={() => dropdownRef.current.blur()} disabled={true} hidden={true} >Choose one</option>;
                 {Object.keys(options).map(key => {
-                    const additionalProps = key === "default" ? {disabled: true, hidden: true} : {};
-                    return <option value={key} onClick={() => selectRef.current.blur()} {...additionalProps}>{options[key]}</option>;
+                    return <option key={key} value={key} onClick={() => dropdownRef.current.blur()} >{options[key]}</option>;
                 })}
             </StyledSelect>
             <IconL>expand_more</IconL>

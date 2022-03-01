@@ -16,6 +16,7 @@ import { useState } from 'react';
 import TextAreaFormBase from './studento-library/forms/base-components/TextAreaFormBase';
 import SingleChoiceFormBase from './studento-library/forms/base-components/SingleChoiceFormBase';
 import DropdownFormBase from './studento-library/forms/base-components/DropdownFormBase';
+import DropdownLongFormBase from './studento-library/forms/base-components/DropdownLongFormBase';
 
 const StyledApp = styled.div`
   font-family: 'Varela Round', sans-serif;
@@ -66,7 +67,8 @@ function App() {
                 <TextFormBase label={"Middle Name"} formId={"Middasdle Name"} placeholder={"Middle Name"} isHorizontal={true} value={input} onChange={setInput} />
                 <TextFormBase label={"Middle Name"} formId={"Middlhhe Name"} placeholder={"Middle Name"} isHorizontal={true} value={input} onChange={setInput} />
                 <TextFormBase label={"Last Name"} formId={"Last Name"} placeholder={"Last Name"} isDisabled={true} value={input} onChange={setInput}/>
-                <DropdownFormBase value={choice} onChange={(e) => setChoice(e.target.value)} label={"Choose"} options={{default: "Choose one", banana: "Banana", haha: "Haha"}}></DropdownFormBase>
+                <DropdownFormBase value={choice} onChange={(e) => setChoice(e.target.value)} label={"Choose"} options={{banana: "Banana", haha: "Haha"}} />
+                <DropdownLongFormBase value={choice} setValue={setChoice} label={"Choose"} optionGroups={{class3C:{title: "3.C", options: {banana: "Banana", haha: "Haha"}}}}/>
                 <TestComponent/>
 
               </div>
