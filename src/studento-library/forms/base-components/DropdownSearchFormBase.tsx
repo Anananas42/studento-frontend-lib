@@ -115,6 +115,10 @@ const StyledOption = styled.div<IStyledSelect>`
     &:last-child {
         border: 0;
     }
+
+    &.guessed {
+        background: linear-gradient(45deg, ${FormColors.Default.hoverBg1}, ${FormColors.Default.hoverBg2});
+    }
 `;
 
 const StyledGroupTitle = styled.div<IStyledSelect>`
@@ -199,6 +203,7 @@ const DropdownSearchFormBase:FC<IProps> = (props) => {
     const [guess, setGuess] = useState<string>();
     const inputRef = useRef<any>();
     const dropdownWrapperRef = useRef<any>();
+    const listRef = useRef<any>();
     const allOptions = useRef<{[key: string]: string}>();
     const allOptionsSorted = useRef<{[key: string]: string[][]}>();
 
@@ -236,12 +241,8 @@ const DropdownSearchFormBase:FC<IProps> = (props) => {
     }, []);
 
     const processInput = (input: string) => {
-        const len = input.length;
-        let closest: string | undefined;
-        if (allOptionsSorted.current) {
-            closest = findClosestOption(allOptionsSorted.current, input);
-            console.log(closest);
-            closest && allOptions.current && console.log(allOptions.current[closest]);
+        if (allOptionsSorted.current && input) {
+            setGuess(findClosestOption(allOptionsSorted.current, input));
         }
         setInput(input);
     }
@@ -259,13 +260,18 @@ const DropdownSearchFormBase:FC<IProps> = (props) => {
                 <StyledCustomDropdown aria-hidden={true} onClick={() => {setInput(""); setIsOpen(!isOpen);}} {...styleProps}>
                     <StyledCurrentInput ref={inputRef} value={isOpen ? input : currOptionName} onClick={() => {setIsOpen(!isOpen); isOpen && inputRef.current.blur()}} onChange={e => processInput(e.target.value)} {...styleProps} />
                 </StyledCustomDropdown>
-                <StyledList {...styleProps} isOpen={isOpen} >
+                <StyledList ref={listRef} {...styleProps} isOpen={isOpen} >
                         {Object.values(optionGroups).map(group => {
                             return (
                                 <div key={group.title + "div"}>
                                     <StyledGroupTitle key={group.title} {...styleProps}>{group.title}</StyledGroupTitle>
                                     {Object.keys(group.options).map(optKey => {
-                                        return <StyledOption key={optKey} onClick={() => {setValue(optKey); setCurrOptionName(group.options[optKey]); setIsOpen(false)}} {...styleProps}>{group.options[optKey]}</StyledOption>
+                                        return (
+                                        <OptionFocusable key={optKey} guess={guess} value={optKey} listRef={listRef} className={optKey === guess ? "guessed" : ""}
+                                         onClick={() => {setValue(optKey); setCurrOptionName(group.options[optKey]); setIsOpen(false)}} {...styleProps}>
+                                             {group.options[optKey]}
+                                        </OptionFocusable>
+                                            )
                                     })}
                                 </div>
                             )
@@ -275,6 +281,24 @@ const DropdownSearchFormBase:FC<IProps> = (props) => {
             </div>
         </FormBase>
     );
+}
+
+const OptionFocusable:FC<any> = (props) => {
+    const { guess, value, listRef, children, ...rest } = props;
+    const optionRef = useRef<any>();
+
+    useEffect(() => {
+        if (guess && guess === value) {
+            optionRef.current.focus();
+            listRef.current.scrollTo(0, optionRef.current.offsetTop);
+        }
+    }, [guess]);
+
+    return (
+        <StyledOption ref={optionRef} {...rest} >
+            {children}
+        </StyledOption>
+    )
 }
 
 export default DropdownSearchFormBase;
