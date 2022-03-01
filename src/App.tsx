@@ -13,6 +13,8 @@ import { BtnCTAL, BtnCTAM } from './studento-library/buttons/components/BtnCTA';
 import TextFormBase from './studento-library/forms/base-components/TextFormBase';
 import TestComponent from './studento-library/TestComponent';
 import { useState } from 'react';
+import TextAreaFormBase from './studento-library/forms/base-components/TextAreaFormBase';
+import SingleChoiceFormBase from './studento-library/forms/base-components/SingleChoiceFormBase';
 
 const StyledApp = styled.div`
   font-family: 'Varela Round', sans-serif;
@@ -26,6 +28,7 @@ const StyledApp = styled.div`
 
 function App() {
   const [input, setInput] = useState<string>("");
+  const [choice, setChoice] = useState<string>("default");
 
   return (
       <>
@@ -56,11 +59,13 @@ function App() {
                 <BtnDangerL icon={"login"} isAfter={false} onClick={() => console.log("Pressed")}>LOGIN</BtnDangerL>
                 <BtnDangerM icon={"login"} isAfter={false} onClick={() => console.log("Pressed")}>LOGIN</BtnDangerM>
                 <PopupUpload title={"Upload File"} fileHandler={() => console.log("uploading")} maxSizeMB={5}/>
-                <TextFormBase label={"First Name"} formId={"First Name"} placeholder={"First Name"} isHorizontal={true} value={input} onChange={setInput} icon={"email"} isOptional={true} isCompact={true}/>
+                <TextAreaFormBase label={"About Me"} formId={"About Me"} placeholder={""} isHorizontal={true} value={input} onChange={setInput} isOptional={true} />
+                <TextFormBase label={"First Name"} formId={"First Name"} placeholder={"First Name"} isHorizontal={true} value={input} onChange={setInput} icon={"email"} isOptional={true} isCompact={true} />
                 <TextFormBase label={"Middle Name"} formId={"Middle Name"} placeholder={"Middle Name"} isHorizontal={true} value={input} onChange={setInput} />
                 <TextFormBase label={"Middle Name"} formId={"Middasdle Name"} placeholder={"Middle Name"} isHorizontal={true} value={input} onChange={setInput} />
                 <TextFormBase label={"Middle Name"} formId={"Middlhhe Name"} placeholder={"Middle Name"} isHorizontal={true} value={input} onChange={setInput} />
                 <TextFormBase label={"Last Name"} formId={"Last Name"} placeholder={"Last Name"} isDisabled={true} value={input} onChange={setInput}/>
+                <SingleChoiceFormBase value={choice} onChange={(e) => setChoice(e.target.value)} label={"Choose"} options={{default: "Choose one", banana: "Banana", haha: "Haha"}}></SingleChoiceFormBase>
                 <TestComponent/>
 
               </div>

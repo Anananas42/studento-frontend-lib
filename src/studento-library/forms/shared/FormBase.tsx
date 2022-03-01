@@ -67,7 +67,7 @@ export interface IFormProps {
     isHorizontal?: boolean;
     label: string;
     defaultNote?: string;
-    formId: string;
+    formId?: string;
     errorMessage?: string;
     isDisabled?: boolean;
     children: ReactNode;
@@ -91,7 +91,7 @@ const FormBase:FC<IFormProps> = (props) => {
 
     return (
         <StyledWrapper isHorizontal={isHorizontal}>
-            <StyledLabel labelColor={FormColors[formState.type].label} borderRadius={borderRadius} isHorizontal={isHorizontal} htmlFor={formId} isDisabled={isDisabled}>{label}</StyledLabel>
+            <StyledLabel labelColor={FormColors[formState.type].label} borderRadius={borderRadius} isHorizontal={isHorizontal} htmlFor={formId ? formId : label} isDisabled={isDisabled}>{label}</StyledLabel>
             <StyledMessageWrapper msgColor={FormColors[formState.type].note} borderRadius={borderRadius} isCompact={isCompact}>
                 <StyledIconAnchor>
                     {children}

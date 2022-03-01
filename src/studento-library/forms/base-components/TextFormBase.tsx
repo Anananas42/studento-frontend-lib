@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC } from "react";
 import styled from "styled-components";
 import { useThemeContext } from "../../ThemeProvider";
 import { IconL } from "../../utilities/Icon";
@@ -58,7 +58,7 @@ interface ITextFormProps {
     onChange: (inputText:string) => void;
     isHorizontal?: boolean; // Place label to the left
     label: string;
-    formId: string; // To link label and input
+    formId?: string; // To link label and input
     defaultNote?: string; // Note under the input in default state
     errorMessage?: string; // Trigger error state by setting errorMessage to a value
     isDisabled?: boolean;
@@ -67,7 +67,7 @@ interface ITextFormProps {
     placeholder: string; // Placeholder text when form is empty
     width?: string; // Set width manually. Else it's 100%
     icon?: string; // Add icon at the start (never use with icons that might cause confusion)
-    onKeyDown?: React.KeyboardEventHandler<HTMLInputElement>; // Detect pressed keys while focused on the input (for example confirm something on enter)
+    onKeyDown?: React.KeyboardEventHandler<any>; // Detect pressed keys while focused on the input (for example confirm something on enter)
 }
 
 const TextForm:FC<ITextFormProps> = (props) => {
@@ -82,8 +82,8 @@ const TextForm:FC<ITextFormProps> = (props) => {
                 </StyledIconWrapper>
             }
 
-            <StyledInput type={"text"} id={formId} value={value} onChange={(e) => onChange(e.target.value)} onKeyDown={onKeyDown} borderRadius={borderRadius}
-             fill={colors.fill} isError={errorMessage} disabled={isDisabled} placeholder={placeholder} width={width} icon={icon}/>
+            <StyledInput type={"text"} id={formId ? formId : label} value={value} onChange={(e) => onChange(e.target.value)} onKeyDown={onKeyDown} borderRadius={borderRadius}
+             fill={colors.fill} isError={errorMessage} disabled={isDisabled} placeholder={placeholder} width={width} icon={icon} />
              
         </FormBase>
     )

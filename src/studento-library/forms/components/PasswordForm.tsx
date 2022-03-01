@@ -1,10 +1,10 @@
 import { FC } from "react";
 
-const TimeForm:FC = () => {
+const PasswordForm:FC = () => {
 
     return (
         <></>
     );
-}
+};
 
-export default TimeForm;
+export default PasswordForm;

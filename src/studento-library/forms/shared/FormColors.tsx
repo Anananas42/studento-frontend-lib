@@ -38,7 +38,7 @@ const FormColors:IFormColors = {
         border: "#DED7CE",
         label: "#453c30",
         note: "rgba(69, 60, 48, 0.6)",
-        innerShadow: "rgba(69, 60, 48, 0.04)",
+        innerShadow: "rgba(69, 60, 48, 0.06)",
         icon: "rgba(69, 60, 48, 0.4)",
     },
     Active: {
