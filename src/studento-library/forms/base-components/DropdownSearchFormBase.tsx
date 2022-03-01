@@ -75,12 +75,9 @@ const StyledCustomDropdown = styled.div<IStyledSelect>`
 	-webkit-appearance: none;
 	appearance: none;
 
+
     @media (hover: hover) {
         display: block;
-    }
-
-    span {
-        color: ${FormColors.Default.placeholder};
     }
 
 `;
@@ -130,18 +127,24 @@ const StyledGroupTitle = styled.div<IStyledSelect>`
 
 `;
 
-const StyledCurrentInput = styled.input`
-    width: 100%;
+const StyledCurrentInput = styled.input<IStyledSelect>`
+    width: 88%;
     height: 100%;
-    padding: 10px 0 0 16px;
+    padding: 0;
     line-height: 20px;
-`;
+    font-size: 20px;
+    border: 0;
+    border-radius: ${props => props.isOpen? `${props.borderRadius} ${props.borderRadius} 0 0` : props.borderRadius};
+    outline: 0;
+    background-color: white;
+    color: ${props => props.placeholderFill};
+    font-family: 'Varela Round', sans-serif;
+    margin: 0 0 0 16px;
+    user-select: none;
 
-const StyledCurrentSelection = styled.div`
-    width: 100%;
-    height: 100%;
-    padding: 10px 0 0 16px;
-    line-height: 20px;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
 `;
 
 const StyledChevron = styled.div<IStyledSelect>`
@@ -182,7 +185,7 @@ const DropdownSearchFormBase:FC<IProps> = (props) => {
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const [currOptionName, setCurrOptionName] = useState<string>("Choose one");
     const [input, setInput] = useState<string>();
-    const [autocomplete, setAutocomplete] = useState<string>();
+    const [guess, setGuess] = useState<string>();
     const customDropdownRef = useRef<any>();
     const dropdownWrapperRef = useRef<any>();
 
@@ -223,12 +226,10 @@ const DropdownSearchFormBase:FC<IProps> = (props) => {
                 })}
             </StyledAccessibleSelect>
             <div ref={dropdownWrapperRef}>
-                <StyledCustomDropdown ref={customDropdownRef} aria-hidden={true} onClick={() => {setIsOpen(!isOpen); setInput(""); setAutocomplete(currOptionName)}} {...styleProps}>
-                    {isOpen && <StyledCurrentInput value={input} onChange={e => processInput(e.target.value)}/>}
-                    {isOpen && <span>{autocomplete}</span>}
-                    {!isOpen && <StyledCurrentSelection>{currOptionName}</StyledCurrentSelection>}
+                <StyledCustomDropdown ref={customDropdownRef} aria-hidden={true} onClick={() => {setInput(""); setIsOpen(!isOpen);}} {...styleProps}>
+                    <StyledCurrentInput value={isOpen ? input : currOptionName} onClick={() => setIsOpen(!isOpen)} onChange={e => processInput(e.target.value)} {...styleProps} />
                 </StyledCustomDropdown>
-                <StyledList {...styleProps} isOpen={isOpen} className={isOpen ? "open" : "closed"}>
+                <StyledList {...styleProps} isOpen={isOpen} >
                         {Object.values(optionGroups).map(group => {
                             return (
                                 <div key={group.title + "div"}>
