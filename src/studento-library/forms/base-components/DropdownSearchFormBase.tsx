@@ -204,10 +204,10 @@ const DropdownSearchFormBase:FC<IProps> = (props) => {
     const inputRef = useRef<any>();
     const dropdownWrapperRef = useRef<any>();
     const listRef = useRef<any>();
-    const allOptions = useRef<{[key: string]: string}>();
-    const allOptionsSorted = useRef<{[key: string]: string[][]}>();
+    const allOptions = useRef<{[key: string]: string}>({});
+    const allOptionsSorted = useRef<{[key: string]: string[][]}>({});
 
-    const placeholderFill = value === "default" ? FormColors.Default.placeholder : colors.fill;
+    const placeholderFill = !input && value === "default" ? FormColors.Default.placeholder : colors.fill;
     const styleProps = { borderRadius, errorMessage, fill: colors.fill, placeholderFill, isOpen };
 
     useEffect(() => {
@@ -230,6 +230,8 @@ const DropdownSearchFormBase:FC<IProps> = (props) => {
     
             if (!dropdownWrapperRef.current.contains(e.target)) {
                 setIsOpen(false);
+                setGuess(undefined);
+                setInput(undefined);
             }
         }
 
@@ -247,6 +249,30 @@ const DropdownSearchFormBase:FC<IProps> = (props) => {
         setInput(input);
     }
 
+    const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === "Enter") {
+            if (guess) {
+                setValue(guess);
+                setInput(allOptions.current[guess]);
+                setCurrOptionName(allOptions.current[guess]);
+                setIsOpen(false);
+                setGuess(undefined);
+                inputRef.current.blur();
+            }else{
+                setInput(allOptions.current[value]);
+                setIsOpen(false);
+                inputRef.current.blur();
+            }
+        }
+
+        if (e.key === "Escape") {
+            setInput(allOptions.current[value]);
+            setIsOpen(false);
+            setGuess(undefined);
+            inputRef.current.blur();
+        }
+    }
+
     return (
         <FormBase formId={formId} label={label} isDisabled={isDisabled} errorMessage={errorMessage} {...rest}>
             <StyledAccessibleSelect aria-labelledby={label} value={value} onChange={(e) => {setValue(e.target.value)}} id={formId ? formId : label} {...styleProps}>
@@ -257,8 +283,9 @@ const DropdownSearchFormBase:FC<IProps> = (props) => {
                 })}
             </StyledAccessibleSelect>
             <div ref={dropdownWrapperRef}>
-                <StyledCustomDropdown aria-hidden={true} onClick={() => {setInput(""); setIsOpen(!isOpen);}} {...styleProps}>
-                    <StyledCurrentInput ref={inputRef} value={isOpen ? input : currOptionName} onClick={() => {setIsOpen(!isOpen); isOpen && inputRef.current.blur()}} onChange={e => processInput(e.target.value)} {...styleProps} />
+                <StyledCustomDropdown aria-hidden={true} onClick={() => {setInput(""); setIsOpen(!isOpen); setGuess(undefined);}} {...styleProps}>
+                    <StyledCurrentInput ref={inputRef} value={isOpen ? input : currOptionName} onClick={() => {setIsOpen(!isOpen); isOpen && inputRef.current.blur()}}
+                     onChange={e => processInput(e.target.value)} onKeyDown={onKeyDown} {...styleProps} />
                 </StyledCustomDropdown>
                 <StyledList ref={listRef} {...styleProps} isOpen={isOpen} >
                         {Object.values(optionGroups).map(group => {
