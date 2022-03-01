@@ -165,7 +165,7 @@ interface IProps {
     isDisabled?: boolean;
 };
 
-const DropdownLongFormBase:FC<IProps> = (props) => {
+const DropdownGroupedFormBase:FC<IProps> = (props) => {
     const { value, setValue, optionGroups, formId, isDisabled, errorMessage, label, ...rest } = props;
     const { borderRadius, colors } = useThemeContext();
     const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -226,4 +226,4 @@ const DropdownLongFormBase:FC<IProps> = (props) => {
     );
 }
 
-export default DropdownLongFormBase;
+export default DropdownGroupedFormBase;

@@ -6,7 +6,7 @@ import TestComponent from './studento-library/TestComponent';
 import { useState } from 'react';
 import TextAreaFormBase from './studento-library/forms/base-components/TextAreaFormBase';
 import DropdownFormBase from './studento-library/forms/base-components/DropdownFormBase';
-import DropdownLongFormBase from './studento-library/forms/base-components/DropdownLongFormBase';
+import DropdownLongFormBase from './studento-library/forms/base-components/DropdownGroupedFormBase';
 
 const StyledApp = styled.div`
   font-family: 'Varela Round', sans-serif;
