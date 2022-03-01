@@ -1,20 +1,10 @@
 import ThemeProvider from './studento-library/ThemeProvider';
 import styled from 'styled-components';
-import { BtnPrimaryL, BtnPrimaryM } from './studento-library/buttons/components/BtnPrimary';
-import { BtnOutlineL, BtnOutlineM } from './studento-library/buttons/components/BtnOutline';
-import { BtnTertiaryL, BtnTertiaryM } from './studento-library/buttons/components/BtnTertiary';
-import { BtnSecondaryL, BtnSecondaryM } from './studento-library/buttons/components/BtnSecondary';
-import { BtnConfirmL, BtnConfirmM } from './studento-library/buttons/components/BtnConfirm';
-import { BtnDangerL, BtnDangerM } from './studento-library/buttons/components/BtnDanger';
-import { BtnCloseL, BtnCloseM } from './studento-library/buttons/components/BtnClose';
 import PopupUpload from './studento-library/popups/components/PopupUpload';
-import { BtnTextL, BtnTextM } from './studento-library/buttons/components/BtnText';
-import { BtnCTAL, BtnCTAM } from './studento-library/buttons/components/BtnCTA';
 import TextFormBase from './studento-library/forms/base-components/TextFormBase';
 import TestComponent from './studento-library/TestComponent';
 import { useState } from 'react';
 import TextAreaFormBase from './studento-library/forms/base-components/TextAreaFormBase';
-import SingleChoiceFormBase from './studento-library/forms/base-components/SingleChoiceFormBase';
 import DropdownFormBase from './studento-library/forms/base-components/DropdownFormBase';
 import DropdownLongFormBase from './studento-library/forms/base-components/DropdownLongFormBase';
 
@@ -51,7 +41,7 @@ function App() {
                 <TextFormBase label={"Middle Name"} formId={"Middasdle Name"} placeholder={"Middle Name"} isHorizontal={true} value={input} onChange={setInput} />
                 <TextFormBase label={"Middle Name"} formId={"Middlhhe Name"} placeholder={"Middle Name"} isHorizontal={true} value={input} onChange={setInput} />
                 <TextFormBase label={"Last Name"} formId={"Last Name"} placeholder={"Last Name"} isDisabled={true} value={input} onChange={setInput}/>
-                <DropdownFormBase value={choice} onChange={(e) => setChoice(e.target.value)} label={"Choose"} options={{banana: "Banana", haha: "Haha"}} />
+                <DropdownFormBase value={choice} setValue={setChoice} label={"Choose"} options={{banana: "Banana", haha: "Haha"}} />
                 <DropdownLongFormBase value={choice} setValue={setChoice} label={"Choose2"} optionGroups={{class3C:{title: "3.C", options: {banana: "Banana", haha: "Haha"}}, class4C:{title: "4.C", options: {appul: "Apple", pi314: "Pie", asd:"asd", dsa:"dsa", sda:"sda", sad:"sad"}}}}/>
                 <TestComponent/>
 

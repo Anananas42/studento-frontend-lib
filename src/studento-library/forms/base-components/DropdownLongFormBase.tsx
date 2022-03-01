@@ -1,4 +1,4 @@
-import { FC, useEffect, useRef, useState } from "react";
+import { createRef, FC, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { useThemeContext } from "../../ThemeProvider";
 import { IconL } from "../../utilities/Icon";
@@ -83,17 +83,20 @@ const StyledCustomDropdown = styled.div<IStyledSelect>`
 
 const StyledList = styled.div<IStyledSelect>`
     position: absolute;
-    margin: 0;
+    margin: 1px 0 0 0;
     padding: 0;
     width: 100%;
     background-color: white;
     color: ${props => props.fill};
     border: 1px solid ${FormColors.Default.border};
+    border-top: 0;
     outline: 1px solid ${FormColors.Default.border};
     border-radius: 0 0 ${props => props.borderRadius} ${props => props.borderRadius};
+    box-shadow: 2px 4px 16px -2px ${FormColors.Default.dropdownShadow};
     user-select: none;
     overflow-y: auto;
     max-height: 400px;
+    z-index: 5;
 
     display: ${props => props.isOpen? "block" : "none"};
 `;
@@ -122,6 +125,10 @@ const StyledGroupTitle = styled.div<IStyledSelect>`
     border-bottom: 1px solid ${FormColors.Default.border};
     border-top: 1px solid ${FormColors.Default.border};
     background-color: ${FormColors.Default.innerShadow};
+
+    &:first-child {
+        border-top: 0;
+    }
 `;
 
 const StyledCurrentSelection = styled.div`
@@ -169,23 +176,29 @@ const DropdownLongFormBase:FC<IProps> = (props) => {
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const [currOptionName, setCurrOptionName] = useState<string>("Choose one");
     const customDropdownRef = useRef<any>();
+    const dropdownWrapperRef = useRef<any>();
 
     const placeholderFill = value === "default" ? FormColors.Default.placeholder : colors.fill;
     const styleProps = { borderRadius, errorMessage, fill: colors.fill, placeholderFill, isOpen };
 
     useEffect(() => {
-        const close = () => setIsOpen(false);
-        window.addEventListener('click', close);
+        const checkClickOutside = (e: any) => {
+            if (dropdownWrapperRef.current === null) {
+                window.removeEventListener('click', checkClickOutside);
+                return;
+            }
+    
+            if (!dropdownWrapperRef.current.contains(e.target)) {
+                setIsOpen(false);
+            }
+        }
 
+        dropdownWrapperRef && window.addEventListener('click', checkClickOutside);
+        
         return () => {
-            window.removeEventListener('click', close);
+            window.removeEventListener('click', checkClickOutside);
         }
     }, []);
-
-    const restrictEvent = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-        e.preventDefault();
-        e.stopPropagation();
-    }
 
     return (
         <FormBase formId={formId} label={label} isDisabled={isDisabled} errorMessage={errorMessage} {...rest}>
@@ -196,22 +209,24 @@ const DropdownLongFormBase:FC<IProps> = (props) => {
                     })
                 })}
             </StyledAccessibleSelect>
-            <StyledCustomDropdown ref={customDropdownRef} aria-hidden={true} onClick={(e) => {restrictEvent(e); setIsOpen(!isOpen)}} {...styleProps}>
-                <StyledCurrentSelection>{currOptionName}</StyledCurrentSelection>
-            </StyledCustomDropdown>
-            <StyledList {...styleProps} isOpen={isOpen} className={isOpen ? "open" : "closed"}>
-                    {Object.values(optionGroups).map(group => {
-                        return (
-                            <div key={group.title + "div"}>
-                                <StyledGroupTitle key={group.title} onClick={e => restrictEvent(e)} {...styleProps}>{group.title}</StyledGroupTitle>
-                                {Object.keys(group.options).map(optKey => {
-                                    return <StyledOption key={optKey} onClick={() => {setValue(optKey); setCurrOptionName(group.options[optKey])}} {...styleProps}>{group.options[optKey]}</StyledOption>
-                                })}
-                            </div>
-                        )
-                    })}
-                </StyledList>
-            <StyledChevron {...styleProps}><IconL>expand_more</IconL></StyledChevron>
+            <div ref={dropdownWrapperRef}>
+                <StyledCustomDropdown ref={customDropdownRef} aria-hidden={true} onClick={() => setIsOpen(!isOpen)} {...styleProps}>
+                    <StyledCurrentSelection>{currOptionName}</StyledCurrentSelection>
+                </StyledCustomDropdown>
+                <StyledList {...styleProps} isOpen={isOpen} className={isOpen ? "open" : "closed"}>
+                        {Object.values(optionGroups).map(group => {
+                            return (
+                                <div key={group.title + "div"}>
+                                    <StyledGroupTitle key={group.title} {...styleProps}>{group.title}</StyledGroupTitle>
+                                    {Object.keys(group.options).map(optKey => {
+                                        return <StyledOption key={optKey} onClick={() => {setValue(optKey); setCurrOptionName(group.options[optKey]); setIsOpen(false)}} {...styleProps}>{group.options[optKey]}</StyledOption>
+                                    })}
+                                </div>
+                            )
+                        })}
+                    </StyledList>
+                <StyledChevron {...styleProps}><IconL>expand_more</IconL></StyledChevron>
+            </div>
         </FormBase>
     );
 }

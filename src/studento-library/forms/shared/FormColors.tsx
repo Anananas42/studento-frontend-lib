@@ -11,6 +11,7 @@ export interface IFormColors {
         label: string;
         note: string;
         innerShadow: string;
+        dropdownShadow: string;
         icon: string;
         hoverBg1: string;
         hoverBg2: string;
@@ -41,6 +42,7 @@ const FormColors:IFormColors = {
         label: "#453c30",
         note: "rgba(69, 60, 48, 0.6)",
         innerShadow: "rgba(69, 60, 48, 0.06)",
+        dropdownShadow: "rgba(69, 60, 48, 0.22)",
         icon: "rgba(69, 60, 48, 0.4)",
         hoverBg1: "#FFBB3D",
         hoverBg2: "#FFD53D",
