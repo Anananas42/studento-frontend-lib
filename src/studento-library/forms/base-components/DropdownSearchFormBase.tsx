@@ -179,6 +179,17 @@ interface IProps {
     isDisabled?: boolean;
 };
 
+const findClosestOption = (options: {[key: string]: string[][]}, input: string) => {
+    if (!options || !input) return undefined;
+    const len = options.insensitive.length;
+    let i = 0;
+    while (i < len && options.sensitive[i][1].substring(0, input.length) !== input) { i++; };
+    if (i !== len) return options.sensitive[i][0];
+    i = 0;
+    while (i < len && options.insensitive[i][1].substring(0, input.length).toLowerCase() !== input.toLowerCase()) { i++; };
+    return (i !== len) ? options.insensitive[i][0] : undefined;
+}
+
 const DropdownSearchFormBase:FC<IProps> = (props) => {
     const { value, setValue, optionGroups, formId, isDisabled, errorMessage, label, ...rest } = props;
     const { borderRadius, colors } = useThemeContext();
@@ -188,11 +199,24 @@ const DropdownSearchFormBase:FC<IProps> = (props) => {
     const [guess, setGuess] = useState<string>();
     const customDropdownRef = useRef<any>();
     const dropdownWrapperRef = useRef<any>();
+    const allOptions = useRef<{[key: string]: string}>();
+    const allOptionsSorted = useRef<{[key: string]: string[][]}>();
 
     const placeholderFill = value === "default" ? FormColors.Default.placeholder : colors.fill;
     const styleProps = { borderRadius, errorMessage, fill: colors.fill, placeholderFill, isOpen };
 
     useEffect(() => {
+        const optionsUnsorted = Object.values(optionGroups).flatMap(group => {
+            return Object.keys(group.options).map(optKey => [optKey, group.options[optKey]]);
+        });
+
+        allOptions.current = Object.fromEntries(optionsUnsorted);
+
+        allOptionsSorted.current = {sensitive: optionsUnsorted.sort((a, b) => a[1] <= b[1] ? -1 : 1),
+             insensitive: optionsUnsorted.sort((a, b) => a[1].toLowerCase() <= b[1].toLowerCase() ? -1 : 1)};
+
+        console.log(allOptionsSorted.current);
+        
         const checkClickOutside = (e: any) => {
             if (dropdownWrapperRef.current === null) {
                 window.removeEventListener('click', checkClickOutside);
@@ -212,7 +236,13 @@ const DropdownSearchFormBase:FC<IProps> = (props) => {
     }, []);
 
     const processInput = (input: string) => {
-
+        const len = input.length;
+        let closest: string | undefined;
+        if (allOptionsSorted.current) {
+            closest = findClosestOption(allOptionsSorted.current, input);
+            console.log(closest);
+            closest && allOptions.current && console.log(allOptions.current[closest]);
+        }
         setInput(input);
     }
 
