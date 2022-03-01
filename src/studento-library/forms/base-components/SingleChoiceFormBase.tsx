@@ -52,6 +52,7 @@ const StyledSelect = styled.select<IStyledSelect>`
         user-select: none;
         transform: rotate(0deg);
         transition: transform 0.3s ease-in-out;
+        pointer-events: none;
     }
 
     :focus-within + div {
