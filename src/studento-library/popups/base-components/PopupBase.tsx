@@ -15,12 +15,12 @@ interface IStyledPopupWrapper {
 
 const StyledBackground = styled.div`
     display: block;
-    position: absolute;
+    position: fixed;
     background-color: rgba(69, 65, 59, 0.75);
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
     z-index: 100;
 `;
 
