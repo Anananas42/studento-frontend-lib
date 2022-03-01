@@ -197,7 +197,7 @@ const DropdownSearchFormBase:FC<IProps> = (props) => {
     const [currOptionName, setCurrOptionName] = useState<string>("Choose one");
     const [input, setInput] = useState<string>();
     const [guess, setGuess] = useState<string>();
-    const customDropdownRef = useRef<any>();
+    const inputRef = useRef<any>();
     const dropdownWrapperRef = useRef<any>();
     const allOptions = useRef<{[key: string]: string}>();
     const allOptionsSorted = useRef<{[key: string]: string[][]}>();
@@ -256,8 +256,8 @@ const DropdownSearchFormBase:FC<IProps> = (props) => {
                 })}
             </StyledAccessibleSelect>
             <div ref={dropdownWrapperRef}>
-                <StyledCustomDropdown ref={customDropdownRef} aria-hidden={true} onClick={() => {setInput(""); setIsOpen(!isOpen);}} {...styleProps}>
-                    <StyledCurrentInput value={isOpen ? input : currOptionName} onClick={() => setIsOpen(!isOpen)} onChange={e => processInput(e.target.value)} {...styleProps} />
+                <StyledCustomDropdown aria-hidden={true} onClick={() => {setInput(""); setIsOpen(!isOpen);}} {...styleProps}>
+                    <StyledCurrentInput ref={inputRef} value={isOpen ? input : currOptionName} onClick={() => {setIsOpen(!isOpen); isOpen && inputRef.current.blur()}} onChange={e => processInput(e.target.value)} {...styleProps} />
                 </StyledCustomDropdown>
                 <StyledList {...styleProps} isOpen={isOpen} >
                         {Object.values(optionGroups).map(group => {
