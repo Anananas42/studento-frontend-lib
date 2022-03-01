@@ -136,7 +136,7 @@ const StyledCurrentInput = styled.input<IStyledSelect>`
     border: 0;
     border-radius: ${props => props.isOpen? `${props.borderRadius} ${props.borderRadius} 0 0` : props.borderRadius};
     outline: 0;
-    background-color: white;
+    background: transparent;
     color: ${props => props.placeholderFill};
     font-family: 'Varela Round', sans-serif;
     margin: 0 0 0 16px;
