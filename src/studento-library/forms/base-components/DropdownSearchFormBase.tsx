@@ -79,6 +79,10 @@ const StyledCustomDropdown = styled.div<IStyledSelect>`
         display: block;
     }
 
+    span {
+        color: ${FormColors.Default.placeholder};
+    }
+
 `;
 
 const StyledList = styled.div<IStyledSelect>`
@@ -116,6 +120,23 @@ const StyledOption = styled.div<IStyledSelect>`
     }
 `;
 
+const StyledGroupTitle = styled.div<IStyledSelect>`
+    font-size: 17px;
+    line-height: 17px;
+    font-weight: bold;
+    color: ${FormColors.Default.placeholder};
+    padding: 8px 16px;
+    background-color: ${FormColors.Default.innerShadow};
+
+`;
+
+const StyledCurrentInput = styled.input`
+    width: 100%;
+    height: 100%;
+    padding: 10px 0 0 16px;
+    line-height: 20px;
+`;
+
 const StyledCurrentSelection = styled.div`
     width: 100%;
     height: 100%;
@@ -134,6 +155,10 @@ const StyledChevron = styled.div<IStyledSelect>`
     pointer-events: none;
 `;
 
+interface IOptionGroups {
+    [key: string]: {title: string, options: IOptions};
+}
+
 interface IOptions {
     [key: string]: string; // key in english, value in local language
 };
@@ -141,7 +166,7 @@ interface IOptions {
 interface IProps {
     value: string;
     setValue: React.Dispatch<React.SetStateAction<string>>;
-    options: IOptions;
+    optionGroups: IOptionGroups;
     label: string;
     formId?: string;
     isHorizontal?: boolean;
@@ -151,10 +176,13 @@ interface IProps {
     isDisabled?: boolean;
 };
 
-const DropdownFormBase:FC<IProps> = (props) => {
-    const { value, setValue, options, formId, isDisabled, errorMessage, label, ...rest } = props;
+const DropdownSearchFormBase:FC<IProps> = (props) => {
+    const { value, setValue, optionGroups, formId, isDisabled, errorMessage, label, ...rest } = props;
     const { borderRadius, colors } = useThemeContext();
     const [isOpen, setIsOpen] = useState<boolean>(false);
+    const [currOptionName, setCurrOptionName] = useState<string>("Choose one");
+    const [input, setInput] = useState<string>();
+    const [autocomplete, setAutocomplete] = useState<string>();
     const customDropdownRef = useRef<any>();
     const dropdownWrapperRef = useRef<any>();
 
@@ -180,21 +208,36 @@ const DropdownFormBase:FC<IProps> = (props) => {
         }
     }, []);
 
+    const processInput = (input: string) => {
+
+        setInput(input);
+    }
+
     return (
         <FormBase formId={formId} label={label} isDisabled={isDisabled} errorMessage={errorMessage} {...rest}>
             <StyledAccessibleSelect aria-labelledby={label} value={value} onChange={(e) => {setValue(e.target.value)}} id={formId ? formId : label} {...styleProps}>
-            {Object.keys(options).map(optKey => {
-                    return <option key={optKey} value={optKey} >{options[optKey]}</option>
-                })
-            }
+                {Object.values(optionGroups).map(group => {
+                    return Object.keys(group.options).map(optKey => {
+                        return <option key={optKey} value={optKey} onClick={() => setCurrOptionName(group.options[optKey])}>{group.options[optKey]}</option>
+                    })
+                })}
             </StyledAccessibleSelect>
             <div ref={dropdownWrapperRef}>
-                <StyledCustomDropdown ref={customDropdownRef} aria-hidden={true} onClick={() => setIsOpen(!isOpen)} {...styleProps}>
-                    <StyledCurrentSelection>{value === "default" ? "Choose one" : options[value]}</StyledCurrentSelection>
+                <StyledCustomDropdown ref={customDropdownRef} aria-hidden={true} onClick={() => {setIsOpen(!isOpen); setInput(""); setAutocomplete(currOptionName)}} {...styleProps}>
+                    {isOpen && <StyledCurrentInput value={input} onChange={e => processInput(e.target.value)}/>}
+                    {isOpen && <span>{autocomplete}</span>}
+                    {!isOpen && <StyledCurrentSelection>{currOptionName}</StyledCurrentSelection>}
                 </StyledCustomDropdown>
-                <StyledList {...styleProps} isOpen={isOpen} >
-                        {Object.keys(options).map(optKey => {
-                            return <StyledOption key={optKey} onClick={() => {setValue(optKey); setIsOpen(false)}} {...styleProps}>{options[optKey]}</StyledOption>
+                <StyledList {...styleProps} isOpen={isOpen} className={isOpen ? "open" : "closed"}>
+                        {Object.values(optionGroups).map(group => {
+                            return (
+                                <div key={group.title + "div"}>
+                                    <StyledGroupTitle key={group.title} {...styleProps}>{group.title}</StyledGroupTitle>
+                                    {Object.keys(group.options).map(optKey => {
+                                        return <StyledOption key={optKey} onClick={() => {setValue(optKey); setCurrOptionName(group.options[optKey]); setIsOpen(false)}} {...styleProps}>{group.options[optKey]}</StyledOption>
+                                    })}
+                                </div>
+                            )
                         })}
                     </StyledList>
                 <StyledChevron {...styleProps}><IconL>expand_more</IconL></StyledChevron>
@@ -203,4 +246,4 @@ const DropdownFormBase:FC<IProps> = (props) => {
     );
 }
 
-export default DropdownFormBase;
+export default DropdownSearchFormBase;

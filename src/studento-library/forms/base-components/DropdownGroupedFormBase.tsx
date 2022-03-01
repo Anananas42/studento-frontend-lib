@@ -1,4 +1,4 @@
-import { createRef, FC, useEffect, useRef, useState } from "react";
+import { FC, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { useThemeContext } from "../../ThemeProvider";
 import { IconL } from "../../utilities/Icon";
@@ -208,7 +208,7 @@ const DropdownGroupedFormBase:FC<IProps> = (props) => {
                 <StyledCustomDropdown ref={customDropdownRef} aria-hidden={true} onClick={() => setIsOpen(!isOpen)} {...styleProps}>
                     <StyledCurrentSelection>{currOptionName}</StyledCurrentSelection>
                 </StyledCustomDropdown>
-                <StyledList {...styleProps} isOpen={isOpen} className={isOpen ? "open" : "closed"}>
+                <StyledList {...styleProps} isOpen={isOpen} >
                         {Object.values(optionGroups).map(group => {
                             return (
                                 <div key={group.title + "div"}>
