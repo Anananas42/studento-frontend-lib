@@ -88,7 +88,8 @@ const StyledList = styled.div<IStyledSelect>`
     outline: 1px solid ${FormColors.Default.border};
     border-radius: 0 0 ${props => props.borderRadius} ${props => props.borderRadius};
     user-select: none;
-    overflow: hidden;
+    overflow-y: auto;
+    max-height: 400px;
 
     display: ${props => props.isOpen? "block" : "none"};
 `;
