@@ -79,6 +79,8 @@ interface IProps {
     isDisabled?: boolean;
 }
 
+// Might be worth redesigning without the use of native select html element. Styling native select can cause multiple tumors in a very short time span.
+
 const SingleChoiceFormBase:FC<IProps> = (props) => {
     const { value, onChange, options, formId, isDisabled, errorMessage, label, ...rest } = props;
     const { borderRadius, colors } = useThemeContext();
