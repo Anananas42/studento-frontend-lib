@@ -7,7 +7,7 @@ const StyledManager = styled.div`
     z-index: 9999;
     top: 20px;
     left: 50%;
-    translate: -50% 0;
+    transform: translateX(-50%);
     display: flex;
     flex-flow: column nowrap;
     align-items: center;
