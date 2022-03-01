@@ -57,7 +57,7 @@ const StyledCustomDropdown = styled.div<IStyledSelect>`
     height: 42px;
     padding: 0;
     border: 1px solid ${props => props.errorMessage ? FormColors.Error.border : (props.isOpen ? FormColors.Active.border : FormColors.Default.border)};
-    border-radius: ${props => props.borderRadius};
+    border-radius: ${props => props.isOpen? `${props.borderRadius} ${props.borderRadius} 0 0` : props.borderRadius};
     outline: ${props => props.isOpen ? `${FormColors.Active.border} solid 1px` : 0};
     box-shadow: inset 0 4px 8px ${props => props.isOpen ? FormColors.Active.innerShadow : FormColors.Default.innerShadow};
     background-color: white;
@@ -79,29 +79,50 @@ const StyledCustomDropdown = styled.div<IStyledSelect>`
 
 const StyledList = styled.div<IStyledSelect>`
     position: absolute;
-    margin-top: 0;
+    margin: 0;
     padding: 0;
     width: 100%;
-    background-color: blue;
-    border-radius: ${props => props.borderRadius};
+    background-color: white;
+    color: ${props => props.fill};
+    border: 1px solid ${FormColors.Default.border};
+    outline: 1px solid ${FormColors.Default.border};
+    border-radius: 0 0 ${props => props.borderRadius} ${props => props.borderRadius};
     user-select: none;
+    overflow: hidden;
 
     display: ${props => props.isOpen? "block" : "none"};
 `;
 
-const StyledOption = styled.div`
-    
+const StyledOption = styled.div<IStyledSelect>`
+    font-size: 20px;
+    line-height: 20px;
+    padding: 16px;
+    border-bottom: 1px solid ${FormColors.Default.border};
 
+    :hover {
+        background: linear-gradient(45deg, ${FormColors.Default.hoverBg1}, ${FormColors.Default.hoverBg2});
+    }
+
+    &:last-child {
+        border: 0;
+    }
 `;
 
-const StyledGroupTitle = styled.div`
-    
+const StyledGroupTitle = styled.div<IStyledSelect>`
+    font-size: 17px;
+    line-height: 17px;
+    font-weight: bold;
+    color: ${FormColors.Default.placeholder};
+    padding: 8px 16px;
+    border-bottom: 1px solid ${FormColors.Default.border};
+    border-top: 1px solid ${FormColors.Default.border};
+    background-color: ${FormColors.Default.innerShadow};
 `;
 
 const StyledCurrentSelection = styled.div`
     width: 100%;
     height: 100%;
-    padding: 10px 0 0 12px;
+    padding: 10px 0 0 16px;
     line-height: 20px;
 `;
 
@@ -112,7 +133,7 @@ const StyledChevron = styled.div<IStyledSelect>`
     right: 0;
     user-select: none;
     transform: ${props => props.isOpen ? "rotate(180deg)" : "rotate(0deg)"};
-    transition: transform 0.3s ease-in-out;
+    transition: transform 0.25s ease-in-out;
     pointer-events: none;
 `;
 
@@ -177,9 +198,9 @@ const DropdownLongFormBase:FC<IProps> = (props) => {
                     {Object.values(optionGroups).map(group => {
                         return (
                             <div key={group.title + "div"}>
-                                <StyledGroupTitle key={group.title} onClick={e => restrictEvent(e)}>{group.title}</StyledGroupTitle>
+                                <StyledGroupTitle key={group.title} onClick={e => restrictEvent(e)} {...styleProps}>{group.title}</StyledGroupTitle>
                                 {Object.keys(group.options).map(optKey => {
-                                    return <StyledOption key={optKey} onClick={() => {setValue(optKey); setCurrOptionName(group.options[optKey])}}>{group.options[optKey]}</StyledOption>
+                                    return <StyledOption key={optKey} onClick={() => {setValue(optKey); setCurrOptionName(group.options[optKey])}} {...styleProps}>{group.options[optKey]}</StyledOption>
                                 })}
                             </div>
                         )

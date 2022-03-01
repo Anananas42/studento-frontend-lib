@@ -12,6 +12,8 @@ export interface IFormColors {
         note: string;
         innerShadow: string;
         icon: string;
+        hoverBg1: string;
+        hoverBg2: string;
     },
     Active: {
         border: string;
@@ -40,6 +42,8 @@ const FormColors:IFormColors = {
         note: "rgba(69, 60, 48, 0.6)",
         innerShadow: "rgba(69, 60, 48, 0.06)",
         icon: "rgba(69, 60, 48, 0.4)",
+        hoverBg1: "#FFBB3D",
+        hoverBg2: "#FFD53D",
     },
     Active: {
         border: "rgb(255, 187, 61)",

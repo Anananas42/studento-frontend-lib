@@ -19,7 +19,7 @@ const StyledSelect = styled.select<IStyledSelect>`
     font-size: 20px;
     line-height: 20px;
     height: 42px;
-    padding: 8px;
+    padding: 8px 16px;
     border: 1px solid ${props => props.errorMessage ? FormColors.Error.border : FormColors.Default.border};
     border-radius: ${props => props.borderRadius};
     outline: 0;
