@@ -122,13 +122,8 @@ const StyledGroupTitle = styled.div<IStyledSelect>`
     font-weight: bold;
     color: ${FormColors.Default.placeholder};
     padding: 8px 16px;
-    border-bottom: 1px solid ${FormColors.Default.border};
-    border-top: 1px solid ${FormColors.Default.border};
     background-color: ${FormColors.Default.innerShadow};
 
-    &:first-child {
-        border-top: 0;
-    }
 `;
 
 const StyledCurrentSelection = styled.div`
