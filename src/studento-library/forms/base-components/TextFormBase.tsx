@@ -56,17 +56,17 @@ const StyledIconWrapper = styled.div`
 interface ITextFormProps {
     value: string;
     onChange: (inputText:string) => void;
-    isHorizontal?: boolean;
+    isHorizontal?: boolean; // Place label to the left
     label: string;
-    formId: string;
-    defaultNote?: string;
-    errorMessage?: string;
+    formId: string; // To link label and input
+    defaultNote?: string; // Note under the input in default state
+    errorMessage?: string; // Trigger error state by setting errorMessage to a value
     isDisabled?: boolean;
-    isOptional?: boolean;
-    isCompact?: boolean;
-    placeholder: string;
-    width?: string;
-    icon?: string;
+    isOptional?: boolean; // The field should be visibly optional
+    isCompact?: boolean; // Form is without messages to save vertical space
+    placeholder: string; // Placeholder text when form is empty
+    width?: string; // Set width manually. Else it's 100%
+    icon?: string; // Add icon at the start (never use with icons that might cause confusion)
     onKeyDown?: React.KeyboardEventHandler<HTMLInputElement>;
 }
 
