@@ -1,10 +1,10 @@
 import { FC } from "react";
 
-const WeekDayForm:FC = () => {
+const WeekDayFormBase:FC = () => {
 
     return (
         <></>
     );
 }
 
-export default WeekDayForm;
+export default WeekDayFormBase;

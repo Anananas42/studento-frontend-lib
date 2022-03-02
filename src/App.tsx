@@ -1,16 +1,9 @@
 import ThemeProvider from './studento-library/ThemeProvider';
 import styled from 'styled-components';
 import PopupUpload from './studento-library/popups/components/PopupUpload';
-import TextFormBase from './studento-library/forms/base-components/TextFormBase';
 import TestComponent from './studento-library/TestComponent';
 import { useState } from 'react';
-import TextAreaFormBase from './studento-library/forms/base-components/TextAreaFormBase';
-import DropdownFormBase from './studento-library/forms/base-components/DropdownFormBase';
-import DropdownGroupedFormBase from './studento-library/forms/base-components/DropdownGroupedFormBase';
-import DropdownSearchFormBase from './studento-library/forms/base-components/DropdownSearchFormBase';
-import DateFormBase from './studento-library/forms/base-components/DateFormBase';
-import MultipleChoiceForm from './studento-library/forms/base-components/MultipleChoiceFormBase';
-import MultipleChoiceFormBase from './studento-library/forms/base-components/MultipleChoiceFormBase';
+import { TextFormBase, TextAreaFormBase, DropdownFormBase, DropdownGroupedFormBase, DropdownSearchFormBase, DateFormBase, MultipleChoiceFormBase } from './studento-library/forms/base-components';
 
 const StyledApp = styled.div`
   font-family: 'Varela Round', sans-serif;

@@ -70,7 +70,7 @@ interface ITextFormProps {
     onKeyDown?: React.KeyboardEventHandler<any>; // Detect pressed keys while focused on the input (for example confirm something on enter)
 }
 
-const TextForm:FC<ITextFormProps> = (props) => {
+const TextFormBase:FC<ITextFormProps> = (props) => {
     const { label, errorMessage, isDisabled, placeholder, width, icon, value, onChange, onKeyDown, isOptional, isCompact, formId, ...passedProps } = props;
     const { borderRadius, colors, languageMap } = useThemeContext();
 
@@ -89,4 +89,4 @@ const TextForm:FC<ITextFormProps> = (props) => {
     )
 }
 
-export default TextForm;
+export default TextFormBase;

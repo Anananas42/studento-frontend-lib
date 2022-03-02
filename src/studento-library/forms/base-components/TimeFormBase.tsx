@@ -1,10 +1,10 @@
 import { FC } from "react";
 
-const TimeForm:FC = () => {
+const TimeFormBase:FC = () => {
 
     return (
         <></>
     );
 }
 
-export default TimeForm;
+export default TimeFormBase;
