@@ -35,7 +35,6 @@ const StyledCheckbox = styled.input<IStyledCheckbox>`
     transform: translateY(4px);
     display:inline-block;
     position: relative;
-    overflow: hidden;
     box-shadow: inset 0 4px 8px ${CheckboxColors.Default.innerShadow};
 
     :hover {
@@ -63,14 +62,15 @@ const StyledCheckbox = styled.input<IStyledCheckbox>`
 
     &:checked::before {
         content: "";
-        transform: scale(1);
+        transform: scale(1.21);
+        border-radius: 4px;
     }
 
     &:checked::after {
         content: "";
         position: absolute;
         display: inline-block;
-        width: 100%;
+        width: 110%;
         height: 100%;
         top: -2px;
         left: -2px;

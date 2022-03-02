@@ -22,8 +22,8 @@ const StyleChoiceRow = styled.div<IStyleProps>`
 
     label {
         padding-left: 8px;
-        font-size: 20px;
-        line-height: 20px;
+        font-size: 18px;
+        line-height: 18px;
         user-select: none;
     }
 `;
