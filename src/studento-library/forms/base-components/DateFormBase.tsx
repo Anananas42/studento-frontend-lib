@@ -19,7 +19,7 @@ const StyledInput = styled.input<IStyledInput>`
     box-shadow: inset 0 4px 8px ${FormColors.Default.innerShadow};
     line-height: 14px;
     font-size: 20px;
-    padding: 8px 44px;
+    padding: 8px 8px 8px ${props => `${48 + parseInt(props.borderRadius.split("px", 1)[0])/4}px`};
     font-family: 'Varela Round', sans-serif;
     width: ${props => props.width || "100%"};
 
@@ -42,11 +42,17 @@ const StyledInput = styled.input<IStyledInput>`
 
 `;
 
-const StyledIconWrapper = styled.div`
+const StyledIconWrapper = styled.div<{borderRadius: string}>`
     position: absolute;
-    left: -0px;
+    left: ${props => `${parseInt(props.borderRadius.split("px", 1)[0])/4}px`};
     top: -5px;
     color: ${FormColors.Default.icon};
+
+    > div > div::after {
+        border-right: 1px solid ${FormColors.Default.icon};
+        padding-left: 8px;
+        content: ""; 
+    }
 `;
 
 export interface IDateFormProps {
@@ -65,7 +71,7 @@ const DateFormBase:FC<IDateFormProps> = (props) => {
 
     return (
         <FormBase formId={formId} label={label} {...rest}>
-            <StyledIconWrapper>
+            <StyledIconWrapper borderRadius={borderRadius}>
                 <IconL>calendar_today</IconL>
             </StyledIconWrapper>
             <StyledInput type={"date"} id={formId ? formId : label} borderRadius={borderRadius} fill={colors.fill} />
