@@ -219,8 +219,6 @@ const DropdownSearchFormBase:FC<IProps> = (props) => {
 
         allOptionsSorted.current = {sensitive: optionsUnsorted.sort((a, b) => a[1] <= b[1] ? -1 : 1),
              insensitive: optionsUnsorted.sort((a, b) => a[1].toLowerCase() <= b[1].toLowerCase() ? -1 : 1)};
-
-        console.log(allOptionsSorted.current);
         
         const checkClickOutside = (e: any) => {
             if (dropdownWrapperRef.current === null) {
