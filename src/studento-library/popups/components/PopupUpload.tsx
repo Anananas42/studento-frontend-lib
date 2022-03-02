@@ -83,7 +83,7 @@ const PopupUpload:FC<IPopupUpload> = (props) => {
 
     const onUploadClick = (file:File) => {
         if (file.size > maxSizeMB * 1e6) {
-            pushSystemNotification({text: `Uploaded file exceeds size of ${maxSizeMB} MB.`, type: NotificationType.Error}, false);
+            pushSystemNotification({text: `${languageMap.Generic.PopupUpload.errorFileSize} ${maxSizeMB} MB.`, type: NotificationType.Error}, false);
             setFile(undefined);
             return;
         }

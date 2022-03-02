@@ -9,6 +9,7 @@ export interface ILanguageSet {
         PopupUpload: {
             title: string;
             prompt: string;
+            errorFileSize: string;
         }
     }
 }
@@ -24,6 +25,7 @@ const EnSet:ILanguageSet = {
         PopupUpload: {
             title: "Upload File",
             prompt: "Drag and drop or click and choose a file to upload.",
+            errorFileSize: "Uploaded file exceeds the size of ",
         }
     }
 }
@@ -39,6 +41,7 @@ const CzSet:ILanguageSet = {
         PopupUpload: {
             title: "Nahrát Soubor",
             prompt: "Přetáhni, nebo klikni a zvol soubor pro nahrání.",
+            errorFileSize: "Nahraný soubor je větší než limit ",
         }
     }
 }
