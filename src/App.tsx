@@ -9,6 +9,8 @@ import DropdownFormBase from './studento-library/forms/base-components/DropdownF
 import DropdownGroupedFormBase from './studento-library/forms/base-components/DropdownGroupedFormBase';
 import DropdownSearchFormBase from './studento-library/forms/base-components/DropdownSearchFormBase';
 import DateFormBase from './studento-library/forms/base-components/DateFormBase';
+import MultipleChoiceForm from './studento-library/forms/base-components/MultipleChoiceFormBase';
+import MultipleChoiceFormBase from './studento-library/forms/base-components/MultipleChoiceFormBase';
 
 const StyledApp = styled.div`
   font-family: 'Varela Round', sans-serif;
@@ -24,6 +26,7 @@ function App() {
   const [input, setInput] = useState<string>("");
   const [choice, setChoice] = useState<string>("default");
   const [date, setDate] = useState<string>("2021-11-04");
+  const [multichoice, setMultichoice] = useState<string>("");
 
   return (
       <>
@@ -49,6 +52,7 @@ function App() {
                 <DropdownSearchFormBase value={choice} setValue={setChoice} label={"Choose22"} optionGroups={{class3C:{title: "3.C", options: {bananda: "Banana", hahaa: "Haha"}}, class4C:{title: "4.C", options: {appusl: "Apple", pi314d: "Pie", asad:"Bbnana", dsaaa:"banan", sdaa:"Banan", saad:"sad", sada:"sada"}}}}/>
                 <TestComponent />
                 <DateFormBase label={"Important Date"} value={date} setValue={setDate} />
+                <MultipleChoiceFormBase value={multichoice} setValue={setMultichoice} label={"Multiple Choice"} choices={{uga: "buba", guge: "gugi"}} />
 
               </div>
             </ThemeProvider>
