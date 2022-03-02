@@ -153,7 +153,7 @@ interface IProps {
 
 const DropdownFormBase:FC<IProps> = (props) => {
     const { value, setValue, options, formId, isDisabled, errorMessage, label, ...rest } = props;
-    const { borderRadius, colors } = useThemeContext();
+    const { borderRadius, colors, languageMap } = useThemeContext();
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const customDropdownRef = useRef<any>();
     const dropdownWrapperRef = useRef<any>();
@@ -190,7 +190,7 @@ const DropdownFormBase:FC<IProps> = (props) => {
             </StyledAccessibleSelect>
             <div ref={dropdownWrapperRef}>
                 <StyledCustomDropdown ref={customDropdownRef} aria-hidden={true} onClick={() => setIsOpen(!isOpen)} {...styleProps}>
-                    <StyledCurrentSelection>{value === "default" ? "Choose one" : options[value]}</StyledCurrentSelection>
+                    <StyledCurrentSelection>{value === "default" ? languageMap.Generic.drpDwnPlaceholder : options[value]}</StyledCurrentSelection>
                 </StyledCustomDropdown>
                 <StyledList {...styleProps} isOpen={isOpen} >
                         {Object.keys(options).map(optKey => {

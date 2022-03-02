@@ -3,6 +3,7 @@ import PopupBase from "../base-components/PopupBase";
 import { BtnDangerL } from '../../buttons/components/BtnDanger';
 import { BtnTertiaryL } from "../../buttons/components/BtnTertiary";
 import styled from "styled-components";
+import { useThemeContext } from "../../ThemeProvider";
 
 interface IPopupDelete {
     title: string;
@@ -23,13 +24,14 @@ const StyledButtons = styled.div`
 const PopupDelete:FC<IPopupDelete> = (props) => {
     const { title, children, event, sidenote } = props;
     const [ isOpened, setIsOpened ] = useState<boolean>(true);
+    const { languageMap } = useThemeContext();
 
     return (
         <PopupBase title={title} isOpened={isOpened} setIsOpened={setIsOpened} sidenote={sidenote} width={"360px"}>
             <div style={{textAlign: "center"}}>{children}</div>
             <StyledButtons>
-                <BtnTertiaryL onClick={() => setIsOpened(false)}>cancel</BtnTertiaryL>
-                <BtnDangerL icon={"delete"} onClick={() => {setIsOpened(false); event()}}>delete</BtnDangerL>
+                <BtnTertiaryL onClick={() => setIsOpened(false)}>{languageMap.Generic.cancel}</BtnTertiaryL>
+                <BtnDangerL icon={"delete"} onClick={() => {setIsOpened(false); event()}}>{languageMap.Generic.delete}</BtnDangerL>
             </StyledButtons>
         </PopupBase>
     )

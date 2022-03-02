@@ -167,9 +167,9 @@ interface IProps {
 
 const DropdownGroupedFormBase:FC<IProps> = (props) => {
     const { value, setValue, optionGroups, formId, isDisabled, errorMessage, label, ...rest } = props;
-    const { borderRadius, colors } = useThemeContext();
+    const { borderRadius, colors, languageMap } = useThemeContext();
     const [isOpen, setIsOpen] = useState<boolean>(false);
-    const [currOptionName, setCurrOptionName] = useState<string>("Choose one");
+    const [currOptionName, setCurrOptionName] = useState<string>();
     const customDropdownRef = useRef<any>();
     const dropdownWrapperRef = useRef<any>();
 
@@ -206,7 +206,7 @@ const DropdownGroupedFormBase:FC<IProps> = (props) => {
             </StyledAccessibleSelect>
             <div ref={dropdownWrapperRef}>
                 <StyledCustomDropdown ref={customDropdownRef} aria-hidden={true} onClick={() => setIsOpen(!isOpen)} {...styleProps}>
-                    <StyledCurrentSelection>{currOptionName}</StyledCurrentSelection>
+                    <StyledCurrentSelection>{currOptionName ? currOptionName : languageMap.Generic.drpDwnPlaceholder}</StyledCurrentSelection>
                 </StyledCustomDropdown>
                 <StyledList {...styleProps} isOpen={isOpen} >
                         {Object.values(optionGroups).map(group => {

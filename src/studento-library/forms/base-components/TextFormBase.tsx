@@ -72,10 +72,10 @@ interface ITextFormProps {
 
 const TextForm:FC<ITextFormProps> = (props) => {
     const { label, errorMessage, isDisabled, placeholder, width, icon, value, onChange, onKeyDown, isOptional, isCompact, formId, ...passedProps } = props;
-    const { borderRadius, colors } = useThemeContext();
+    const { borderRadius, colors, languageMap } = useThemeContext();
 
     return (
-        <FormBase label={label + (isOptional ? " (optional)" : "")} errorMessage={errorMessage} isDisabled={isDisabled} isCompact={isCompact} formId={formId} {...passedProps}>
+        <FormBase label={label + (isOptional ? ` (${languageMap.Generic.optional})` : "")} errorMessage={errorMessage} isDisabled={isDisabled} isCompact={isCompact} formId={formId} {...passedProps}>
             {icon && 
                 <StyledIconWrapper>
                     <IconL>{icon}</IconL>

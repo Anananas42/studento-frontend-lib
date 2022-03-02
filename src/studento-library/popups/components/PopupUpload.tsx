@@ -7,13 +7,6 @@ import { useThemeContext } from "../../ThemeProvider";
 import FileDragAndDrop from '../../utilities/FileDragAndDrop';
 import { NotificationType } from "../../utilities/SystemNotification";
 
-interface IPopupUpload {
-    title: string;
-    sidenote?: string;
-    fileHandler: (file: any) => string | void;
-    maxSizeMB: number;
-}
-
 interface IStyledUpload {
     borderRadius: string;
     fill: string;
@@ -65,8 +58,15 @@ const StyledHiddenInput = styled.input`
     display: none;
 `;
 
+interface IPopupUpload {
+    title?: string;
+    sidenote?: string;
+    fileHandler: (file: any) => string | void;
+    maxSizeMB: number;
+}
+
 const PopupUpload:FC<IPopupUpload> = (props) => {
-    const { borderRadius, colors, pushSystemNotification, clearSystemNotifications } = useThemeContext();
+    const { borderRadius, colors, pushSystemNotification, clearSystemNotifications, languageMap } = useThemeContext();
     const { title, fileHandler, sidenote, maxSizeMB } = props;
     const [isOpened, setIsOpened] = useState<boolean>(true);
     const [isDragOver, setIsDragOver] = useState<boolean>(false);
@@ -107,16 +107,16 @@ const PopupUpload:FC<IPopupUpload> = (props) => {
 
     return (
         <>{!file && isOpened}
-            <PopupBase title={title} isOpened={isOpened} setIsOpened={setIsOpened} sidenote={sidenote}>
+            <PopupBase title={title ? title : languageMap.Generic.PopupUpload.title} isOpened={isOpened} setIsOpened={setIsOpened} sidenote={sidenote}>
                 <FileDragAndDrop setIsDragOver={setIsDragOver} fileHandler={(files:any) => setFile(files[0])}>
                     <StyledUpload ref={UploadRef} borderRadius={borderRadius} fill={colors.fill} isDragOver={isDragOver} width={initWidth} height={initHeight} onClick={inputClick}>
                         <StyledHiddenInput ref={HiddenInputRef} type="file" name="file" onChange={e => e.target.files && e.target.files.length > 0 && setFile(e.target.files[0])}/>
-                        {isDragOver ? `Nahrát soubor...` : (file ? <span style={{fontWeight: 700}}>{file.name}</span> : <span>Přetáhni, nebo klikni a zvol soubor pro nahrání.<br/>(max. {maxSizeMB} MB)</span>)}
+                        {isDragOver ? `Nahrát soubor...` : (file ? <span style={{fontWeight: 700}}>{file.name}</span> : <span>{languageMap.Generic.PopupUpload.prompt}<br/>(max. {maxSizeMB} MB)</span>)}
                     </StyledUpload>
                 </FileDragAndDrop>
                 <StyledButtons>
-                    <BtnTertiaryL onClick={() => {setIsOpened(false); clearSystemNotifications()}}>CANCEL</BtnTertiaryL>
-                    <BtnPrimaryL icon={"upload"} onClick={() => file && onUploadClick(file)} isDisabled={file === undefined}>upload</BtnPrimaryL>
+                    <BtnTertiaryL onClick={() => {setIsOpened(false); clearSystemNotifications()}}>{languageMap.Generic.cancel}</BtnTertiaryL>
+                    <BtnPrimaryL icon={"upload"} onClick={() => file && onUploadClick(file)} isDisabled={file === undefined}>{languageMap.Generic.upload}</BtnPrimaryL>
                 </StyledButtons>
             </PopupBase>
         </>

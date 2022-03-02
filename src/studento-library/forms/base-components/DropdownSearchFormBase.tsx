@@ -196,9 +196,9 @@ const findClosestOption = (options: {[key: string]: string[][]}, input: string) 
 
 const DropdownSearchFormBase:FC<IProps> = (props) => {
     const { value, setValue, optionGroups, formId, isDisabled, errorMessage, label, ...rest } = props;
-    const { borderRadius, colors } = useThemeContext();
+    const { borderRadius, colors, languageMap } = useThemeContext();
     const [isOpen, setIsOpen] = useState<boolean>(false);
-    const [currOptionName, setCurrOptionName] = useState<string>("Choose one");
+    const [currOptionName, setCurrOptionName] = useState<string>();
     const [input, setInput] = useState<string>();
     const [guess, setGuess] = useState<string>();
     const inputRef = useRef<any>();
@@ -282,7 +282,8 @@ const DropdownSearchFormBase:FC<IProps> = (props) => {
             </StyledAccessibleSelect>
             <div ref={dropdownWrapperRef}>
                 <StyledCustomDropdown aria-hidden={true} onClick={() => {setInput(""); setIsOpen(!isOpen); setGuess(undefined);}} {...styleProps}>
-                    <StyledCurrentInput ref={inputRef} value={isOpen ? input : currOptionName} onClick={() => {setIsOpen(!isOpen); isOpen && inputRef.current.blur()}}
+                    <StyledCurrentInput ref={inputRef} value={isOpen ? input : (currOptionName ? currOptionName : languageMap.Generic.drpDwnPlaceholder)}
+                     onClick={() => {setIsOpen(!isOpen); isOpen && inputRef.current.blur()}}
                      onChange={e => processInput(e.target.value)} onKeyDown={onKeyDown} {...styleProps} />
                 </StyledCustomDropdown>
                 <StyledList ref={listRef} {...styleProps} isOpen={isOpen} >

@@ -3,6 +3,7 @@ import PopupBase from "../base-components/PopupBase";
 import { BtnConfirmL } from "../../buttons/components/BtnConfirm";
 import { BtnTertiaryL } from "../../buttons/components/BtnTertiary";
 import styled from "styled-components";
+import { useThemeContext } from "../../ThemeProvider";
 
 interface IPopupConfirm {
     title: string;
@@ -24,12 +25,13 @@ const StyledButtons = styled.div`
 const PopupConfirm:FC<IPopupConfirm> = (props) => {
     const { title, children, btnText, event, sidenote } = props;
     const [ isOpened, setIsOpened ] = useState<boolean>(true);
+    const { languageMap } = useThemeContext();
 
     return (
         <PopupBase title={title} isOpened={isOpened} setIsOpened={setIsOpened} sidenote={sidenote}>
             <div style={{textAlign: "center"}}>{children}</div>
             <StyledButtons>
-                <BtnTertiaryL onClick={() => setIsOpened(false)}>CANCEL</BtnTertiaryL>
+                <BtnTertiaryL onClick={() => setIsOpened(false)}>{languageMap.Generic.cancel}</BtnTertiaryL>
                 <BtnConfirmL icon={"check"} onClick={() => {setIsOpened(false); event()}}>{btnText}</BtnConfirmL>
             </StyledButtons>
         </PopupBase>
