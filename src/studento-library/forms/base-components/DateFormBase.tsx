@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useRef } from "react";
 import styled from "styled-components";
 import { useThemeContext } from "../../ThemeProvider";
 import { IconL } from "../../utilities/Icon";
@@ -71,13 +71,16 @@ export interface IDateFormProps {
 const DateFormBase:FC<IDateFormProps> = (props) => {
     const { formId, label, errorMessage, setValue, value, ...rest } = props;
     const { borderRadius, colors } = useThemeContext();
+    const datePickerRef = useRef<any>();
 
     return (
         <FormBase formId={formId} label={label} errorMessage={errorMessage} {...rest}>
-            <StyledIconWrapper borderRadius={borderRadius}>
-                <IconL>calendar_today</IconL>
-            </StyledIconWrapper>
-            <StyledInput type={"date"} id={formId ? formId : label} value={value} onChange={e => setValue(e.target.value)} borderRadius={borderRadius} fill={colors.fill} isError={errorMessage} required />
+            <label htmlFor={formId ? formId : label}>
+                <StyledIconWrapper borderRadius={borderRadius}>
+                    <IconL>calendar_today</IconL>
+                </StyledIconWrapper>
+            </label>
+            <StyledInput ref={datePickerRef} type={"date"} id={formId ? formId : label} value={value} onChange={e => setValue(e.target.value)} borderRadius={borderRadius} fill={colors.fill} isError={errorMessage} required />
         </FormBase>
     );
 }

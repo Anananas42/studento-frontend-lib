@@ -1,5 +1,6 @@
 import { FC } from "react";
 import styled from "styled-components";
+import { useThemeContext } from "../../ThemeProvider";
 import FormBase from "../shared/FormBase";
 import StyledCheckbox from "../shared/StyledCheckbox";
 
@@ -8,8 +9,17 @@ const StyledMultipleChoice = styled.div`
 
 `;
 
-const StyleChoiceRow = styled.div`
-    
+const StyleChoiceRow = styled.div<{borderRadius: string}>`
+    padding-left: ${props => props.borderRadius};
+    display: grid;
+    grid-template-columns: 40px auto;
+    gap: 8px;
+
+    label {
+        font-size: 20px;
+        line-height: 20px;
+        user-select: none;
+    }
 `
 
 interface IChoices {
@@ -30,16 +40,17 @@ interface MultipleChoiceProps {
 }
 
 const MultipleChoiceFormBase:FC<MultipleChoiceProps> = (props) => {
-    const { choices, value, setValue, isDisabled, ...rest } = props;
+    const { choices, value, setValue, isDisabled, formId, label, ...rest } = props;
+    const { borderRadius } = useThemeContext();
 
     return (
-        <FormBase isDisabled={isDisabled} {...rest}>
+        <FormBase isDisabled={isDisabled} formId={formId} label={label} {...rest}>
             <StyledMultipleChoice>
             {Object.keys(choices).map(choice => {
                 return (
-                    <StyleChoiceRow>
-                        <StyledCheckbox type={"checkbox"} value={choice} />
-                        <label>{choices[choice]}</label>
+                    <StyleChoiceRow borderRadius={borderRadius}>
+                        <StyledCheckbox id={formId ? formId + choice : label + choice} type={"checkbox"} value={choice} />
+                        <label htmlFor={formId ? formId + choice : label + choice}>{choices[choice]}</label>
                     </StyleChoiceRow>
                 )
             })}
