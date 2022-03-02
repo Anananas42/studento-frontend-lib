@@ -21,7 +21,7 @@ const StyledInput = styled.input<IStyledInput>`
     font-size: 20px;
     padding: 8px 8px 8px ${props => `${48 + parseInt(props.borderRadius.split("px", 1)[0])/4}px`};
     font-family: 'Varela Round', sans-serif;
-    width: ${props => props.width || "100%"};
+    width: ${props => props.width || "fit-content"};
 
     :focus {
         box-shadow: inset 0 4px 8px ${FormColors.Active.innerShadow};
