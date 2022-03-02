@@ -1,4 +1,4 @@
-import { createRef, FC, useEffect, useRef, useState } from "react";
+import { FC, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { useThemeContext } from "../../ThemeProvider";
 import { IconL } from "../../utilities/Icon";
@@ -238,7 +238,7 @@ const DropdownSearchFormBase:FC<IProps> = (props) => {
         return () => {
             window.removeEventListener('click', checkClickOutside);
         }
-    }, []);
+    }, [optionGroups]);
 
     const processInput = (input: string) => {
         if (allOptionsSorted.current && input) {
@@ -318,7 +318,7 @@ const OptionFocusable:FC<any> = (props) => {
             optionRef.current.focus();
             listRef.current.scrollTo(0, optionRef.current.offsetTop);
         }
-    }, [guess]);
+    }, [guess, listRef, value]);
 
     return (
         <StyledOption ref={optionRef} {...rest} >
