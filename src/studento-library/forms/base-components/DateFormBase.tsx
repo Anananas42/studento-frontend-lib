@@ -17,7 +17,7 @@ const StyledInput = styled.input<IStyledInput>`
     color: ${props => props.fill};
     border: 1px solid ${props => props.isError ? FormColors.Error.border : FormColors.Default.border};
     box-shadow: inset 0 4px 8px ${FormColors.Default.innerShadow};
-    line-height: 14px;
+    line-height: 20px;
     font-size: 20px;
     padding: 8px 8px 8px ${props => `${48 + parseInt(props.borderRadius.split("px", 1)[0])/4}px`};
     font-family: 'Varela Round', sans-serif;
@@ -47,6 +47,7 @@ const StyledIconWrapper = styled.div<{borderRadius: string}>`
     left: ${props => `${parseInt(props.borderRadius.split("px", 1)[0])/4}px`};
     top: -5px;
     color: ${FormColors.Default.icon};
+    user-select: none;
 
     > div > div::after {
         border-right: 1px solid ${FormColors.Default.icon};
@@ -74,7 +75,7 @@ const DateFormBase:FC<IDateFormProps> = (props) => {
             <StyledIconWrapper borderRadius={borderRadius}>
                 <IconL>calendar_today</IconL>
             </StyledIconWrapper>
-            <StyledInput type={"date"} id={formId ? formId : label} borderRadius={borderRadius} fill={colors.fill} />
+            <StyledInput type={"date"} id={formId ? formId : label} borderRadius={borderRadius} fill={colors.fill} required />
         </FormBase>
     );
 }
