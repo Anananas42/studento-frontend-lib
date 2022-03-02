@@ -21,6 +21,7 @@ interface IStyledCheckbox {
     isError?: string;
 }
 
+// DISABLED STATE MISSING
 const StyledCheckbox = styled.input<IStyledCheckbox>`
     -webkit-appearance: none;
     appearance: none;

@@ -32,6 +32,7 @@ export interface IFormColors {
         placeholder: string;
         note: string;
         background: string;
+        icon: string;
     };
 }
 
@@ -63,6 +64,7 @@ const FormColors:IFormColors = {
         border: "rgba(69, 60, 48, 0.04)",
         note: "rgba(69, 60, 48, 0.32)",
         background: "rgba(69, 60, 48, 0.06)",
+        icon: "rgba(69, 60, 48, 0.2)",
     }
     
 }

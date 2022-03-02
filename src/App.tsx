@@ -37,15 +37,15 @@ function App() {
                 <TextAreaFormBase label={"About Me"} formId={"About Me"} placeholder={""} isHorizontal={true} value={input} onChange={setInput} isOptional={true} />
                 <TextFormBase label={"First Name"} formId={"First Name"} placeholder={"First Name"} isHorizontal={true} value={input} onChange={setInput} icon={"email"} isOptional={true} isCompact={true} />
                 <TextFormBase label={"Middle Name"} formId={"Middle Name"} placeholder={"Middle Name"} isHorizontal={false} value={input} onChange={setInput} />
-                <MultipleChoiceFormBase value={multichoice} setValue={setMultichoice} label={"Multiple Choice"} choices={{uga: "Buba", guge: "Gugi"}} />
+                <MultipleChoiceFormBase value={multichoice} setValue={setMultichoice} label={"Multiple Choice"} choices={{uga: "Buba", guge: "Gugi"}} isDisabled={true} />
                 <TextFormBase label={"Middle Name"} formId={"Middasdle Name"} placeholder={"Middle Name"} isHorizontal={true} value={input} onChange={setInput} />
                 <TextFormBase label={"Middle Name"} formId={"Middlhhe Name"} placeholder={"Middle Name"} isHorizontal={true} value={input} onChange={setInput} />
                 <TextFormBase label={"Last Name"} formId={"Last Name"} placeholder={"Last Name"} isDisabled={true} value={input} onChange={setInput}/>
-                <DropdownFormBase value={choice} setValue={setChoice} label={"Choose"} options={{banana: "Banana", haha: "Haha"}} />
-                <DropdownGroupedFormBase value={choice} setValue={setChoice} label={"Choose2"} optionGroups={{class3C:{title: "3.C", options: {banana: "Banana", haha: "Haha"}}, class4C:{title: "4.C", options: {appul: "Apple", pi314: "Pie", asd:"asd", dsa:"dsa", sda:"sda", sad:"sad"}}}}/>
-                <DropdownSearchFormBase value={choice} setValue={setChoice} label={"Choose22"} optionGroups={{class3C:{title: "3.C", options: {bananda: "Banana", hahaa: "Haha"}}, class4C:{title: "4.C", options: {appusl: "Apple", pi314d: "Pie", asad:"Bbnana", dsaaa:"banan", sdaa:"Banan", saad:"sad", sada:"sada"}}}}/>
+                <DropdownFormBase value={choice} setValue={setChoice} label={"Choose"} isDisabled={true} options={{banana: "Banana", haha: "Haha"}} />
+                <DropdownGroupedFormBase value={choice} setValue={setChoice} label={"Choose2"}  isDisabled={true} optionGroups={{class3C:{title: "3.C", options: {banana: "Banana", haha: "Haha"}}, class4C:{title: "4.C", options: {appul: "Apple", pi314: "Pie", asd:"asd", dsa:"dsa", sda:"sda", sad:"sad"}}}}/>
+                <DropdownSearchFormBase value={choice} setValue={setChoice} label={"Choose22"} isDisabled={true} optionGroups={{class3C:{title: "3.C", options: {bananda: "Banana", hahaa: "Haha"}}, class4C:{title: "4.C", options: {appusl: "Apple", pi314d: "Pie", asad:"Bbnana", dsaaa:"banan", sdaa:"Banan", saad:"sad", sada:"sada"}}}}/>
                 <TestComponent />
-                <DateFormBase label={"Important Date"} value={date} setValue={setDate} />
+                <DateFormBase label={"Important Date"} value={date} isDisabled={true} setValue={setDate} />
 
               </div>
             </ThemeProvider>
