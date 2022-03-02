@@ -1,9 +1,9 @@
 import { FC, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
-import { useThemeContext } from "../../ThemeProvider";
-import { IconL } from "../../utilities/Icon";
-import FormBase from "../shared/FormBase";
-import FormColors from "../shared/FormColors";
+import { useThemeContext } from "../../../ThemeProvider";
+import { IconL } from "../../../utilities/Icon";
+import FormBase from "../../shared/FormBase";
+import FormColors from "../../shared/FormColors";
 
 interface IStyledSelect {
     errorMessage?: string;
@@ -11,6 +11,7 @@ interface IStyledSelect {
     fill: string;
     placeholderFill: string;
     isOpen?: boolean;
+    isDisabled?: boolean;
 }
 
 const StyledAccessibleSelect = styled.select<IStyledSelect>`
@@ -44,6 +45,10 @@ const StyledAccessibleSelect = styled.select<IStyledSelect>`
         transition: box-shadow 0.2s ease-in-out;
     }
 
+    :disabled {
+        visibility: hidden;
+    }
+
     @media (hover: hover) {
         :focus + div {
             display: none;
@@ -61,10 +66,10 @@ const StyledCustomDropdown = styled.div<IStyledSelect>`
     height: 42px;
     padding: 0;
     border: 1px solid ${props => props.errorMessage ? FormColors.Error.border : (props.isOpen ? FormColors.Active.border : FormColors.Default.border)};
-    border-radius: ${props => props.isOpen? `${props.borderRadius} ${props.borderRadius} 0 0` : props.borderRadius};
+    border-radius: ${props => props.isOpen ? `${props.borderRadius} ${props.borderRadius} 0 0` : props.borderRadius};
     outline: ${props => props.isOpen ? `${FormColors.Active.border} solid 1px` : 0};
-    box-shadow: inset 0 4px 8px ${props => props.isOpen ? FormColors.Active.innerShadow : FormColors.Default.innerShadow};
-    background-color: white;
+    box-shadow: inset 0 4px 8px ${props => props.isDisabled ? "none" : (props.isOpen ? FormColors.Active.innerShadow : FormColors.Default.innerShadow)};
+    background-color: ${props => props.isDisabled ? FormColors.Disabled.background : "#fff"};
     color: ${props => props.placeholderFill};
     font-family: 'Varela Round', sans-serif;
     margin: 0;
@@ -78,7 +83,7 @@ const StyledCustomDropdown = styled.div<IStyledSelect>`
     @media (hover: hover) {
         display: block;
     }
-
+    
 `;
 
 const StyledList = styled.div<IStyledSelect>`
@@ -116,16 +121,6 @@ const StyledOption = styled.div<IStyledSelect>`
     }
 `;
 
-const StyledGroupTitle = styled.div<IStyledSelect>`
-    font-size: 17px;
-    line-height: 17px;
-    font-weight: bold;
-    color: ${FormColors.Default.placeholder};
-    padding: 8px 16px;
-    background-color: ${FormColors.Default.innerShadow};
-
-`;
-
 const StyledCurrentSelection = styled.div`
     width: 100%;
     height: 100%;
@@ -135,7 +130,7 @@ const StyledCurrentSelection = styled.div`
 
 const StyledChevron = styled.div<IStyledSelect>`
     position: absolute;
-    color: ${props => props.fill};
+    color: ${props => props.isDisabled ? FormColors.Disabled.placeholder : props.fill};
     top: -4px;
     right: 0;
     user-select: none;
@@ -144,10 +139,6 @@ const StyledChevron = styled.div<IStyledSelect>`
     pointer-events: none;
 `;
 
-interface IOptionGroups {
-    [key: string]: {title: string, options: IOptions};
-}
-
 interface IOptions {
     [key: string]: string; // key in english, value in local language
 };
@@ -155,7 +146,7 @@ interface IOptions {
 interface IProps {
     value: string;
     setValue: React.Dispatch<React.SetStateAction<string>>;
-    optionGroups: IOptionGroups;
+    options: IOptions;
     label: string;
     formId?: string;
     isHorizontal?: boolean;
@@ -165,16 +156,15 @@ interface IProps {
     isDisabled?: boolean;
 };
 
-const DropdownGroupedFormBase:FC<IProps> = (props) => {
-    const { value, setValue, optionGroups, formId, isDisabled, errorMessage, label, ...rest } = props;
+const DropdownFormBase:FC<IProps> = (props) => {
+    const { value, setValue, options, formId, isDisabled, errorMessage, label, ...rest } = props;
     const { borderRadius, colors, languageMap } = useThemeContext();
     const [isOpen, setIsOpen] = useState<boolean>(false);
-    const [currOptionName, setCurrOptionName] = useState<string>();
     const customDropdownRef = useRef<any>();
     const dropdownWrapperRef = useRef<any>();
 
-    const placeholderFill = value === "default" ? FormColors.Default.placeholder : colors.fill;
-    const styleProps = { borderRadius, errorMessage, fill: colors.fill, placeholderFill, isOpen };
+    const placeholderFill = !value ? FormColors.Default.placeholder : colors.fill;
+    const styleProps = { borderRadius, errorMessage, fill: colors.fill, placeholderFill, isOpen, isDisabled };
 
     useEffect(() => {
         const checkClickOutside = (e: any) => {
@@ -195,29 +185,28 @@ const DropdownGroupedFormBase:FC<IProps> = (props) => {
         }
     }, []);
 
+    useEffect(() => {
+        if (isDisabled){
+            setIsOpen(false);
+            setValue("");
+        } 
+    }, [isDisabled, setValue]);
+
     return (
         <FormBase formId={formId} label={label} isDisabled={isDisabled} errorMessage={errorMessage} {...rest}>
-            <StyledAccessibleSelect aria-labelledby={label} value={value} onChange={(e) => {setValue(e.target.value)}} id={formId ? formId : label} {...styleProps}>
-                {Object.values(optionGroups).map(group => {
-                    return Object.keys(group.options).map(optKey => {
-                        return <option key={optKey} value={optKey} onClick={() => setCurrOptionName(group.options[optKey])}>{group.options[optKey]}</option>
-                    })
-                })}
+            <StyledAccessibleSelect disabled={isDisabled} aria-labelledby={label} value={value} onChange={(e) => {setValue(e.target.value)}} id={formId ? formId : label} {...styleProps}>
+            {Object.keys(options).map(optKey => {
+                    return <option key={optKey} value={optKey} disabled={isDisabled}>{options[optKey]}</option>
+                })
+            }
             </StyledAccessibleSelect>
             <div ref={dropdownWrapperRef}>
-                <StyledCustomDropdown ref={customDropdownRef} aria-hidden={true} onClick={() => setIsOpen(!isOpen)} {...styleProps}>
-                    <StyledCurrentSelection>{currOptionName ? currOptionName : languageMap.Generic.drpDwnPlaceholder}</StyledCurrentSelection>
+                <StyledCustomDropdown ref={customDropdownRef} aria-hidden={true} onClick={() => {!isDisabled && setIsOpen(!isOpen)}} {...styleProps}>
+                    <StyledCurrentSelection>{isDisabled ? "" : (!value ? languageMap.Generic.drpDwnPlaceholder : options[value])}</StyledCurrentSelection>
                 </StyledCustomDropdown>
                 <StyledList {...styleProps} isOpen={isOpen} >
-                        {Object.values(optionGroups).map(group => {
-                            return (
-                                <div key={group.title + "div"}>
-                                    <StyledGroupTitle key={group.title} {...styleProps}>{group.title}</StyledGroupTitle>
-                                    {Object.keys(group.options).map(optKey => {
-                                        return <StyledOption key={optKey} onClick={() => {setValue(optKey); setCurrOptionName(group.options[optKey]); setIsOpen(false)}} {...styleProps}>{group.options[optKey]}</StyledOption>
-                                    })}
-                                </div>
-                            )
+                        {Object.keys(options).map(optKey => {
+                            return <StyledOption key={optKey} onClick={() => {if (!isDisabled) {setValue(optKey); setIsOpen(false)}}} {...styleProps}>{options[optKey]}</StyledOption>
                         })}
                     </StyledList>
                 <StyledChevron {...styleProps}><IconL>expand_more</IconL></StyledChevron>
@@ -226,4 +215,4 @@ const DropdownGroupedFormBase:FC<IProps> = (props) => {
     );
 }
 
-export default DropdownGroupedFormBase;
+export default DropdownFormBase;

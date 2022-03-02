@@ -83,7 +83,7 @@ const TextFormBase:FC<ITextFormProps> = (props) => {
             }
 
             <StyledInput type={"text"} id={formId ? formId : label} value={value} onChange={(e) => onChange(e.target.value)} onKeyDown={onKeyDown} borderRadius={borderRadius}
-             fill={colors.fill} isError={errorMessage} disabled={isDisabled} placeholder={placeholder} width={width} icon={icon} />
+             fill={colors.fill} isError={errorMessage} disabled={isDisabled} placeholder={isDisabled ? "" : placeholder} width={width} icon={icon} />
              
         </FormBase>
     )

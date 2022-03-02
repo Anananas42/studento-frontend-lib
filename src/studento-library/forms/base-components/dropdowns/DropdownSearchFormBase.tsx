@@ -1,9 +1,9 @@
 import { FC, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
-import { useThemeContext } from "../../ThemeProvider";
-import { IconL } from "../../utilities/Icon";
-import FormBase from "../shared/FormBase";
-import FormColors from "../shared/FormColors";
+import { useThemeContext } from "../../../ThemeProvider";
+import { IconL } from "../../../utilities/Icon";
+import FormBase from "../../shared/FormBase";
+import FormColors from "../../shared/FormColors";
 
 interface IStyledSelect {
     errorMessage?: string;
@@ -11,6 +11,7 @@ interface IStyledSelect {
     fill: string;
     placeholderFill: string;
     isOpen?: boolean;
+    isDisabled?: boolean;
 }
 
 const StyledAccessibleSelect = styled.select<IStyledSelect>`
@@ -44,6 +45,10 @@ const StyledAccessibleSelect = styled.select<IStyledSelect>`
         transition: box-shadow 0.2s ease-in-out;
     }
 
+    :disabled {
+        visibility: hidden;
+    }
+
     @media (hover: hover) {
         :focus + div {
             display: none;
@@ -75,10 +80,14 @@ const StyledCustomDropdown = styled.div<IStyledSelect>`
 	-webkit-appearance: none;
 	appearance: none;
 
-
     @media (hover: hover) {
         display: block;
     }
+
+    ${props => props.isDisabled ? `
+        box-shadow: none;
+        background-color: ${FormColors.Disabled.background};
+    ` : ""}
 
 `;
 
@@ -153,7 +162,7 @@ const StyledCurrentInput = styled.input<IStyledSelect>`
 
 const StyledChevron = styled.div<IStyledSelect>`
     position: absolute;
-    color: ${props => props.fill};
+    color: ${props => props.isDisabled ? FormColors.Disabled.placeholder : props.fill};
     top: -4px;
     right: 0;
     user-select: none;
@@ -207,8 +216,8 @@ const DropdownSearchFormBase:FC<IProps> = (props) => {
     const allOptions = useRef<{[key: string]: string}>({});
     const allOptionsSorted = useRef<{[key: string]: string[][]}>({});
 
-    const placeholderFill = !input && value === "default" ? FormColors.Default.placeholder : colors.fill;
-    const styleProps = { borderRadius, errorMessage, fill: colors.fill, placeholderFill, isOpen };
+    const placeholderFill = !input && !value ? FormColors.Default.placeholder : colors.fill;
+    const styleProps = { borderRadius, errorMessage, fill: colors.fill, placeholderFill, isOpen, isDisabled };
 
     useEffect(() => {
         const optionsUnsorted = Object.values(optionGroups).flatMap(group => {
@@ -248,6 +257,10 @@ const DropdownSearchFormBase:FC<IProps> = (props) => {
     }
 
     const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (isDisabled) {
+            return;
+        }
+
         if (e.key === "Enter") {
             if (guess) {
                 setValue(guess);
@@ -273,18 +286,18 @@ const DropdownSearchFormBase:FC<IProps> = (props) => {
 
     return (
         <FormBase formId={formId} label={label} isDisabled={isDisabled} errorMessage={errorMessage} {...rest}>
-            <StyledAccessibleSelect aria-labelledby={label} value={value} onChange={(e) => {setValue(e.target.value)}} id={formId ? formId : label} {...styleProps}>
+            <StyledAccessibleSelect aria-labelledby={label} value={value} onChange={(e) => {setValue(e.target.value)}} id={formId ? formId : label} disabled={isDisabled} {...styleProps}>
                 {Object.values(optionGroups).map(group => {
                     return Object.keys(group.options).map(optKey => {
-                        return <option key={optKey} value={optKey} onClick={() => setCurrOptionName(group.options[optKey])}>{group.options[optKey]}</option>
+                        return <option key={optKey} value={optKey} onClick={() => setCurrOptionName(group.options[optKey])} disabled={isDisabled}>{group.options[optKey]}</option>
                     })
                 })}
             </StyledAccessibleSelect>
             <div ref={dropdownWrapperRef}>
-                <StyledCustomDropdown aria-hidden={true} onClick={() => {setInput(""); setIsOpen(!isOpen); setGuess(undefined);}} {...styleProps}>
-                    <StyledCurrentInput ref={inputRef} value={isOpen ? input : (currOptionName ? currOptionName : languageMap.Generic.drpDwnPlaceholder)}
-                     onClick={() => {setIsOpen(!isOpen); isOpen && inputRef.current.blur()}}
-                     onChange={e => processInput(e.target.value)} onKeyDown={onKeyDown} {...styleProps} />
+                <StyledCustomDropdown aria-hidden={true} onClick={() => {if (!isDisabled) {setInput(""); setIsOpen(!isOpen); setGuess(undefined);}}} {...styleProps}>
+                    <StyledCurrentInput ref={inputRef} value={isDisabled ? "" : (isOpen ? input : (currOptionName ? currOptionName : languageMap.Generic.drpDwnPlaceholder))}
+                     onClick={() => {if (!isDisabled) {setIsOpen(!isOpen); isOpen && inputRef.current.blur()}}}
+                     onChange={e => processInput(e.target.value)} onKeyDown={onKeyDown} {...styleProps} disabled={isDisabled} />
                 </StyledCustomDropdown>
                 <StyledList ref={listRef} {...styleProps} isOpen={isOpen} >
                         {Object.values(optionGroups).map(group => {
@@ -294,7 +307,7 @@ const DropdownSearchFormBase:FC<IProps> = (props) => {
                                     {Object.keys(group.options).map(optKey => {
                                         return (
                                         <OptionFocusable key={optKey} guess={guess} value={optKey} listRef={listRef} className={optKey === guess ? "guessed" : ""}
-                                         onClick={() => {setValue(optKey); setCurrOptionName(group.options[optKey]); setIsOpen(false)}} {...styleProps}>
+                                         onClick={() => {if (!isDisabled) {setValue(optKey); setCurrOptionName(group.options[optKey]); setIsOpen(false)}}} {...styleProps}>
                                              {group.options[optKey]}
                                         </OptionFocusable>
                                             )

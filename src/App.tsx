@@ -17,7 +17,7 @@ const StyledApp = styled.div`
 
 function App() {
   const [input, setInput] = useState<string>("");
-  const [choice, setChoice] = useState<string>("default");
+  const [choice, setChoice] = useState<string>("");
   const [date, setDate] = useState<string>("2021-11-04");
   const [multichoice, setMultichoice] = useState<string>("");
 
