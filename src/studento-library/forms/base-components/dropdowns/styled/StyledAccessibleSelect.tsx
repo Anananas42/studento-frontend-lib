@@ -8,11 +8,12 @@ export interface IStyledSelect {
     placeholderFill: string;
     isOpen?: boolean;
     isDisabled?: boolean;
+    width?: string;
 }
 
 const StyledAccessibleSelect = styled.select<IStyledSelect>`
     position: relative;
-    width: 100%;
+    width: ${props => props.width ? props.width : "100%"};
     font-size: 20px;
     line-height: 20px;
     height: 42px;

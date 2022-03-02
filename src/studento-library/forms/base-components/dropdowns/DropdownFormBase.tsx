@@ -21,17 +21,18 @@ interface IProps {
     defaultNote?: string;
     errorMessage?: string;
     isDisabled?: boolean;
+    width?: string;
 };
 
 const DropdownFormBase:FC<IProps> = (props) => {
-    const { value, setValue, options, formId, isDisabled, errorMessage, label, ...rest } = props;
+    const { value, setValue, options, formId, isDisabled, errorMessage, label, width, ...rest } = props;
     const { borderRadius, colors, languageMap } = useThemeContext();
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const customDropdownRef = useRef<any>();
     const dropdownWrapperRef = useRef<any>();
 
     const placeholderFill = !value ? FormColors.Default.placeholder : colors.fill;
-    const styleProps = { borderRadius, errorMessage, fill: colors.fill, placeholderFill, isOpen, isDisabled };
+    const styleProps = { borderRadius, errorMessage, fill: colors.fill, placeholderFill, isOpen, isDisabled, width };
 
     useEffect(() => {
         const checkClickOutside = (e: any) => {

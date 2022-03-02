@@ -46,6 +46,7 @@ interface IProps {
     defaultNote?: string;
     errorMessage?: string;
     isDisabled?: boolean;
+    width?: string;
 };
 
 const findClosestOption = (options: {[key: string]: string[][]}, input: string) => {
@@ -60,7 +61,7 @@ const findClosestOption = (options: {[key: string]: string[][]}, input: string) 
 }
 
 const DropdownSearchFormBase:FC<IProps> = (props) => {
-    const { value, setValue, optionGroups, formId, isDisabled, errorMessage, label, ...rest } = props;
+    const { value, setValue, optionGroups, formId, isDisabled, errorMessage, label, width, ...rest } = props;
     const { borderRadius, colors, languageMap } = useThemeContext();
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const [currOptionName, setCurrOptionName] = useState<string>();
@@ -73,7 +74,7 @@ const DropdownSearchFormBase:FC<IProps> = (props) => {
     const allOptionsSorted = useRef<{[key: string]: string[][]}>({});
 
     const placeholderFill = !input && !value ? FormColors.Default.placeholder : colors.fill;
-    const styleProps = { borderRadius, errorMessage, fill: colors.fill, placeholderFill, isOpen, isDisabled };
+    const styleProps = { borderRadius, errorMessage, fill: colors.fill, placeholderFill, isOpen, isDisabled, width };
 
     useEffect(() => {
         const optionsUnsorted = Object.values(optionGroups).flatMap(group => {

@@ -6,7 +6,7 @@ export const StyledCustomDropdown = styled.div<IStyledSelect>`
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
+    width: ${props => props.width ? props.width : "100%"};
     font-size: 20px;
     line-height: 20px;
     height: 42px;
