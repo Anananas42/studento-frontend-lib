@@ -2,11 +2,13 @@ import { FC } from "react";
 import styled from "styled-components";
 import { useThemeContext } from "../../ThemeProvider";
 import FormBase from "../shared/FormBase";
+import FormColors from "../shared/FormColors";
 import StyledCheckbox from "../shared/StyledCheckbox";
 
 interface IStyleProps {
     borderRadius: string;
     fill: string;
+    isDisabled?: boolean;
 }
 
 const StyledMultipleChoice = styled.div`
@@ -25,6 +27,7 @@ const StyleChoiceRow = styled.div<IStyleProps>`
         font-size: 18px;
         line-height: 18px;
         user-select: none;
+        color: ${props => props.isDisabled ? FormColors.Disabled.label : FormColors.Default.label};
     }
 `;
 
@@ -55,8 +58,8 @@ const MultipleChoiceFormBase:FC<MultipleChoiceProps> = (props) => {
             {Object.keys(choices).map(choice => {
                 const identifier = formId ? formId + choice : label + choice;
                 return (
-                    <StyleChoiceRow key={identifier} borderRadius={borderRadius} fill={colors.fill}>
-                        <StyledCheckbox id={identifier} type={"checkbox"} value={choice} />
+                    <StyleChoiceRow key={identifier} borderRadius={borderRadius} fill={colors.fill} isDisabled={isDisabled}>
+                        <StyledCheckbox id={identifier} type={"checkbox"} value={choice} disabled={isDisabled} />
                         <label htmlFor={identifier}>{choices[choice]}</label>
                     </StyleChoiceRow>
                 )

@@ -38,7 +38,7 @@ const StyledCheckbox = styled.input<IStyledCheckbox>`
     position: relative;
     box-shadow: inset 0 4px 8px ${CheckboxColors.Default.innerShadow};
 
-    :hover {
+    :hover:not(&:disabled) {
         border-color: ${CheckboxColors.Hover.border};
         box-shadow: inset 0 4px 16px ${CheckboxColors.Hover.innerShadow};
 
@@ -47,7 +47,7 @@ const StyledCheckbox = styled.input<IStyledCheckbox>`
         }
     }
 
-    :active {
+    :active:not(&:disabled) {
         border-color: ${CheckboxColors.Active.border};
         box-shadow: inset 0 4px 16px ${CheckboxColors.Active.innerShadow};
     }
