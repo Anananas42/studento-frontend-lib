@@ -8,6 +8,7 @@ import TextAreaFormBase from './studento-library/forms/base-components/TextAreaF
 import DropdownFormBase from './studento-library/forms/base-components/DropdownFormBase';
 import DropdownGroupedFormBase from './studento-library/forms/base-components/DropdownGroupedFormBase';
 import DropdownSearchFormBase from './studento-library/forms/base-components/DropdownSearchFormBase';
+import DateFormBase from './studento-library/forms/base-components/DateFormBase';
 
 const StyledApp = styled.div`
   font-family: 'Varela Round', sans-serif;
@@ -45,7 +46,8 @@ function App() {
                 <DropdownFormBase value={choice} setValue={setChoice} label={"Choose"} options={{banana: "Banana", haha: "Haha"}} />
                 <DropdownGroupedFormBase value={choice} setValue={setChoice} label={"Choose2"} optionGroups={{class3C:{title: "3.C", options: {banana: "Banana", haha: "Haha"}}, class4C:{title: "4.C", options: {appul: "Apple", pi314: "Pie", asd:"asd", dsa:"dsa", sda:"sda", sad:"sad"}}}}/>
                 <DropdownSearchFormBase value={choice} setValue={setChoice} label={"Choose22"} optionGroups={{class3C:{title: "3.C", options: {bananda: "Banana", hahaa: "Haha"}}, class4C:{title: "4.C", options: {appusl: "Apple", pi314d: "Pie", asad:"Bbnana", dsaaa:"banan", sdaa:"Banan", saad:"sad", sada:"sada"}}}}/>
-                <TestComponent/>
+                <TestComponent />
+                <DateFormBase label={"Important Date"} />
 
               </div>
             </ThemeProvider>

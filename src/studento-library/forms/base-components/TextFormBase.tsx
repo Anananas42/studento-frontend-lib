@@ -20,7 +20,7 @@ const StyledInput = styled.input<IStyledInput>`
     box-shadow: inset 0 4px 8px ${FormColors.Default.innerShadow};
     line-height: 14px;
     font-size: 20px;
-    padding: 8px ${props => props.borderRadius} ${props => props.icon ? "8px 50px" : ""};
+    padding: 8px ${props => props.borderRadius} ${props => props.icon ? "8px 46px" : ""};
     font-family: 'Varela Round', sans-serif;
     width: ${props => props.width || "100%"};
 
