@@ -4,23 +4,29 @@ import { useThemeContext } from "../../ThemeProvider";
 import FormBase from "../shared/FormBase";
 import StyledCheckbox from "../shared/StyledCheckbox";
 
+interface IStyleProps {
+    borderRadius: string;
+    fill: string;
+}
+
 const StyledMultipleChoice = styled.div`
-    
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
 
 `;
 
-const StyleChoiceRow = styled.div<{borderRadius: string}>`
-    padding-left: ${props => props.borderRadius};
-    display: grid;
-    grid-template-columns: 40px auto;
-    gap: 8px;
+const StyleChoiceRow = styled.div<IStyleProps>`
+    padding-left: ${props => parseInt(props.borderRadius.split("px", 1)[0]) * 2 + "px"};
+    color: ${props => props.fill};
 
     label {
+        padding-left: 8px;
         font-size: 20px;
         line-height: 20px;
         user-select: none;
     }
-`
+`;
 
 interface IChoices {
     [key: string]: string;
@@ -41,16 +47,17 @@ interface MultipleChoiceProps {
 
 const MultipleChoiceFormBase:FC<MultipleChoiceProps> = (props) => {
     const { choices, value, setValue, isDisabled, formId, label, ...rest } = props;
-    const { borderRadius } = useThemeContext();
+    const { borderRadius, colors } = useThemeContext();
 
     return (
         <FormBase isDisabled={isDisabled} formId={formId} label={label} {...rest}>
             <StyledMultipleChoice>
             {Object.keys(choices).map(choice => {
+                const identifier = formId ? formId + choice : label + choice;
                 return (
-                    <StyleChoiceRow borderRadius={borderRadius}>
-                        <StyledCheckbox id={formId ? formId + choice : label + choice} type={"checkbox"} value={choice} />
-                        <label htmlFor={formId ? formId + choice : label + choice}>{choices[choice]}</label>
+                    <StyleChoiceRow key={identifier} borderRadius={borderRadius} fill={colors.fill}>
+                        <StyledCheckbox id={identifier} type={"checkbox"} value={choice} />
+                        <label htmlFor={identifier}>{choices[choice]}</label>
                     </StyleChoiceRow>
                 )
             })}
