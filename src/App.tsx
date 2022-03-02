@@ -23,6 +23,7 @@ const StyledApp = styled.div`
 function App() {
   const [input, setInput] = useState<string>("");
   const [choice, setChoice] = useState<string>("default");
+  const [date, setDate] = useState<string>("2021-11-04");
 
   return (
       <>
@@ -47,7 +48,7 @@ function App() {
                 <DropdownGroupedFormBase value={choice} setValue={setChoice} label={"Choose2"} optionGroups={{class3C:{title: "3.C", options: {banana: "Banana", haha: "Haha"}}, class4C:{title: "4.C", options: {appul: "Apple", pi314: "Pie", asd:"asd", dsa:"dsa", sda:"sda", sad:"sad"}}}}/>
                 <DropdownSearchFormBase value={choice} setValue={setChoice} label={"Choose22"} optionGroups={{class3C:{title: "3.C", options: {bananda: "Banana", hahaa: "Haha"}}, class4C:{title: "4.C", options: {appusl: "Apple", pi314d: "Pie", asad:"Bbnana", dsaaa:"banan", sdaa:"Banan", saad:"sad", sada:"sada"}}}}/>
                 <TestComponent />
-                <DateFormBase label={"Important Date"} />
+                <DateFormBase label={"Important Date"} value={date} setValue={setDate} />
 
               </div>
             </ThemeProvider>

@@ -57,6 +57,8 @@ const StyledIconWrapper = styled.div<{borderRadius: string}>`
 `;
 
 export interface IDateFormProps {
+    value: string;
+    setValue: React.Dispatch<React.SetStateAction<string>>;
     isHorizontal?: boolean;
     label: string;
     defaultNote?: string;
@@ -67,15 +69,15 @@ export interface IDateFormProps {
 }
 
 const DateFormBase:FC<IDateFormProps> = (props) => {
-    const { formId, label, ...rest } = props;
+    const { formId, label, errorMessage, setValue, value, ...rest } = props;
     const { borderRadius, colors } = useThemeContext();
 
     return (
-        <FormBase formId={formId} label={label} {...rest}>
+        <FormBase formId={formId} label={label} errorMessage={errorMessage} {...rest}>
             <StyledIconWrapper borderRadius={borderRadius}>
                 <IconL>calendar_today</IconL>
             </StyledIconWrapper>
-            <StyledInput type={"date"} id={formId ? formId : label} borderRadius={borderRadius} fill={colors.fill} required />
+            <StyledInput type={"date"} id={formId ? formId : label} value={value} onChange={e => setValue(e.target.value)} borderRadius={borderRadius} fill={colors.fill} isError={errorMessage} required />
         </FormBase>
     );
 }
