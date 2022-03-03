@@ -71,13 +71,13 @@ const DropdownFormBase:FC<IProps> = (props) => {
             <div ref={dropdownWrapperRef}>
                 <StyledCustomDropdown ref={customDropdownRef} aria-hidden={true} onClick={() => {!isDisabled && setIsOpen(!isOpen)}} {...styleProps}>
                     <StyledCurrentSelection>{isDisabled ? "" : (!value ? languageMap.Generic.drpDwnPlaceholder : options[value])}</StyledCurrentSelection>
+                    <StyledChevron {...styleProps}><IconL>expand_more</IconL></StyledChevron>
                 </StyledCustomDropdown>
                 <StyledList {...styleProps} isOpen={isOpen} >
                         {Object.keys(options).map(optKey => {
                             return <StyledOption key={optKey} onClick={() => {if (!isDisabled) {setValue(optKey); setIsOpen(false)}}} {...styleProps}>{options[optKey]}</StyledOption>
                         })}
-                    </StyledList>
-                <StyledChevron {...styleProps}><IconL>expand_more</IconL></StyledChevron>
+                </StyledList>
             </div>
         </FormBase>
     );

@@ -155,6 +155,7 @@ const DropdownSearchFormBase:FC<IProps> = (props) => {
                     <StyledCurrentInput ref={inputRef} value={isDisabled ? "" : (isOpen ? input : (currOptionName ? currOptionName : languageMap.Generic.drpDwnPlaceholder))}
                      onClick={() => {if (!isDisabled) {setIsOpen(!isOpen); isOpen && inputRef.current.blur()}}}
                      onChange={e => processInput(e.target.value)} onKeyDown={onKeyDown} {...styleProps} disabled={isDisabled} />
+                    <StyledChevron {...styleProps}><IconL>expand_more</IconL></StyledChevron>
                 </StyledCustomDropdown>
                 <StyledList ref={listRef} {...styleProps} isOpen={isOpen} >
                         {Object.values(optionGroups).map(group => {
@@ -172,8 +173,7 @@ const DropdownSearchFormBase:FC<IProps> = (props) => {
                                 </div>
                             )
                         })}
-                    </StyledList>
-                <StyledChevron {...styleProps}><IconL>expand_more</IconL></StyledChevron>
+                </StyledList>
             </div>
         </FormBase>
     );

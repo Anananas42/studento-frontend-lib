@@ -77,6 +77,7 @@ const DropdownGroupedFormBase:FC<IProps> = (props) => {
             <div ref={dropdownWrapperRef}>
                 <StyledCustomDropdown ref={customDropdownRef} aria-hidden={true} onClick={() => !isDisabled && setIsOpen(!isOpen)} {...styleProps}>
                     <StyledCurrentSelection>{isDisabled ? "" : (currOptionName ? currOptionName : languageMap.Generic.drpDwnPlaceholder)}</StyledCurrentSelection>
+                    <StyledChevron {...styleProps}><IconL>expand_more</IconL></StyledChevron>
                 </StyledCustomDropdown>
                 <StyledList {...styleProps} isOpen={isOpen} >
                         {Object.values(optionGroups).map(group => {
@@ -89,8 +90,7 @@ const DropdownGroupedFormBase:FC<IProps> = (props) => {
                                 </div>
                             )
                         })}
-                    </StyledList>
-                <StyledChevron {...styleProps}><IconL>expand_more</IconL></StyledChevron>
+                </StyledList>
             </div>
         </FormBase>
     );

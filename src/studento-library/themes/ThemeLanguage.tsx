@@ -10,6 +10,16 @@ export interface ILanguageSet {
             title: string;
             prompt: string;
             errorFileSize: string;
+        },
+        weekday: string;
+        Week: {
+            monday: string;
+            tuesday: string;
+            wednesday: string;
+            thursday: string;
+            friday: string;
+            saturday: string;
+            sunday: string;
         }
     }
 }
@@ -26,6 +36,16 @@ const EnSet:ILanguageSet = {
             title: "Upload File",
             prompt: "Drag and drop or click and choose a file to upload.",
             errorFileSize: "Uploaded file exceeds the size of ",
+        },
+        weekday: "Day of the week",
+        Week: {
+            monday: "Monday",
+            tuesday: "Tuesday",
+            wednesday: "Wednesday",
+            thursday: "Thursday",
+            friday: "Friday",
+            saturday: "Saturday",
+            sunday: "Sunday",
         }
     }
 }
@@ -42,6 +62,16 @@ const CzSet:ILanguageSet = {
             title: "Nahrát Soubor",
             prompt: "Přetáhni, nebo klikni a zvol soubor pro nahrání.",
             errorFileSize: "Nahraný soubor je větší než limit ",
+        },
+        weekday: "Den v týdnu",
+        Week: {
+            monday: "Pondělí",
+            tuesday: "Úterý",
+            wednesday: "Středa",
+            thursday: "Čtvrtek",
+            friday: "Pátek",
+            saturday: "Sobota",
+            sunday: "Neděle",
         }
     }
 }

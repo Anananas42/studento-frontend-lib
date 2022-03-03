@@ -52,7 +52,7 @@ export const StyledList = styled.div<IStyledSelect>`
     position: absolute;
     margin: 1px 0 0 0;
     padding: 0;
-    width: 100%;
+    width: ${props => props.width ? props.width : "100%"};
     background-color: white;
     color: ${props => props.fill};
     border: 1px solid ${FormColors.Default.border};
