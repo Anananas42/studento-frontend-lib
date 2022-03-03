@@ -1,10 +1,10 @@
-import { FC, useState } from "react";
+import { FC } from "react";
 import styled from "styled-components";
 import { useThemeContext } from "../../ThemeProvider";
 import { IconL } from "../../utilities/Icon";
 import FormBase from "../shared/FormBase";
 import FormColors from "../shared/FormColors";
-import { IStyledInput, StyledIconWrapper, StyledInput } from "./TextFormBase";
+import { IStyledInput, StyledIconWrapper } from "./TextFormBase";
 
 export const StyledTimeForm = styled.input<IStyledInput>`
     border-radius: ${props => props.borderRadius};
@@ -52,31 +52,14 @@ interface ITimeFormProps {
     isCompact?: boolean;
 }
 
-const placeholder = "--:--";
-
-const checkHour = (time:string) => {
-    const parsed = Number(time.substring(0, 2));
-    if (parsed >= 0 && parsed < 24) return time;
-    return "";
-}
-
-const checkMinute = (time:string) => {
-    const parsed = Number(time.substring(2, 4));
-    if (parsed >= 0 && parsed < 60) return time;
-    return "";
-}
 
 const TimeFormBase:FC<ITimeFormProps> = (props) => {
     const { value, setValue, label, formId, isDisabled, errorMessage, ...rest} = props;
     const { borderRadius, colors } = useThemeContext();
 
-    const onKeyDown = () => {
-
-    }
-
     const processInput = (time: any) => {
         console.log(time);
-        setValue(time);
+        
         return;
     }
 
@@ -86,8 +69,8 @@ const TimeFormBase:FC<ITimeFormProps> = (props) => {
                 <IconL>schedule</IconL>
             </StyledIconWrapper>
 
-            <StyledTimeForm type={"time"} step={60} id={formId ? formId : label} value={value} onChange={(e) => processInput(e.target.value)} onKeyDown={onKeyDown} borderRadius={borderRadius}
-             fill={colors.fill} isError={errorMessage} disabled={isDisabled} placeholder={isDisabled ? "" : placeholder} width={"140px"} icon={"schedule"} required />
+            <StyledTimeForm type={"time"} id={formId ? formId : label} value={value} onChange={(e) => setValue(e.target.value)} borderRadius={borderRadius}
+             fill={colors.fill} isError={errorMessage} disabled={isDisabled} width={"140px"} icon={"schedule"} required />
         </FormBase>
     );
 }
