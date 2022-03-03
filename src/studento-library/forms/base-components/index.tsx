@@ -7,6 +7,5 @@ import DropdownSearchFormBase from "./dropdowns/DropdownSearchFormBase";
 import MultipleChoiceFormBase from "./MultipleChoiceFormBase";
 import SingleChoiceFormBase from "./SingleChoiceFormBase";
 import TimeFormBase from "./TimeFormBase";
-import WeekDayFormBase from "./WeekDayFormBase";
 
-export { TextFormBase, TextAreaFormBase, DateFormBase, DropdownFormBase, DropdownGroupedFormBase, DropdownSearchFormBase, MultipleChoiceFormBase, SingleChoiceFormBase, TimeFormBase, WeekDayFormBase };
+export { TextFormBase, TextAreaFormBase, DateFormBase, DropdownFormBase, DropdownGroupedFormBase, DropdownSearchFormBase, MultipleChoiceFormBase, SingleChoiceFormBase, TimeFormBase };
