@@ -28,22 +28,22 @@ const StyledSingleChoiceForm = styled.div<IStyleProps>`
         overflow: hidden;
 
         &:first-child {
-            padding-left: ${props => `${16 + parseInt(props.borderRadius.split("px", 1)[0])}px`};
+            padding-left: ${props => `${16 + parseInt(props.borderRadius.split("px", 1)[0])/2}px`};
             border-radius: ${props => props.borderRadius} 0 0 ${props => props.borderRadius};
             border-left: 2px solid ${FormColors.Default.border};
 
             &.selected {
-                padding: 14px 17px 14px ${props => `${18 + parseInt(props.borderRadius.split("px", 1)[0])}px`};
+                padding: 14px 17px 14px ${props => `${18 + parseInt(props.borderRadius.split("px", 1)[0])/2}px`};
             }
         }
 
         &:last-child {
-            padding-right: ${props => `${16 + parseInt(props.borderRadius.split("px", 1)[0])}px`};
+            padding-right: ${props => `${16 + parseInt(props.borderRadius.split("px", 1)[0])/2}px`};
             border-radius: 0 ${props => props.borderRadius} ${props => props.borderRadius} 0;
             border-right: 2px solid ${FormColors.Default.border};;
 
             &.selected {
-                padding: 14px ${props => `${18 + parseInt(props.borderRadius.split("px", 1)[0])}px`} 14px 17px;
+                padding: 14px ${props => `${18 + parseInt(props.borderRadius.split("px", 1)[0])/2}px`} 14px 17px;
             }
         }
 
@@ -57,6 +57,14 @@ const StyledSingleChoiceForm = styled.div<IStyleProps>`
 
         &:not(&.selected) {
             box-shadow: inset 2px 2px 8px ${FormColors.Default.innerShadow};
+        }
+
+        
+        &.formDisabled {
+            pointer-events: none;
+            color: ${FormColors.Disabled.text};
+            background-color: ${FormColors.Disabled.background};
+            box-shadow: none !important;
         }
     }
 
@@ -80,15 +88,14 @@ interface IProps {
 }
 
 const SingleChoiceFormBase:FC<IProps> = (props) => {
-    const { value, setValue, formId, isDisabled, errorMessage, label, choices, ...rest } = props;
+    const { value, setValue, formId, isDisabled, label, choices, ...rest } = props;
     const { borderRadius, colors } = useThemeContext();
-    const styleProps = { borderRadius, errorMessage, fill: colors.fill, placeholderFill: value === "default" ? FormColors.Default.placeholder : colors.fill, primaryColor: colors.primary };
 
     return (
-        <FormBase formId={formId} label={label} isDisabled={isDisabled} errorMessage={errorMessage} {...rest}>
+        <FormBase formId={formId} label={label} isDisabled={isDisabled} {...rest}>
             <StyledSingleChoiceForm borderRadius={borderRadius} fill={colors.fill}>
                 {Object.keys(choices).map(choice => {
-                    return <div key={formId ? formId + choice : label + choice} onClick={() => setValue(choice)} className={choice === value ? "selected" : ""}>{choices[choice]}</div>
+                    return <div key={formId ? formId + choice : label + choice} onClick={() => setValue(choice)} className={isDisabled ? "formDisabled" : (choice === value ? "selected" : "")}>{choices[choice]}</div>
                 })}
             </StyledSingleChoiceForm>
         </FormBase>

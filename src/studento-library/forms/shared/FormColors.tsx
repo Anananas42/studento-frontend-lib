@@ -31,6 +31,7 @@ export interface IFormColors {
         label: string,
         border: string,
         placeholder: string;
+        text: string;
         note: string;
         background: string;
         icon: string;
@@ -67,6 +68,7 @@ const FormColors:IFormColors = {
     Disabled: {
         label: "rgba(69, 60, 48, 0.48)",
         placeholder: "rgba(69, 60, 48, 0.42)",
+        text: "rgba(69, 60, 48, 0.26)",
         border: "rgba(69, 60, 48, 0.04)",
         note: "rgba(69, 60, 48, 0.32)",
         background: "rgba(69, 60, 48, 0.06)",
