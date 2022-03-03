@@ -12,6 +12,7 @@ export interface IFormColors {
         note: string;
         innerShadow: string;
         dropdownShadow: string;
+        singleChoiceShadow: string;
         icon: string;
         hoverBg1: string;
         hoverBg2: string;
@@ -34,6 +35,10 @@ export interface IFormColors {
         background: string;
         icon: string;
     };
+    SecondaryGrad: {
+        bg1: string,
+        bg2: string,
+    }
 }
 
 const FormColors:IFormColors = {
@@ -44,6 +49,7 @@ const FormColors:IFormColors = {
         note: "rgba(69, 60, 48, 0.6)",
         innerShadow: "rgba(69, 60, 48, 0.06)",
         dropdownShadow: "rgba(69, 60, 48, 0.22)",
+        singleChoiceShadow: "hsla(222.29074889867843, 100%, 35%, 0.3)",
         icon: "rgba(69, 60, 48, 0.4)",
         hoverBg1: "#FFBB3D",
         hoverBg2: "#FFD53D",
@@ -65,6 +71,10 @@ const FormColors:IFormColors = {
         note: "rgba(69, 60, 48, 0.32)",
         background: "rgba(69, 60, 48, 0.06)",
         icon: "rgba(69, 60, 48, 0.2)",
+    },
+    SecondaryGrad: {
+        bg1: "#1C5FFF",
+        bg2: "#1C9EFF",
     }
     
 }
