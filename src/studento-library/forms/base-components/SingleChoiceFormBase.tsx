@@ -54,11 +54,6 @@ const StyledSingleChoiceForm = styled.div<IStyleProps>`
             color: #fff;
             box-shadow: 2px 2px 8px -2px ${FormColors.Default.dropdownShadow};
         }
-
-        &:not(&.selected) {
-            box-shadow: inset 2px 2px 8px ${FormColors.Default.innerShadow};
-        }
-
         
         &.formDisabled {
             pointer-events: none;
