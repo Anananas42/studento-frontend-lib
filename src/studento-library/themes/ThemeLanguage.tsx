@@ -1,17 +1,21 @@
 export interface ILanguageSet {
     Generic: {
-        optional: string;
         btnLogin: string;
-        drpDwnPlaceholder: string;
-        upload: string;
         cancel: string;
+        date: string;
         delete: string;
+        drpDwnPlaceholder: string;
+        optional: string;
+        password: string;
+        passwordPlaceholder: string;
+        time: string;
+        upload: string;
+        weekday: string;
         PopupUpload: {
             title: string;
             prompt: string;
             errorFileSize: string;
         },
-        weekday: string;
         Week: {
             monday: string;
             tuesday: string;
@@ -21,25 +25,27 @@ export interface ILanguageSet {
             saturday: string;
             sunday: string;
         },
-        password: string;
-        passwordPlaceholder: string;
     }
 }
 
 const EnSet:ILanguageSet = {
     Generic: {
-        optional: "optional",
         btnLogin: "login",
-        drpDwnPlaceholder: "Choose one",
-        upload: "upload",
         cancel: "CANCEL",
+        date: "Date",
         delete: "DELETE",
+        drpDwnPlaceholder: "Choose one",
+        optional: "optional",
+        password: "Password",
+        passwordPlaceholder: "Enter password",
+        time: "Time",
+        upload: "upload",
+        weekday: "Day of the week",
         PopupUpload: {
             title: "Upload File",
             prompt: "Drag and drop or click and choose a file to upload.",
             errorFileSize: "Uploaded file exceeds the size of ",
         },
-        weekday: "Day of the week",
         Week: {
             monday: "Monday",
             tuesday: "Tuesday",
@@ -49,25 +55,27 @@ const EnSet:ILanguageSet = {
             saturday: "Saturday",
             sunday: "Sunday",
         },
-        password: "Password",
-        passwordPlaceholder: "Enter password",
     }
 }
 
 const CzSet:ILanguageSet = {
     Generic: {
-        optional: "volitelné",
         btnLogin: "přihlásit",
-        drpDwnPlaceholder: "Vybrat možnost",
-        upload: "nahrát",
         cancel: "ZRUŠIT",
+        date: "Datum",
         delete: "SMAZAT",
+        drpDwnPlaceholder: "Vybrat možnost",
+        optional: "volitelné",
+        password: "Heslo",
+        passwordPlaceholder: "Zadejte heslo",
+        time: "Čas",
+        upload: "nahrát",
+        weekday: "Den v týdnu",
         PopupUpload: {
             title: "Nahrát Soubor",
             prompt: "Přetáhni, nebo klikni a zvol soubor pro nahrání.",
             errorFileSize: "Nahraný soubor je větší než limit ",
         },
-        weekday: "Den v týdnu",
         Week: {
             monday: "Pondělí",
             tuesday: "Úterý",
@@ -77,8 +85,6 @@ const CzSet:ILanguageSet = {
             saturday: "Sobota",
             sunday: "Neděle",
         },
-        password: "Heslo",
-        passwordPlaceholder: "Zadejte heslo",
     }
 }
 

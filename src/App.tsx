@@ -38,9 +38,9 @@ function App() {
               <div style={{display:"flex", flexFlow:"row wrap", gap:"0px", maxWidth: "500px"}}>
                 <PopupUpload title={"Upload File"} fileHandler={() => console.log("uploading")} maxSizeMB={5}/>
                 <TestComponent />
-                <DateFormBase label={"Important Date"} value={date} setValue={setDate} />
+                <DateFormBase value={date} setValue={setDate} />
                 <SingleChoiceFormBase value={fruit} setValue={setFruit} label={"Single Choice"} choices={{first: "Banana", second: "Apple", third: "Pineapple"}}/>
-                <TimeFormBase label={"Choose Time"} value={time} setValue={setTime} />
+                <TimeFormBase value={time} setValue={setTime} />
                 <WeekDayForm value={weekday} setValue={setWeekday} />
                 <PasswordForm value={password} setValue={setPassword} />
                 <TextFormBase value={password} setValue={setPassword} label={"xd"} placeholder={""} icon={"print"}/>

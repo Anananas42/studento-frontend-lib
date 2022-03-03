@@ -57,7 +57,6 @@ export interface IDateFormProps {
     value: string;
     setValue: React.Dispatch<React.SetStateAction<string>>;
     isHorizontal?: boolean;
-    label: string;
     defaultNote?: string;
     formId?: string;
     errorMessage?: string;
@@ -66,10 +65,11 @@ export interface IDateFormProps {
     width?: string;
 }
 
-const DateFormBase:FC<IDateFormProps> = (props) => {
-    const { formId, label, errorMessage, isDisabled, setValue, value, width, ...rest } = props;
-    const { borderRadius, colors } = useThemeContext();
+const DateForm:FC<IDateFormProps> = (props) => {
+    const { formId, errorMessage, isDisabled, setValue, value, width, ...rest } = props;
+    const { borderRadius, colors, languageMap } = useThemeContext();
     const datePickerRef = useRef<any>();
+    const label = languageMap.Generic.date;
 
     return (
         <FormBase formId={formId} label={label} isDisabled={isDisabled} errorMessage={errorMessage} {...rest}>
@@ -84,4 +84,4 @@ const DateFormBase:FC<IDateFormProps> = (props) => {
     );
 }
 
-export default DateFormBase;
+export default DateForm;

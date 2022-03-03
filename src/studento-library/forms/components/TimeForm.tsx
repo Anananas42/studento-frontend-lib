@@ -4,7 +4,7 @@ import { useThemeContext } from "../../ThemeProvider";
 import { IconL } from "../../utilities/Icon";
 import FormBase from "../shared/FormBase";
 import FormColors from "../shared/FormColors";
-import { IStyledInput, StyledIconWrapper } from "./TextFormBase";
+import { IStyledInput, StyledIconWrapper } from "../base-components/TextFormBase";
 
 export const StyledTimeForm = styled.input<IStyledInput>`
     border-radius: ${props => props.borderRadius};
@@ -44,7 +44,6 @@ interface ITimeFormProps {
     setValue: (inputText:string) => void;
     isOptional?: boolean;
     isHorizontal?: boolean;
-    label: string;
     defaultNote?: string;
     formId?: string;
     errorMessage?: string;
@@ -53,10 +52,11 @@ interface ITimeFormProps {
 }
 
 
-const TimeFormBase:FC<ITimeFormProps> = (props) => {
-    const { value, setValue, label, formId, isDisabled, errorMessage, ...rest} = props;
-    const { borderRadius, colors } = useThemeContext();
+const TimeForm:FC<ITimeFormProps> = (props) => {
+    const { value, setValue, formId, isDisabled, errorMessage, ...rest} = props;
+    const { borderRadius, colors, languageMap } = useThemeContext();
     const formRef = useRef<any>();
+    const label = languageMap.Generic.time;
 
     return (
         <FormBase label={label} formId={formId} isDisabled={isDisabled} errorMessage={errorMessage} {...rest}>
@@ -70,4 +70,4 @@ const TimeFormBase:FC<ITimeFormProps> = (props) => {
     );
 }
 
-export default TimeFormBase;
+export default TimeForm;
