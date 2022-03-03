@@ -42,7 +42,7 @@ function App() {
                 <SingleChoiceFormBase value={fruit} setValue={setFruit} label={"Single Choice"} choices={{first: "Banana", second: "Apple", third: "Pineapple"}}/>
                 <TimeFormBase label={"Choose Time"} value={time} setValue={setTime} />
                 <WeekDayForm value={weekday} setValue={setWeekday} />
-                <PasswordForm value={password} setValue={setPassword} label={"Password"} placeholder={"Enter password"} />
+                <PasswordForm value={password} setValue={setPassword} />
                 <TextFormBase value={password} setValue={setPassword} label={"xd"} placeholder={""} icon={"print"}/>
               </div>
             </ThemeProvider>

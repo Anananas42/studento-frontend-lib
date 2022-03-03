@@ -20,7 +20,9 @@ export interface ILanguageSet {
             friday: string;
             saturday: string;
             sunday: string;
-        }
+        },
+        password: string;
+        passwordPlaceholder: string;
     }
 }
 
@@ -46,7 +48,9 @@ const EnSet:ILanguageSet = {
             friday: "Friday",
             saturday: "Saturday",
             sunday: "Sunday",
-        }
+        },
+        password: "Password",
+        passwordPlaceholder: "Enter password",
     }
 }
 
@@ -72,7 +76,9 @@ const CzSet:ILanguageSet = {
             friday: "Pátek",
             saturday: "Sobota",
             sunday: "Neděle",
-        }
+        },
+        password: "Heslo",
+        passwordPlaceholder: "Zadejte heslo",
     }
 }
 

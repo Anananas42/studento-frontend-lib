@@ -22,11 +22,9 @@ interface IFormProps {
     value: string;
     setValue: React.Dispatch<React.SetStateAction<string>>;
     isHorizontal?: boolean; // Place label to the left
-    label: string;
     formId?: string; // To link label and input
     errorMessage?: string; // Trigger error state by setting errorMessage to a value
     isDisabled?: boolean;
-    placeholder: string; // Placeholder text when form is empty
     width?: string; // Set width manually. Else it's 100%
     onKeyDown?: React.KeyboardEventHandler<any>; // Detect pressed keys while focused on the input (for example confirm something on enter)
 }
@@ -49,10 +47,11 @@ const getUpdatedValue = (value: string, e: React.ChangeEvent<HTMLInputElement>) 
 }
 
 const PasswordForm:FC<IFormProps> = (props) => {
-    const { isDisabled, placeholder, value, setValue, onKeyDown, formId, width, label, errorMessage, ...rest } = props;
-    const { borderRadius, colors } = useThemeContext();
+    const { isDisabled, value, setValue, onKeyDown, formId, width, errorMessage, ...rest } = props;
+    const { borderRadius, colors, languageMap } = useThemeContext();
     const [isVisible, setIsVisible] = useState<boolean>(false);
     const formRef = useRef<any>();
+    const label = languageMap.Generic.password;
 
     return (
         <FormBase label={label} isDisabled={isDisabled} formId={formId} errorMessage={errorMessage} {...rest}>
@@ -61,7 +60,7 @@ const PasswordForm:FC<IFormProps> = (props) => {
             </StyledIconWrapper>
             <StyledInput ref={formRef} type={"text"} id={formId ? formId : label} value={isVisible ? value : '●'.repeat(value.length)}
              onChange={(e) => setValue(getUpdatedValue(value, e))} onKeyDown={onKeyDown} borderRadius={borderRadius}
-                fill={colors.fill} isError={errorMessage} disabled={isDisabled} placeholder={isDisabled ? "" : placeholder} width={width ? width : "400px"} icon={"lock"} style={{paddingRight: "48px"}}/>
+                fill={colors.fill} isError={errorMessage} disabled={isDisabled} placeholder={isDisabled ? "" : languageMap.Generic.passwordPlaceholder} width={width ? width : "400px"} icon={"lock"} style={{paddingRight: "48px"}}/>
             <StyledViewIcon onMouseDown={() => setIsVisible(true)} onMouseUp={() => {setIsVisible(false); formRef.current.focus()}} onMouseLeave={() => setIsVisible(false)}>
                 {value && <IconL>{isVisible ? "visibility_off" : "visibility"}</IconL>}
             </StyledViewIcon>
