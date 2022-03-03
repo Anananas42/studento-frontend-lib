@@ -44,6 +44,7 @@ interface MultipleChoiceProps {
     defaultNote?: string;
     formId?: string;
     errorMessage?: string;
+    isOptional?: boolean;
     isDisabled?: boolean;
     isCompact?: boolean;
 }

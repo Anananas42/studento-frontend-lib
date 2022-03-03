@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import PopupUpload from './studento-library/popups/components/PopupUpload';
 import TestComponent from './studento-library/TestComponent';
 import { useState } from 'react';
-import { DateFormBase, SingleChoiceFormBase } from './studento-library/forms/base-components';
+import { DateFormBase, SingleChoiceFormBase, TimeFormBase } from './studento-library/forms/base-components';
 
 const StyledApp = styled.div`
   font-family: 'Varela Round', sans-serif;
@@ -18,6 +18,7 @@ const StyledApp = styled.div`
 function App() {
   const [date, setDate] = useState<string>("2021-11-04");
   const [fruit, setFruit] = useState<string>("");
+  const [time, setTime] = useState<string>("--:--");
 
   return (
       <>
@@ -35,6 +36,7 @@ function App() {
                 <TestComponent />
                 <DateFormBase label={"Important Date"} value={date} setValue={setDate} />
                 <SingleChoiceFormBase value={fruit} setValue={setFruit} label={"Single Choice"} choices={{first: "Banana", second: "Apple", third: "Pineapple"}}/>
+                <TimeFormBase label={"Choose Time"} value={time} setValue={setTime} />
               </div>
             </ThemeProvider>
           </StyledApp>

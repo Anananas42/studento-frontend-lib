@@ -5,7 +5,7 @@ import { IconL } from "../../utilities/Icon";
 import FormBase from "../shared/FormBase";
 import FormColors from "../shared/FormColors";
 
-interface IStyledInput {
+export interface IStyledInput {
     borderRadius: string;
     fill: string;
     isError?: string;
@@ -13,7 +13,7 @@ interface IStyledInput {
     icon?: string;
 }
 
-const StyledInput = styled.input<IStyledInput>`
+export const StyledInput = styled.input<IStyledInput>`
     border-radius: ${props => props.borderRadius};
     color: ${props => props.fill};
     border: 1px solid ${props => props.isError ? FormColors.Error.border : FormColors.Default.border};
@@ -46,7 +46,7 @@ const StyledInput = styled.input<IStyledInput>`
     }
 `;
 
-const StyledIconWrapper = styled.div`
+export const StyledIconWrapper = styled.div`
     position: absolute;
     left: -0px;
     top: -5px;
@@ -55,7 +55,7 @@ const StyledIconWrapper = styled.div`
 
 interface ITextFormProps {
     value: string;
-    onChange: (inputText:string) => void;
+    setValue: (inputText:string) => void;
     isHorizontal?: boolean; // Place label to the left
     label: string;
     formId?: string; // To link label and input
@@ -71,7 +71,7 @@ interface ITextFormProps {
 }
 
 const TextFormBase:FC<ITextFormProps> = (props) => {
-    const { label, errorMessage, isDisabled, placeholder, width, icon, value, onChange, onKeyDown, isOptional, isCompact, formId, ...passedProps } = props;
+    const { label, errorMessage, isDisabled, placeholder, width, icon, value, setValue, onKeyDown, isOptional, isCompact, formId, ...passedProps } = props;
     const { borderRadius, colors, languageMap } = useThemeContext();
 
     return (
@@ -82,7 +82,7 @@ const TextFormBase:FC<ITextFormProps> = (props) => {
                 </StyledIconWrapper>
             }
 
-            <StyledInput type={"text"} id={formId ? formId : label} value={value} onChange={(e) => onChange(e.target.value)} onKeyDown={onKeyDown} borderRadius={borderRadius}
+            <StyledInput type={"text"} id={formId ? formId : label} value={value} onChange={(e) => setValue(e.target.value)} onKeyDown={onKeyDown} borderRadius={borderRadius}
              fill={colors.fill} isError={errorMessage} disabled={isDisabled} placeholder={isDisabled ? "" : placeholder} width={width} icon={icon} />
              
         </FormBase>
