@@ -20,6 +20,7 @@ export interface IFormColors {
     Active: {
         border: string;
         innerShadow: string;
+        icon: string;
     },
     Error: {
         border: string,
@@ -58,6 +59,7 @@ const FormColors:IFormColors = {
     Active: {
         border: "rgb(255, 187, 61)",
         innerShadow: "rgba(255, 187, 61, 0.12)",
+        icon: "rgba(69, 60, 48, 0.65)",
     },
     Error: {
         border: "#EB2013",

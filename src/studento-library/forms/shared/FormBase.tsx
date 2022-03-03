@@ -69,15 +69,16 @@ export interface IFormProps {
     defaultNote?: string;
     formId?: string;
     errorMessage?: string;
+    isOptional?: boolean;
     isDisabled?: boolean;
     children: ReactNode;
     isCompact?: boolean;
 }
 
 const FormBase:FC<IFormProps> = (props) => {
-    const { isHorizontal, isDisabled, label, formId, defaultNote, errorMessage, children, isCompact } = props;
+    const { isHorizontal, isDisabled, label, formId, defaultNote, errorMessage, children, isCompact, isOptional } = props;
     const [formState, setFormState] = useState<IFormState>({type: isDisabled ? StateType.Disabled : StateType.Default, message: defaultNote});
-    const { borderRadius } = useThemeContext();
+    const { borderRadius, languageMap } = useThemeContext();
 
     useEffect(() => {
         if (isDisabled) {
@@ -91,7 +92,9 @@ const FormBase:FC<IFormProps> = (props) => {
 
     return (
         <StyledWrapper isHorizontal={isHorizontal}>
-            <StyledLabel labelColor={FormColors[formState.type].label} borderRadius={borderRadius} isHorizontal={isHorizontal} htmlFor={formId ? formId : label} isDisabled={isDisabled}>{label}</StyledLabel>
+            <StyledLabel labelColor={FormColors[formState.type].label} borderRadius={borderRadius} isHorizontal={isHorizontal} htmlFor={formId ? formId : label} isDisabled={isDisabled}>
+                {label + (isOptional ? ` (${languageMap.Generic.optional})` : "")}
+            </StyledLabel>
             <StyledMessageWrapper msgColor={FormColors[formState.type].note} borderRadius={borderRadius} isCompact={isCompact}>
                 <StyledIconAnchor>
                     {children}

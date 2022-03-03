@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, ReactNode } from "react";
 import styled from "styled-components";
 import { useThemeContext } from "../../ThemeProvider";
 import { IconL } from "../../utilities/Icon";
@@ -51,6 +51,8 @@ export const StyledIconWrapper = styled.div`
     left: -0px;
     top: -5px;
     color: ${FormColors.Default.icon};
+    user-select: none;
+    pointer-events: none;
 `;
 
 interface ITextFormProps {
@@ -71,11 +73,11 @@ interface ITextFormProps {
 }
 
 const TextFormBase:FC<ITextFormProps> = (props) => {
-    const { label, errorMessage, isDisabled, placeholder, width, icon, value, setValue, onKeyDown, isOptional, isCompact, formId, ...passedProps } = props;
-    const { borderRadius, colors, languageMap } = useThemeContext();
+    const { label, errorMessage, isDisabled, placeholder, width, icon, value, setValue, onKeyDown, isCompact, formId, ...rest } = props;
+    const { borderRadius, colors } = useThemeContext();
 
     return (
-        <FormBase label={label + (isOptional ? ` (${languageMap.Generic.optional})` : "")} errorMessage={errorMessage} isDisabled={isDisabled} isCompact={isCompact} formId={formId} {...passedProps}>
+        <FormBase label={label} errorMessage={errorMessage} isDisabled={isDisabled} isCompact={isCompact} formId={formId} {...rest}>
             {icon && 
                 <StyledIconWrapper>
                     <IconL>{icon}</IconL>

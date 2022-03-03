@@ -3,8 +3,9 @@ import styled from 'styled-components';
 import PopupUpload from './studento-library/popups/components/PopupUpload';
 import TestComponent from './studento-library/TestComponent';
 import { useState } from 'react';
-import { DateFormBase, SingleChoiceFormBase, TimeFormBase } from './studento-library/forms/base-components';
+import { DateFormBase, SingleChoiceFormBase, TextFormBase, TimeFormBase } from './studento-library/forms/base-components';
 import WeekDayForm from './studento-library/forms/components/WeekDayFormBase';
+import PasswordForm from './studento-library/forms/components/PasswordForm';
 
 const StyledApp = styled.div`
   font-family: 'Varela Round', sans-serif;
@@ -21,6 +22,7 @@ function App() {
   const [fruit, setFruit] = useState<string>("");
   const [time, setTime] = useState<string>("--:--");
   const [weekday, setWeekday] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
 
   return (
       <>
@@ -40,6 +42,8 @@ function App() {
                 <SingleChoiceFormBase value={fruit} setValue={setFruit} label={"Single Choice"} choices={{first: "Banana", second: "Apple", third: "Pineapple"}}/>
                 <TimeFormBase label={"Choose Time"} value={time} setValue={setTime} />
                 <WeekDayForm value={weekday} setValue={setWeekday} />
+                <PasswordForm value={password} setValue={setPassword} label={"Password"} placeholder={"Enter password"} />
+                <TextFormBase value={password} setValue={setPassword} label={"xd"} placeholder={""} icon={"print"}/>
               </div>
             </ThemeProvider>
           </StyledApp>

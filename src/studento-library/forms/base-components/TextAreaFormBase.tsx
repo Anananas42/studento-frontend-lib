@@ -66,11 +66,11 @@ interface ITextAreaFormBaseProps {
 }
 
 const TextAreaFormBase:FC<ITextAreaFormBaseProps> = (props) => {
-    const { label, errorMessage, isDisabled, placeholder, width, value, onChange, onKeyDown, isOptional, isCompact, formId, ...passedProps } = props;
-    const { borderRadius, colors, languageMap } = useThemeContext();
+    const { label, errorMessage, isDisabled, placeholder, width, value, onChange, onKeyDown, isCompact, formId, ...rest } = props;
+    const { borderRadius, colors } = useThemeContext();
 
     return (
-        <FormBase label={label + (isOptional ? ` (${languageMap.Generic.optional})` : "")} errorMessage={errorMessage} isDisabled={isDisabled} isCompact={isCompact} formId={formId ? formId : label} {...passedProps}>
+        <FormBase label={label} errorMessage={errorMessage} isDisabled={isDisabled} isCompact={isCompact} formId={formId ? formId : label} {...rest}>
             <StyledTextArea id={formId} value={value} onChange={(e) => onChange(e.target.value)} onKeyDown={onKeyDown} borderRadius={borderRadius}
              fill={colors.fill} isError={errorMessage} disabled={isDisabled} placeholder={isDisabled ? "" : placeholder} width={width} />
              

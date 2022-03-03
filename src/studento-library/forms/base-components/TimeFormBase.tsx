@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useRef } from "react";
 import styled from "styled-components";
 import { useThemeContext } from "../../ThemeProvider";
 import { IconL } from "../../utilities/Icon";
@@ -56,20 +56,15 @@ interface ITimeFormProps {
 const TimeFormBase:FC<ITimeFormProps> = (props) => {
     const { value, setValue, label, formId, isDisabled, errorMessage, ...rest} = props;
     const { borderRadius, colors } = useThemeContext();
-
-    const processInput = (time: any) => {
-        console.log(time);
-        
-        return;
-    }
+    const formRef = useRef<any>();
 
     return (
         <FormBase label={label} formId={formId} isDisabled={isDisabled} errorMessage={errorMessage} {...rest}>
-            <StyledIconWrapper>
+            <StyledIconWrapper onClick={() => formRef.current.focus()}>
                 <IconL>schedule</IconL>
             </StyledIconWrapper>
 
-            <StyledTimeForm type={"time"} id={formId ? formId : label} value={value} onChange={(e) => setValue(e.target.value)} borderRadius={borderRadius}
+            <StyledTimeForm ref={formRef} type={"time"} id={formId ? formId : label} value={value} onChange={(e) => setValue(e.target.value)} borderRadius={borderRadius}
              fill={colors.fill} isError={errorMessage} disabled={isDisabled} width={"140px"} icon={"schedule"} required />
         </FormBase>
     );
