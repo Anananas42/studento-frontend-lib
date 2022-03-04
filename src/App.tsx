@@ -9,6 +9,8 @@ import PasswordForm from './studento-library/forms/components/PasswordForm';
 import DateForm from './studento-library/forms/components/DateForm';
 import TimeForm from './studento-library/forms/components/TimeForm';
 import UsernameForm from './studento-library/forms/components/UsernameForm';
+import ToggleRow from './studento-library/forms/base-components/ToggleRow';
+import RadioButtonFormBase from './studento-library/forms/base-components/RadioButtonFormBase';
 
 const StyledApp = styled.div`
   font-family: 'Varela Round', sans-serif;
@@ -26,6 +28,8 @@ function App() {
   const [time, setTime] = useState<string>("--:--");
   const [weekday, setWeekday] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [isToggled, setIsToggled] = useState<boolean>(false);
+  const [radio, setRadio] = useState<string>("");
 
   return (
       <>
@@ -48,6 +52,8 @@ function App() {
                 <UsernameForm value={password} setValue={setPassword} />
                 <PasswordForm value={password} setValue={setPassword} />
                 <TextFormBase value={password} setValue={setPassword} label={"xd"} placeholder={""} icon={"print"}/>
+                <ToggleRow label={"Dark mode"} value={isToggled} setValue={setIsToggled} />
+                <RadioButtonFormBase value={radio} setValue={setRadio} label={"Radio buttons"} options={{first: "Pineapple", second: "Banana", third: "Third time's the charm"}}/>
               </div>
             </ThemeProvider>
           </StyledApp>
