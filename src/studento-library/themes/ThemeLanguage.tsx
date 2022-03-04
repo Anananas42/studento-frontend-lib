@@ -28,6 +28,29 @@ export interface ILanguageSet {
             saturday: string;
             sunday: string;
         },
+    },
+
+    Address: {
+        index: string;
+        street: string;
+        city: string;
+        zip: string;
+    },
+    Contact: {
+        index: string;
+        email: string;
+        phoneNumber: string;
+    },
+    PersonalDetails: {
+        index: string;
+        firstName: string;
+        middleName: string;
+        lastName: string;
+        birthdate: string;
+        personalIdentifNumber: string;
+        placeOfBirth: string;
+        startDate: string;
+        insuranceCompany: string;
     }
 }
 
@@ -61,7 +84,30 @@ const EnSet:ILanguageSet = {
             saturday: "Saturday",
             sunday: "Sunday",
         },
-    }
+    },
+    Address: {
+        index: "Adress",
+        street: "Street",
+        city: "City",
+        zip: "Zip code",
+    },
+    Contact: {
+        index: "Contact",
+        email: "Email",
+        phoneNumber: "Phone number",
+    },
+    PersonalDetails: {
+        index: "Personal details",
+        firstName: "First name",
+        middleName: "Middle name",
+        lastName: "Last name",
+        birthdate: "Date of birth",
+        personalIdentifNumber: "Personal identification number",
+        placeOfBirth: "Place of birth",
+        startDate: "Start date",
+        insuranceCompany: "Insurance provider",
+    },
+    
 }
 
 const CzSet:ILanguageSet = {
@@ -94,7 +140,29 @@ const CzSet:ILanguageSet = {
             saturday: "Sobota",
             sunday: "Neděle",
         },
-    }
+    },
+    Address: {
+        index: "Adresa",
+        street: "Ulice",
+        city: "Město",
+        zip: "PSČ",
+    },
+    Contact: {
+        index: "Kontakt",
+        email: "Email",
+        phoneNumber: "Telefonní číslo",
+    },
+    PersonalDetails: {
+        index: "Osobní údaje",
+        firstName: "Křestní jméno",
+        middleName: "Střední jméno",
+        lastName: "Příjmení",
+        birthdate: "Datum narození",
+        personalIdentifNumber: "Osobní identifikační číslo",
+        placeOfBirth: "Místo narození",
+        startDate: "Datum nastoupení",
+        insuranceCompany: "Pojišťovna",
+    },
 }
 
 interface ILanguageSets {
