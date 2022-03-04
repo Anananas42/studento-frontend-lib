@@ -63,10 +63,12 @@ export interface IDateFormProps {
     isDisabled?: boolean;
     isCompact?: boolean;
     width?: string;
+    min?: string;
+    max?: string;
 }
 
 const DateForm:FC<IDateFormProps> = (props) => {
-    const { formId, errorMessage, isDisabled, setValue, value, width, ...rest } = props;
+    const { formId, errorMessage, isDisabled, setValue, value, width, min, max, ...rest } = props;
     const { borderRadius, colors, languageMap } = useThemeContext();
     const datePickerRef = useRef<any>();
     const label = languageMap.Generic.date;
@@ -78,7 +80,7 @@ const DateForm:FC<IDateFormProps> = (props) => {
                     <IconL>calendar_today</IconL>
                 </StyledIconWrapper>
             </label>
-            <StyledInput ref={datePickerRef} type={"date"} id={formId ? formId : label} value={value} width={width}
+            <StyledInput ref={datePickerRef} type={"date"} id={formId ? formId : label} value={value} width={width} min={min} max={max}
              onChange={e => setValue(e.target.value)} borderRadius={borderRadius} fill={colors.fill} isError={errorMessage} required disabled={isDisabled}/>
         </FormBase>
     );

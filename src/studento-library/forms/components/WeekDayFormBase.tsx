@@ -11,18 +11,20 @@ interface IFormProps {
     errorMessage?: string;
     isDisabled?: boolean;
     isCompact?: boolean;
+    isWorkingWeekOnly?: boolean;
 }
 
 const WeekDayForm:FC<IFormProps> = (props) => {
+    const { isWorkingWeekOnly, ...rest } = props;
     const { languageMap } = useThemeContext();
 
     const weekdays = languageMap.Generic.Week;
 
-    const choices = {0: weekdays.monday, 1: weekdays.tuesday, 2: weekdays.wednesday,
-         3: weekdays.thursday, 4: weekdays.friday, 5: weekdays.saturday, 6: weekdays.sunday};
+    let choices = {0: weekdays.monday, 1: weekdays.tuesday, 2: weekdays.wednesday,
+         3: weekdays.thursday, 4: weekdays.friday, ...(!isWorkingWeekOnly && {5: weekdays.saturday, 6: weekdays.sunday})};
 
     return (
-        <DropdownFormBase label={languageMap.Generic.weekday} options={choices} width={"220px"} {...props}/>
+        <DropdownFormBase label={languageMap.Generic.weekday} options={choices} width={"220px"} {...rest}/>
     );
 }
 

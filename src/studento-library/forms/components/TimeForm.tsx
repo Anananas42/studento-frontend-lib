@@ -49,11 +49,13 @@ interface ITimeFormProps {
     errorMessage?: string;
     isDisabled?: boolean;
     isCompact?: boolean;
+    min?: string;
+    max?: string;
 }
 
 
 const TimeForm:FC<ITimeFormProps> = (props) => {
-    const { value, setValue, formId, isDisabled, errorMessage, ...rest} = props;
+    const { value, setValue, formId, isDisabled, errorMessage, min, max, ...rest} = props;
     const { borderRadius, colors, languageMap } = useThemeContext();
     const formRef = useRef<any>();
     const label = languageMap.Generic.time;
@@ -64,7 +66,8 @@ const TimeForm:FC<ITimeFormProps> = (props) => {
                 <IconL>schedule</IconL>
             </StyledIconWrapper>
 
-            <StyledTimeForm ref={formRef} type={"time"} id={formId ? formId : label} value={value} onChange={(e) => setValue(e.target.value)} borderRadius={borderRadius}
+            <StyledTimeForm ref={formRef} type={"time"} id={formId ? formId : label} value={value}
+             onChange={(e) => setValue(e.target.value)} borderRadius={borderRadius} min={min} max={max}
              fill={colors.fill} isError={errorMessage} disabled={isDisabled} width={"140px"} icon={"schedule"} required />
         </FormBase>
     );

@@ -3,9 +3,11 @@ import styled from 'styled-components';
 import PopupUpload from './studento-library/popups/components/PopupUpload';
 import TestComponent from './studento-library/TestComponent';
 import { useState } from 'react';
-import { DateFormBase, SingleChoiceFormBase, TextFormBase, TimeFormBase } from './studento-library/forms/base-components';
+import { SingleChoiceFormBase, TextFormBase } from './studento-library/forms/base-components';
 import WeekDayForm from './studento-library/forms/components/WeekDayFormBase';
 import PasswordForm from './studento-library/forms/components/PasswordForm';
+import DateForm from './studento-library/forms/components/DateForm';
+import TimeForm from './studento-library/forms/components/TimeForm';
 
 const StyledApp = styled.div`
   font-family: 'Varela Round', sans-serif;
@@ -18,7 +20,7 @@ const StyledApp = styled.div`
 `;
 
 function App() {
-  const [date, setDate] = useState<string>("2021-11-04");
+  const [date, setDate] = useState<string>("2022-03-02");
   const [fruit, setFruit] = useState<string>("");
   const [time, setTime] = useState<string>("--:--");
   const [weekday, setWeekday] = useState<string>("");
@@ -38,10 +40,10 @@ function App() {
               <div style={{display:"flex", flexFlow:"row wrap", gap:"0px", maxWidth: "500px"}}>
                 <PopupUpload title={"Upload File"} fileHandler={() => console.log("uploading")} maxSizeMB={5}/>
                 <TestComponent />
-                <DateFormBase value={date} setValue={setDate} />
+                <DateForm value={date} setValue={setDate} min={"2022-03-04"} />
                 <SingleChoiceFormBase value={fruit} setValue={setFruit} label={"Single Choice"} choices={{first: "Banana", second: "Apple", third: "Pineapple"}}/>
-                <TimeFormBase value={time} setValue={setTime} />
-                <WeekDayForm value={weekday} setValue={setWeekday} />
+                <TimeForm value={time} setValue={setTime} />
+                <WeekDayForm value={weekday} setValue={setWeekday} isWorkingWeekOnly={true} />
                 <PasswordForm value={password} setValue={setPassword} />
                 <TextFormBase value={password} setValue={setPassword} label={"xd"} placeholder={""} icon={"print"}/>
               </div>
