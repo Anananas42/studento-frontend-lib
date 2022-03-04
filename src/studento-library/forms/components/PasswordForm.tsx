@@ -21,6 +21,7 @@ const StyledViewIcon = styled.div`
 interface IFormProps {
     value: string;
     setValue: React.Dispatch<React.SetStateAction<string>>;
+    isConfirmPassword?: boolean;
     isHorizontal?: boolean; // Place label to the left
     formId?: string; // To link label and input
     errorMessage?: string; // Trigger error state by setting errorMessage to a value
@@ -47,11 +48,11 @@ const getUpdatedValue = (value: string, e: React.ChangeEvent<HTMLInputElement>) 
 }
 
 const PasswordForm:FC<IFormProps> = (props) => {
-    const { isDisabled, value, setValue, onKeyDown, formId, width, errorMessage, ...rest } = props;
+    const { isDisabled, value, setValue, onKeyDown, formId, width, errorMessage, isConfirmPassword, ...rest } = props;
     const { borderRadius, colors, languageMap } = useThemeContext();
     const [isVisible, setIsVisible] = useState<boolean>(false);
     const formRef = useRef<any>();
-    const label = languageMap.Generic.password;
+    const label = isConfirmPassword ? languageMap.Generic.passwordConfirm : languageMap.Generic.password;
 
     return (
         <FormBase label={label} isDisabled={isDisabled} formId={formId} errorMessage={errorMessage} {...rest}>

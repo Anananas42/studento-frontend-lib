@@ -7,6 +7,7 @@ export interface ILanguageSet {
         drpDwnPlaceholder: string;
         optional: string;
         password: string;
+        passwordConfirm: string;
         passwordPlaceholder: string;
         time: string;
         upload: string;
@@ -39,6 +40,7 @@ const EnSet:ILanguageSet = {
         drpDwnPlaceholder: "Choose one",
         optional: "optional",
         password: "Password",
+        passwordConfirm: "Confirm password",
         passwordPlaceholder: "",
         time: "Time",
         upload: "upload",
@@ -71,6 +73,7 @@ const CzSet:ILanguageSet = {
         drpDwnPlaceholder: "Vybrat možnost",
         optional: "volitelné",
         password: "Heslo",
+        passwordConfirm: "Potvrdit heslo",
         passwordPlaceholder: "",
         time: "Čas",
         upload: "nahrát",
