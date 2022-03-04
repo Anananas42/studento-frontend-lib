@@ -35,9 +35,13 @@ interface IChoices {
     [key: string]: string;
 }
 
+interface IChoicesSelected {
+    [key: string]: boolean;
+}
+
 interface MultipleChoiceProps {
-    value: string;
-    setValue: React.Dispatch<React.SetStateAction<string>>;
+    value: IChoicesSelected;
+    setValue: React.Dispatch<React.SetStateAction<IChoicesSelected>>;
     choices: IChoices;
     isHorizontal?: boolean;
     label: string;
@@ -53,6 +57,10 @@ const MultipleChoiceFormBase:FC<MultipleChoiceProps> = (props) => {
     const { choices, value, setValue, isDisabled, formId, label, ...rest } = props;
     const { borderRadius, colors } = useThemeContext();
 
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>, choice: string) => {
+        setValue({[choice]: e.target.checked, ...value});
+    };
+
     return (
         <FormBase isDisabled={isDisabled} formId={formId} label={label} {...rest}>
             <StyledMultipleChoice>
@@ -60,7 +68,7 @@ const MultipleChoiceFormBase:FC<MultipleChoiceProps> = (props) => {
                 const identifier = formId ? formId + choice : label + choice;
                 return (
                     <StyleChoiceRow key={identifier} borderRadius={borderRadius} fill={colors.fill} isDisabled={isDisabled}>
-                        <StyledCheckbox id={identifier} type={"checkbox"} value={choice} disabled={isDisabled} />
+                        <StyledCheckbox id={identifier} type={"checkbox"} checked={value[choice]} onChange={(e) => handleInputChange(e, choice)} disabled={isDisabled} />
                         <label htmlFor={identifier}>{choices[choice]}</label>
                     </StyleChoiceRow>
                 )
