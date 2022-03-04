@@ -78,7 +78,7 @@ const RadioButtonFormBase:FC<IRadioButtonFormProps> = (props) => {
         <FormBase formId={formId} {...rest}>
             <StyledRadioList borderRadius={borderRadius}>
                 {Object.keys(options).map(opt => {
-                    return <RadioButtonRow value={value} thisButtonValue={opt} setValue={setValue} label={options[opt]} formId={formId} />
+                    return <RadioButtonRow key={opt} value={value} thisButtonValue={opt} setValue={setValue} label={options[opt]} formId={formId} />
                 })}
             </StyledRadioList>
         </FormBase>
