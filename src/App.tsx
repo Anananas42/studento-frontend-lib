@@ -1,7 +1,6 @@
 import ThemeProvider from './studento-library/ThemeProvider';
 import styled from 'styled-components';
 import PopupUpload from './studento-library/popups/components/PopupUpload';
-import TestComponent from './studento-library/TestComponent';
 import { useState } from 'react';
 import { SingleChoiceFormBase, TextFormBase } from './studento-library/forms/base-components';
 import WeekDayForm from './studento-library/forms/components/WeekDayFormBase';
@@ -44,7 +43,6 @@ function App() {
             <ThemeProvider>
               <div style={{display:"flex", flexFlow:"row wrap", gap:"0px", maxWidth: "500px"}}>
                 <PopupUpload title={"Upload File"} fileHandler={() => console.log("uploading")} maxSizeMB={5}/>
-                <TestComponent />
                 <DateForm value={date} setValue={setDate} min={"2022-03-04"} />
                 <SingleChoiceFormBase value={fruit} setValue={setFruit} label={"Single Choice"} choices={{first: "Banana", second: "Apple", third: "Pineapple"}}/>
                 <TimeForm value={time} setValue={setTime} />
