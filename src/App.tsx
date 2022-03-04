@@ -8,6 +8,7 @@ import WeekDayForm from './studento-library/forms/components/WeekDayFormBase';
 import PasswordForm from './studento-library/forms/components/PasswordForm';
 import DateForm from './studento-library/forms/components/DateForm';
 import TimeForm from './studento-library/forms/components/TimeForm';
+import UsernameForm from './studento-library/forms/components/UsernameForm';
 
 const StyledApp = styled.div`
   font-family: 'Varela Round', sans-serif;
@@ -44,6 +45,7 @@ function App() {
                 <SingleChoiceFormBase value={fruit} setValue={setFruit} label={"Single Choice"} choices={{first: "Banana", second: "Apple", third: "Pineapple"}}/>
                 <TimeForm value={time} setValue={setTime} />
                 <WeekDayForm value={weekday} setValue={setWeekday} isWorkingWeekOnly={true} />
+                <UsernameForm value={password} setValue={setPassword} />
                 <PasswordForm value={password} setValue={setPassword} />
                 <TextFormBase value={password} setValue={setPassword} label={"xd"} placeholder={""} icon={"print"}/>
               </div>

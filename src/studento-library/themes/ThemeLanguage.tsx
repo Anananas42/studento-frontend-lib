@@ -10,6 +10,8 @@ export interface ILanguageSet {
         passwordPlaceholder: string;
         time: string;
         upload: string;
+        username: string;
+        usernamePlaceholder: string;
         weekday: string;
         PopupUpload: {
             title: string;
@@ -40,6 +42,8 @@ const EnSet:ILanguageSet = {
         passwordPlaceholder: "Enter password",
         time: "Time",
         upload: "upload",
+        username: "Username",
+        usernamePlaceholder: "Enter username",
         weekday: "Day of the week",
         PopupUpload: {
             title: "Upload File",
@@ -67,9 +71,11 @@ const CzSet:ILanguageSet = {
         drpDwnPlaceholder: "Vybrat možnost",
         optional: "volitelné",
         password: "Heslo",
-        passwordPlaceholder: "Zadejte heslo",
+        passwordPlaceholder: "Heslo",
         time: "Čas",
         upload: "nahrát",
+        username: "Přihlašovací jméno",
+        usernamePlaceholder: "Přihlašovací jméno",
         weekday: "Den v týdnu",
         PopupUpload: {
             title: "Nahrát Soubor",
