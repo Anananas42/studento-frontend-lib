@@ -22,7 +22,7 @@ const WeekDayForm:FC<IFormProps> = (props) => {
          3: weekdays.thursday, 4: weekdays.friday, 5: weekdays.saturday, 6: weekdays.sunday};
 
     return (
-        <DropdownFormBase label={languageMap.Generic.weekday} options={choices} width={"200px"} {...props}/>
+        <DropdownFormBase label={languageMap.Generic.weekday} options={choices} width={"220px"} {...props}/>
     );
 }
 

@@ -2,6 +2,7 @@ import { useState, createContext, FC, SetStateAction, useContext, ReactNode } fr
 import { IColorSet, colorsLightMode, colorsDarkMode } from './themes/ThemeColor';
 import { ILanguageSet, LanguageSets } from './themes/ThemeLanguage';
 import SystemNotificationManager, { INewEntry, INotification } from './managers/SystemNotificationManager';
+import PopupManager from './managers/PopupManager';
 
 type ThemeMode = "light" | "dark";
 type Language = keyof typeof LanguageSets;
@@ -56,6 +57,7 @@ const ThemeProvider:FC<IThemeProps> = (props) => {
     return (
         <ThemeContext.Provider value={{ mode, setMode, language, languageMap, setLanguage, colors, borderRadius, pushSystemNotification, clearSystemNotifications}}>
             <SystemNotificationManager newEntry={systemNotification}/>
+            <PopupManager />
             { props.children }
         </ThemeContext.Provider>
     )
