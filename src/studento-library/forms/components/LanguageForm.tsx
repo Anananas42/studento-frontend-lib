@@ -3,7 +3,7 @@ import styled from "styled-components";
 import CloseColors from "../../buttons/colors/CloseColors";
 import { useThemeContext } from "../../ThemeProvider";
 import { Language } from "../../themes/ThemeLanguage";
-import { IconL, IconM } from "../../utilities/Icon";
+import { IconL } from "../../utilities/Icon";
 import { StyledOption } from "../base-components/dropdowns/styled/StyledCustomDropdown";
 import FormColors from "../shared/FormColors";
 
