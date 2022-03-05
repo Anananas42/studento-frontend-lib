@@ -71,7 +71,7 @@ const TextAreaFormBase:FC<ITextAreaFormBaseProps> = (props) => {
 
     return (
         <FormBase label={label} errorMessage={errorMessage} isDisabled={isDisabled} isCompact={isCompact} formId={formId ? formId : label} {...rest}>
-            <StyledTextArea id={formId} value={value} onChange={(e) => setValue(e.target.value)} onKeyDown={onKeyDown} borderRadius={borderRadius}
+            <StyledTextArea id={formId ? formId : label} value={value} onChange={(e) => setValue(e.target.value)} onKeyDown={onKeyDown} borderRadius={borderRadius}
              fill={colors.fill} isError={errorMessage} disabled={isDisabled} placeholder={isDisabled ? "" : placeholder} width={width} />
              
         </FormBase>
