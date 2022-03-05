@@ -45,13 +45,14 @@ interface IStyledMessageWrapper {
     msgColor: string;
     borderRadius: string;
     isCompact?: boolean;
+    isMessage?: string;
 }
 
 const StyledMessageWrapper = styled.div<IStyledMessageWrapper>`
     padding-bottom: ${props => props.isCompact ? "16px" : 0};
 
     .message {
-        color: ${props => props.msgColor};
+        color: ${props => props.isMessage ? props.msgColor : "transparent"};
         padding-left: ${props => `${parseInt(props.borderRadius.split("px", 1)[0])/1.5}px`};
         padding-top: 8px;
         font-size: 17px;
@@ -95,11 +96,11 @@ const FormBase:FC<IFormProps> = (props) => {
             <StyledLabel labelColor={FormColors[formState.type].label} borderRadius={borderRadius} isHorizontal={isHorizontal} htmlFor={formId ? formId : label} isDisabled={isDisabled}>
                 {label + (isOptional ? ` (${languageMap.Generic.optional})` : "")}
             </StyledLabel>
-            <StyledMessageWrapper msgColor={FormColors[formState.type].note} borderRadius={borderRadius} isCompact={isCompact}>
+            <StyledMessageWrapper msgColor={FormColors[formState.type].note} borderRadius={borderRadius} isCompact={isCompact} isMessage={defaultNote || errorMessage}>
                 <StyledIconAnchor>
                     {children}
                 </StyledIconAnchor>
-                {!isCompact && <div className={"message"}>{formState.message}</div>}
+                {!isCompact && <div className={"message"}>{formState.message ? formState.message : "|"}</div>}
             </StyledMessageWrapper>
         </StyledWrapper>
     )

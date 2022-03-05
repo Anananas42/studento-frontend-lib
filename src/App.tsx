@@ -52,9 +52,9 @@ function App() {
                 <SingleChoiceFormBase value={fruit} setValue={setFruit} label={"Single Choice"} choices={{first: "Banana", second: "Apple", third: "Pineapple"}}/>
                 <DropdownSearchFormBase label={"Dropdown with groups and search"} value={selection} setValue={setSelection} optionGroups={{Group1: {title: "First group", options: {a: "Banana", b: "Pineapple"}}, Group2: {title: "Second group", options: {c: "banan", d: "ananas"}}}}/>
                 <MultipleChoiceFormBase value={selections} setValue={setSelections} label={"Multiple choice"} choices={{first: "Banana", second: "Apple", third: "Pineapple"}}/>
-                <TextAreaFormBase value={fruit} setValue={setFruit} label={"Text area"} placeholder={""} />
-                <TextFormBase value={fruit} setValue={setFruit} label={"Text form with print icon"} placeholder={""} icon={"print"}/>
-                <TimeForm value={time} setValue={setTime} />
+                <TextAreaFormBase value={fruit} setValue={setFruit} label={"Text area"} placeholder={""} defaultNote={"Don't break me"} isCompact={true}/>
+                <TextFormBase value={fruit} setValue={setFruit} label={"Text form with print icon"} placeholder={""} />
+                <TimeForm value={time} setValue={setTime} isHorizontal={true} errorMessage={""}/>
                 <WeekDayForm value={weekday} setValue={setWeekday} isWorkingWeekOnly={true} />
                 <UsernameForm value={password} setValue={setPassword} />
                 <PasswordForm value={password} setValue={setPassword} />
