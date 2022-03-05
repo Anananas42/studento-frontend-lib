@@ -29,6 +29,7 @@ const StyledUserButton = styled.div<IStyledUserStatus>`
     align-items: center;
     border-radius: ${props => props.borderRadius};
     padding: 8px 16px 4px 16px;
+    cursor: pointer;
 
     &:hover {
         background-color: ${TextColors.Hover.bg};
