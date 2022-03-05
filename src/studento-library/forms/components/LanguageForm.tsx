@@ -3,7 +3,7 @@ import styled from "styled-components";
 import CloseColors from "../../buttons/colors/CloseColors";
 import { useThemeContext } from "../../ThemeProvider";
 import { Language } from "../../themes/ThemeLanguage";
-import { IconL } from "../../utilities/Icon";
+import { IconL, IconM } from "../../utilities/Icon";
 import { StyledOption } from "../base-components/dropdowns/styled/StyledCustomDropdown";
 import FormColors from "../shared/FormColors";
 
@@ -27,7 +27,7 @@ const StyledDropdown = styled.div<IStyledProps>`
     background-color: ${CloseColors.Default.bg};
     font-size: 20px;
     line-height: 20px;
-    padding: 16px 0 16px 16px;
+    padding: 17px 0 15px 16px;
     width: fit-content;
     height: 40px;
     display: flex;
@@ -47,6 +47,7 @@ const StyledDropdown = styled.div<IStyledProps>`
 
     div {
         user-select: none;
+        padding-bottom: 1px;
     }
 `;
 
@@ -106,7 +107,7 @@ const LanguageForm:FC = () => {
     return (
         <StyledLanguageForm ref={dropdownWrapperRef}>
             <StyledDropdown aria-hidden={true} onClick={() => setIsOpen(!isOpen)} {...styleProps}>
-                <div>{language}</div>
+                <div>{language.toUpperCase()}</div>
                 <IconL>expand_more</IconL>
             </StyledDropdown>
             <StyledList {...styleProps} isOpen={isOpen} width={"120px"}>
