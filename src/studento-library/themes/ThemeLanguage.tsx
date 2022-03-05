@@ -174,3 +174,5 @@ export const LanguageSets:ILanguageSets = {
     cz: CzSet,
 }
 
+export type Language = "en" | "cz";
+

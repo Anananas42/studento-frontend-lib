@@ -10,6 +10,7 @@ import TimeForm from './studento-library/forms/components/TimeForm';
 import UsernameForm from './studento-library/forms/components/UsernameForm';
 import ToggleRow from './studento-library/forms/base-components/ToggleRow';
 import RadioButtonFormBase from './studento-library/forms/base-components/RadioButtonFormBase';
+import LanguageForm from './studento-library/forms/components/LanguageForm';
 
 const StyledApp = styled.div`
   font-family: 'Varela Round', sans-serif;
@@ -31,6 +32,7 @@ function App() {
   const [radio, setRadio] = useState<string>("");
   const [selections, setSelections] = useState<{[key: string]: boolean}>({first: false, second: false, third: false});
   const [selection, setSelection] = useState<string>("");
+  const [language, setLanguage] = useState<string>("");
 
   return (
       <>
@@ -46,6 +48,7 @@ function App() {
               <div style={{display:"flex", flexFlow:"row wrap", gap:"0px", maxWidth: "500px"}}>
                 <PopupUpload title={"Upload File"} fileHandler={() => console.log("uploading")} maxSizeMB={5}/>
                 <DateForm value={date} setValue={setDate} min={"2022-03-04"} />
+                <LanguageForm />
                 <SingleChoiceFormBase value={fruit} setValue={setFruit} label={"Single Choice"} choices={{first: "Banana", second: "Apple", third: "Pineapple"}}/>
                 <DropdownSearchFormBase label={"Dropdown with groups and search"} value={selection} setValue={setSelection} optionGroups={{Group1: {title: "First group", options: {a: "Banana", b: "Pineapple"}}, Group2: {title: "Second group", options: {c: "banan", d: "ananas"}}}}/>
                 <MultipleChoiceFormBase value={selections} setValue={setSelections} label={"Multiple choice"} choices={{first: "Banana", second: "Apple", third: "Pineapple"}}/>

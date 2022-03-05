@@ -1,10 +1,9 @@
 import React, { useState, createContext, FC, SetStateAction, useContext, ReactNode } from 'react';
 import { IColorSet, colorsLightMode, colorsDarkMode } from './themes/ThemeColor';
-import { ILanguageSet, LanguageSets } from './themes/ThemeLanguage';
+import { ILanguageSet, Language, LanguageSets } from './themes/ThemeLanguage';
 import SystemNotificationManager, { INewEntry, INotification } from './managers/SystemNotificationManager';
 
 type ThemeMode = "light" | "dark";
-type Language = keyof typeof LanguageSets;
 
 interface ThemeContextValue {
     borderRadius: string;
