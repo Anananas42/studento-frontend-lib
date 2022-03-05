@@ -59,7 +59,6 @@ const MultipleChoiceFormBase:FC<MultipleChoiceProps> = (props) => {
 
     const handleInputChange = (choice: string) => {
         setValue({...value, [choice]: !value[choice]});
-        console.log(value);
     };
 
     return (
@@ -70,7 +69,7 @@ const MultipleChoiceFormBase:FC<MultipleChoiceProps> = (props) => {
                 return (
                     <StyleChoiceRow key={identifier} borderRadius={borderRadius} fill={colors.fill} isDisabled={isDisabled}>
                         <StyledCheckbox id={identifier} type={"checkbox"} checked={value[choice]} onChange={() => handleInputChange(choice)} disabled={isDisabled} />
-                        <label onClick={() => handleInputChange(choice)} htmlFor={identifier}>{choices[choice]}</label>
+                        <label htmlFor={identifier}>{choices[choice]}</label>
                     </StyleChoiceRow>
                 )
             })}
