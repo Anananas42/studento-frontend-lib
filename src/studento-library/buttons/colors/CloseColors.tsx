@@ -4,11 +4,11 @@ const CloseColors = {
         txt: "#453C30",
     },
     Hover: {
-        bg: "#F2F2F2",
+        bg: "hsl(0, 0%, 91%)",
         txt: "#453C30",
     },
     Active: {
-        bg: "#EDEDED",
+        bg: "hsl(0, 0%, 87%)",
         txt: "#453C30",
     },
     Disabled: {
