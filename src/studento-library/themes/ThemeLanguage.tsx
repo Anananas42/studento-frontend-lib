@@ -1,10 +1,11 @@
 export interface ILanguageSet {
     Generic: {
-        btnLogin: string;
         cancel: string;
         date: string;
         delete: string;
         drpDwnPlaceholder: string;
+        login: string;
+        logout: string;
         optional: string;
         password: string;
         passwordConfirm: string;
@@ -56,11 +57,12 @@ export interface ILanguageSet {
 
 const EnSet:ILanguageSet = {
     Generic: {
-        btnLogin: "login",
         cancel: "CANCEL",
         date: "Date",
         delete: "DELETE",
         drpDwnPlaceholder: "Choose one",
+        login: "Login",
+        logout: "Logout",
         optional: "optional",
         password: "Password",
         passwordConfirm: "Confirm password",
@@ -112,11 +114,12 @@ const EnSet:ILanguageSet = {
 
 const CzSet:ILanguageSet = {
     Generic: {
-        btnLogin: "přihlásit",
         cancel: "ZRUŠIT",
         date: "Datum",
         delete: "SMAZAT",
         drpDwnPlaceholder: "Vybrat možnost",
+        login: "Přihlásit",
+        logout: "Odhlásit",
         optional: "volitelné",
         password: "Heslo",
         passwordConfirm: "Potvrdit heslo",
