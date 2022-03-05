@@ -1,13 +1,13 @@
 import { IBtnSizes } from '../shared/ButtonSizes';
-import CloseColors from '../colors/CloseColors';
+import TextColors from '../colors/TextColors';
 import styled from 'styled-components';
 import { FC, ReactElement } from 'react';
 import BtnBase, { IStyledBtn } from '../shared/BtnBase';
 
 const StyledText = styled.button<IStyledBtn>`
     border-radius: ${props => props.borderRadius};
-    color: ${CloseColors.Default.txt};
-    background-color: ${CloseColors.Default.bg};
+    color: ${TextColors.Default.txt};
+    background-color: ${TextColors.Default.bg};
     font-family: 'Roboto', sans-serif;
     font-weight: 600;
     font-size: ${props => props.fontSize};
@@ -23,18 +23,18 @@ const StyledText = styled.button<IStyledBtn>`
     border: none;
 
     :hover {
-        color: ${CloseColors.Hover.txt};
-        background-color: ${CloseColors.Hover.bg};
+        color: ${TextColors.Hover.txt};
+        background-color: ${TextColors.Hover.bg};
     }
 
     :active {
-        color: ${CloseColors.Active.txt};
-        background-color: ${CloseColors.Active.bg};
+        color: ${TextColors.Active.txt};
+        background-color: ${TextColors.Active.bg};
     }
 
     :disabled {
-        color: ${CloseColors.Disabled.txt};
-        background-color: ${CloseColors.Disabled.bg};
+        color: ${TextColors.Disabled.txt};
+        background-color: ${TextColors.Disabled.bg};
         pointer-events: none;
     }
 `;
