@@ -51,7 +51,7 @@ const StyledTextArea = styled.textarea<IStyledTextArea>`
 
 interface ITextAreaFormBaseProps {
     value: string;
-    onChange: (inputText:string) => void;
+    setValue: React.Dispatch<React.SetStateAction<string>>;
     isHorizontal?: boolean; // Place label to the left
     label: string;
     formId?: string; // To link label and input
@@ -66,12 +66,12 @@ interface ITextAreaFormBaseProps {
 }
 
 const TextAreaFormBase:FC<ITextAreaFormBaseProps> = (props) => {
-    const { label, errorMessage, isDisabled, placeholder, width, value, onChange, onKeyDown, isCompact, formId, ...rest } = props;
+    const { label, errorMessage, isDisabled, placeholder, width, value, setValue, onKeyDown, isCompact, formId, ...rest } = props;
     const { borderRadius, colors } = useThemeContext();
 
     return (
         <FormBase label={label} errorMessage={errorMessage} isDisabled={isDisabled} isCompact={isCompact} formId={formId ? formId : label} {...rest}>
-            <StyledTextArea id={formId} value={value} onChange={(e) => onChange(e.target.value)} onKeyDown={onKeyDown} borderRadius={borderRadius}
+            <StyledTextArea id={formId} value={value} onChange={(e) => setValue(e.target.value)} onKeyDown={onKeyDown} borderRadius={borderRadius}
              fill={colors.fill} isError={errorMessage} disabled={isDisabled} placeholder={isDisabled ? "" : placeholder} width={width} />
              
         </FormBase>

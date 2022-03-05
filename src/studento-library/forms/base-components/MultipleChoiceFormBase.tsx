@@ -57,8 +57,9 @@ const MultipleChoiceFormBase:FC<MultipleChoiceProps> = (props) => {
     const { choices, value, setValue, isDisabled, formId, label, ...rest } = props;
     const { borderRadius, colors } = useThemeContext();
 
-    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>, choice: string) => {
-        setValue({[choice]: e.target.checked, ...value});
+    const handleInputChange = (choice: string) => {
+        setValue({...value, [choice]: !value[choice]});
+        console.log(value);
     };
 
     return (
@@ -68,8 +69,8 @@ const MultipleChoiceFormBase:FC<MultipleChoiceProps> = (props) => {
                 const identifier = formId ? formId + choice : label + choice;
                 return (
                     <StyleChoiceRow key={identifier} borderRadius={borderRadius} fill={colors.fill} isDisabled={isDisabled}>
-                        <StyledCheckbox id={identifier} type={"checkbox"} checked={value[choice]} onChange={(e) => handleInputChange(e, choice)} disabled={isDisabled} />
-                        <label htmlFor={identifier}>{choices[choice]}</label>
+                        <StyledCheckbox id={identifier} type={"checkbox"} checked={value[choice]} onChange={() => handleInputChange(choice)} disabled={isDisabled} />
+                        <label onClick={() => handleInputChange(choice)} htmlFor={identifier}>{choices[choice]}</label>
                     </StyleChoiceRow>
                 )
             })}

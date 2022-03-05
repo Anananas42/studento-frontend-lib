@@ -2,7 +2,7 @@ import ThemeProvider from './studento-library/ThemeProvider';
 import styled from 'styled-components';
 import PopupUpload from './studento-library/popups/components/PopupUpload';
 import { useState } from 'react';
-import { SingleChoiceFormBase, TextFormBase } from './studento-library/forms/base-components';
+import { DropdownSearchFormBase, MultipleChoiceFormBase, SingleChoiceFormBase, TextAreaFormBase, TextFormBase } from './studento-library/forms/base-components';
 import WeekDayForm from './studento-library/forms/components/WeekDayFormBase';
 import PasswordForm from './studento-library/forms/components/PasswordForm';
 import DateForm from './studento-library/forms/components/DateForm';
@@ -29,6 +29,8 @@ function App() {
   const [password, setPassword] = useState<string>("");
   const [isToggled, setIsToggled] = useState<boolean>(false);
   const [radio, setRadio] = useState<string>("");
+  const [selections, setSelections] = useState<{[key: string]: boolean}>({first: false, second: false, third: false});
+  const [selection, setSelection] = useState<string>("");
 
   return (
       <>
@@ -45,12 +47,15 @@ function App() {
                 <PopupUpload title={"Upload File"} fileHandler={() => console.log("uploading")} maxSizeMB={5}/>
                 <DateForm value={date} setValue={setDate} min={"2022-03-04"} />
                 <SingleChoiceFormBase value={fruit} setValue={setFruit} label={"Single Choice"} choices={{first: "Banana", second: "Apple", third: "Pineapple"}}/>
+                <DropdownSearchFormBase label={"Dropdown with groups and search"} value={selection} setValue={setSelection} optionGroups={{Group1: {title: "First group", options: {a: "Banana", b: "Pineapple"}}, Group2: {title: "Second group", options: {c: "banan", d: "ananas"}}}}/>
+                <MultipleChoiceFormBase value={selections} setValue={setSelections} label={"Multiple choice"} choices={{first: "Banana", second: "Apple", third: "Pineapple"}}/>
+                <TextAreaFormBase value={fruit} setValue={setFruit} label={"Text area"} placeholder={""} />
+                <TextFormBase value={fruit} setValue={setFruit} label={"Text form with print icon"} placeholder={""} icon={"print"}/>
                 <TimeForm value={time} setValue={setTime} />
                 <WeekDayForm value={weekday} setValue={setWeekday} isWorkingWeekOnly={true} />
                 <UsernameForm value={password} setValue={setPassword} />
                 <PasswordForm value={password} setValue={setPassword} />
-                <TextFormBase value={password} setValue={setPassword} label={"xd"} placeholder={""} icon={"print"}/>
-                <ToggleRow label={"Dark mode"} value={isToggled} setValue={setIsToggled} />
+                <ToggleRow label={"Dark mode"} value={isToggled} setValue={setIsToggled} height={"80px"}/>
                 <RadioButtonFormBase value={radio} setValue={setRadio} label={"Radio buttons"} options={{first: "Pineapple", second: "Banana", third: "Third time's the charm"}}/>
               </div>
             </ThemeProvider>
