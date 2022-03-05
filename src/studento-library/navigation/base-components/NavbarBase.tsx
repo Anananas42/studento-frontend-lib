@@ -8,7 +8,7 @@ import NavUserStatus, { IUserStatus } from "./NavUserStatus";
 const StyledNavbarBase = styled.nav`
     position: fixed;
     top: 0;
-    width: 800px;
+    width: 1200px;
     z-index: 5;
     height: 74px;
     font-size: 20px;
