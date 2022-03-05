@@ -11,8 +11,11 @@ import UsernameForm from './studento-library/forms/components/UsernameForm';
 import ToggleRow from './studento-library/forms/base-components/ToggleRow';
 import RadioButtonFormBase from './studento-library/forms/base-components/RadioButtonFormBase';
 import LanguageForm from './studento-library/forms/components/LanguageForm';
+import NavbarBase from './studento-library/navigation/base-components/NavbarBase';
 
 const StyledApp = styled.div`
+  display: flex;
+  justify-content: center;
   font-family: 'Varela Round', sans-serif;
   font-style: 'normal';
   font-weight: 'normal';
@@ -34,6 +37,14 @@ function App() {
   const [selection, setSelection] = useState<string>("");
   const [language, setLanguage] = useState<string>("");
 
+  const userStatus = {
+    username: "Leonhard Euler",
+    school: "University of Venice",
+    logoutUrl: "",
+    profileUrl: "",
+    dashboardUrl: "",
+  }
+
   return (
       <>
         <head>
@@ -45,6 +56,7 @@ function App() {
         <body>
           <StyledApp>
             <ThemeProvider>
+              <NavbarBase userStatus={false ? undefined : userStatus} />
               <div style={{display:"flex", flexFlow:"row wrap", gap:"0px", maxWidth: "500px"}}>
                 <PopupUpload title={"Upload File"} fileHandler={() => console.log("uploading")} maxSizeMB={5}/>
                 <DateForm value={date} setValue={setDate} min={"2022-03-04"} />
@@ -52,8 +64,8 @@ function App() {
                 <SingleChoiceFormBase value={fruit} setValue={setFruit} label={"Single Choice"} choices={{first: "Banana", second: "Apple", third: "Pineapple"}}/>
                 <DropdownSearchFormBase label={"Dropdown with groups and search"} value={selection} setValue={setSelection} optionGroups={{Group1: {title: "First group", options: {a: "Banana", b: "Pineapple"}}, Group2: {title: "Second group", options: {c: "banan", d: "ananas"}}}}/>
                 <MultipleChoiceFormBase value={selections} setValue={setSelections} label={"Multiple choice"} choices={{first: "Banana", second: "Apple", third: "Pineapple"}}/>
-                <TextAreaFormBase value={fruit} setValue={setFruit} label={"Text area"} placeholder={""} defaultNote={"Don't break me"} isCompact={true}/>
-                <TextFormBase value={fruit} setValue={setFruit} label={"Text form with print icon"} placeholder={""} />
+                <TextAreaFormBase value={fruit} setValue={setFruit} label={"Text area"} placeholder={""} defaultNote={"Don't break me"} />
+                <TextFormBase value={fruit} setValue={setFruit} label={"Text form with print icon"} placeholder={""} errorMessage={""} />
                 <TimeForm value={time} setValue={setTime} isHorizontal={true} errorMessage={""}/>
                 <WeekDayForm value={weekday} setValue={setWeekday} isWorkingWeekOnly={true} />
                 <UsernameForm value={password} setValue={setPassword} />
