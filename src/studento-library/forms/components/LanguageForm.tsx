@@ -1,10 +1,9 @@
-import { FC, useEffect, useRef, useState } from "react";
+import { FC, useState } from "react";
 import styled from "styled-components";
 import TextColors from "../../buttons/colors/TextColors";
 import { useThemeContext } from "../../ThemeProvider";
 import { Language } from "../../themes/ThemeLanguage";
 import { IconL } from "../../utilities/Icon";
-import { StyledOption } from "../base-components/dropdowns/styled/StyledCustomDropdown";
 import FormColors from "../shared/FormColors";
 
 interface IStyledProps {
@@ -54,6 +53,7 @@ const StyledDropdown = styled.div<IStyledProps>`
 
 const StyledList = styled.div<IStyledProps>`
     position: absolute;
+    display: none;
     margin: 0;
     left: 0;
     top: 100%;
@@ -61,17 +61,37 @@ const StyledList = styled.div<IStyledProps>`
     width: ${props => props.width ? props.width : "100%"};
     background-color: white;
     color: ${props => props.fill};
-    border: 1px solid ${FormColors.Default.border};
+    border: 1px solid ${TextColors.Hover.bg};
     border-top: 0;
-    outline: 1px solid ${FormColors.Default.border};
-    border-radius: ${props => props.borderRadius} ${props => props.borderRadius};
+    outline: 1px solid ${TextColors.Hover.bg};
+    border-radius: ${props => props.borderRadius};
     box-shadow: 2px 8px 16px -2px ${FormColors.Default.dropdownShadow};
     user-select: none;
     overflow-y: auto;
     max-height: 400px;
     z-index: 5;
 
-    display: ${props => props.isOpen? "block" : "none"};
+    &.open {
+        display: flex;
+        flex-direction: column;
+        justify-content: stretch;
+        padding: 8px;
+    }
+
+    > div {
+        padding: 12px 16px;
+        border-radius: ${props => props.borderRadius};
+
+        :hover {
+            background-color: ${TextColors.Hover.bg};
+        }
+
+        :active {
+            background-color: ${TextColors.Active.bg};
+        }
+
+    }
+
 `;
 
 type IOption = {
@@ -81,39 +101,19 @@ type IOption = {
 const LanguageForm:FC = () => {
     const { borderRadius, colors, language, setLanguage } = useThemeContext();
     const [isOpen, setIsOpen] = useState<boolean>(false);
-    const dropdownWrapperRef = useRef<any>();
 
-    const options:IOption = {en: "English", cz: "Čeština"};
+    const options:IOption = {en: "English", cz: "Česky"};
 
     const styleProps = { borderRadius, fill: colors.fill, placeholderFill: FormColors.Default.placeholder };
 
-    useEffect(() => {
-        const checkClickOutside = (e: any) => {
-            if (dropdownWrapperRef.current === null) {
-                window.removeEventListener('click', checkClickOutside);
-                return;
-            }
-    
-            if (!dropdownWrapperRef.current.contains(e.target)) {
-                setIsOpen(false);
-            }
-        }
-
-        dropdownWrapperRef && window.addEventListener('click', checkClickOutside);
-        
-        return () => {
-            window.removeEventListener('click', checkClickOutside);
-        }
-    }, []);
-
     return (
-        <StyledLanguageForm ref={dropdownWrapperRef}>
-            <StyledDropdown aria-hidden={true} onClick={() => setIsOpen(!isOpen)} {...styleProps}>
+        <StyledLanguageForm>
+            <StyledDropdown aria-hidden={true} {...styleProps} onMouseEnter={() => setIsOpen(true)} onMouseLeave={() => setIsOpen(false)}>
                 <div>{language.toUpperCase()}</div>
                 <IconL>expand_more</IconL>
-                <StyledList {...styleProps} isOpen={isOpen} width={"140px"}>
+                <StyledList {...styleProps} width={"180px"} className={isOpen ? "open" : "closed"}>
                     {(Object.keys(options) as Language[]).map(optKey => {
-                        return <StyledOption key={optKey} onClick={() => {setLanguage(optKey); setIsOpen(false)}} {...styleProps}>{options[optKey]}</StyledOption>
+                        return <div key={optKey} onClick={() => {setLanguage(optKey); setIsOpen(false)}}>{options[optKey]}</div>
                     })}
                 </StyledList>
             </StyledDropdown>
