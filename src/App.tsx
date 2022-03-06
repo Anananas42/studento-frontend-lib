@@ -57,7 +57,7 @@ function App() {
         <body style={{backgroundColor: "#F7F6F5"}}>
           <StyledApp>
             <ThemeProvider>
-              <NavbarBase userStatus={false ? undefined : userStatus} featureTiles={{first: {title: "First feature", description: "Best feature ever", url: "", icon: ""}}}/>
+              <NavbarBase userStatus={false ? undefined : userStatus} featureTiles={{first: {title: "First feature", description: "Best feature ever", url: "", icon: "school"}, second: {title: "Second feature", description: "Second best feature ever", url: "", icon: "calendar_month"}}}/>
               <div style={{display:"flex", flexFlow:"row wrap", gap:"0px", maxWidth: "500px", paddingTop: "100px", backgroundColor: "#F7F6F5"}}>
                 <PopupUpload title={"Upload File"} fileHandler={() => console.log("uploading")} maxSizeMB={5}/>
                 <DateForm value={date} setValue={setDate} min={"2022-03-04"} />

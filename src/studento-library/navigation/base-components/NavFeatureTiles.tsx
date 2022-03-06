@@ -135,7 +135,7 @@ const NavFeatureTiles:FC<IProps> = (props) => {
                     const tile = featureTiles[key];
                     return (
                         <StyledTile key={key} {...styleProps}>
-                            <Icon fontSize={"32px"} width={'32px'} height={'32px'}>school</Icon>
+                            <Icon fontSize={"32px"} width={'32px'} height={'32px'}>{tile.icon}</Icon>
                             <StyledInformation {...styleProps}>
                                 <div>{tile.title}</div>
                                 <div>{tile.description}</div>
