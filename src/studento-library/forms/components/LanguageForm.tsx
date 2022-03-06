@@ -111,7 +111,7 @@ const LanguageForm:FC = () => {
             <StyledDropdown aria-hidden={true} onClick={() => setIsOpen(!isOpen)} {...styleProps}>
                 <div>{language.toUpperCase()}</div>
                 <IconL>expand_more</IconL>
-                <StyledList {...styleProps} isOpen={isOpen} width={"120px"}>
+                <StyledList {...styleProps} isOpen={isOpen} width={"140px"}>
                     {(Object.keys(options) as Language[]).map(optKey => {
                         return <StyledOption key={optKey} onClick={() => {setLanguage(optKey); setIsOpen(false)}} {...styleProps}>{options[optKey]}</StyledOption>
                     })}
