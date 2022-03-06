@@ -45,10 +45,7 @@ const StyledUserButton = styled.div<IStyledUserStatus>`
 
 const StyledUserInfo = styled.div`
     font-weight: 100;
-
-    div:first-child {
-
-    }
+    white-space: nowrap;
 
     div:last-child {
         font-size: 12px;
