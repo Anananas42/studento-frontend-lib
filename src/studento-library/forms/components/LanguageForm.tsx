@@ -57,7 +57,6 @@ const StyledList = styled.div<IStyledProps>`
     margin: 0;
     left: 0;
     top: 100%;
-    padding: 0;
     width: ${props => props.width ? props.width : "100%"};
     background-color: white;
     color: ${props => props.fill};
@@ -79,7 +78,7 @@ const StyledList = styled.div<IStyledProps>`
     }
 
     > div {
-        padding: 12px 16px;
+        padding: 12px 32px 12px 16px;
         border-radius: ${props => props.borderRadius};
 
         :hover {
@@ -111,7 +110,7 @@ const LanguageForm:FC = () => {
             <StyledDropdown aria-hidden={true} {...styleProps} onMouseEnter={() => setIsOpen(true)} onMouseLeave={() => setIsOpen(false)}>
                 <div>{language.toUpperCase()}</div>
                 <IconL>expand_more</IconL>
-                <StyledList {...styleProps} width={"180px"} className={isOpen ? "open" : "closed"}>
+                <StyledList {...styleProps} width={"fit-content"} className={isOpen ? "open" : "closed"}>
                     {(Object.keys(options) as Language[]).map(optKey => {
                         return <div key={optKey} onClick={() => {setLanguage(optKey); setIsOpen(false)}}>{options[optKey]}</div>
                     })}
