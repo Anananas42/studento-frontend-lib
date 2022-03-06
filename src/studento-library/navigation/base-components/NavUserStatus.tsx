@@ -17,7 +17,6 @@ const StyledUserStatus = styled.div<IStyledUserStatus>`
     align-items: center;
     gap: 8px;
     user-select: none;
-    transform: translateX(50%);
     color: ${props => props.fill};
     background-color: ${props => props.bg};
     border-radius: 0 0 16px 16px;

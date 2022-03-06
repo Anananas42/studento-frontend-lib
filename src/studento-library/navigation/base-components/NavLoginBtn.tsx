@@ -12,7 +12,6 @@ interface IStyledNavLoginBtn {
 const StyledNavLoginBtn = styled.div<IStyledNavLoginBtn>`
     display: flex;
     align-items: center;
-    transform: translateX(50%);
     user-select: none;
     color: ${props => props.fill};
     background-color: ${props => props.bg};

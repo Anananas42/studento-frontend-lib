@@ -1,5 +1,6 @@
 import { FC } from "react";
 import styled from "styled-components";
+import LanguageForm from "../../forms/components/LanguageForm";
 import NavFeatureTiles from "./NavFeatureTiles";
 import NavLoginBtn from "./NavLoginBtn";
 import NavLogoBtn from "./NavLogoBtn";
@@ -21,6 +22,15 @@ const StyledMiddleNavbar = styled.div`
     display: flex;
     align-items: stretch;
     justify-content: center;
+`;
+
+const StyledRightNavbar = styled.div`
+    display: flex;
+    transform: translateX(50%);
+
+    > div:first-child {
+        padding-right: 16px;
+    }
 `;
 
 interface IFeatureTiles {
@@ -45,7 +55,10 @@ const NavbarBase:FC<NavbarProps> = (props) => {
             <StyledMiddleNavbar>
                 <NavFeatureTiles />
             </StyledMiddleNavbar>
-            {userStatus ? <NavUserStatus userStatus={userStatus}/> : <NavLoginBtn />}
+            <StyledRightNavbar>
+                <LanguageForm />
+                {userStatus ? <NavUserStatus userStatus={userStatus}/> : <NavLoginBtn />}
+            </StyledRightNavbar>
         </StyledNavbarBase>
     )
 }
