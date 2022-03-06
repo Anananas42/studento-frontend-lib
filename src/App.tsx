@@ -14,7 +14,10 @@ import LanguageForm from './studento-library/forms/components/LanguageForm';
 import NavbarBase from './studento-library/navigation/base-components/NavbarBase';
 
 const StyledApp = styled.div`
+  position: static;
   display: flex;
+  width: 100vw;
+  height: 100vh;
   justify-content: center;
   font-family: 'Varela Round', sans-serif;
   font-style: 'normal';
@@ -64,7 +67,7 @@ function App() {
           </style> 
           <link href="https://fonts.googleapis.com/css2?family=Material+Icons+Round" rel="stylesheet" />
         </head>
-        <body style={{backgroundColor: "#F7F6F5"}}>
+        <body>
           <StyledApp>
             <ThemeProvider>
               <NavbarBase userStatus={false ? undefined : userStatus} featureTiles={featureTiles} navButtons={navButtons}/>
