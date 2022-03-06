@@ -15,6 +15,7 @@ const StyledNavLogoBtn = styled.div<IStyledProps>`
     border-radius: ${props => props.borderRadius};
     height: fit-content;
     padding: 4px 24px 4px 8px;
+    margin-right: 80px;
     cursor: pointer;
 
     img {
