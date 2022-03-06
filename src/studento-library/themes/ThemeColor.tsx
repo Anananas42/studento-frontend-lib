@@ -5,10 +5,12 @@ export interface IColorSet {
     link: string;
     linkActive: string;
     fill: string;
+    fillSecondary: string;
     fillDisabled: string;
     bg: string;
     descBg: string;
     descTxt: string;
+    sectionShadow: string;
 
     System: {
         Error: {
@@ -37,10 +39,12 @@ export const colorsLightMode: IColorSet = {
     link: "#0F5FFF",
     linkActive: "#5C92FF",
     fill: "#453C30",
+    fillSecondary: "rgba(69, 60, 48, 0.6)",
     fillDisabled: "#453C3042",
     bg: "#F7F6F5",
     descBg: "#C5E3FA",
     descTxt: "#186AA8",
+    sectionShadow: "rgba(69, 60, 48, 0.12)",
 
     System: {
         Error: {
@@ -69,10 +73,12 @@ export const colorsDarkMode: IColorSet = {
     link: "#0F5FFF",
     linkActive: "#5C92FF",
     fill: "#453C30",
+    fillSecondary: "rgba(69, 60, 48, 0.6)",
     fillDisabled: "#453C3042",
     bg: "#F7F6F5",
     descBg: "#C5E3FA",
     descTxt: "#186AA8",
+    sectionShadow: "rgba(69, 60, 48, 0.32)",
 
     System: {
         Error: {

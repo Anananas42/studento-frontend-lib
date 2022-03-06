@@ -19,6 +19,7 @@ const StyledApp = styled.div`
   font-family: 'Varela Round', sans-serif;
   font-style: 'normal';
   font-weight: 'normal';
+  background-color: "#F7F6F5";
 
   *, *::after, *::before {
     box-sizing: border-box;
@@ -53,11 +54,11 @@ function App() {
           </style> 
           <link href="https://fonts.googleapis.com/css2?family=Material+Icons+Round" rel="stylesheet" />
         </head>
-        <body>
+        <body style={{backgroundColor: "#F7F6F5"}}>
           <StyledApp>
             <ThemeProvider>
-              <NavbarBase userStatus={false ? undefined : userStatus} />
-              <div style={{display:"flex", flexFlow:"row wrap", gap:"0px", maxWidth: "500px", paddingTop: "100px"}}>
+              <NavbarBase userStatus={false ? undefined : userStatus} featureTiles={{first: {title: "First feature", description: "Best feature ever", url: "", icon: ""}}}/>
+              <div style={{display:"flex", flexFlow:"row wrap", gap:"0px", maxWidth: "500px", paddingTop: "100px", backgroundColor: "#F7F6F5"}}>
                 <PopupUpload title={"Upload File"} fileHandler={() => console.log("uploading")} maxSizeMB={5}/>
                 <DateForm value={date} setValue={setDate} min={"2022-03-04"} />
                 <LanguageForm />

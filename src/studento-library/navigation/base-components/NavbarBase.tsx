@@ -1,7 +1,7 @@
 import { FC } from "react";
 import styled from "styled-components";
 import LanguageForm from "../../forms/components/LanguageForm";
-import NavFeatureTiles from "./NavFeatureTiles";
+import NavFeatureTiles, { IFeatureTiles } from "./NavFeatureTiles";
 import NavLoginBtn from "./NavLoginBtn";
 import NavLogoBtn from "./NavLogoBtn";
 import NavUserStatus, { IUserStatus } from "./NavUserStatus";
@@ -34,13 +34,6 @@ const StyledRightNavbar = styled.div`
     }
 `;
 
-interface IFeatureTiles {
-    [key: string]: {
-        url: string;
-        icon: string;
-    };
-}
-
 interface NavbarProps {
     userStatus?: IUserStatus;
     featureTiles?: IFeatureTiles;
@@ -54,7 +47,7 @@ const NavbarBase:FC<NavbarProps> = (props) => {
         <StyledNavbarBase>
             <NavLogoBtn />
             <StyledMiddleNavbar>
-                <NavFeatureTiles />
+                {featureTiles && <NavFeatureTiles featureTiles={featureTiles}/>}
             </StyledMiddleNavbar>
             <StyledRightNavbar>
                 <LanguageForm />

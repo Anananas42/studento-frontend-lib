@@ -41,7 +41,7 @@ const StyledWrapper = styled.div<IStyledWrapper>`
     height: ${props => props.height || 'auto'};
 `;
 
-const Icon:FC<IconProps> = (props) => {
+export const Icon:FC<IconProps> = (props) => {
     const { colors } = useThemeContext();
 
     let fill: string;
