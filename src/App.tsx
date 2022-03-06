@@ -57,7 +57,7 @@ function App() {
           <StyledApp>
             <ThemeProvider>
               <NavbarBase userStatus={false ? undefined : userStatus} />
-              <div style={{display:"flex", flexFlow:"row wrap", gap:"0px", maxWidth: "500px"}}>
+              <div style={{display:"flex", flexFlow:"row wrap", gap:"0px", maxWidth: "500px", paddingTop: "100px"}}>
                 <PopupUpload title={"Upload File"} fileHandler={() => console.log("uploading")} maxSizeMB={5}/>
                 <DateForm value={date} setValue={setDate} min={"2022-03-04"} />
                 <LanguageForm />

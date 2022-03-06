@@ -15,6 +15,7 @@ const StyledNavbarBase = styled.nav`
     font-size: 20px;
     line-height: 20px;
     display: flex;
+    align-items: center;
     justify-content: space-between;
 `;
 
