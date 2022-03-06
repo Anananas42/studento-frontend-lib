@@ -60,7 +60,7 @@ const StyledCheckbox = styled.input<IStyledCheckbox>`
         height: 100%;
         transform: scale(0);
         background: linear-gradient(45deg, ${CheckboxColors.bg1}, ${CheckboxColors.bg2});
-        transition: transform 0.1s ease-in-out -0.05s;
+        transition: transform 0.08s ease-in-out -0.05s;
     }
 
     &:checked::before {

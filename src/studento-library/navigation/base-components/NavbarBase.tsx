@@ -15,33 +15,32 @@ interface IStyleProps {
 const StyledNavbarBase = styled.nav`
     position: fixed;
     top: 0;
-    width: 100%;
-    max-width: 1400px;
+    width: min(100vw, 1800px);
+    margin-left: 64px;
     z-index: 5;
     height: 74px;
     font-size: 20px;
     line-height: 20px;
     display: flex;
-    align-items: center;
+    align-items: stretch;
     justify-content: space-between;
 `;
 
-const StyledMiddleNavbar = styled.div`
+const StyledLeftNavbar = styled.div`
     display: flex;
-    align-items: stretch;
-    justify-content: space-between;
-
-    > div:first-child {
-        margin-right: 16px;
-    }
+    align-items: center;
+    justify-content: center;
+    width: 600px;
+    height: 100%;
 `;
 
 const StyledRightNavbar = styled.div`
     display: flex;
-    margin-left: 40px;
+    width: 600px;
 
-    > div:first-child {
-        padding-right: 16px;
+    > div:last-child {
+        padding-left: 16px;
+        margin-right: 64px;
     }
 `;
 
@@ -77,21 +76,21 @@ const NavbarBase:FC<NavbarProps> = (props) => {
 
     return (
         <StyledNavbarBase>
-            <NavLogoBtn />
-            <StyledMiddleNavbar>
+            <StyledLeftNavbar>
+                <NavLogoBtn />
                 {featureTiles && <NavFeatureTiles featureTiles={featureTiles}/>}
                 {Object.values(navButtons).map(btn => {
                     return (
-                        <StyledMiddleButton fill={colors.fill}>
+                        <StyledMiddleButton fill={colors.fill} key={btn.title}>
                             {btn.icon && <Icon fontSize={"27px"} width={'27px'} height={'27px'}>{btn.icon}</Icon>}
                             {btn.title}
                         </StyledMiddleButton>
                     )
                 })}
-            </StyledMiddleNavbar>
+            </StyledLeftNavbar>
             <StyledRightNavbar>
-                <LanguageForm />
                 {userStatus ? <NavUserStatus userStatus={userStatus}/> : <NavLoginBtn />}
+                <LanguageForm />
             </StyledRightNavbar>
         </StyledNavbarBase>
     )
