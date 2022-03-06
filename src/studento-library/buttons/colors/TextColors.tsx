@@ -4,11 +4,11 @@ const TextColors = {
         txt: "#453C30",
     },
     Hover: {
-        bg: "rgba(69, 60, 48, 0.22)",
+        bg: "rgba(69, 60, 48, 0.11)",
         txt: "#453C30",
     },
     Active: {
-        bg: "rgba(69, 60, 48, 0.36)",
+        bg: "rgba(69, 60, 48, 0.22)",
         txt: "#453C30",
     },
     Disabled: {
