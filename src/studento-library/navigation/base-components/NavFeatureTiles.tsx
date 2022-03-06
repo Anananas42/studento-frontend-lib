@@ -9,6 +9,7 @@ interface StyleProps {
     fillSecondary: string;
     borderRadius: string;
     sectionShadow: string;
+    primary: string;
 }
 
 const StyledDropdown = styled.div<StyleProps>`
@@ -49,7 +50,7 @@ const StyledList = styled.div<StyleProps>`
     top: 100%;
     left: 0;
     background-color: #fff;
-    width: 600px;
+    width: 500px;
     height: fit-content;
     padding: 16px;
     border-radius: 0 16px 16px 16px;
@@ -70,10 +71,20 @@ const StyledTile = styled.div<StyleProps>`
 
     > div:last-child {
         margin-left: auto;
+        opacity: 0;
+        color: ${props => props.fill};
+        transform: translateX(-15px);
+        transition: all 0.2s ease-in-out;
     }
 
     :hover {
         background-color: ${TextColors.Hover.bg};
+
+        > div:last-child {
+            opacity: 1;
+            color: ${props => props.primary};
+            transform: translateX(0);
+        }
     }
 
     :active {
@@ -112,7 +123,7 @@ interface IProps {
 const NavFeatureTiles:FC<IProps> = (props) => {
     const { featureTiles } = props;
     const { colors, borderRadius } = useThemeContext();
-    const styleProps = { fill: colors.fill, fillSecondary: colors.fillSecondary, borderRadius, sectionShadow: colors.sectionShadow };
+    const styleProps = { fill: colors.fill, fillSecondary: colors.fillSecondary, borderRadius, sectionShadow: colors.sectionShadow, primary: colors.primary };
 
     return (
         <StyledDropdown {...styleProps}>
@@ -129,7 +140,7 @@ const NavFeatureTiles:FC<IProps> = (props) => {
                                 <div>{tile.title}</div>
                                 <div>{tile.description}</div>
                             </StyledInformation>
-                            <Icon fontSize={"27px"} width={'27px'} height={'27px'}>arrow_forward</Icon>
+                            <Icon fontSize={"32px"} width={'32px'} height={'32px'}>arrow_forward</Icon>
                         </StyledTile>
                     )
                 })}
