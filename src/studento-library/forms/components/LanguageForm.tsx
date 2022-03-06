@@ -1,6 +1,6 @@
 import { FC, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
-import CloseColors from "../../buttons/colors/CloseColors";
+import TextColors from "../../buttons/colors/TextColors";
 import { useThemeContext } from "../../ThemeProvider";
 import { Language } from "../../themes/ThemeLanguage";
 import { IconL } from "../../utilities/Icon";
@@ -24,8 +24,8 @@ const StyledLanguageForm = styled.div`
 const StyledDropdown = styled.div<IStyledProps>`
     position: relative;
     border-radius: ${props => props.borderRadius};
-    color: ${CloseColors.Default.txt};
-    background-color: ${CloseColors.Default.bg};
+    color: ${TextColors.Default.txt};
+    background-color: ${TextColors.Default.bg};
     font-size: 20px;
     line-height: 20px;
     padding: 17px 0 15px 16px;
@@ -40,11 +40,11 @@ const StyledDropdown = styled.div<IStyledProps>`
     user-select: none;
 
     :hover {
-        background-color: ${CloseColors.Hover.bg};
+        background-color: ${TextColors.Hover.bg};
     }
 
     :active {
-        background-color: ${CloseColors.Active.bg};
+        background-color: ${TextColors.Active.bg};
     }
 
     > div:nth-child(2) {
