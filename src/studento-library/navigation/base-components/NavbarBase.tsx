@@ -18,7 +18,7 @@ interface IStyleProps {
 const StyledNavbarBase = styled.nav`
     position: fixed;
     top: 0;
-    width: min(100vw, 1800px);
+    width: min(100vw, 1900px);
     margin: 0 32px;
     z-index: 5;
     height: 74px;

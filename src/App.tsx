@@ -14,6 +14,7 @@ import LanguageForm from './studento-library/forms/components/LanguageForm';
 import NavbarBase from './studento-library/navigation/base-components/NavbarBase';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import StudentNavbar from './studento-library/navigation/components/StudentNavbar';
+import TeacherNavbar from './studento-library/navigation/components/TeacherNavbar';
 
 const StyledApp = styled.div`
   position: static;
@@ -45,9 +46,9 @@ function App() {
   const userStatus = {
     username: "Leonhard Euler",
     school: "University of Venice",
-    logoutUrl: "/logout",
-    profileUrl: "/profile",
-    dashboardUrl: "/dashboard",
+    logoutUrl: "/Logout",
+    profileUrl: "/Profile",
+    dashboardUrl: "/",
   }
 
   const featureTiles =  {
@@ -73,7 +74,7 @@ function App() {
           <StyledApp>
             <Router>
               <ThemeProvider>
-                <StudentNavbar userStatus={userStatus} />
+                <TeacherNavbar userStatus={userStatus} />
                 <div style={{display:"flex", flexFlow:"row wrap", gap:"0px", maxWidth: "500px", backgroundColor: "#F7F6F5", marginTop: "100px"}}>
 
                   <PopupUpload title={"Upload File"} fileHandler={() => console.log("uploading")} maxSizeMB={5}/>

@@ -61,7 +61,7 @@ const StyledList = styled.div<StyleProps>`
 const StyledTile = styled.div<StyleProps>`
     display: flex;
     align-items: center;
-    width: 460px;
+    width: 480px;
     height: 98px;
     border-radius: ${props => props.borderRadius};
     padding: 24px;

@@ -44,22 +44,32 @@ export interface ILanguageSet {
     },
     Navigation: {
         absences: string;
+        class: string;
+        diplomas: string;
+        events: string;
+        find: string;
         grades: string;
         home: string;
+        homework: string;
+        schoolTrips: string;
+        subjects: string;
+        substitutions: string;
         timetable: string;
 
         Student: {
-            class: string;
             classDesc: string;
-            diplomas: string;
             diplomasDesc: string;
-            events: string;
             eventsDesc: string;
-            homework: string;
             homeworkDesc: string;
-            schoolTrips: string;
             schoolTripsDesc: string;
-            subjects: string;
+            subjectsDesc: string;
+        },
+        Teacher: {
+            eventsDesc: string;
+            findDesc: string;
+            diplomasDesc: string;
+            homeworkDesc: string;
+            schoolTripsDesc: string;
             subjectsDesc: string;
         }
     },
@@ -121,23 +131,33 @@ const EnSet:ILanguageSet = {
     },
     Navigation: {
         absences: "Absences",
+        class: "Class",
+        diplomas: "Diplomas",
+        events: "Events",
+        find: "Find",
         grades: "Grades",
         home: "Home",
+        homework: "Homework",
+        schoolTrips: "School Trips",
+        subjects: "Subjects",
+        substitutions: "Substitutions",
         timetable: "Timetable",
 
         Student: {
-            class: "Class",
             classDesc: "Class information and actions to take",
-            diplomas: "Diplomas",
             diplomasDesc: "Your diplomas and current prediction",
-            events: "Events",
             eventsDesc: "Explore upcoming and past events",
-            homework: "Homework",
             homeworkDesc: "Manage your homework",
-            schoolTrips: "School Trips",
             schoolTripsDesc: "Explore upcoming and past school trips",
-            subjects: "Subjects",
             subjectsDesc: "Explore your subjects and statistics",
+        },
+        Teacher: {
+            eventsDesc: "View and manage all your events",
+            findDesc: "Find a person or anything about your school",
+            diplomasDesc: "Prepare and print your class' diplomas",
+            homeworkDesc: "Create and manage student assignments",
+            schoolTripsDesc: "View and manage all your school trips",
+            subjectsDesc: "View and manage all your subjects",
         }
     },
     PersonalDetails: {
@@ -199,23 +219,33 @@ const CzSet:ILanguageSet = {
     },
     Navigation: {
         absences: "Absence",
+        class: "Třída",
+        diplomas: "Vysvědčení",
+        events: "Události",
+        find: "Najít",
         grades: "Známky",
         home: "Domov",
+        homework: "Úkoly",
+        schoolTrips: "Školní Výlety",
+        subjects: "Předměty",
+        substitutions: "Suplování",
         timetable: "Rozvrh",
 
         Student: {
-            class: "Třída",
             classDesc: "Informace o třídě a požadované akce",
-            diplomas: "Vysvědčení",
             diplomasDesc: "Tvá vysvědčení a budoucí predikce",
-            events: "Události",
             eventsDesc: "Nadcházející a minulé událost",
-            homework: "Úkoly",
             homeworkDesc: "Zobrazení a odevzdávání tvých úkolů",
-            schoolTrips: "Školní Výlety",
             schoolTripsDesc: "Nadcházející a minulé školní výlety",
-            subjects: "Předměty",
             subjectsDesc: "Tvé předměty a užitečné statistiky",
+        },
+        Teacher: {
+            eventsDesc: "Přehled tvých nadcházejících událostí",
+            findDesc: "Najdi osobu nebo cokoliv o tvé škole",
+            diplomasDesc: "Příprava a tisk vysvědčení pro tvou třídu",
+            homeworkDesc: "Vytváření a sledování zadaných úkolů",
+            schoolTripsDesc: "Správa a přehled tvých školních výletů",
+            subjectsDesc: "Správa a přehled tvých předmětů",
         }
     },
     PersonalDetails: {
