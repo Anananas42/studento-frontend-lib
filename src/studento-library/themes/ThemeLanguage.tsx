@@ -92,6 +92,7 @@ export interface ILanguageSet {
             homeworkDesc: string;
             schoolTripsDesc: string;
             subjectsDesc: string;
+            parentMeetingsDesc: string;
         },
         Principal: {
             admissionsDesc: string;
@@ -209,6 +210,7 @@ const EnSet:ILanguageSet = {
             homeworkDesc: "Create and manage student assignments",
             schoolTripsDesc: "View and manage all your school trips",
             subjectsDesc: "View and manage all your subjects",
+            parentMeetingsDesc: "View and manage all your parent meetings",
         },
         Principal: {
             admissionsDesc: "Automate communication and transfer new students",
@@ -327,6 +329,7 @@ const CzSet:ILanguageSet = {
             homeworkDesc: "Vytváření a sledování zadaných úkolů",
             schoolTripsDesc: "Správa a přehled tvých školních výletů",
             subjectsDesc: "Správa a přehled tvých předmětů",
+            parentMeetingsDesc: "Správa a přehled tvých třídních schůzek",
         },
         Principal: {
             admissionsDesc: "Hromadná komunikace a přijímání nových studentů",

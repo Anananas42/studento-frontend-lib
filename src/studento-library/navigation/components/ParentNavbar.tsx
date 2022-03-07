@@ -16,7 +16,7 @@ const ParentNavbar:FC<IParentNavbarProps> = (props) => {
 
     const featureTiles = {
         subjects: {title: translations.subjects, description: descTranslations.subjectsDesc, url: "Subjects", icon: "school"},
-        timetable: {title: languageMap.Navigation.timetable, description: descTranslations.timetableDesc, url: "Timetable", icon: "calendar_month"},
+        timetable: {title: translations.timetable, description: descTranslations.timetableDesc, url: "Timetable", icon: "calendar_month"},
         diplomas: {title: translations.diplomas, description: descTranslations.diplomasDesc, url: "Diplomas", icon: "workspace_premium"},
         homework: {title: translations.homework, description: descTranslations.homeworkDesc, url: "Homework", icon: "assignment"},
         events: {title: translations.events, description: descTranslations.eventsDesc, url: "Events", icon: "celebration"},
@@ -24,10 +24,10 @@ const ParentNavbar:FC<IParentNavbarProps> = (props) => {
     };
 
     const navButtons = {
-        home: {title: languageMap.Navigation.home, icon: "home", url: "/"},
-        parentMeetings: {title: languageMap.Navigation.parentMeetings, icon: "calendar_month", url: "ParentMeetings"},
-        grades: {title: languageMap.Navigation.grades, icon: "star_rate", url: "Grades"},
-        absences: {title: languageMap.Navigation.absences, icon: "event_busy", url: "Absences"},
+        home: {title: translations.home, icon: "home", url: "/"},
+        parentMeetings: {title: translations.parentMeetings, icon: "meeting_room", url: "ParentMeetings"},
+        grades: {title: translations.grades, icon: "star_rate", url: "Grades"},
+        absences: {title: translations.absences, icon: "event_busy", url: "Absences"},
         class: {title: translations.class, url: "Class", icon: "groups"},
     };
 

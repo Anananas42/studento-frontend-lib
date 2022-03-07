@@ -66,7 +66,7 @@ function App() {
           <StyledApp>
             <Router>
               <ThemeProvider>
-                <ParentNavbar userStatus={userStatus} />
+                <TeacherNavbar userStatus={userStatus} />
                 <div style={{display:"flex", flexFlow:"row wrap", gap:"0px", maxWidth: "500px", backgroundColor: "#F7F6F5", marginTop: "100px"}}>
 
                   <PopupUpload title={"Upload File"} fileHandler={() => console.log("uploading")} maxSizeMB={5}/>
