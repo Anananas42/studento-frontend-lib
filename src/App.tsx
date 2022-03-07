@@ -12,6 +12,7 @@ import ToggleRow from './studento-library/forms/base-components/ToggleRow';
 import RadioButtonFormBase from './studento-library/forms/base-components/RadioButtonFormBase';
 import LanguageForm from './studento-library/forms/components/LanguageForm';
 import NavbarBase from './studento-library/navigation/base-components/NavbarBase';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 const StyledApp = styled.div`
   position: static;
@@ -43,9 +44,9 @@ function App() {
   const userStatus = {
     username: "Leonhard Euler",
     school: "University of Venice",
-    logoutUrl: "",
-    profileUrl: "",
-    dashboardUrl: "",
+    logoutUrl: "/logout",
+    profileUrl: "/profile",
+    dashboardUrl: "/dashboard",
   }
 
   const featureTiles =  {
@@ -54,7 +55,7 @@ function App() {
   };
 
   const navButtons = {
-    home: {title: "", icon: "home", url: ""},
+    home: {title: "Home", icon: "home", url: ""},
     find: {title: "Find", icon: "search", url: ""},
     create: {title: "Create", icon: "add", url: ""}
   }
@@ -69,25 +70,27 @@ function App() {
         </head>
         <body>
           <StyledApp>
-            <ThemeProvider>
-              <NavbarBase userStatus={false ? undefined : userStatus} featureTiles={featureTiles} navButtons={navButtons}/>
-              <div style={{display:"flex", flexFlow:"row wrap", gap:"0px", maxWidth: "500px", backgroundColor: "#F7F6F5", marginTop: "100px"}}>
-                <PopupUpload title={"Upload File"} fileHandler={() => console.log("uploading")} maxSizeMB={5}/>
-                <DateForm value={date} setValue={setDate} min={"2022-03-04"} />
-                <LanguageForm />
-                <SingleChoiceFormBase value={fruit} setValue={setFruit} label={"Single Choice"} choices={{first: "Banana", second: "Apple", third: "Pineapple"}}/>
-                <DropdownSearchFormBase label={"Dropdown with groups and search"} value={selection} setValue={setSelection} optionGroups={{Group1: {title: "First group", options: {a: "Banana", b: "Pineapple"}}, Group2: {title: "Second group", options: {c: "banan", d: "ananas"}}}}/>
-                <MultipleChoiceFormBase value={selections} setValue={setSelections} label={"Multiple choice"} choices={{first: "Banana", second: "Apple", third: "Pineapple"}}/>
-                <TextAreaFormBase value={fruit} setValue={setFruit} label={"Text area"} placeholder={""} defaultNote={"Don't break me"} />
-                <TextFormBase value={fruit} setValue={setFruit} label={"Text form with print icon"} placeholder={""} errorMessage={""} />
-                <TimeForm value={time} setValue={setTime} isHorizontal={true} errorMessage={""}/>
-                <WeekDayForm value={weekday} setValue={setWeekday} isWorkingWeekOnly={true} />
-                <UsernameForm value={password} setValue={setPassword} />
-                <PasswordForm value={password} setValue={setPassword} />
-                <ToggleRow label={"Dark mode"} value={isToggled} setValue={setIsToggled} height={"80px"}/>
-                <RadioButtonFormBase value={radio} setValue={setRadio} label={"Radio buttons"} options={{first: "Pineapple", second: "Banana", third: "Third time's the charm"}}/>
-              </div>
-            </ThemeProvider>
+            <Router>
+              <ThemeProvider>
+                <NavbarBase userStatus={false ? undefined : userStatus} featureTiles={featureTiles} navButtons={navButtons}/>
+                <div style={{display:"flex", flexFlow:"row wrap", gap:"0px", maxWidth: "500px", backgroundColor: "#F7F6F5", marginTop: "100px"}}>
+                  <PopupUpload title={"Upload File"} fileHandler={() => console.log("uploading")} maxSizeMB={5}/>
+                  <DateForm value={date} setValue={setDate} min={"2022-03-04"} />
+                  <LanguageForm />
+                  <SingleChoiceFormBase value={fruit} setValue={setFruit} label={"Single Choice"} choices={{first: "Banana", second: "Apple", third: "Pineapple"}}/>
+                  <DropdownSearchFormBase label={"Dropdown with groups and search"} value={selection} setValue={setSelection} optionGroups={{Group1: {title: "First group", options: {a: "Banana", b: "Pineapple"}}, Group2: {title: "Second group", options: {c: "banan", d: "ananas"}}}}/>
+                  <MultipleChoiceFormBase value={selections} setValue={setSelections} label={"Multiple choice"} choices={{first: "Banana", second: "Apple", third: "Pineapple"}}/>
+                  <TextAreaFormBase value={fruit} setValue={setFruit} label={"Text area"} placeholder={""} defaultNote={"Don't break me"} />
+                  <TextFormBase value={fruit} setValue={setFruit} label={"Text form with print icon"} placeholder={""} errorMessage={""} />
+                  <TimeForm value={time} setValue={setTime} isHorizontal={true} errorMessage={""}/>
+                  <WeekDayForm value={weekday} setValue={setWeekday} isWorkingWeekOnly={true} />
+                  <UsernameForm value={password} setValue={setPassword} />
+                  <PasswordForm value={password} setValue={setPassword} />
+                  <ToggleRow label={"Dark mode"} value={isToggled} setValue={setIsToggled} height={"80px"}/>
+                  <RadioButtonFormBase value={radio} setValue={setRadio} label={"Radio buttons"} options={{first: "Pineapple", second: "Banana", third: "Third time's the charm"}}/>
+                </div>
+              </ThemeProvider>
+            </Router>
           </StyledApp>
         </body>
       </>
