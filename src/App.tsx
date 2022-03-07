@@ -13,6 +13,7 @@ import RadioButtonFormBase from './studento-library/forms/base-components/RadioB
 import LanguageForm from './studento-library/forms/components/LanguageForm';
 import NavbarBase from './studento-library/navigation/base-components/NavbarBase';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import StudentNavbar from './studento-library/navigation/components/StudentNavbar';
 
 const StyledApp = styled.div`
   position: static;
@@ -72,8 +73,9 @@ function App() {
           <StyledApp>
             <Router>
               <ThemeProvider>
-                <NavbarBase userStatus={false ? undefined : userStatus} featureTiles={featureTiles} navButtons={navButtons}/>
+                <StudentNavbar userStatus={userStatus} />
                 <div style={{display:"flex", flexFlow:"row wrap", gap:"0px", maxWidth: "500px", backgroundColor: "#F7F6F5", marginTop: "100px"}}>
+
                   <PopupUpload title={"Upload File"} fileHandler={() => console.log("uploading")} maxSizeMB={5}/>
                   <DateForm value={date} setValue={setDate} min={"2022-03-04"} />
                   <LanguageForm />

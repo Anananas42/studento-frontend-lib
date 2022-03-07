@@ -85,13 +85,13 @@ interface INavButtons {
     }
 }
 
-interface NavbarProps {
+interface INavbarProps {
     userStatus?: IUserStatus;
     featureTiles?: IFeatureTiles;
     navButtons: INavButtons;
 }
 
-const NavbarBase:FC<NavbarProps> = (props) => {
+const NavbarBase:FC<INavbarProps> = (props) => {
     const { userStatus, featureTiles, navButtons } = props;
     const { colors, borderRadius } = useThemeContext();
 
@@ -102,8 +102,8 @@ const NavbarBase:FC<NavbarProps> = (props) => {
                 {featureTiles && <NavFeatureTiles featureTiles={featureTiles}/>}
                 {Object.values(navButtons).map(btn => {
                     return (
-                        <StyledLink to={btn.url}>
-                            <StyledMiddleButton fill={colors.fill} borderRadius={borderRadius} key={btn.title}>
+                        <StyledLink to={btn.url} key={btn.title} >
+                            <StyledMiddleButton fill={colors.fill} borderRadius={borderRadius}>
                                 {btn.icon && <Icon fontSize={"27px"} width={'27px'} height={'27px'}>{btn.icon}</Icon>}
                                 <span>{btn.title}</span>
                             </StyledMiddleButton>

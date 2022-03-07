@@ -132,8 +132,8 @@ const NavFeatureTiles:FC<IProps> = (props) => {
                 {Object.keys(featureTiles).map(key => {
                     const tile = featureTiles[key];
                     return (
-                        <StyledLink to={tile.url}>
-                            <StyledTile key={key} {...styleProps}>
+                        <StyledLink to={tile.url} key={key}>
+                            <StyledTile {...styleProps}>
                                 <Icon fontSize={"32px"} width={'32px'} height={'32px'}>{tile.icon}</Icon>
                                 <StyledInformation {...styleProps}>
                                     <div>{tile.title}</div>

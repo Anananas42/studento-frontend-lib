@@ -16,6 +16,11 @@ const StyledManager = styled.div`
     width: fit-content;
     height: fit-content;
     transition: translate 1s ease-in-out;
+    pointer-events: none;
+
+    * {
+        pointer-events: all;
+    }
 `;
 
 export interface INotification {
