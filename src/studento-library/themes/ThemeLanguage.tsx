@@ -54,6 +54,7 @@ export interface ILanguageSet {
         grades: string;
         home: string;
         homework: string;
+        parentMeetings: string;
         schoolTrips: string;
         subjects: string;
         substitutions: string;
@@ -69,7 +70,12 @@ export interface ILanguageSet {
             timetableManagementDesc: string;
         },
         Parent: {
-
+            diplomasDesc: string;
+            eventsDesc: string;
+            homeworkDesc: string;
+            schoolTripsDesc: string;
+            subjectsDesc: string;
+            timetableDesc: string;
         },
         Student: {
             classDesc: string;
@@ -165,6 +171,7 @@ const EnSet:ILanguageSet = {
         grades: "Grades",
         home: "Home",
         homework: "Homework",
+        parentMeetings: "Parent Meetings",
         schoolTrips: "School Trips",
         subjects: "Subjects",
         substitutions: "Substitutions",
@@ -180,7 +187,12 @@ const EnSet:ILanguageSet = {
             timetableManagementDesc: "Create and manage timetables",
         },
         Parent: {
-
+            diplomasDesc: "Diplomas and current prediction",
+            eventsDesc: "Upcoming and past events",
+            homeworkDesc: "Student's homework",
+            schoolTripsDesc: "Upcoming and past school trips",
+            subjectsDesc: "Subjects and statistics",
+            timetableDesc: "Student's timetable",
         },
         Student: {
             classDesc: "Class information and actions to take",
@@ -277,6 +289,7 @@ const CzSet:ILanguageSet = {
         grades: "Známky",
         home: "Domov",
         homework: "Úkoly",
+        parentMeetings: "Třídní Schůzky",
         schoolTrips: "Školní Výlety",
         subjects: "Předměty",
         substitutions: "Suplování",
@@ -292,15 +305,20 @@ const CzSet:ILanguageSet = {
             timetableManagementDesc: "Vytváření a správa rozvrhů",
         },
         Parent: {
-
+            diplomasDesc: "Vysvědčení a budoucí predikce",
+            eventsDesc: "Nadcházející a minulé události",
+            homeworkDesc: "Nadcházející a minulé úkoly",
+            schoolTripsDesc: "Nadcházející a minulé školní výlety",
+            subjectsDesc: "Předměty a souhrnné statistiky",
+            timetableDesc: "Studentův rozvrh",
         },
         Student: {
             classDesc: "Informace o třídě a požadované akce",
             diplomasDesc: "Tvá vysvědčení a budoucí predikce",
-            eventsDesc: "Nadcházející a minulé událost",
+            eventsDesc: "Nadcházející a minulé události",
             homeworkDesc: "Zobrazení a odevzdávání tvých úkolů",
             schoolTripsDesc: "Nadcházející a minulé školní výlety",
-            subjectsDesc: "Tvé předměty a užitečné statistiky",
+            subjectsDesc: "Tvé předměty a souhrnné statistiky",
         },
         Teacher: {
             eventsDesc: "Přehled tvých nadcházejících událostí",

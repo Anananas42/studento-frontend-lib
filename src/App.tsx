@@ -17,6 +17,7 @@ import StudentNavbar from './studento-library/navigation/components/StudentNavba
 import TeacherNavbar from './studento-library/navigation/components/TeacherNavbar';
 import AdminNavbar from './studento-library/navigation/components/AdminNavbar';
 import PrincipalNavbar from './studento-library/navigation/components/PrincipalNavbar';
+import ParentNavbar from './studento-library/navigation/components/ParentNavbar';
 
 const StyledApp = styled.div`
   position: static;
@@ -65,7 +66,7 @@ function App() {
           <StyledApp>
             <Router>
               <ThemeProvider>
-                <PrincipalNavbar userStatus={userStatus} />
+                <ParentNavbar userStatus={userStatus} />
                 <div style={{display:"flex", flexFlow:"row wrap", gap:"0px", maxWidth: "500px", backgroundColor: "#F7F6F5", marginTop: "100px"}}>
 
                   <PopupUpload title={"Upload File"} fileHandler={() => console.log("uploading")} maxSizeMB={5}/>
