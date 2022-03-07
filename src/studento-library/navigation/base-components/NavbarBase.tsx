@@ -19,7 +19,7 @@ const StyledNavbarBase = styled.nav`
     position: fixed;
     top: 0;
     width: min(100vw, 1800px);
-    margin-left: 64px;
+    margin: 0 32px;
     z-index: 5;
     height: 74px;
     font-size: 20px;
@@ -34,13 +34,13 @@ const StyledLeftNavbar = styled.div`
     align-items: center;
     justify-content: center;
     gap: 16px;
-    width: 600px;
+    width: fit-content;
     height: 100%;
 `;
 
 const StyledRightNavbar = styled.div`
     display: flex;
-    width: 600px;
+    width: fit-content;
 
     > div:last-child {
         padding-left: 16px;
