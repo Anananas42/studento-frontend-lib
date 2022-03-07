@@ -3,6 +3,7 @@ import styled from "styled-components";
 import TextColors from "../../buttons/colors/TextColors";
 import { useThemeContext } from "../../ThemeProvider";
 import { Icon } from "../../utilities/Icon";
+import StyledLink from "../../utilities/StyledLink";
 
 interface StyleProps {
     fill: string;
@@ -39,10 +40,7 @@ const StyledDropdownHighlight = styled.div<StyleProps>`
         background-color: ${TextColors.Hover.bg};
     }
 
-    :active {
-        background-color: ${TextColors.Active.bg};
-    }
-`
+`;
 
 const StyledList = styled.div<StyleProps>`
     position: absolute;
@@ -134,14 +132,16 @@ const NavFeatureTiles:FC<IProps> = (props) => {
                 {Object.keys(featureTiles).map(key => {
                     const tile = featureTiles[key];
                     return (
-                        <StyledTile key={key} {...styleProps}>
-                            <Icon fontSize={"32px"} width={'32px'} height={'32px'}>{tile.icon}</Icon>
-                            <StyledInformation {...styleProps}>
-                                <div>{tile.title}</div>
-                                <div>{tile.description}</div>
-                            </StyledInformation>
-                            <Icon fontSize={"32px"} width={'32px'} height={'32px'}>arrow_forward</Icon>
-                        </StyledTile>
+                        <StyledLink to={tile.url}>
+                            <StyledTile key={key} {...styleProps}>
+                                <Icon fontSize={"32px"} width={'32px'} height={'32px'}>{tile.icon}</Icon>
+                                <StyledInformation {...styleProps}>
+                                    <div>{tile.title}</div>
+                                    <div>{tile.description}</div>
+                                </StyledInformation>
+                                <Icon fontSize={"32px"} width={'32px'} height={'32px'}>arrow_forward</Icon>
+                            </StyledTile>
+                        </StyledLink>
                     )
                 })}
             </StyledList>
