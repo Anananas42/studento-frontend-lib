@@ -24,7 +24,9 @@ const StyledDropdown = styled.div<StyleProps>`
     cursor: pointer;
 
     :hover > :last-child {
-        display: block;
+        display: grid;
+        grid-template-rows: repeat(3, 1fr);
+        grid-auto-flow: column;
     }
 `;
 
@@ -48,16 +50,19 @@ const StyledList = styled.div<StyleProps>`
     top: 100%;
     left: 0;
     background-color: #fff;
-    width: 500px;
+    width: fit-content;
     height: fit-content;
     padding: 16px;
     border-radius: 0 16px 16px 16px;
     box-shadow: 2px 2px 16px -2px ${props => props.sectionShadow};
+    cursor: default;
 `;
 
 const StyledTile = styled.div<StyleProps>`
     display: flex;
     align-items: center;
+    width: 460px;
+    height: 98px;
     border-radius: ${props => props.borderRadius};
     padding: 24px;
 

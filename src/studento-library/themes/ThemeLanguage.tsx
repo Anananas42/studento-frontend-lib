@@ -42,6 +42,27 @@ export interface ILanguageSet {
         email: string;
         phoneNumber: string;
     },
+    Navigation: {
+        absences: string;
+        grades: string;
+        home: string;
+        timetable: string;
+
+        Student: {
+            class: string;
+            classDesc: string;
+            diplomas: string;
+            diplomasDesc: string;
+            events: string;
+            eventsDesc: string;
+            homework: string;
+            homeworkDesc: string;
+            schoolTrips: string;
+            schoolTripsDesc: string;
+            subjects: string;
+            subjectsDesc: string;
+        }
+    },
     PersonalDetails: {
         index: string;
         firstName: string;
@@ -97,6 +118,27 @@ const EnSet:ILanguageSet = {
         index: "Contact",
         email: "Email",
         phoneNumber: "Phone number",
+    },
+    Navigation: {
+        absences: "Absences",
+        grades: "Grades",
+        home: "Home",
+        timetable: "Timetable",
+
+        Student: {
+            class: "Class",
+            classDesc: "Class information and actions to take",
+            diplomas: "Diplomas",
+            diplomasDesc: "Your diplomas and current prediction",
+            events: "Events",
+            eventsDesc: "Explore upcoming and past events",
+            homework: "Homework",
+            homeworkDesc: "Manage your homework",
+            schoolTrips: "School Trips",
+            schoolTripsDesc: "Explore upcoming and past school trips",
+            subjects: "Subjects",
+            subjectsDesc: "Explore your subjects and statistics",
+        }
     },
     PersonalDetails: {
         index: "Personal details",
@@ -154,6 +196,27 @@ const CzSet:ILanguageSet = {
         index: "Kontakt",
         email: "Email",
         phoneNumber: "Telefonní číslo",
+    },
+    Navigation: {
+        absences: "Absence",
+        grades: "Známky",
+        home: "Domov",
+        timetable: "Rozvrh",
+
+        Student: {
+            class: "Třída",
+            classDesc: "Informace o třídě a požadované akce",
+            diplomas: "Vysvědčení",
+            diplomasDesc: "Tvá vysvědčení a budoucí predikce",
+            events: "Události",
+            eventsDesc: "Nadcházející a minulé událost",
+            homework: "Úkoly",
+            homeworkDesc: "Zobrazení a odevzdávání tvých úkolů",
+            schoolTrips: "Školní Výlety",
+            schoolTripsDesc: "Nadcházející a minulé školní výlety",
+            subjects: "Předměty",
+            subjectsDesc: "Tvé předměty a užitečné statistiky",
+        }
     },
     PersonalDetails: {
         index: "Osobní údaje",
