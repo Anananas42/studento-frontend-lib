@@ -48,6 +48,7 @@ export interface ILanguageSet {
         class: string;
         create: string;
         diplomas: string;
+        employees: string;
         events: string;
         find: string;
         grades: string;
@@ -87,7 +88,13 @@ export interface ILanguageSet {
             subjectsDesc: string;
         },
         Principal: {
-
+            admissionsDesc: string;
+            diplomasDesc: string;
+            employeesDesc: string;
+            eventsDesc: string;
+            schoolTripsDesc: string;
+            substitutionDesc: string;
+            timetableManagementDesc: string;
         }
     },
     PersonalDetails: {
@@ -152,6 +159,7 @@ const EnSet:ILanguageSet = {
         class: "Class",
         create: "Create",
         diplomas: "Diplomas",
+        employees: "Employees",
         events: "Events",
         find: "Find",
         grades: "Grades",
@@ -191,7 +199,13 @@ const EnSet:ILanguageSet = {
             subjectsDesc: "View and manage all your subjects",
         },
         Principal: {
-
+            admissionsDesc: "Automate communication and transfer new students",
+            diplomasDesc: "Print and edit diplomas",
+            employeesDesc: "View and manage school employees",
+            eventsDesc: "Create and manage school events",
+            schoolTripsDesc: "Create and manage school trips",
+            substitutionDesc: "Create and manage substitutions",
+            timetableManagementDesc: "Create and manage timetables",
         }
     },
     PersonalDetails: {
@@ -257,6 +271,7 @@ const CzSet:ILanguageSet = {
         class: "Třída",
         create: "Přidat",
         diplomas: "Vysvědčení",
+        employees: "Zaměstnanci",
         events: "Události",
         find: "Najít",
         grades: "Známky",
@@ -296,7 +311,13 @@ const CzSet:ILanguageSet = {
             subjectsDesc: "Správa a přehled tvých předmětů",
         },
         Principal: {
-
+            admissionsDesc: "Hromadná komunikace a přijímání nových studentů",
+            diplomasDesc: "Úpravy a tisk vysvědčení",
+            eventsDesc: "Vytváření a správa školních událostí",
+            employeesDesc: "Přehled a správa školních zaměstnanců",
+            schoolTripsDesc: "Vytváření a správa školních výletů",
+            substitutionDesc: "Vytváření a správa suplování",
+            timetableManagementDesc: "Vytváření a správa rozvrhů",
         }
     },
     PersonalDetails: {

@@ -16,6 +16,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import StudentNavbar from './studento-library/navigation/components/StudentNavbar';
 import TeacherNavbar from './studento-library/navigation/components/TeacherNavbar';
 import AdminNavbar from './studento-library/navigation/components/AdminNavbar';
+import PrincipalNavbar from './studento-library/navigation/components/PrincipalNavbar';
 
 const StyledApp = styled.div`
   position: static;
@@ -52,17 +53,6 @@ function App() {
     dashboardUrl: "/",
   }
 
-  const featureTiles =  {
-    first: {title: "First feature", description: "Best feature ever", url: "first", icon: "school"},
-    second: {title: "Second feature", description: "Second best feature ever", url: "second", icon: "calendar_month"}
-  };
-
-  const navButtons = {
-    home: {title: "Home", icon: "home", url: "home"},
-    find: {title: "Find", icon: "search", url: "search"},
-    create: {title: "Create", icon: "add", url: "add"}
-  }
-
   return (
       <>
         <head>
@@ -75,7 +65,7 @@ function App() {
           <StyledApp>
             <Router>
               <ThemeProvider>
-                <AdminNavbar userStatus={userStatus} />
+                <PrincipalNavbar userStatus={userStatus} />
                 <div style={{display:"flex", flexFlow:"row wrap", gap:"0px", maxWidth: "500px", backgroundColor: "#F7F6F5", marginTop: "100px"}}>
 
                   <PopupUpload title={"Upload File"} fileHandler={() => console.log("uploading")} maxSizeMB={5}/>
