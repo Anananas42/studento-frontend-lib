@@ -42,10 +42,6 @@ const StyledDropdown = styled.div<IStyledProps>`
         background-color: ${TextColors.Hover.bg};
     }
 
-    :active {
-        background-color: ${TextColors.Active.bg};
-    }
-
     > div:nth-child(2) {
         padding-bottom: 1px;
     }
