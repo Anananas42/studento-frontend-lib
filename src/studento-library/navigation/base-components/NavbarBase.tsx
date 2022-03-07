@@ -4,6 +4,7 @@ import TextColors from "../../buttons/colors/TextColors";
 import LanguageForm from "../../forms/components/LanguageForm";
 import { useThemeContext } from "../../ThemeProvider";
 import { Icon } from "../../utilities/Icon";
+import StyledLink from "../../utilities/StyledLink";
 import NavFeatureTiles, { IFeatureTiles } from "./NavFeatureTiles";
 import NavLoginBtn from "./NavLoginBtn";
 import NavLogoBtn from "./NavLogoBtn";
@@ -101,10 +102,12 @@ const NavbarBase:FC<NavbarProps> = (props) => {
                 {featureTiles && <NavFeatureTiles featureTiles={featureTiles}/>}
                 {Object.values(navButtons).map(btn => {
                     return (
-                        <StyledMiddleButton fill={colors.fill} borderRadius={borderRadius} key={btn.title}>
-                            {btn.icon && <Icon fontSize={"27px"} width={'27px'} height={'27px'}>{btn.icon}</Icon>}
-                            <span>{btn.title}</span>
-                        </StyledMiddleButton>
+                        <StyledLink to={btn.url}>
+                            <StyledMiddleButton fill={colors.fill} borderRadius={borderRadius} key={btn.title}>
+                                {btn.icon && <Icon fontSize={"27px"} width={'27px'} height={'27px'}>{btn.icon}</Icon>}
+                                <span>{btn.title}</span>
+                            </StyledMiddleButton>
+                        </StyledLink>
                     )
                 })}
             </StyledLeftNavbar>

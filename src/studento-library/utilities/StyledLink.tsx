@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 
-const StyledLink = styled(Link)<any>`
+const StyledLink = styled(Link)`
     text-decoration: none;
     color: inherit;
 
@@ -12,4 +12,4 @@ const StyledLink = styled(Link)<any>`
     }
 `;
 
-export default (props:any) => <StyledLink {...props} />;
+export default StyledLink;

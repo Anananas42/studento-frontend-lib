@@ -50,14 +50,14 @@ function App() {
   }
 
   const featureTiles =  {
-    first: {title: "First feature", description: "Best feature ever", url: "", icon: "school"},
-    second: {title: "Second feature", description: "Second best feature ever", url: "", icon: "calendar_month"}
+    first: {title: "First feature", description: "Best feature ever", url: "first", icon: "school"},
+    second: {title: "Second feature", description: "Second best feature ever", url: "second", icon: "calendar_month"}
   };
 
   const navButtons = {
-    home: {title: "Home", icon: "home", url: ""},
-    find: {title: "Find", icon: "search", url: ""},
-    create: {title: "Create", icon: "add", url: ""}
+    home: {title: "Home", icon: "home", url: "home"},
+    find: {title: "Find", icon: "search", url: "search"},
+    create: {title: "Create", icon: "add", url: "add"}
   }
 
   return (
