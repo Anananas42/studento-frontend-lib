@@ -44,7 +44,9 @@ export interface ILanguageSet {
     },
     Navigation: {
         absences: string;
+        admissions: string;
         class: string;
+        create: string;
         diplomas: string;
         events: string;
         find: string;
@@ -55,7 +57,19 @@ export interface ILanguageSet {
         subjects: string;
         substitutions: string;
         timetable: string;
+        timetableManagement: string;
 
+        Admin: {
+            admissionsDesc: string;
+            diplomasDesc: string;
+            eventsDesc: string;
+            schoolTripsDesc: string;
+            substitutionDesc: string;
+            timetableManagementDesc: string;
+        },
+        Parent: {
+
+        },
         Student: {
             classDesc: string;
             diplomasDesc: string;
@@ -71,6 +85,9 @@ export interface ILanguageSet {
             homeworkDesc: string;
             schoolTripsDesc: string;
             subjectsDesc: string;
+        },
+        Principal: {
+
         }
     },
     PersonalDetails: {
@@ -131,7 +148,9 @@ const EnSet:ILanguageSet = {
     },
     Navigation: {
         absences: "Absences",
+        admissions: "Admissions",
         class: "Class",
+        create: "Create",
         diplomas: "Diplomas",
         events: "Events",
         find: "Find",
@@ -142,7 +161,19 @@ const EnSet:ILanguageSet = {
         subjects: "Subjects",
         substitutions: "Substitutions",
         timetable: "Timetable",
+        timetableManagement: "Timetable Management",
 
+        Admin: {
+            admissionsDesc: "Automate communication and transfer new students",
+            diplomasDesc: "Print and edit diplomas",
+            eventsDesc: "Create and manage school events",
+            schoolTripsDesc: "Create and manage school trips",
+            substitutionDesc: "Create and manage substitutions",
+            timetableManagementDesc: "Create and manage timetables",
+        },
+        Parent: {
+
+        },
         Student: {
             classDesc: "Class information and actions to take",
             diplomasDesc: "Your diplomas and current prediction",
@@ -158,6 +189,9 @@ const EnSet:ILanguageSet = {
             homeworkDesc: "Create and manage student assignments",
             schoolTripsDesc: "View and manage all your school trips",
             subjectsDesc: "View and manage all your subjects",
+        },
+        Principal: {
+
         }
     },
     PersonalDetails: {
@@ -219,7 +253,9 @@ const CzSet:ILanguageSet = {
     },
     Navigation: {
         absences: "Absence",
+        admissions: "Přijímací Proces",
         class: "Třída",
+        create: "Přidat",
         diplomas: "Vysvědčení",
         events: "Události",
         find: "Najít",
@@ -230,7 +266,19 @@ const CzSet:ILanguageSet = {
         subjects: "Předměty",
         substitutions: "Suplování",
         timetable: "Rozvrh",
+        timetableManagement: "Správa Rozvrhů",
 
+        Admin: {
+            admissionsDesc: "Hromadná komunikace a přijímání nových studentů",
+            diplomasDesc: "Úpravy a tisk vysvědčení",
+            eventsDesc: "Vytváření a správa školních událostí",
+            schoolTripsDesc: "Vytváření a správa školních výletů",
+            substitutionDesc: "Vytváření a správa suplování",
+            timetableManagementDesc: "Vytváření a správa rozvrhů",
+        },
+        Parent: {
+
+        },
         Student: {
             classDesc: "Informace o třídě a požadované akce",
             diplomasDesc: "Tvá vysvědčení a budoucí predikce",
@@ -246,6 +294,9 @@ const CzSet:ILanguageSet = {
             homeworkDesc: "Vytváření a sledování zadaných úkolů",
             schoolTripsDesc: "Správa a přehled tvých školních výletů",
             subjectsDesc: "Správa a přehled tvých předmětů",
+        },
+        Principal: {
+
         }
     },
     PersonalDetails: {

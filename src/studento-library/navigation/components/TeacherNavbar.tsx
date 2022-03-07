@@ -11,6 +11,7 @@ interface ITeacherNavbarProps {
 const TeacherNavbar:FC<ITeacherNavbarProps> = (props) => {
     const { userStatus, className } = props;
     const { languageMap } = useThemeContext();
+    
     const translations = languageMap.Navigation;
     const descTranslations = languageMap.Navigation.Teacher;
 
@@ -20,7 +21,7 @@ const TeacherNavbar:FC<ITeacherNavbarProps> = (props) => {
         ...(className ? {diplomas: {title: translations.diplomas, description: descTranslations.diplomasDesc, url: "Diplomas", icon: "workspace_premium"}} : {}),
         find: {title: translations.find, description: descTranslations.findDesc, url: "Find", icon: "search"},
         events: {title: translations.events, description: descTranslations.eventsDesc, url: "Events", icon: "celebration"},
-        schoolTrips: {title: translations.schoolTrips, description: descTranslations.schoolTripsDesc, url: "School_trips", icon: "luggage"},
+        schoolTrips: {title: translations.schoolTrips, description: descTranslations.schoolTripsDesc, url: "SchoolTrips", icon: "luggage"},
     };
 
     const navButtons = {
