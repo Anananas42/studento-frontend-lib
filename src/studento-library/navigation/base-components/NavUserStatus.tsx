@@ -4,6 +4,7 @@ import TextColors from "../../buttons/colors/TextColors";
 import { BtnTextL } from "../../buttons/components/BtnText";
 import { useThemeContext } from "../../ThemeProvider";
 import { IconL } from "../../utilities/Icon";
+import StyledLink from "../../utilities/StyledLink";
 
 
 interface IStyledUserStatus {
@@ -67,18 +68,22 @@ interface INavUserStatusProps {
 const NavUserStatus:FC<INavUserStatusProps> = (props) => {
     const { userStatus } = props;
     const { colors, borderRadius, languageMap } = useThemeContext();
-    const styleProps = { bg: colors.primary, fill: colors.fill, borderRadius};
+    const styleProps = { bg: colors.primary, fill: colors.fill, borderRadius };
 
     return (
         <StyledUserStatus {...styleProps}>
-            <StyledUserButton {...styleProps}>
-                <IconL>account_circle</IconL>
-                <StyledUserInfo>
-                    <div>{userStatus.username}</div>
-                    <div>{userStatus.school}</div>
-                </StyledUserInfo>
-            </StyledUserButton>
-            <BtnTextL icon={"logout"} isAfter={false} onClick={() => 0}>{languageMap.Generic.logout}</BtnTextL>
+            <StyledLink to={userStatus.profileUrl}>
+                <StyledUserButton {...styleProps}>
+                    <IconL>account_circle</IconL>
+                    <StyledUserInfo>
+                        <div>{userStatus.username}</div>
+                        <div>{userStatus.school}</div>
+                    </StyledUserInfo>
+                </StyledUserButton>
+            </StyledLink>
+            <StyledLink to={userStatus.logoutUrl}>
+                <BtnTextL icon={"logout"} isAfter={false} onClick={() => 0}>{languageMap.Generic.logout}</BtnTextL>
+            </StyledLink>
         </StyledUserStatus>
     )
 }

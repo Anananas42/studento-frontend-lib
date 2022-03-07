@@ -1,5 +1,6 @@
 import { FC } from "react";
 import styled from "styled-components";
+import TextColors from "../../buttons/colors/TextColors";
 import LanguageForm from "../../forms/components/LanguageForm";
 import { useThemeContext } from "../../ThemeProvider";
 import { Icon } from "../../utilities/Icon";
@@ -10,6 +11,7 @@ import NavUserStatus, { IUserStatus } from "./NavUserStatus";
 
 interface IStyleProps {
     fill: string;
+    borderRadius: string;
 }
 
 const StyledNavbarBase = styled.nav`
@@ -30,6 +32,7 @@ const StyledLeftNavbar = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+    gap: 16px;
     width: 600px;
     height: 100%;
 `;
@@ -46,14 +49,31 @@ const StyledRightNavbar = styled.div`
 
 const StyledMiddleButton = styled.div<IStyleProps>`
     display: flex;
-    gap: 16px;
+    gap: 8px;
     align-items: center;
     color: ${props => props.fill};
+    border-radius: ${props => props.borderRadius};
     user-select: none;
     cursor: pointer;
     padding: 16px;
     font-size: 20px;
     line-height: 20px;
+
+    :hover {
+        background-color: ${TextColors.Hover.bg};
+    }
+
+    :active {
+        background-color: ${TextColors.Active.bg};
+    }
+
+    div {
+        padding-right: 0;
+    }
+
+    > span {
+        padding-top: 3px;
+    }
 `;
 
 interface INavButtons {
@@ -72,18 +92,18 @@ interface NavbarProps {
 
 const NavbarBase:FC<NavbarProps> = (props) => {
     const { userStatus, featureTiles, navButtons } = props;
-    const { colors } = useThemeContext();
+    const { colors, borderRadius } = useThemeContext();
 
     return (
         <StyledNavbarBase>
             <StyledLeftNavbar>
-                <NavLogoBtn />
+                <NavLogoBtn logoUrl={userStatus ? userStatus.dashboardUrl : "/"}/>
                 {featureTiles && <NavFeatureTiles featureTiles={featureTiles}/>}
                 {Object.values(navButtons).map(btn => {
                     return (
-                        <StyledMiddleButton fill={colors.fill} key={btn.title}>
+                        <StyledMiddleButton fill={colors.fill} borderRadius={borderRadius} key={btn.title}>
                             {btn.icon && <Icon fontSize={"27px"} width={'27px'} height={'27px'}>{btn.icon}</Icon>}
-                            {btn.title}
+                            <span>{btn.title}</span>
                         </StyledMiddleButton>
                     )
                 })}
