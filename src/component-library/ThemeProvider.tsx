@@ -5,7 +5,7 @@ import SystemNotificationManager, { INewEntry, INotification } from './managers/
 
 type ThemeMode = "light" | "dark";
 
-interface ThemeContextValue {
+interface IThemeContextValue {
     borderRadius: string;
     mode: ThemeMode;
     setMode: React.Dispatch<SetStateAction<ThemeMode>>;
@@ -17,7 +17,7 @@ interface ThemeContextValue {
     clearSystemNotifications: {(): void};
 }
 
-const ThemeContext = createContext<ThemeContextValue | undefined>(undefined);
+const ThemeContext = createContext<IThemeContextValue | undefined>(undefined);
 
 const borderRadius = "10px";
 
@@ -31,11 +31,11 @@ export const useThemeContext = () => {
     return context;
 }
 
-interface IThemeProps {
+interface IProviderProps {
     chilren?: ReactNode;
 }
 
-const ThemeProvider:FC<IThemeProps> = (props) => {
+const ThemeProvider:FC<IProviderProps> = (props) => {
     const [mode, setMode] = useState<ThemeMode>("light");
     const [language, setLanguage] = useState<Language>("en");
 
