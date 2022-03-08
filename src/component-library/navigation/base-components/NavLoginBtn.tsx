@@ -2,6 +2,7 @@ import { FC } from "react";
 import styled from "styled-components";
 import { BtnTextL } from "../../buttons/components/BtnText";
 import { useThemeContext } from "../../ThemeProvider";
+import StyledLink from "../../utilities/StyledLink";
 
 interface IStyledNavLoginBtn {
     bg: string;
@@ -16,16 +17,18 @@ const StyledNavLoginBtn = styled.div<IStyledNavLoginBtn>`
     color: ${props => props.fill};
     background-color: ${props => props.bg};
     border-radius: 0 0 16px 16px;
-    padding: 0px 16px;
+    padding: 8px 16px;
 `;
 
 const NavLoginBtn:FC = () => {
     const { colors, borderRadius, languageMap } = useThemeContext();
 
     return (
-        <StyledNavLoginBtn bg={colors.primary} fill={colors.fill} borderRadius={borderRadius}>
-            <BtnTextL icon={"login"} isAfter={true} onClick={() => 0}>{languageMap.Generic.login}</BtnTextL>
-        </StyledNavLoginBtn>
+        <StyledLink to={'/login'}>
+            <StyledNavLoginBtn bg={colors.primary} fill={colors.fill} borderRadius={borderRadius}>
+                <BtnTextL icon={"login"} isAfter={true} onClick={() => 0}>{languageMap.Generic.login}</BtnTextL>
+            </StyledNavLoginBtn>
+        </StyledLink>
     )
 }
 
