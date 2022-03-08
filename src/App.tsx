@@ -1,24 +1,33 @@
-import ThemeProvider from './component-library/ThemeProvider';
 import styled from 'styled-components';
-import UserProvider from './component-library/UserProvider';
+import { useThemeContext } from './component-library/ThemeProvider';
 import AllRoutes from './routes';
-import { Route, Routes } from 'react-router-dom';
-import DefaultNavbar from './component-library/navigation/components/DefaultNavbar';
 
-
-const StyledApp = styled.div`
-  display: flex;
-  justify-content: center;
+const StyledContent = styled.div<{bg: string}>`
+  position: absolute;
+  height: fit-content;
+  min-height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
   font-family: 'Varela Round', sans-serif;
   font-style: 'normal';
   font-weight: 'normal';
+  background-color: ${props => props.bg};
 
   *, *::after, *::before {
     box-sizing: border-box;
   }
+
+  > div {
+    display: flex;
+    justify-content: center;
+    padding-top: 74px;
+  }
+
 `;
 
 function App() {
+  const { colors } = useThemeContext();
 
   return (
       <>
@@ -26,11 +35,11 @@ function App() {
             @import url('https://fonts.googleapis.com/css2?family=Roboto&family=Varela+Round&display=swap');
           </style> 
           <link href="https://fonts.googleapis.com/css2?family=Material+Icons+Round" rel="stylesheet" />
-          <StyledApp>
-              <ThemeProvider><UserProvider>
-                <AllRoutes/>
-              </UserProvider></ThemeProvider>
-          </StyledApp>
+          <StyledContent bg={colors.bg}>
+            <div>
+              <AllRoutes/>
+            </div>
+          </StyledContent>
       </>
   );
 }
