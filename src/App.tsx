@@ -1,8 +1,6 @@
 import ThemeProvider from './component-library/ThemeProvider';
 import styled from 'styled-components';
 import { BrowserRouter as Router } from 'react-router-dom';
-import TeacherNavbar from './component-library/navigation/components/TeacherNavbar';
-import { UserMode } from './component-library/navigation/base-components/NavUserStatus';
 
 const StyledApp = styled.div`
   position: static;
@@ -21,17 +19,6 @@ const StyledApp = styled.div`
 
 function App() {
 
-  const userStatus = {
-    username: "Leonhard Euler",
-    school: "University of Venice",
-    logoutUrl: "/Logout",
-    profileUrl: "/Profile",
-    dashboardUrl: "/",
-    userMode: UserMode.TEACHER,
-    authorizedUserModes: [UserMode.PARENT, UserMode.TEACHER, UserMode.PRINCIPAL],
-    setUserMode: (userMode: UserMode) => console.log(userMode),
-  }
-
   return (
       <>
         <head>
@@ -44,7 +31,7 @@ function App() {
           <StyledApp>
             <Router>
               <ThemeProvider>
-                <TeacherNavbar userStatus={userStatus} />
+                
               </ThemeProvider>
             </Router>
           </StyledApp>

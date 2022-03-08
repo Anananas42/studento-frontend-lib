@@ -17,6 +17,7 @@ export interface IUserStatus {
 
 interface IUserContextValue {
     userStatus?: IUserStatus;
+    setUserMode: (mode: UserMode) => void;
 }
 
 const UserContext = createContext<IUserContextValue | undefined>(undefined);
@@ -58,8 +59,14 @@ const UserProvider:FC<IProviderProps> = (props) => {
         
     }, [setFetchedData]);
 
+    const setUserMode = (mode: UserMode) => {
+        if (!fetchedData.userStatus) return;
+
+        setFetchedData({...fetchedData, userStatus: {...fetchedData.userStatus, userMode: mode}});
+    }
+
     return (
-        <UserContext.Provider value={{ userStatus: fetchedData.userStatus }}>
+        <UserContext.Provider value={{ userStatus: fetchedData.userStatus, setUserMode }}>
             { props.children }
         </UserContext.Provider>
     )

@@ -3,6 +3,7 @@ import styled from "styled-components";
 import TextColors from "../../buttons/colors/TextColors";
 import { BtnTextL } from "../../buttons/components/BtnText";
 import { useThemeContext } from "../../ThemeProvider";
+import { useUserContext } from "../../UserProvider";
 import { IconL } from "../../utilities/Icon";
 import StyledLink from "../../utilities/StyledLink";
 
@@ -137,29 +138,18 @@ const StyledUserMode = styled.div<IStyleProps>`
     }
 `;
 
-export interface IUserStatus {
-    username: string;
-    school: string;
-    logoutUrl: string;
-    profileUrl: string;
-    dashboardUrl: string;
-    userMode: UserMode;
-    authorizedUserModes: Array<UserMode>;
-    setUserMode?: (userMode: UserMode) => void;
-}
-
-interface INavUserStatusProps {
-    userStatus: IUserStatus;
-}
-
-const NavUserStatus:FC<INavUserStatusProps> = (props) => {
-    const { userStatus } = props;
+const NavUserStatus:FC = () => {
     const { colors, borderRadius, languageMap } = useThemeContext();
+    const { userStatus, setUserMode } = useUserContext();
+
+    const baseUrl = userStatus?.userMode;
     const styleProps = { bg: colors.primary, fill: colors.fill, borderRadius, sectionShadow: colors.sectionShadow };
 
     return (
+    <>
+        { userStatus ?
         <StyledUserStatus {...styleProps}>
-            <StyledLink to={userStatus.profileUrl}>
+            <StyledLink to={`${baseUrl}/profile`}>
                 <StyledUserButton {...styleProps}>
                     <IconL>account_circle</IconL>
                     <StyledUserButtonHighlight {...styleProps}/>
@@ -167,7 +157,7 @@ const NavUserStatus:FC<INavUserStatusProps> = (props) => {
                         <div>{userStatus.username}</div>
                         <div>{userStatus.school}</div>
                     </StyledUserInfo>
-                    {userStatus.authorizedUserModes.length > 1 && userStatus.setUserMode && 
+                    {userStatus.authorizedUserModes.length > 1 && 
                     <>
                         <IconL>expand_more</IconL>
                         <StyledList {...styleProps}>
@@ -176,7 +166,7 @@ const NavUserStatus:FC<INavUserStatusProps> = (props) => {
                                 <div>
                                     {userStatus.authorizedUserModes.filter(m => m !== userStatus.userMode).map(mode => {
                                         return (
-                                        <div key={mode} onClick={() => userStatus.setUserMode && userStatus.setUserMode(mode)}>
+                                        <div key={mode} onClick={() => setUserMode(mode)}>
                                             {languageMap.Generic.UserModes[mode]}
                                         </div>
                                         )
@@ -187,19 +177,16 @@ const NavUserStatus:FC<INavUserStatusProps> = (props) => {
                     </>}
                 </StyledUserButton>
             </StyledLink>
-            <StyledLink to={userStatus.logoutUrl}>
+            <StyledLink to={`${baseUrl}/logout`}>
                 <BtnTextL icon={"logout"} isAfter={false} onClick={() => 0}>{languageMap.Generic.logout}</BtnTextL>
             </StyledLink>
         </StyledUserStatus>
+        :
+        <div>...</div>
+        }
+    </>
     )
 }
 
 export default NavUserStatus;
 
-export enum UserMode {
-    ADMIN = "student",
-    PARENT = "parent",
-    PRINCIPAL = "principal",
-    STUDENT = "student",
-    TEACHER = "teacher",
-}
