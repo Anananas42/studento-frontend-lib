@@ -1,8 +1,8 @@
 import { FC } from "react";
 
-const Profile:FC = () => {
+const AdminProfile:FC = () => {
 
     return <></>
 }
 
-export default Profile;
+export default AdminProfile;

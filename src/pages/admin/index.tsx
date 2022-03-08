@@ -1,8 +1,8 @@
 import { FC } from "react";
 
-const Dashboard:FC = () => {
+const AdminDashboard:FC = () => {
 
     return <></>
 }
 
-export default Dashboard;
+export default AdminDashboard;
