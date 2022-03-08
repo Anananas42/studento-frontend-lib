@@ -17,7 +17,7 @@ export interface IUserStatus {
 
 interface IUserContextValue {
     userStatus?: IUserStatus;
-    checkAccessToken: () => boolean;
+    checkSessionToken: () => boolean;
     login: (username: string, password: string) => boolean;
     logout: () => boolean;
     setUserMode: (mode: UserMode) => void;
@@ -49,7 +49,7 @@ const UserProvider:FC<IProviderProps> = (props) => {
         setUserStatus({...userStatus, userMode: mode});
     }
 
-    const checkAccessToken = useCallback(() => {
+    const checkSessionToken = useCallback(() => {
         /*setUserStatus({
             username: "Leonhard Euler",
             school: "University of Venice",
@@ -78,7 +78,7 @@ const UserProvider:FC<IProviderProps> = (props) => {
     }, [setUserStatus]);
 
     return (
-        <UserContext.Provider value={{ userStatus: userStatus, checkAccessToken, login, logout, setUserMode }}>
+        <UserContext.Provider value={{ userStatus: userStatus, checkSessionToken, login, logout, setUserMode }}>
             { props.children }
         </UserContext.Provider>
     )
