@@ -142,12 +142,12 @@ const NavUserStatus:FC = () => {
     const { colors, borderRadius, languageMap } = useThemeContext();
     const { userStatus, setUserMode } = useUserContext();
 
-    const baseUrl = userStatus?.userMode;
+    if (!userStatus) throw new Error("[NavUserStatus] Trying to display NavUserStatus while the user isn't fetched.");
+
+    const baseUrl = userStatus.userMode;
     const styleProps = { bg: colors.primary, fill: colors.fill, borderRadius, sectionShadow: colors.sectionShadow };
 
     return (
-    <>
-        { userStatus ?
         <StyledUserStatus {...styleProps}>
             <StyledLink to={`${baseUrl}/profile`}>
                 <StyledUserButton {...styleProps}>
@@ -181,10 +181,6 @@ const NavUserStatus:FC = () => {
                 <BtnTextL icon={"logout"} isAfter={false} onClick={() => 0}>{languageMap.Generic.logout}</BtnTextL>
             </StyledLink>
         </StyledUserStatus>
-        :
-        <div>...</div>
-        }
-    </>
     )
 }
 

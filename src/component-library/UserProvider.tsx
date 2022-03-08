@@ -18,8 +18,6 @@ export interface IUserStatus {
 interface IUserContextValue {
     userStatus?: IUserStatus;
     setUserMode: (mode: UserMode) => void;
-    isLoggedIn: boolean;
-    setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const UserContext = createContext<IUserContextValue | undefined>(undefined);
@@ -39,38 +37,22 @@ interface IProviderProps {
 }
 
 const UserProvider:FC<IProviderProps> = (props) => {
-    const [fetchedData, setFetchedData] = useState<{userStatus?: IUserStatus, isFetched: boolean}>({userStatus: undefined, isFetched: false});
-    const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
-
-    useEffect(() => {
-        const fetchUser = async () => {
-            try {
-                const userStatus = {
-                    username: "Leonhard Euler",
-                    school: "University of Venice",
-                    userMode: UserMode.TEACHER,
-                    authorizedUserModes: [UserMode.PARENT, UserMode.TEACHER, UserMode.PRINCIPAL],
-                }
-                setFetchedData({userStatus, isFetched: true});
-
-            } catch (e) {
-                console.log(e);
-                setFetchedData({userStatus: undefined, isFetched: true});
-            }
-        }
-
-        isLoggedIn && fetchUser();
-        
-    }, [isLoggedIn, setFetchedData]);
+    const [userStatus, setUserStatus] = useState<IUserStatus>({
+        username: "Leonhard Euler",
+        school: "University of Venice",
+        userMode: UserMode.TEACHER,
+        authorizedUserModes: [UserMode.PARENT, UserMode.TEACHER, UserMode.PRINCIPAL],
+    });
 
     const setUserMode = (mode: UserMode) => {
-        if (!fetchedData.userStatus) return;
+        if (!userStatus) return;
+        if (!userStatus.authorizedUserModes.includes(mode)) throw new Error("[UserProvider] Trying to set unauthorized user mode.");
 
-        setFetchedData({...fetchedData, userStatus: {...fetchedData.userStatus, userMode: mode}});
+        setUserStatus({...userStatus, userMode: mode});
     }
 
     return (
-        <UserContext.Provider value={{ userStatus: fetchedData.userStatus, setUserMode, isLoggedIn, setIsLoggedIn }}>
+        <UserContext.Provider value={{ userStatus: userStatus, setUserMode }}>
             { props.children }
         </UserContext.Provider>
     )

@@ -9,7 +9,6 @@ import TeacherRoutes from "./TeacherRoutes";
 
 const AllRoutes:FC = () => {
     
-    
     return (
         <Routes>
             <Route path={"/admin/*"} element={<AdminRoutes />} />

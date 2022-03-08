@@ -95,7 +95,7 @@ interface INavbarProps {
 const NavbarBase:FC<INavbarProps> = (props) => {
     const { featureTiles, navButtons } = props;
     const { colors, borderRadius } = useThemeContext();
-    const { isLoggedIn } = useUserContext();
+    const { userStatus } = useUserContext();
 
     return (
         <StyledNavbarBase>
@@ -114,7 +114,7 @@ const NavbarBase:FC<INavbarProps> = (props) => {
                 })}
             </StyledLeftNavbar>
             <StyledRightNavbar>
-                {isLoggedIn ? <NavUserStatus/> : <NavLoginBtn />}
+                {userStatus ? <NavUserStatus/> : <NavLoginBtn />}
                 <LanguageForm />
             </StyledRightNavbar>
         </StyledNavbarBase>
