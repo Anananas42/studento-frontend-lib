@@ -18,6 +18,7 @@ import TeacherNavbar from './studento-library/navigation/components/TeacherNavba
 import AdminNavbar from './studento-library/navigation/components/AdminNavbar';
 import PrincipalNavbar from './studento-library/navigation/components/PrincipalNavbar';
 import ParentNavbar from './studento-library/navigation/components/ParentNavbar';
+import { UserMode } from './studento-library/navigation/base-components/NavUserStatus';
 
 const StyledApp = styled.div`
   position: static;
@@ -52,6 +53,9 @@ function App() {
     logoutUrl: "/Logout",
     profileUrl: "/Profile",
     dashboardUrl: "/",
+    userMode: UserMode.TEACHER,
+    authorizedUserModes: [UserMode.PARENT, UserMode.TEACHER, UserMode.PRINCIPAL],
+    setUserMode: (userMode: UserMode) => console.log(userMode),
   }
 
   return (

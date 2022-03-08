@@ -5,7 +5,7 @@ import { useThemeContext } from "../../ThemeProvider";
 import { Icon } from "../../utilities/Icon";
 import StyledLink from "../../utilities/StyledLink";
 
-interface StyleProps {
+interface IStyleProps {
     fill: string;
     fillSecondary: string;
     borderRadius: string;
@@ -13,7 +13,7 @@ interface StyleProps {
     primary: string;
 }
 
-const StyledDropdown = styled.div<StyleProps>`
+const StyledDropdown = styled.div<IStyleProps>`
     display: flex;
     align-items: center;
     position: relative;
@@ -30,7 +30,7 @@ const StyledDropdown = styled.div<StyleProps>`
     }
 `;
 
-const StyledDropdownHighlight = styled.div<StyleProps>`
+const StyledDropdownHighlight = styled.div<IStyleProps>`
     position: absolute;
     top: 0;
     left: 0;
@@ -44,7 +44,7 @@ const StyledDropdownHighlight = styled.div<StyleProps>`
 
 `;
 
-const StyledList = styled.div<StyleProps>`
+const StyledList = styled.div<IStyleProps>`
     position: absolute;
     display: none;
     top: 100%;
@@ -58,7 +58,7 @@ const StyledList = styled.div<StyleProps>`
     cursor: default;
 `;
 
-const StyledTile = styled.div<StyleProps>`
+const StyledTile = styled.div<IStyleProps>`
     display: flex;
     align-items: center;
     width: 480px;
@@ -95,7 +95,7 @@ const StyledTile = styled.div<StyleProps>`
     }
 `;
 
-const StyledInformation = styled.div<StyleProps>`
+const StyledInformation = styled.div<IStyleProps>`
     display: flex;
     flex-direction: column;
 
@@ -126,21 +126,21 @@ interface IProps {
 const NavFeatureTiles:FC<IProps> = (props) => {
     const { featureTiles } = props;
     const { colors, borderRadius } = useThemeContext();
-    const styleProps = { fill: colors.fill, fillSecondary: colors.fillSecondary, borderRadius, sectionShadow: colors.sectionShadow, primary: colors.primary };
+    const IstyleProps = { fill: colors.fill, fillSecondary: colors.fillSecondary, borderRadius, sectionShadow: colors.sectionShadow, primary: colors.primary };
 
     return (
-        <StyledDropdown {...styleProps}>
-            <StyledDropdownHighlight {...styleProps} />
+        <StyledDropdown {...IstyleProps}>
+            <StyledDropdownHighlight {...IstyleProps} />
             <Icon fontSize={"32px"} width={'32px'} height={'32px'}>apps</Icon>
             <Icon fontSize={"27px"} width={'27px'} height={'27px'}>expand_more</Icon>
-            <StyledList {...styleProps}>
+            <StyledList {...IstyleProps}>
                 {Object.keys(featureTiles).map(key => {
                     const tile = featureTiles[key];
                     return (
                         <StyledLink to={tile.url} key={key}>
-                            <StyledTile {...styleProps}>
+                            <StyledTile {...IstyleProps}>
                                 <Icon fontSize={"32px"} width={'32px'} height={'32px'}>{tile.icon}</Icon>
-                                <StyledInformation {...styleProps}>
+                                <StyledInformation {...IstyleProps}>
                                     <div>{tile.title}</div>
                                     <div>{tile.description}</div>
                                 </StyledInformation>

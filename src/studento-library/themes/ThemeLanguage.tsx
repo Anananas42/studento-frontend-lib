@@ -12,6 +12,7 @@ export interface ILanguageSet {
         passwordPlaceholder: string;
         time: string;
         upload: string;
+        usermode: string;
         username: string;
         usernamePlaceholder: string;
         weekday: string;
@@ -29,6 +30,13 @@ export interface ILanguageSet {
             saturday: string;
             sunday: string;
         },
+        UserModes: {
+            admin: string;
+            parent: string;
+            principal: string;
+            student: string;
+            teacher: string;
+        }
     },
 
     Address: {
@@ -131,6 +139,7 @@ const EnSet:ILanguageSet = {
         passwordPlaceholder: "",
         time: "Time",
         upload: "upload",
+        usermode: "User mode",
         username: "Username",
         usernamePlaceholder: "",
         weekday: "Day of the week",
@@ -148,6 +157,13 @@ const EnSet:ILanguageSet = {
             saturday: "Saturday",
             sunday: "Sunday",
         },
+        UserModes: {
+            admin: "Admin",
+            parent: "Parent",
+            principal: "Principal",
+            student: "Student",
+            teacher: "Teacher",
+        }
     },
     Address: {
         index: "Adress",
@@ -250,6 +266,7 @@ const CzSet:ILanguageSet = {
         passwordPlaceholder: "",
         time: "Čas",
         upload: "nahrát",
+        usermode: "Uživatelský mód",
         username: "Přihlašovací jméno",
         usernamePlaceholder: "",
         weekday: "Den v týdnu",
@@ -267,6 +284,13 @@ const CzSet:ILanguageSet = {
             saturday: "Sobota",
             sunday: "Neděle",
         },
+        UserModes: {
+            admin: "Admin",
+            parent: "Rodič",
+            principal: "Ředitel",
+            student: "Student",
+            teacher: "Učitel",
+        }
     },
     Address: {
         index: "Adresa",
