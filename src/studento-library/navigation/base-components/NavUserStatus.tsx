@@ -167,20 +167,24 @@ const NavUserStatus:FC<INavUserStatusProps> = (props) => {
                         <div>{userStatus.username}</div>
                         <div>{userStatus.school}</div>
                     </StyledUserInfo>
-                    {userStatus.authorizedUserModes.length > 1 && userStatus.setUserMode && <StyledList {...styleProps}>
-                        <StyledUserMode {...styleProps}>
-                            {`${languageMap.Generic.usermode}:`}<span>{languageMap.Generic.UserModes[userStatus.userMode]}</span><IconL>chevron_right</IconL>
-                            <div>
-                                {userStatus.authorizedUserModes.filter(m => m !== userStatus.userMode).map(mode => {
-                                    return (
-                                    <div key={mode} onClick={() => userStatus.setUserMode && userStatus.setUserMode(mode)}>
-                                        {languageMap.Generic.UserModes[mode]}
-                                    </div>
-                                    )
-                                })}
-                            </div>
-                        </StyledUserMode>
-                    </StyledList>}
+                    {userStatus.authorizedUserModes.length > 1 && userStatus.setUserMode && 
+                    <>
+                        <IconL>expand_more</IconL>
+                        <StyledList {...styleProps}>
+                            <StyledUserMode {...styleProps}>
+                                {`${languageMap.Generic.usermode}:`}<span>{languageMap.Generic.UserModes[userStatus.userMode]}</span><IconL>chevron_right</IconL>
+                                <div>
+                                    {userStatus.authorizedUserModes.filter(m => m !== userStatus.userMode).map(mode => {
+                                        return (
+                                        <div key={mode} onClick={() => userStatus.setUserMode && userStatus.setUserMode(mode)}>
+                                            {languageMap.Generic.UserModes[mode]}
+                                        </div>
+                                        )
+                                    })}
+                                </div>
+                            </StyledUserMode>
+                        </StyledList>
+                    </>}
                 </StyledUserButton>
             </StyledLink>
             <StyledLink to={userStatus.logoutUrl}>
