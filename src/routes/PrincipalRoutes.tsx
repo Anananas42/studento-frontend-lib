@@ -11,8 +11,8 @@ const PrincipalRoutes:FC = () => {
         <>
             <PrincipalNavbar />
             <Routes>
-                <Route path={"./profile"} element={<PrincipalProfile />}/>
-                <Route path={"./"} element={<PrincipalDashboard />}/>
+                <Route path={"/profile"} element={<PrincipalProfile />}/>
+                <Route path={"/"} element={<PrincipalDashboard />}/>
             </Routes>
         </>
     )

@@ -2,7 +2,7 @@ import { FC } from "react";
 
 const AdminProfile:FC = () => {
 
-    return <></>
+    return <>admin profile</>
 }
 
 export default AdminProfile;

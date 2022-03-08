@@ -2,7 +2,7 @@ import { FC } from "react";
 
 const TeacherProfile:FC = () => {
 
-    return <></>
+    return <>teacher profile</>
 }
 
 export default TeacherProfile;

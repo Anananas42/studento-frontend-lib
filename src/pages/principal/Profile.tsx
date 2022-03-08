@@ -2,7 +2,7 @@ import { FC } from "react";
 
 const PrincipalProfile:FC = () => {
 
-    return <></>
+    return <>principal profile</>
 }
 
 export default PrincipalProfile;

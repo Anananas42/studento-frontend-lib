@@ -2,7 +2,7 @@ import { FC } from "react";
 
 const ActivateUserMode:FC = () => {
 
-    return <></>
+    return <>activate user</>
 }
 
 export default ActivateUserMode;

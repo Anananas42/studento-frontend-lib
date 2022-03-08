@@ -2,7 +2,7 @@ import { FC } from "react";
 
 const StudentDashboard:FC = () => {
 
-    return <></>
+    return <>student dashboard</>
 }
 
 export default StudentDashboard;

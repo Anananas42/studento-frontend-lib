@@ -2,7 +2,7 @@ import { FC } from "react";
 
 const Login:FC = () => {
 
-    return <></>
+    return <>login page</>
 }
 
 export default Login;

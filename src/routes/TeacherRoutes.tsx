@@ -11,8 +11,8 @@ const TeacherRoutes:FC = () => {
         <>
             <TeacherNavbar />
             <Routes>
-                <Route path={"./profile"} element={<TeacherProfile />}/>
-                <Route path={"./"} element={<TeacherDashboard />}/>
+                <Route path={"/profile"} element={<TeacherProfile />}/>
+                <Route path={"/"} element={<TeacherDashboard />}/>
             </Routes>
         </>
     )

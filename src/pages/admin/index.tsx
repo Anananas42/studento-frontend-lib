@@ -2,7 +2,7 @@ import { FC } from "react";
 
 const AdminDashboard:FC = () => {
 
-    return <></>
+    return <>admin dashboard</>
 }
 
 export default AdminDashboard;

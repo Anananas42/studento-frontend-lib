@@ -2,7 +2,7 @@ import { FC } from "react";
 
 const ForgotPassword:FC = () => {
 
-    return <></>
+    return <>forgot password</>
 }
 
 export default ForgotPassword;

@@ -11,8 +11,8 @@ const ParentRoutes:FC = () => {
         <>
             <ParentNavbar />
             <Routes>
-                <Route path={"./profile"} element={<ParentProfile />}/>
-                <Route path={"./"} element={<ParentDashboard />}/>
+                <Route path={"/profile"} element={<ParentProfile />}/>
+                <Route path={"/"} element={<ParentDashboard />}/>
             </Routes>
         </>
     )

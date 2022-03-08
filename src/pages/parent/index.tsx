@@ -2,7 +2,7 @@ import { FC } from "react";
 
 const ParentDashboard:FC = () => {
 
-    return <></>
+    return <>parent dashboard</>
 }
 
 export default ParentDashboard;

@@ -2,7 +2,7 @@ import { FC } from "react";
 
 const ParentProfile:FC = () => {
 
-    return <></>
+    return <>parent profile</>
 }
 
 export default ParentProfile;
