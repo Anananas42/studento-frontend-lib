@@ -1,7 +1,7 @@
 import { useState, createContext, FC, useContext, ReactNode, useCallback } from 'react';
 
 export enum UserMode {
-    ADMIN = "student",
+    ADMIN = "admin",
     PARENT = "parent",
     PRINCIPAL = "principal",
     STUDENT = "student",
@@ -50,6 +50,12 @@ const UserProvider:FC<IProviderProps> = (props) => {
     }
 
     const checkAccessToken = useCallback(() => {
+        /*setUserStatus({
+            username: "Leonhard Euler",
+            school: "University of Venice",
+            userMode: UserMode.TEACHER,
+            authorizedUserModes: [UserMode.PARENT, UserMode.TEACHER, UserMode.PRINCIPAL],
+        });*/
         
         return false;
     }, [])
@@ -59,7 +65,7 @@ const UserProvider:FC<IProviderProps> = (props) => {
             username: "Leonhard Euler",
             school: "University of Venice",
             userMode: UserMode.TEACHER,
-            authorizedUserModes: [UserMode.PARENT, UserMode.TEACHER, UserMode.PRINCIPAL],
+            authorizedUserModes: [UserMode.PARENT, UserMode.TEACHER, UserMode.PRINCIPAL, UserMode.ADMIN, UserMode.STUDENT],
         });
 
         return true;
