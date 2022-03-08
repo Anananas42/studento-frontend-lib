@@ -25,21 +25,15 @@ function App() {
 
   return (
       <>
-        <head>
           <style>
             @import url('https://fonts.googleapis.com/css2?family=Roboto&family=Varela+Round&display=swap');
           </style> 
           <link href="https://fonts.googleapis.com/css2?family=Material+Icons+Round" rel="stylesheet" />
-        </head>
-        <body>
           <StyledApp>
-              <ThemeProvider>
-                <UserProvider>
-                  <AllRoutes/>
-                </UserProvider>
-              </ThemeProvider>
+              <ThemeProvider><UserProvider>
+                <AllRoutes/>
+              </UserProvider></ThemeProvider>
           </StyledApp>
-        </body>
       </>
   );
 }
