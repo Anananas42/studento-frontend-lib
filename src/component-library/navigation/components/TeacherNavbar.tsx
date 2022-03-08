@@ -1,15 +1,13 @@
 import { FC } from "react";
 import { useThemeContext } from "../../ThemeProvider";
 import NavbarBase from "../base-components/NavbarBase";
-import { IUserStatus } from "../base-components/NavUserStatus";
 
 interface ITeacherNavbarProps {
-    userStatus: IUserStatus;
     className?: string;
 }
 
 const TeacherNavbar:FC<ITeacherNavbarProps> = (props) => {
-    const { userStatus, className } = props;
+    const { className } = props;
     const { languageMap } = useThemeContext();
 
     const translations = languageMap.Navigation;
@@ -34,7 +32,7 @@ const TeacherNavbar:FC<ITeacherNavbarProps> = (props) => {
     };
 
     return (
-        <NavbarBase userStatus={userStatus} featureTiles={featureTiles} navButtons={navButtons} />
+        <NavbarBase featureTiles={featureTiles} navButtons={navButtons} />
     )
 }
 
