@@ -1,4 +1,4 @@
-import { useState, createContext, FC, useContext, ReactNode, useEffect } from 'react';
+import { useState, createContext, FC, useContext, ReactNode, useCallback } from 'react';
 
 export enum UserMode {
     ADMIN = "student",
@@ -17,6 +17,9 @@ export interface IUserStatus {
 
 interface IUserContextValue {
     userStatus?: IUserStatus;
+    checkAccessToken: () => boolean;
+    login: (username: string, password: string) => boolean;
+    logout: () => boolean;
     setUserMode: (mode: UserMode) => void;
 }
 
@@ -37,12 +40,7 @@ interface IProviderProps {
 }
 
 const UserProvider:FC<IProviderProps> = (props) => {
-    const [userStatus, setUserStatus] = useState<IUserStatus>({
-        username: "Leonhard Euler",
-        school: "University of Venice",
-        userMode: UserMode.TEACHER,
-        authorizedUserModes: [UserMode.PARENT, UserMode.TEACHER, UserMode.PRINCIPAL],
-    });
+    const [userStatus, setUserStatus] = useState<IUserStatus>();
 
     const setUserMode = (mode: UserMode) => {
         if (!userStatus) return;
@@ -51,8 +49,30 @@ const UserProvider:FC<IProviderProps> = (props) => {
         setUserStatus({...userStatus, userMode: mode});
     }
 
+    const checkAccessToken = useCallback(() => {
+        
+        return false;
+    }, [])
+
+    const login = useCallback((username: string, password: string) => {
+        setUserStatus({
+            username: "Leonhard Euler",
+            school: "University of Venice",
+            userMode: UserMode.TEACHER,
+            authorizedUserModes: [UserMode.PARENT, UserMode.TEACHER, UserMode.PRINCIPAL],
+        });
+
+        return true;
+    }, [setUserStatus]);
+
+    const logout = useCallback(() => {
+        setUserStatus(undefined);
+
+        return true;
+    }, [setUserStatus]);
+
     return (
-        <UserContext.Provider value={{ userStatus: userStatus, setUserMode }}>
+        <UserContext.Provider value={{ userStatus: userStatus, checkAccessToken, login, logout, setUserMode }}>
             { props.children }
         </UserContext.Provider>
     )

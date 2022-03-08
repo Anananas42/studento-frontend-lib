@@ -21,7 +21,7 @@ const StyledContent = styled.div<{bg: string}>`
   > div {
     display: flex;
     justify-content: center;
-    padding-top: 74px;
+    padding-top: 90px;
   }
 
 `;

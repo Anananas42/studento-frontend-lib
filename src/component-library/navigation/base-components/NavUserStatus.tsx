@@ -140,7 +140,7 @@ const StyledUserMode = styled.div<IStyleProps>`
 
 const NavUserStatus:FC = () => {
     const { colors, borderRadius, languageMap } = useThemeContext();
-    const { userStatus, setUserMode } = useUserContext();
+    const { userStatus, setUserMode, logout } = useUserContext();
 
     if (!userStatus) throw new Error("[NavUserStatus] Trying to display NavUserStatus while the user isn't fetched.");
 
@@ -149,7 +149,7 @@ const NavUserStatus:FC = () => {
 
     return (
         <StyledUserStatus {...styleProps}>
-            <StyledLink to={`${baseUrl}/profile`}>
+            <StyledLink to={`/${baseUrl}/profile`}>
                 <StyledUserButton {...styleProps}>
                     <IconL>account_circle</IconL>
                     <StyledUserButtonHighlight {...styleProps}/>
@@ -160,7 +160,7 @@ const NavUserStatus:FC = () => {
                     {userStatus.authorizedUserModes.length > 1 && 
                     <>
                         <IconL>expand_more</IconL>
-                        <StyledList {...styleProps}>
+                        <StyledList {...styleProps} onClick={(e) => {e.preventDefault(); e.stopPropagation()}}>
                             <StyledUserMode {...styleProps}>
                                 {`${languageMap.Generic.usermode}:`}<span>{languageMap.Generic.UserModes[userStatus.userMode]}</span><IconL>chevron_right</IconL>
                                 <div>
@@ -177,9 +177,7 @@ const NavUserStatus:FC = () => {
                     </>}
                 </StyledUserButton>
             </StyledLink>
-            <StyledLink to={`${baseUrl}/logout`}>
-                <BtnTextL icon={"logout"} isAfter={false} onClick={() => 0}>{languageMap.Generic.logout}</BtnTextL>
-            </StyledLink>
+            <BtnTextL icon={"logout"} isAfter={false} onClick={() => logout()}>{languageMap.Generic.logout}</BtnTextL>
         </StyledUserStatus>
     )
 }

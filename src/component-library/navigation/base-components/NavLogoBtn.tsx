@@ -48,7 +48,7 @@ const NavLogoBtn:FC = () => {
     const baseUrl = userStatus?.userMode;
 
     return (
-        <StyledLink to={baseUrl ? `${baseUrl}/` : '/'}>
+        <StyledLink to={baseUrl ? `/${baseUrl}` : '/'}>
             <StyledNavLogoBtn fill={colors.fill} borderRadius={borderRadius}>
                 <img alt={"Studento logo"} src={logo} />
                 <span>Studento</span>
