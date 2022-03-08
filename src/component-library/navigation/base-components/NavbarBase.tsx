@@ -19,7 +19,8 @@ interface IStyleProps {
 const StyledNavbarBase = styled.nav`
     position: fixed;
     top: 0;
-    width: min(100vw, 1900px);
+    width: 1900px;
+    max-width: 100vw;
     margin: 0 32px;
     z-index: 5;
     height: 74px;
@@ -42,10 +43,10 @@ const StyledLeftNavbar = styled.div`
 const StyledRightNavbar = styled.div`
     display: flex;
     width: fit-content;
+    padding-right: 64px;
 
     > div:last-child {
         padding-left: 16px;
-        margin-right: 64px;
     }
 `;
 

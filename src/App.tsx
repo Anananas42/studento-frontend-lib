@@ -7,10 +7,7 @@ import DefaultNavbar from './component-library/navigation/components/DefaultNavb
 
 
 const StyledApp = styled.div`
-  position: static;
   display: flex;
-  width: 100vw;
-  height: 100vh;
   justify-content: center;
   font-family: 'Varela Round', sans-serif;
   font-style: 'normal';
