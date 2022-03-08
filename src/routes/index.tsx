@@ -12,12 +12,12 @@ const AllRoutes:FC = () => {
     
     return (
         <Routes>
-            <Route path="/admin" element={AdminRoutes} />
-            <Route path="/parent" element={ParentRoutes} />
-            <Route path="/principal" element={PrincipalRoutes} />
-            <Route path="/student" element={StudentRoutes} />
-            <Route path="/teacher" element={TeacherRoutes} />
-            <Route path="/" element={PublicRoutes} />
+            <Route path={"/admin/*"} element={<AdminRoutes />} />
+            <Route path={"/parent/*"} element={<ParentRoutes />} />
+            <Route path={"/principal/*"} element={<PrincipalRoutes />} />
+            <Route path={"/student/*"} element={<StudentRoutes />} />
+            <Route path={"/teacher/*"} element={<TeacherRoutes />} />
+            <Route path={"/*"} element={<PublicRoutes />} />
         </Routes>
     )
 }

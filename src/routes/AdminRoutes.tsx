@@ -10,8 +10,8 @@ const AdminRoutes:FC = () => {
         <>
             <AdminNavbar />
             <Routes>
-                <Route path={"./profile"} element={AdminProfile}/>
-                <Route path={"./"} element={AdminDashboard}/>
+                <Route path={"./profile"} element={<AdminProfile />}/>
+                <Route path={"./"} element={<AdminDashboard />}/>
             </Routes>
         </>
     )

@@ -1,6 +1,10 @@
 import ThemeProvider from './component-library/ThemeProvider';
 import styled from 'styled-components';
-import { BrowserRouter as Router } from 'react-router-dom';
+import UserProvider from './component-library/UserProvider';
+import AllRoutes from './routes';
+import { Route, Routes } from 'react-router-dom';
+import DefaultNavbar from './component-library/navigation/components/DefaultNavbar';
+
 
 const StyledApp = styled.div`
   position: static;
@@ -29,11 +33,11 @@ function App() {
         </head>
         <body>
           <StyledApp>
-            <Router>
               <ThemeProvider>
-                
+                <UserProvider>
+                  <AllRoutes/>
+                </UserProvider>
               </ThemeProvider>
-            </Router>
           </StyledApp>
         </body>
       </>

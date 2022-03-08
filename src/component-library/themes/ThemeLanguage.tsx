@@ -77,6 +77,9 @@ export interface ILanguageSet {
             substitutionDesc: string;
             timetableManagementDesc: string;
         },
+        Default: {
+
+        },
         Parent: {
             diplomasDesc: string;
             eventsDesc: string;
@@ -202,6 +205,9 @@ const EnSet:ILanguageSet = {
             schoolTripsDesc: "Create and manage school trips",
             substitutionDesc: "Create and manage substitutions",
             timetableManagementDesc: "Create and manage timetables",
+        },
+        Default: {
+
         },
         Parent: {
             diplomasDesc: "Diplomas and current prediction",
@@ -329,6 +335,9 @@ const CzSet:ILanguageSet = {
             schoolTripsDesc: "Vytváření a správa školních výletů",
             substitutionDesc: "Vytváření a správa suplování",
             timetableManagementDesc: "Vytváření a správa rozvrhů",
+        },
+        Default: {
+
         },
         Parent: {
             diplomasDesc: "Vysvědčení a budoucí predikce",
