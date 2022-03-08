@@ -1,6 +1,7 @@
 import { FC } from "react";
 import { Route, Routes } from "react-router";
 import AdminRoutes from "./AdminRoutes";
+import DocumentationRoutes from "./DocumentationRoutes";
 import ParentRoutes from "./ParentRoutes";
 import PrincipalRoutes from "./PrincipalRoutes";
 import PublicRoutes from "./PublicRoutes";
@@ -16,6 +17,7 @@ const AllRoutes:FC = () => {
             <Route path={"/principal/*"} element={<PrincipalRoutes />} />
             <Route path={"/student/*"} element={<StudentRoutes />} />
             <Route path={"/teacher/*"} element={<TeacherRoutes />} />
+            <Route path={"/documentation/*"} element={<DocumentationRoutes />}/>
             <Route path={"/*"} element={<PublicRoutes />} />
         </Routes>
     )
