@@ -8,7 +8,7 @@ export const useUserRedirect = (mode: UserMode) => {
 
     useEffect(() => {
         if (!userStatus) {
-            navigation.current("/");
+            navigation.current("/login");
         } else if (userStatus.userMode !== mode) {
             navigation.current("/" + userStatus.userMode);
         }
