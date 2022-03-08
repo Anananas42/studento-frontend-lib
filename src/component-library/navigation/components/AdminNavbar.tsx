@@ -1,14 +1,8 @@
 import { FC } from "react";
 import { useThemeContext } from "../../ThemeProvider";
 import NavbarBase from "../base-components/NavbarBase";
-import { IUserStatus } from "../base-components/NavUserStatus";
 
-interface IAdminNavbarProps {
-    userStatus: IUserStatus;
-}
-
-const AdminNavbar:FC<IAdminNavbarProps> = (props) => {
-    const { userStatus } = props;
+const AdminNavbar:FC = () => {
     const { languageMap } = useThemeContext();
 
     const translations = languageMap.Navigation;
@@ -31,7 +25,7 @@ const AdminNavbar:FC<IAdminNavbarProps> = (props) => {
     };
 
     return (
-        <NavbarBase userStatus={userStatus} featureTiles={featureTiles} navButtons={navButtons} />
+        <NavbarBase featureTiles={featureTiles} navButtons={navButtons} />
     )
 }
 

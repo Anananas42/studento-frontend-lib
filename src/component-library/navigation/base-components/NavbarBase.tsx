@@ -3,12 +3,13 @@ import styled from "styled-components";
 import TextColors from "../../buttons/colors/TextColors";
 import LanguageForm from "../../forms/components/LanguageForm";
 import { useThemeContext } from "../../ThemeProvider";
+import { useUserContext } from "../../UserProvider";
 import { Icon } from "../../utilities/Icon";
 import StyledLink from "../../utilities/StyledLink";
 import NavFeatureTiles, { IFeatureTiles } from "./NavFeatureTiles";
 import NavLoginBtn from "./NavLoginBtn";
 import NavLogoBtn from "./NavLogoBtn";
-import NavUserStatus, { IUserStatus } from "./NavUserStatus";
+import NavUserStatus from "./NavUserStatus";
 
 interface IStyleProps {
     fill: string;
@@ -86,19 +87,19 @@ interface INavButtons {
 }
 
 interface INavbarProps {
-    userStatus?: IUserStatus;
     featureTiles?: IFeatureTiles;
     navButtons: INavButtons;
 }
 
 const NavbarBase:FC<INavbarProps> = (props) => {
-    const { userStatus, featureTiles, navButtons } = props;
+    const { featureTiles, navButtons } = props;
     const { colors, borderRadius } = useThemeContext();
+    const { isLoggedIn } = useUserContext();
 
     return (
         <StyledNavbarBase>
             <StyledLeftNavbar>
-                <NavLogoBtn logoUrl={userStatus ? userStatus.dashboardUrl : "/"}/>
+                <NavLogoBtn />
                 {featureTiles && <NavFeatureTiles featureTiles={featureTiles}/>}
                 {Object.values(navButtons).map(btn => {
                     return (
@@ -112,7 +113,7 @@ const NavbarBase:FC<INavbarProps> = (props) => {
                 })}
             </StyledLeftNavbar>
             <StyledRightNavbar>
-                {userStatus ? <NavUserStatus userStatus={userStatus}/> : <NavLoginBtn />}
+                {isLoggedIn ? <NavUserStatus/> : <NavLoginBtn />}
                 <LanguageForm />
             </StyledRightNavbar>
         </StyledNavbarBase>

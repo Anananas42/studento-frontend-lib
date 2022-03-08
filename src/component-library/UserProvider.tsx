@@ -18,6 +18,8 @@ export interface IUserStatus {
 interface IUserContextValue {
     userStatus?: IUserStatus;
     setUserMode: (mode: UserMode) => void;
+    isLoggedIn: boolean;
+    setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const UserContext = createContext<IUserContextValue | undefined>(undefined);
@@ -38,6 +40,7 @@ interface IProviderProps {
 
 const UserProvider:FC<IProviderProps> = (props) => {
     const [fetchedData, setFetchedData] = useState<{userStatus?: IUserStatus, isFetched: boolean}>({userStatus: undefined, isFetched: false});
+    const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
 
     useEffect(() => {
         const fetchUser = async () => {
@@ -55,9 +58,10 @@ const UserProvider:FC<IProviderProps> = (props) => {
                 setFetchedData({userStatus: undefined, isFetched: true});
             }
         }
-        fetchUser();
+
+        isLoggedIn && fetchUser();
         
-    }, [setFetchedData]);
+    }, [isLoggedIn, setFetchedData]);
 
     const setUserMode = (mode: UserMode) => {
         if (!fetchedData.userStatus) return;
@@ -66,7 +70,7 @@ const UserProvider:FC<IProviderProps> = (props) => {
     }
 
     return (
-        <UserContext.Provider value={{ userStatus: fetchedData.userStatus, setUserMode }}>
+        <UserContext.Provider value={{ userStatus: fetchedData.userStatus, setUserMode, isLoggedIn, setIsLoggedIn }}>
             { props.children }
         </UserContext.Provider>
     )

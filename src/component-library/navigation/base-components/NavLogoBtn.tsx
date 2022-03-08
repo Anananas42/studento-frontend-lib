@@ -3,6 +3,7 @@ import styled from "styled-components";
 import TextColors from "../../buttons/colors/TextColors";
 import logo from '../../media/logo.png';
 import { useThemeContext } from "../../ThemeProvider";
+import { useUserContext } from "../../UserProvider";
 import StyledLink from "../../utilities/StyledLink";
 
 interface IStyledProps {
@@ -40,16 +41,14 @@ const StyledNavLogoBtn = styled.div<IStyledProps>`
 
 `;
 
-interface INavLogoBtn {
-    logoUrl: string;
-}
-
-const NavLogoBtn:FC<INavLogoBtn> = (props) => {
-    const { logoUrl } = props;
+const NavLogoBtn:FC = () => {
     const { colors, borderRadius } = useThemeContext();
+    const { userStatus } = useUserContext();
+
+    const baseUrl = userStatus?.userMode;
 
     return (
-        <StyledLink to={logoUrl}>
+        <StyledLink to={`${baseUrl}/`}>
             <StyledNavLogoBtn fill={colors.fill} borderRadius={borderRadius}>
                 <img alt={"Studento logo"} src={logo} />
                 <span>Studento</span>
