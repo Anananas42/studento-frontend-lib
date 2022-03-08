@@ -7,15 +7,15 @@ import Login from "../pages/shared/Login";
 
 const PublicRoutes:FC = () => {
     const navigate = useNavigate();
-    const { userStatus, checkSessionToken } = useUserContext();
+    const { userStatus, checkSessionAuth } = useUserContext();
 
     useEffect(() => {
         if (userStatus) {
             return navigate("/" + userStatus.userMode);
         } else {
-            checkSessionToken();
+            checkSessionAuth();
         }
-    }, [userStatus, navigate, checkSessionToken]);
+    }, [userStatus, navigate, checkSessionAuth]);
 
     return (
         <>
