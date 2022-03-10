@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { useThemeContext } from "../../ThemeProvider";
-import { DropdownFormBase, SingleChoiceFormBase } from "../base-components";
+import { DropdownFormBase } from "../base-components";
 
 interface IFormProps {
     value: string;

@@ -1,4 +1,4 @@
-import { ChangeEventHandler, FC } from "react";
+import { FC } from "react";
 import styled from "styled-components";
 import { useThemeContext } from "../../ThemeProvider";
 import FormBase from "../shared/FormBase";

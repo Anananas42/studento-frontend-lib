@@ -1,11 +1,13 @@
 import { FC } from "react";
-import { BtnCTAL } from "../../component-library/buttons/components/BtnCTA";
-import { useUserContext } from "../../component-library/UserProvider";
+import LoginForm from "../../template-library/public/LoginForm";
 
 const Login:FC = () => {
-    const { login } = useUserContext();
 
-    return <BtnCTAL onClick={() => login("", "")} icon={"login"}>Login</BtnCTAL>
+    return (
+        <>
+            <LoginForm />
+        </>
+    )
 }
 
 export default Login;
