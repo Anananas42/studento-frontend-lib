@@ -21,7 +21,6 @@ const StyledOutline = styled.button<IStyledBtn>`
     border: 2px solid ${OutlineColors.Default.stroke};
     text-decoration: none;
     cursor: pointer;
-    box-shadow: 1px 1px 8px ${OutlineColors.shadow};
 
     :hover {
         color: ${OutlineColors.Hover.txt};
@@ -39,7 +38,6 @@ const StyledOutline = styled.button<IStyledBtn>`
         color: ${OutlineColors.Disabled.txt};
         background-color: ${OutlineColors.Disabled.bg};
         border-color: ${OutlineColors.Disabled.stroke};
-        box-shadow: none;
         pointer-events: none;
     }
 `;
