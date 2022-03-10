@@ -63,9 +63,9 @@ const PasswordForm:FC<IFormProps> = (props) => {
             <StyledInput ref={formRef} type={"text"} id={formId ? formId : label} value={isVisible ? value : '●'.repeat(value.length)}
              onChange={(e) => setValue(getUpdatedValue(value, e))} onKeyDown={onKeyDown} borderRadius={borderRadius}
                 fill={colors.fill} isError={errorMessage} disabled={isDisabled} placeholder={isDisabled ? "" : languageMap.Generic.passwordPlaceholder} width={width ? width : "400px"} icon={"lock"} style={{paddingRight: "48px"}}/>
-            <StyledViewIcon onMouseDown={() => setIsVisible(true)} onMouseUp={() => {setIsVisible(false); formRef.current.focus()}} onMouseLeave={() => setIsVisible(false)}>
+            {!isConfirmPassword && <StyledViewIcon onMouseDown={() => setIsVisible(true)} onMouseUp={() => {setIsVisible(false); formRef.current.focus()}} onMouseLeave={() => setIsVisible(false)}>
                 {value && <IconL>{isVisible ? "visibility_off" : "visibility"}</IconL>}
-            </StyledViewIcon>
+            </StyledViewIcon>}
         </FormBase>
     );
 };
