@@ -8,5 +8,5 @@ import { BtnSecondaryS, BtnSecondaryM, BtnSecondaryL } from "./BtnSecondary";
 import { BtnTertiaryS, BtnTertiaryM, BtnTertiaryL } from "./BtnTertiary";
 import { BtnTextS, BtnTextM, BtnTextL } from "./BtnText";
 
-export default {BtnCloseS, BtnCloseM, BtnCloseL, BtnConfirmS, BtnConfirmM, BtnConfirmL, BtnCTAS, BtnCTAM, BtnCTAL, BtnDangerS, BtnDangerM, BtnDangerL, BtnOutlineS, BtnOutlineM, BtnOutlineL, 
+export {BtnCloseS, BtnCloseM, BtnCloseL, BtnConfirmS, BtnConfirmM, BtnConfirmL, BtnCTAS, BtnCTAM, BtnCTAL, BtnDangerS, BtnDangerM, BtnDangerL, BtnOutlineS, BtnOutlineM, BtnOutlineL, 
     BtnPrimaryS, BtnPrimaryM, BtnPrimaryL, BtnSecondaryS, BtnSecondaryM, BtnSecondaryL, BtnTertiaryS, BtnTertiaryM, BtnTertiaryL, BtnTextS, BtnTextM, BtnTextL};
