@@ -6,19 +6,16 @@ const DefaultNavbar:FC = () => {
     const { languageMap } = useThemeContext();
 
     const translations = languageMap.Navigation;
-    const descTranslations = languageMap.Navigation.Default;
-
-    const featureTiles = {
-        
-    };
 
     const navButtons = {
         home: {title: translations.home, icon: "home", url: "/"},
+        contact: {title: translations.contact, icon: "call", url: "/contact"},
+        documentation: {title: translations.documentation, icon: "help", url: "/documentation"},
                 
     };
 
     return (
-        <NavbarBase featureTiles={featureTiles} navButtons={navButtons} />
+        <NavbarBase navButtons={navButtons} />
     )
 }
 

@@ -54,8 +54,10 @@ export interface ILanguageSet {
         absences: string;
         admissions: string;
         class: string;
+        contact: string;
         create: string;
         diplomas: string;
+        documentation: string;
         employees: string;
         events: string;
         find: string;
@@ -183,8 +185,10 @@ const EnSet:ILanguageSet = {
         absences: "Absences",
         admissions: "Admissions",
         class: "Class",
+        contact: "Contact us",
         create: "Create",
         diplomas: "Diplomas",
+        documentation: "Documentation",
         employees: "Employees",
         events: "Events",
         find: "Find",
@@ -313,8 +317,10 @@ const CzSet:ILanguageSet = {
         absences: "Absence",
         admissions: "Přijímací Proces",
         class: "Třída",
+        contact: "Napište nám",
         create: "Přidat",
         diplomas: "Vysvědčení",
+        documentation: "Manuál",
         employees: "Zaměstnanci",
         events: "Události",
         find: "Najít",
