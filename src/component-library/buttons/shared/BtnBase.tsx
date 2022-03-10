@@ -10,6 +10,7 @@ export interface IStyledBtn {
     lineHeight: string;
     paddingV: string;
     onClick: any;
+    width?: string;
 }
 
 interface BtnProps {
@@ -21,15 +22,17 @@ interface BtnProps {
     isDisabled?: boolean;
     StyledButton: StyledComponent<"button", any, IStyledBtn, never>;
     forceUppercase?: boolean;
+    width?: string;
 }
 
-const StyledButtonBase = styled.div`
+const StyledButtonBase = styled.div<{width?: string}>`
+    width: ${props => props.width ? props.width : "auto"};
     white-space: nowrap;
 `;
 
 const BtnBase:FC<BtnProps> = (props) => {
     const { borderRadius } = useThemeContext();
-    const { Icon, isAfter, Sizes, children, onClick, isDisabled, StyledButton, forceUppercase } = props;
+    const { Icon, isAfter, Sizes, children, StyledButton, forceUppercase, ...rest } = props;
     const padH = Sizes.paddingH;
     const padV = Sizes.paddingV;
 
@@ -38,8 +41,8 @@ const BtnBase:FC<BtnProps> = (props) => {
     const lineHeight = Sizes.lineHeight;
 
     return(
-        <StyledButtonBase>
-            <StyledButton borderRadius={borderRadius} padding={padding} paddingV={padV} fontSize={fontSize} lineHeight={lineHeight} disabled={isDisabled} onClick={onClick}>
+        <StyledButtonBase width={rest.width}>
+            <StyledButton borderRadius={borderRadius} padding={padding} paddingV={padV} fontSize={fontSize} lineHeight={lineHeight} {...rest}>
                 {Icon && !isAfter && Icon}{children && (forceUppercase ? children.toUpperCase() : children)}{Icon && isAfter && Icon}
             </StyledButton>
         </StyledButtonBase>

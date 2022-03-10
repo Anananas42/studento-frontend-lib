@@ -1,6 +1,6 @@
 import { FC, useState } from "react";
 import styled from "styled-components";
-import { BtnCTAL } from "../../component-library/buttons/components";
+import { BtnCTAL, BtnOutlineL, BtnTertiaryL, BtnTextL } from "../../component-library/buttons/components";
 import { CheckboxRow } from "../../component-library/forms/base-components";
 import { UsernameForm, PasswordForm } from "../../component-library/forms/components";
 import { useThemeContext } from "../../component-library/ThemeProvider";
@@ -39,6 +39,12 @@ const StyledTitle = styled.div<IStyleProps>`
     }
 `;
 
+const StyledBtnRow = styled.div`
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+`;
+
 const LoginForm:FC = (props) => {
     const { login } = useUserContext();
     const { languageMap, colors, borderRadius, sectionPadding, sectionRadius } = useThemeContext();
@@ -54,8 +60,10 @@ const LoginForm:FC = (props) => {
             <StyledTitle {...styleProps}><img alt={"Studento logo"} src={logo} />Studento</StyledTitle>
             <UsernameForm value={username} setValue={setUsername} />
             <PasswordForm value={password} setValue={setPassword} />
-            <CheckboxRow value={rememberPassword} setValue={setRememberPassword} label={"Remember password"} />
-            <BtnCTAL onClick={() => login(username, password)} icon={"login"}>{languageMap.Generic.login}</BtnCTAL>
+            <CheckboxRow value={rememberPassword} setValue={setRememberPassword} label={languageMap.Generic.passwordRemember} />
+            <StyledBtnRow>
+                <BtnCTAL onClick={() => login(username, password)} icon={"login"} width={"100%"}>{languageMap.Generic.login}</BtnCTAL>
+            </StyledBtnRow>
         </StyledLoginForm>
     )
 };

@@ -14,11 +14,12 @@ const StyledCTA = styled.button<IStyledBtn>`
     font-size: ${props => props.fontSize};
     line-height: ${props => props.lineHeight};
     padding: ${props => props.padding};
-    width: fit-content;
+    width: ${props => props.width ? props.width : "fit-content"};
     height: ${props => `calc(${props.lineHeight} + 2*${props.paddingV})`};
     display: flex;
     flex-flow: row;
     align-items: center;
+    justify-content: center;
     border: none;
     text-decoration: none;
     cursor: pointer;
@@ -53,6 +54,7 @@ interface CTAProps {
     Sizes: IBtnSizes;
     onClick: Function;
     isDisabled?: boolean;
+    width?: string;
 }
 
 const BtnCTABase:FC<CTAProps> = (props) => {
