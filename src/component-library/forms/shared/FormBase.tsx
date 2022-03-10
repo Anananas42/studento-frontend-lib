@@ -8,6 +8,7 @@ interface IStyledLabel {
     borderRadius: string;
     isHorizontal?: boolean;
     isDisabled?: boolean;
+    isCompact?: boolean;
 }
 
 const StyledLabel = styled.label<IStyledLabel>`
@@ -18,7 +19,7 @@ const StyledLabel = styled.label<IStyledLabel>`
     line-height: 20px;
     width: ${props => props.isHorizontal ? "auto" : "fit-content"};
     padding-top: ${props => props.isHorizontal ? "9px" : 0};
-    padding-bottom: ${props => props.isHorizontal ? 0 : "19px"};
+    padding-bottom: ${props => props.isHorizontal ? 0 : (props.isCompact ? "12px" : "19px")};
     padding-right: ${props => props.isHorizontal ? "16px" : 0};
     white-space: nowrap;
     overflow: hidden;
@@ -49,7 +50,7 @@ interface IStyledMessageWrapper {
 }
 
 const StyledMessageWrapper = styled.div<IStyledMessageWrapper>`
-    padding-bottom: ${props => props.isCompact ? "16px" : 0};
+    padding-bottom: ${props => props.isCompact ? "24px" : 0};
 
     .message {
         color: ${props => props.isMessage ? props.msgColor : "transparent"};
@@ -93,7 +94,7 @@ const FormBase:FC<IFormProps> = (props) => {
 
     return (
         <StyledWrapper isHorizontal={isHorizontal}>
-            <StyledLabel labelColor={FormColors[formState.type].label} borderRadius={borderRadius} isHorizontal={isHorizontal} htmlFor={formId ? formId : label} isDisabled={isDisabled}>
+            <StyledLabel labelColor={FormColors[formState.type].label} borderRadius={borderRadius} isHorizontal={isHorizontal} htmlFor={formId ? formId : label} isDisabled={isDisabled} isCompact={isCompact}>
                 {label + (isOptional ? ` (${languageMap.Generic.optional})` : "")}
             </StyledLabel>
             <StyledMessageWrapper msgColor={FormColors[formState.type].note} borderRadius={borderRadius} isCompact={isCompact} isMessage={defaultNote || errorMessage}>

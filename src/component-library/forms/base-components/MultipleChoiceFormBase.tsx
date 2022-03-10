@@ -6,8 +6,6 @@ import CheckboxRow from "./CheckboxRow";
 const StyledMultipleChoice = styled.div`
     display: flex;
     flex-direction: column;
-    gap: 8px;
-
 `;
 
 interface IChoices {
@@ -45,7 +43,7 @@ const MultipleChoiceFormBase:FC<MultipleChoiceProps> = (props) => {
             {Object.keys(choices).map(choice => {
                 const identifier = formId ? formId + choice : label + choice;
                 return (
-                    <CheckboxRow key={identifier} formId={identifier} value={value[choice]} setValue={() => handleInputChange(choice)} label={choices[choice]} isDisabled={isDisabled}/>
+                    <CheckboxRow key={identifier} formId={identifier} value={value[choice]} setValue={() => handleInputChange(choice)} label={choices[choice]} isDisabled={isDisabled} isGrouped={true}/>
                 )
             })}
             </StyledMultipleChoice>

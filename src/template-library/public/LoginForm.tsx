@@ -1,6 +1,7 @@
 import { FC, useState } from "react";
 import styled from "styled-components";
 import { BtnCTAL } from "../../component-library/buttons/components";
+import { CheckboxRow } from "../../component-library/forms/base-components";
 import { UsernameForm, PasswordForm } from "../../component-library/forms/components";
 import { useThemeContext } from "../../component-library/ThemeProvider";
 import { useUserContext } from "../../component-library/UserProvider";
@@ -44,6 +45,7 @@ const LoginForm:FC = (props) => {
     
     const [username, setUsername] = useState<string>("");
     const [password, setPassword] = useState<string>("");
+    const [rememberPassword, setRememberPassword] = useState<boolean>(false);
 
     const styleProps = { fill: colors.fill, sectionShadow: colors.sectionShadow, borderRadius, sectionPadding, sectionRadius };
 
@@ -52,7 +54,8 @@ const LoginForm:FC = (props) => {
             <StyledTitle {...styleProps}><img alt={"Studento logo"} src={logo} />Studento</StyledTitle>
             <UsernameForm value={username} setValue={setUsername} />
             <PasswordForm value={password} setValue={setPassword} />
-            <BtnCTAL onClick={() => login("", "")} icon={"login"}>{languageMap.Generic.login}</BtnCTAL>
+            <CheckboxRow value={rememberPassword} setValue={setRememberPassword} label={"Remember password"} />
+            <BtnCTAL onClick={() => login(username, password)} icon={"login"}>{languageMap.Generic.login}</BtnCTAL>
         </StyledLoginForm>
     )
 };
