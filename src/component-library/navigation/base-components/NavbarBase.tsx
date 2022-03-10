@@ -14,9 +14,10 @@ import NavUserStatus from "./NavUserStatus";
 interface IStyleProps {
     fill: string;
     borderRadius: string;
+    navbarBg: string;
 }
 
-const StyledNavbarBase = styled.nav`
+const StyledNavbarBase = styled.nav<IStyleProps>`
     position: fixed;
     top: 0;
     width: 1900px;
@@ -29,6 +30,7 @@ const StyledNavbarBase = styled.nav`
     display: flex;
     align-items: stretch;
     justify-content: space-between;
+    background-color: ${props => props.navbarBg};
 `;
 
 const StyledLeftNavbar = styled.div`
@@ -98,15 +100,17 @@ const NavbarBase:FC<INavbarProps> = (props) => {
     const { colors, borderRadius } = useThemeContext();
     const { userStatus } = useUserContext();
 
+    const styleProps = { fill: colors.fill, borderRadius, navbarBg: colors.navbarBg };
+
     return (
-        <StyledNavbarBase>
+        <StyledNavbarBase {...styleProps}>
             <StyledLeftNavbar>
                 <NavLogoBtn />
                 {featureTiles && <NavFeatureTiles featureTiles={featureTiles}/>}
                 {Object.values(navButtons).map(btn => {
                     return (
                         <StyledLink to={btn.url} key={btn.title} >
-                            <StyledMiddleButton fill={colors.fill} borderRadius={borderRadius}>
+                            <StyledMiddleButton {...styleProps}>
                                 {btn.icon && <Icon fontSize={"27px"} width={'27px'} height={'27px'}>{btn.icon}</Icon>}
                                 <span>{btn.title}</span>
                             </StyledMiddleButton>

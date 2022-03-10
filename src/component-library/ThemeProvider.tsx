@@ -7,6 +7,8 @@ type ThemeMode = "light" | "dark";
 
 interface IThemeContextValue {
     borderRadius: string;
+    sectionPadding: string;
+    sectionRadius: string;
     mode: ThemeMode;
     setMode: React.Dispatch<SetStateAction<ThemeMode>>;
     language: Language;
@@ -20,6 +22,8 @@ interface IThemeContextValue {
 const ThemeContext = createContext<IThemeContextValue | undefined>(undefined);
 
 const borderRadius = "10px";
+const sectionPadding = "48px";
+const sectionRadius = "24px";
 
 export const useThemeContext = () => {
     const context = useContext(ThemeContext);
@@ -53,7 +57,7 @@ const ThemeProvider:FC<IProviderProps> = (props) => {
     }
 
     return (
-        <ThemeContext.Provider value={{ mode, setMode, language, languageMap, setLanguage, colors, borderRadius, pushSystemNotification, clearSystemNotifications}}>
+        <ThemeContext.Provider value={{ mode, setMode, language, languageMap, setLanguage, colors, borderRadius, sectionPadding, sectionRadius, pushSystemNotification, clearSystemNotifications}}>
             <SystemNotificationManager newEntry={systemNotification}/>
             { props.children }
         </ThemeContext.Provider>

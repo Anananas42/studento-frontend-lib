@@ -9,6 +9,8 @@ import logo from '../../media/logo.png';
 interface IStyleProps {
     fill: string;
     sectionShadow: string;
+    sectionPadding: string;
+    sectionRadius: string;
 }
 
 const StyledLoginForm = styled.form<IStyleProps>`
@@ -16,24 +18,34 @@ const StyledLoginForm = styled.form<IStyleProps>`
     flex-direction: column;
     background-color: #fff;
     box-shadow: ${props => props.sectionShadow};
+    border-radius: ${props => props.sectionRadius};
+    padding: ${props => props.sectionPadding};
 `;
 
 const StyledTitle = styled.div<IStyleProps>`
     color: ${props => props.fill};
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 100%;
     font-size: 32px;
-    padding: 16px 32px 64px 32px;
+    padding: 16px 0 48px 0;
     font-weight: 700;
+
+    img {
+        padding-bottom: 4px;
+        margin-left: -8px;
+    }
 `;
 
 const LoginForm:FC = (props) => {
     const { login } = useUserContext();
-    const { languageMap, colors } = useThemeContext();
+    const { languageMap, colors, borderRadius, sectionPadding, sectionRadius } = useThemeContext();
     
     const [username, setUsername] = useState<string>("");
     const [password, setPassword] = useState<string>("");
 
-    const styleProps = { fill: colors.fill, sectionShadow: colors.sectionShadow };
+    const styleProps = { fill: colors.fill, sectionShadow: colors.sectionShadow, borderRadius, sectionPadding, sectionRadius };
 
     return (
         <StyledLoginForm {...styleProps}>

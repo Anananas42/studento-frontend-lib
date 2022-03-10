@@ -1,11 +1,25 @@
 import { FC } from "react";
+import styled from "styled-components";
+
+const StyledFooter = styled.footer`
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 128px;
+    padding: 32px;
+    border-top: 2px solid rgba(69, 60, 48, 0.08);
+    color: rgba(69, 60, 48, 0.57);
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+`;
 
 const Footer:FC = (props) => {
 
     return (
-        <>
-        
-        </>
+        <StyledFooter>
+            Studento © 2022
+        </StyledFooter>
     )
 };
 

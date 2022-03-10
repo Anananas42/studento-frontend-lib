@@ -5,6 +5,7 @@ import { useUserContext } from "../component-library/UserProvider";
 import Contact from "../pages/public/Contact";
 import Home from "../pages/public/Home";
 import Login from "../pages/public/Login";
+import Footer from "../template-library/Footer";
 
 const PublicRoutes:FC = () => {
     const navigate = useNavigate();
@@ -26,6 +27,7 @@ const PublicRoutes:FC = () => {
                 <Route path={"/contact"} element={<Contact />}/>
                 <Route path={"/"} element={<Home />}/>
             </Routes>
+            <Footer />
         </>
     )
 }

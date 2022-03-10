@@ -11,6 +11,7 @@ export interface IColorSet {
     descBg: string;
     descTxt: string;
     sectionShadow: string;
+    navbarBg: string;
 
     System: {
         Error: {
@@ -45,6 +46,7 @@ export const colorsLightMode: IColorSet = {
     descBg: "#C5E3FA",
     descTxt: "#186AA8",
     sectionShadow: "2px 2px 16px -2px rgba(69, 60, 48, 0.24)",
+    navbarBg: "rgba(247, 246, 245, 1)",
 
     System: {
         Error: {
@@ -79,6 +81,7 @@ export const colorsDarkMode: IColorSet = {
     descBg: "#C5E3FA",
     descTxt: "#186AA8",
     sectionShadow: "rgba(69, 60, 48, 0.32)",
+    navbarBg: "rgba(247, 246, 245, 0.6)",
 
     System: {
         Error: {

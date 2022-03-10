@@ -22,6 +22,8 @@ const StyledContent = styled.div<{bg: string}>`
     display: flex;
     justify-content: center;
     padding-top: 90px;
+    padding-bottom: 160px;
+    min-height: 100vh;
   }
 
 `;
