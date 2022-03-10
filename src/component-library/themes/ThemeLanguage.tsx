@@ -140,7 +140,7 @@ const EnSet:ILanguageSet = {
         date: "Date",
         delete: "DELETE",
         drpDwnPlaceholder: "Choose one",
-        login: "Login",
+        login: "Log In",
         logout: "Logout",
         optional: "optional",
         password: "Password",
