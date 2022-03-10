@@ -61,6 +61,7 @@ const StyledMiddleButton = styled.div<IStyleProps>`
     padding: 16px;
     font-size: 20px;
     line-height: 20px;
+    white-space: nowrap;
 
     :hover {
         background-color: ${TextColors.Hover.bg};
