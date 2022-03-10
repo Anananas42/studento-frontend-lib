@@ -1,34 +1,13 @@
 import { FC } from "react";
 import styled from "styled-components";
-import { useThemeContext } from "../../ThemeProvider";
 import FormBase from "../shared/FormBase";
-import FormColors from "../shared/FormColors";
-import StyledCheckbox from "../shared/StyledCheckbox";
-
-interface IStyleProps {
-    borderRadius: string;
-    fill: string;
-    isDisabled?: boolean;
-}
+import CheckboxRow from "./CheckboxRow";
 
 const StyledMultipleChoice = styled.div`
     display: flex;
     flex-direction: column;
     gap: 8px;
 
-`;
-
-const StyleChoiceRow = styled.div<IStyleProps>`
-    padding-left: ${props => parseInt(props.borderRadius.split("px", 1)[0]) * 2 + "px"};
-    color: ${props => props.fill};
-
-    label {
-        padding-left: 8px;
-        font-size: 18px;
-        line-height: 18px;
-        user-select: none;
-        color: ${props => props.isDisabled ? FormColors.Disabled.label : FormColors.Default.label};
-    }
 `;
 
 interface IChoices {
@@ -55,7 +34,6 @@ interface MultipleChoiceProps {
 
 const MultipleChoiceFormBase:FC<MultipleChoiceProps> = (props) => {
     const { choices, value, setValue, isDisabled, formId, label, ...rest } = props;
-    const { borderRadius, colors } = useThemeContext();
 
     const handleInputChange = (choice: string) => {
         setValue({...value, [choice]: !value[choice]});
@@ -67,10 +45,7 @@ const MultipleChoiceFormBase:FC<MultipleChoiceProps> = (props) => {
             {Object.keys(choices).map(choice => {
                 const identifier = formId ? formId + choice : label + choice;
                 return (
-                    <StyleChoiceRow key={identifier} borderRadius={borderRadius} fill={colors.fill} isDisabled={isDisabled}>
-                        <StyledCheckbox id={identifier} type={"checkbox"} checked={value[choice]} onChange={() => handleInputChange(choice)} disabled={isDisabled} />
-                        <label htmlFor={identifier}>{choices[choice]}</label>
-                    </StyleChoiceRow>
+                    <CheckboxRow key={identifier} formId={identifier} value={value[choice]} setValue={() => handleInputChange(choice)} label={choices[choice]} isDisabled={isDisabled}/>
                 )
             })}
             </StyledMultipleChoice>
