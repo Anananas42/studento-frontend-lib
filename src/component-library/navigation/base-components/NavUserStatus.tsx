@@ -79,7 +79,7 @@ const StyledList = styled.div<IStyleProps>`
     display: none;
     background-color: #fff;
     border-radius: ${props => props.borderRadius};
-    box-shadow: 2px 2px 16px -2px ${props => props.sectionShadow};
+    box-shadow: ${props => props.sectionShadow};
     white-space: nowrap;
     cursor: default;
 `;
@@ -118,7 +118,7 @@ const StyledUserMode = styled.div<IStyleProps>`
         left: 100%;
         background-color: #fff;
         border-radius: 0 ${props => props.borderRadius} ${props => props.borderRadius} ${props => props.borderRadius};
-        box-shadow: 4px 4px 16px -2px ${props => props.sectionShadow};
+        box-shadow: ${props => props.sectionShadow};
         padding: 16px;
         cursor: default;
 

@@ -54,7 +54,7 @@ const StyledList = styled.div<IStyleProps>`
     height: fit-content;
     padding: 16px;
     border-radius: 0 16px 16px 16px;
-    box-shadow: 2px 2px 16px -2px ${props => props.sectionShadow};
+    box-shadow: ${props => props.sectionShadow};
     cursor: default;
 `;
 

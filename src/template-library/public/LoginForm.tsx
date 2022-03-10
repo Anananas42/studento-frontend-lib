@@ -6,20 +6,21 @@ import { useThemeContext } from "../../component-library/ThemeProvider";
 import { useUserContext } from "../../component-library/UserProvider";
 import logo from '../../media/logo.png';
 
-const StyledLoginForm = styled.form`
-    display: flex;
-    flex-direction: column;
-
-`;
-
 interface IStyleProps {
     fill: string;
+    sectionShadow: string;
 }
+
+const StyledLoginForm = styled.form<IStyleProps>`
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    box-shadow: ${props => props.sectionShadow};
+`;
 
 const StyledTitle = styled.div<IStyleProps>`
     color: ${props => props.fill};
     width: 100%;
-    text-align: center;
     font-size: 32px;
     padding: 16px 32px 64px 32px;
     font-weight: 700;
@@ -32,9 +33,11 @@ const LoginForm:FC = (props) => {
     const [username, setUsername] = useState<string>("");
     const [password, setPassword] = useState<string>("");
 
+    const styleProps = { fill: colors.fill, sectionShadow: colors.sectionShadow };
+
     return (
-        <StyledLoginForm>
-            <StyledTitle fill={colors.fill}><img alt={"Studento logo"} src={logo} />Studento</StyledTitle>
+        <StyledLoginForm {...styleProps}>
+            <StyledTitle {...styleProps}><img alt={"Studento logo"} src={logo} />Studento</StyledTitle>
             <UsernameForm value={username} setValue={setUsername} />
             <PasswordForm value={password} setValue={setPassword} />
             <BtnCTAL onClick={() => login("", "")} icon={"login"}>{languageMap.Generic.login}</BtnCTAL>

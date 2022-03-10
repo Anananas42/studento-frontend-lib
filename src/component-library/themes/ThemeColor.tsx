@@ -44,7 +44,7 @@ export const colorsLightMode: IColorSet = {
     bg: "#F7F6F5",
     descBg: "#C5E3FA",
     descTxt: "#186AA8",
-    sectionShadow: "rgba(69, 60, 48, 0.24)",
+    sectionShadow: "2px 2px 16px -2px rgba(69, 60, 48, 0.24)",
 
     System: {
         Error: {
