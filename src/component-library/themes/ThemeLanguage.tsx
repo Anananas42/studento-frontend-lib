@@ -1,6 +1,7 @@
 export interface ILanguageSet {
     Generic: {
         cancel: string;
+        createAccount: string;
         date: string;
         delete: string;
         drpDwnPlaceholder: string;
@@ -9,6 +10,7 @@ export interface ILanguageSet {
         optional: string;
         password: string;
         passwordConfirm: string;
+        passwordForgot: string;
         passwordPlaceholder: string;
         passwordRemember: string;
         time: string;
@@ -134,6 +136,7 @@ export interface ILanguageSet {
 const EnSet:ILanguageSet = {
     Generic: {
         cancel: "CANCEL",
+        createAccount: "Create new account",
         date: "Date",
         delete: "DELETE",
         drpDwnPlaceholder: "Choose one",
@@ -142,6 +145,7 @@ const EnSet:ILanguageSet = {
         optional: "optional",
         password: "Password",
         passwordConfirm: "Confirm password",
+        passwordForgot: "Forgot password",
         passwordPlaceholder: "",
         passwordRemember: "Remember password",
         time: "Time",
@@ -267,6 +271,7 @@ const EnSet:ILanguageSet = {
 const CzSet:ILanguageSet = {
     Generic: {
         cancel: "ZRUŠIT",
+        createAccount: "Vytvořit účet",
         date: "Datum",
         delete: "SMAZAT",
         drpDwnPlaceholder: "Vybrat možnost",
@@ -275,6 +280,7 @@ const CzSet:ILanguageSet = {
         optional: "volitelné",
         password: "Heslo",
         passwordConfirm: "Potvrdit heslo",
+        passwordForgot: "Zapomenuté heslo",
         passwordPlaceholder: "",
         passwordRemember: "Zapamatovat přihlášení",
         time: "Čas",
