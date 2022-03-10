@@ -66,7 +66,7 @@ const LoginForm:FC = (props) => {
             <UsernameForm value={username} setValue={setUsername} />
             <PasswordForm value={password} setValue={setPassword} />
             <CheckboxRow value={rememberPassword} setValue={setRememberPassword} label={languageMap.Generic.passwordRemember} />
-            <BtnCTAL onClick={() => login(username, password)} icon={"login"} width={"100%"}>{languageMap.Generic.login}</BtnCTAL>
+            <BtnCTAL onClick={() => login(username, password)} width={"100%"}>{languageMap.Generic.login}</BtnCTAL>
             <StyledForgotPassword {...styleProps}>
                 <BtnLinkS onClick={() => console.log("haha")}>{languageMap.Generic.passwordForgot}</BtnLinkS>
                 <BtnLinkS onClick={() => console.log("haha")}>{languageMap.Generic.createAccount}</BtnLinkS>
