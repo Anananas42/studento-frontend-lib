@@ -57,10 +57,10 @@ export interface ILanguageSet {
     },
     Navigation: {
         absences: string;
+        add: string;
         admissions: string;
         class: string;
         contact: string;
-        create: string;
         diplomas: string;
         documentation: string;
         employees: string;
@@ -193,10 +193,10 @@ const EnSet:ILanguageSet = {
     },
     Navigation: {
         absences: "Absences",
+        add: "Add",
         admissions: "Admissions",
         class: "Class",
         contact: "Contact us",
-        create: "Create",
         diplomas: "Diplomas",
         documentation: "Documentation",
         employees: "Employees",
@@ -330,10 +330,10 @@ const CzSet:ILanguageSet = {
     },
     Navigation: {
         absences: "Absence",
+        add: "Přidat",
         admissions: "Přijímací Proces",
         class: "Třída",
         contact: "Napište nám",
-        create: "Přidat",
         diplomas: "Vysvědčení",
         documentation: "Manuál",
         employees: "Zaměstnanci",

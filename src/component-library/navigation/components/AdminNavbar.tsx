@@ -20,7 +20,7 @@ const AdminNavbar:FC = () => {
     const navButtons = {
         home: {title: translations.home, icon: "home", url: "/admin"},
         find: {title: translations.find, icon: "search", url: "find"},
-        create: {title: translations.create, icon: "add", url: "create"},
+        add: {title: translations.add, icon: "add", url: "add"},
         
     };
 
