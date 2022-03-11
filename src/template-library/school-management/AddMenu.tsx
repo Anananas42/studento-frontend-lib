@@ -35,7 +35,7 @@ const StyledTile = styled.div<IStyledProps>`
     
     :hover {
         background: linear-gradient(20deg, ${props => props.primary}, white),
-                    radial-gradient(circle farthest-corner at 60% -40%,
+                    radial-gradient(circle closest-corner at 0% 0%,
                                 white, white 20%, ${props => props.primary});
     }
 `;
