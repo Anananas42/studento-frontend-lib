@@ -132,6 +132,14 @@ export interface ILanguageSet {
         placeOfBirth: string;
         startDate: string;
         insuranceCompany: string;
+    },
+    SchoolManagement: {
+        class: string;
+        employee: string;
+        room: string;
+        student: string;
+        subject: string;
+        teacher: string;
     }
 }
 
@@ -269,6 +277,14 @@ const EnSet:ILanguageSet = {
         startDate: "Start date",
         insuranceCompany: "Insurance provider",
     },
+    SchoolManagement: {
+        class: "Class",
+        employee: "Employee",
+        room: "Room",
+        student: "Student",
+        subject: "Subject",
+        teacher: "Teacher",
+    }
     
 }
 
@@ -406,6 +422,14 @@ const CzSet:ILanguageSet = {
         startDate: "Datum nastoupení",
         insuranceCompany: "Pojišťovna",
     },
+    SchoolManagement: {
+        class: "Třída",
+        employee: "Zaměstnanec",
+        room: "Místnost",
+        student: "Student",
+        subject: "Předmět",
+        teacher: "Učitel",
+    }
 }
 
 interface ILanguageSets {
