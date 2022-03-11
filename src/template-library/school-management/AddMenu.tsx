@@ -15,7 +15,6 @@ interface IStyledProps {
 
 const StyledAddMenu = styled.div<IStyledProps>`
     display: grid;
-    padding-top: 64px;
     height: fit-content;
     grid-template-columns: repeat(3, 1fr);
     grid-auto-flow: row;
