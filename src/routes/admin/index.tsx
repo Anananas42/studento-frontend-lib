@@ -6,6 +6,7 @@ import AdminDashboard from "../../pages/admin";
 import AdminProfile from "../../pages/admin/Profile";
 import useUserRedirect from "./../utilities/useUserRedirect";
 import AdminAddRoutes from "./add";
+import AdminFindRoutes from "./find";
 
 const AdminRoutes:FC = () => {
     useUserRedirect(UserMode.ADMIN);
@@ -15,6 +16,7 @@ const AdminRoutes:FC = () => {
             <AdminNavbar />
             <Routes>
                 <Route path={"/add/*"} element={<AdminAddRoutes />} />
+                <Route path={"/find/*"} element={<AdminFindRoutes />} />
                 <Route path={"/profile"} element={<AdminProfile />}/>
                 <Route path={"/"} element={<AdminDashboard />}/>
             </Routes>

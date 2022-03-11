@@ -140,6 +140,10 @@ export interface ILanguageSet {
         student: string;
         subject: string;
         teacher: string;
+
+        AddPage: {
+            recentlyAdded: string;
+        }
     }
 }
 
@@ -284,6 +288,10 @@ const EnSet:ILanguageSet = {
         student: "Student",
         subject: "Subject",
         teacher: "Teacher",
+
+        AddPage: {
+            recentlyAdded: "Recently added",
+        }
     }
     
 }
@@ -429,6 +437,10 @@ const CzSet:ILanguageSet = {
         student: "Student",
         subject: "Předmět",
         teacher: "Učitel",
+
+        AddPage: {
+            recentlyAdded: "Nedávno přidané",
+        }
     }
 }
 

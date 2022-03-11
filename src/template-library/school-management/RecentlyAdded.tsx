@@ -2,6 +2,7 @@ import { FC } from "react"
 import styled from "styled-components";
 import { useThemeContext } from "../../component-library/ThemeProvider";
 import { IconL } from "../../component-library/utilities/Icon";
+import StyledLink from "../../component-library/utilities/StyledLink";
 import { AddIconMap } from "./AddMenu";
 
 enum AddedItemType {
@@ -18,6 +19,8 @@ interface IStyleProps {
     sectionShadow: string;
     sectionPadding: string;
     fill: string;
+    primary: string;
+    primaryAlt: string;
     borderRadius: string;
 };
 
@@ -37,15 +40,19 @@ const StyledTitle = styled.div`
 `;
 
 const StyledItem = styled.div<IStyleProps>`
+    position: relative;
     display: flex;
     align-items: center;
     border-radius: ${props => props.borderRadius};
     background-color: #fff;
     padding: 8px;
     box-shadow: 2px 2px 8px -2px #453c3042;
-    width: 320px;
+    width: 360px;
+    cursor: pointer;
+    transition: all 0.1s ease-in-out;
+    user-select: none;
 
-    > div {
+    > div:first-child {
         padding-bottom: 4px;
         min-width: 50px;
     }
@@ -55,6 +62,28 @@ const StyledItem = styled.div<IStyleProps>`
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
+        padding-right: 40px;
+    }
+
+    > div:last-child {
+        position: absolute;
+        color: ${props => props.fill};
+        right: 8px;
+        top: 7px;
+        opacity: 0;
+        transition: all 0.15s ease-in-out;
+    }
+
+    :hover {
+        > div:last-child {
+            transform: translateX(4px);
+            color: ${props => props.fill};
+            opacity: 1;
+        }
+    }
+
+    :hover {
+        background-color: ${props => props.primary};
     }
 `;
 
@@ -79,19 +108,22 @@ const items:Array<IItem> = [
 
 const RecentlyAdded:FC = () => {
     const { sectionRadius, colors, sectionPadding, borderRadius, languageMap } = useThemeContext();
-    const styleProps = { sectionRadius, sectionPadding, sectionShadow: colors.sectionShadow, fill: colors.fill, borderRadius };
+    const styleProps = { sectionRadius, sectionPadding, sectionShadow: colors.sectionShadow, fill: colors.fill, primary: colors.primary, primaryAlt: colors.primaryAlt, borderRadius };
 
     return (
         <StyledRecentlyAdded {...styleProps}>    
             <StyledTitle {...styleProps}>
-                {"Recently added"}
+                {languageMap.SchoolManagement.AddPage.recentlyAdded}
             </StyledTitle>
             {items.map(item => {
                 return (
-                    <StyledItem {...styleProps}>
-                        <IconL>{AddIconMap[item.type]}</IconL>
-                        <span>{item.name}</span>
-                    </StyledItem>
+                    <StyledLink key={item.type + item.id} to={`./find/${item.type}/${item.id}`}>
+                        <StyledItem {...styleProps}>
+                            <IconL>{AddIconMap[item.type]}</IconL>
+                            <span>{item.name}</span>
+                            <IconL>arrow_forward</IconL>
+                        </StyledItem>
+                    </StyledLink>
                 )
             })}
         </StyledRecentlyAdded>
