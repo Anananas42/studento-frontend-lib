@@ -6,7 +6,6 @@ import StyledLink from "../../component-library/utilities/StyledLink";
 
 interface IStyledProps {
     fill: string;
-    fillSecondary: string;
     primary: string;
     sectionRadius: string;
     sectionShadow: string;
@@ -36,7 +35,7 @@ const StyledTile = styled.div<IStyledProps>`
     :hover {
         background: linear-gradient(20deg, ${props => props.primary}, white),
                     radial-gradient(circle closest-corner at 0% 0%,
-                                white, white 20%, ${props => props.primary});
+                                white, white 20%, ${props => props.primary}); 
     }
 `;
 
@@ -53,69 +52,40 @@ const StyledOptionTitle = styled.div<IStyledProps>`
 
 `;
 
-const StyledOptionDesc = styled.div<IStyledProps>`
-    color: ${props => props.fillSecondary};
 
-`;
+const options = [
+    "student",
+    "teacher",
+    "subject",
+    "class",
+    "room",
+    "employee",
+];
 
-interface IOptions {
-    [key: string]: {
-        description: string;
-        url: string;
-        icon: string;
-    }
-}
-
-const options:IOptions = {
-    student: {
-        description: "",
-        url: "student",
-        icon: "person",
-    },
-    teacher: {
-        description: "",
-        url: "teacher",
-        icon: "assignment_ind",
-    },
-    subject: {
-        description: "",
-        url: "subject",
-        icon: "school",
-    },
-    class: {
-        description: "",
-        url: "class",
-        icon: "groups",
-    },
-    room: {
-        description: "",
-        url: "room",
-        icon: "meeting_room",
-    },
-    employee: {
-        description: "",
-        url: "employee",
-        icon: "badge",
-    }
-
+export const AddIconMap:any = {
+    class: "groups",
+    employee: "badge",
+    room: "meeting_room",
+    student: "person",
+    subject: "school",
+    teacher: "assignment_ind",
 }
 
 const AddMenu:FC = () => {
     const { sectionRadius, sectionPadding, colors, languageMap } = useThemeContext();
-    const styleProps = { sectionRadius, sectionPadding, sectionShadow: colors.sectionShadow, fill: colors.fill, fillSecondary: colors.fillSecondary, primary: colors.primary };
+    const styleProps = { sectionRadius, sectionPadding, sectionShadow: colors.sectionShadow, fill: colors.fill, primary: colors.primary };
 
     const translations:any = languageMap.SchoolManagement;
 
     return (
         <StyledAddMenu {...styleProps}>
-            {Object.keys(options).map((key) => {
+            {options.map(opt => {
                 return (
-                    <StyledLink key={key} to={options[key].url}>
+                    <StyledLink key={opt} to={opt}>
                         <StyledTile {...styleProps}>
-                            <Icon fontSize={"56px"}>{options[key].icon}</Icon>
+                            <Icon fontSize={"56px"}>{AddIconMap[opt]}</Icon>
                             <div>
-                                <StyledOptionTitle {...styleProps}><Icon fontSize={"40px"}>add</Icon><span>{translations[key]}</span></StyledOptionTitle>
-                                <StyledOptionDesc {...styleProps}>{options[key].description}</StyledOptionDesc>
+                                <StyledOptionTitle {...styleProps}><Icon fontSize={"40px"}>add</Icon><span>{translations[opt]}</span></StyledOptionTitle>
                             </div>
                         </StyledTile>
                     </StyledLink>

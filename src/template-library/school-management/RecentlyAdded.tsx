@@ -1,6 +1,8 @@
 import { FC } from "react"
 import styled from "styled-components";
 import { useThemeContext } from "../../component-library/ThemeProvider";
+import { IconL } from "../../component-library/utilities/Icon";
+import { AddIconMap } from "./AddMenu";
 
 enum AddedItemType {
     CLASS = "class",
@@ -16,6 +18,7 @@ interface IStyleProps {
     sectionShadow: string;
     sectionPadding: string;
     fill: string;
+    borderRadius: string;
 };
 
 
@@ -23,44 +26,60 @@ const StyledRecentlyAdded = styled.div<IStyleProps>`
     display: flex;
     flex-direction: column;
     height: fit-content;
-    background-color: #fff;
-    border-radius: ${props => props.sectionRadius};
-    box-shadow: ${props => props.sectionShadow};
-    padding: ${props => props.sectionPadding};
     color: ${props => props.fill};
-    min-width: 320px;
+    width: fit-content;
+    gap: 16px;
 `;
 
 const StyledTitle = styled.div`
-    font-size: 24px;
+    font-size: 28px;
+    padding-bottom: 8px;
 `;
 
-const StyledItem = styled.div`
+const StyledItem = styled.div<IStyleProps>`
+    display: flex;
+    align-items: center;
+    border-radius: ${props => props.borderRadius};
+    background-color: #fff;
+    padding: 8px;
+    box-shadow: 2px 2px 8px -2px #453c3042;
+    width: 320px;
 
+    > div {
+        padding-bottom: 4px;
+        min-width: 50px;
+    }
+
+    > span {
+        font-size: 20px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
 `;
 
 interface IItem {
     name: string;
-    date: string;
+    id: number;
     type: AddedItemType;
 }
 
 const items:Array<IItem> = [
     {
         name: "4.C",
-        date: new Date().toDateString(),
+        id: 42,
         type: AddedItemType.CLASS,
     },
     {
         name: "Nikolai Kapustin",
-        date: new Date().toDateString(),
+        id: 43,
         type: AddedItemType.STUDENT,
     },
 ];
 
 const RecentlyAdded:FC = () => {
-    const { sectionRadius, colors, sectionPadding, languageMap } = useThemeContext();
-    const styleProps = { sectionRadius, sectionPadding, sectionShadow: colors.sectionShadow, fill: colors.fill };
+    const { sectionRadius, colors, sectionPadding, borderRadius, languageMap } = useThemeContext();
+    const styleProps = { sectionRadius, sectionPadding, sectionShadow: colors.sectionShadow, fill: colors.fill, borderRadius };
 
     return (
         <StyledRecentlyAdded {...styleProps}>    
@@ -69,8 +88,9 @@ const RecentlyAdded:FC = () => {
             </StyledTitle>
             {items.map(item => {
                 return (
-                    <StyledItem>
-                        {item.name}
+                    <StyledItem {...styleProps}>
+                        <IconL>{AddIconMap[item.type]}</IconL>
+                        <span>{item.name}</span>
                     </StyledItem>
                 )
             })}
