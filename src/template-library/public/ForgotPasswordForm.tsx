@@ -31,7 +31,7 @@ const StyledTitle = styled.div<IStyleProps>`
     align-items: center;
     justify-content: center;
     width: 100%;
-    font-size: 32px;
+    font-size: 24px;
     padding: 16px 0 48px 0;
     font-weight: 500;
 `;
