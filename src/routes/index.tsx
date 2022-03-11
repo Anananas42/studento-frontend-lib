@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { Route, Routes } from "react-router";
-import AdminRoutes from "./AdminRoutes";
+import AdminRoutes from "./admin";
 import DocumentationRoutes from "./DocumentationRoutes";
 import ParentRoutes from "./ParentRoutes";
 import PrincipalRoutes from "./PrincipalRoutes";
