@@ -46,8 +46,8 @@ const AdminAddClass:FC = () => {
 
     const ButtonRow = <StyledButtonRow>
         {currentStep > 0 && <BtnTertiaryL icon={"arrow_back"} onClick={() => setCurrentStep((currentStep - 1) % steps.length)}>Back</BtnTertiaryL>}
-        {currentStep < steps.length && <BtnPrimaryL icon={"arrow_forward"} isAfter={true} onClick={() => setCurrentStep((currentStep + 1) % steps.length)}>Next</BtnPrimaryL>}
-        {currentStep === steps.length - 1 && <BtnConfirmL icon={"done"} onClick={() => console.log("done")}>Done</BtnConfirmL>}
+        {currentStep < steps.length - 1 && <BtnPrimaryL icon={"arrow_forward"} isAfter={true} onClick={() => setCurrentStep((currentStep + 1) % steps.length)}>Next</BtnPrimaryL>}
+        {currentStep === steps.length - 1 && <BtnConfirmL icon={"done"} onClick={() => console.log("done")}>Finish</BtnConfirmL>}
     </StyledButtonRow>;
 
     const stepProps = { title, ButtonRow };
