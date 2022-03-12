@@ -9,12 +9,12 @@ const StyledDetailForm = styled.div`
 const StyledRow = styled.div`
     display: flex;
     justify-content: flex-start;
-    gap: 32px;
+    gap: 24px;
 `;
 
 const DetailForm:FC = () => {
-    const [classYear, setClassYear] = useState<string>("");
-    const [classCode, setClassCode] = useState<string>("");
+    const [grade, setGrade] = useState<string>("");
+    const [code, setCode] = useState<string>("");
     const [classTeacher, setClassTeacher] = useState<string>("");
     const [secondTeacher, setSecondTeacher] = useState<string>("");
     const [room, setRoom] = useState<string>("");
@@ -50,8 +50,8 @@ const DetailForm:FC = () => {
     return (
         <StyledDetailForm>
             <StyledRow>
-                <DropdownFormBase label={"Class year"} value={classYear} setValue={setClassYear} width={"110px"} options={yearOptions} placeholder={" "}/>
-                <TextFormBase label={"Class code"} value={classCode} setValue={setClassCode} placeholder={""} width={"110px"} />
+                <DropdownFormBase label={"Grade"} value={grade} setValue={setGrade} width={"108px"} options={yearOptions} placeholder={" "}/>
+                <TextFormBase label={"Code"} value={code} setValue={setCode} placeholder={""} width={"108px"} />
                 <DropdownSearchFormBase label={"Room"} value={room} setValue={setRoom} options={roomOptions} width={"100%"} isOptional={true} />
             </StyledRow>
             <DropdownSearchFormBase  label={"Class teacher"} options={teacherOptions} value={classTeacher} setValue={setClassTeacher} />
