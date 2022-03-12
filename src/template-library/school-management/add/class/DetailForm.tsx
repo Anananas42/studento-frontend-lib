@@ -1,6 +1,6 @@
 import { FC, useState } from "react";
 import styled from "styled-components";
-import { DropdownFormBase, DropdownSearchFormBase, TextFormBase } from "../../../../component-library/forms/base-components";
+import { DropdownFormBase, DropdownSearchFormBase, TextAreaFormBase, TextFormBase } from "../../../../component-library/forms/base-components";
 
 const StyledDetailForm = styled.div`
     width: 480px;
@@ -16,7 +16,9 @@ const DetailForm:FC = () => {
     const [classYear, setClassYear] = useState<string>("");
     const [classCode, setClassCode] = useState<string>("");
     const [classTeacher, setClassTeacher] = useState<string>("");
+    const [secondTeacher, setSecondTeacher] = useState<string>("");
     const [room, setRoom] = useState<string>("");
+    const [note, setNote] = useState<string>("");
     
     const teacherOptions = {
         randomGuy1: "Alfred Nobel",
@@ -48,11 +50,13 @@ const DetailForm:FC = () => {
     return (
         <StyledDetailForm>
             <StyledRow>
-                <DropdownFormBase label={"Class year"} value={classYear} setValue={setClassYear} width={"120px"} options={yearOptions} placeholder={" "}/>
-                <TextFormBase label={"Class code"} value={classCode} setValue={setClassCode} placeholder={""} width={"120px"} />
+                <DropdownFormBase label={"Class year"} value={classYear} setValue={setClassYear} width={"110px"} options={yearOptions} placeholder={" "}/>
+                <TextFormBase label={"Class code"} value={classCode} setValue={setClassCode} placeholder={""} width={"110px"} />
                 <DropdownSearchFormBase label={"Room"} value={room} setValue={setRoom} options={roomOptions} width={"100%"} />
             </StyledRow>
             <DropdownSearchFormBase  label={"Class teacher"} options={teacherOptions} value={classTeacher} setValue={setClassTeacher} />
+            <DropdownSearchFormBase  label={"Backup teacher"} options={teacherOptions} value={secondTeacher} setValue={setSecondTeacher} />
+            <TextAreaFormBase label={"Note"} value={note} setValue={setNote} placeholder={"Additional information..."}/>
         </StyledDetailForm>
     );
 }

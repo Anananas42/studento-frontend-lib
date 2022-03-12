@@ -28,6 +28,7 @@ const StyledTextArea = styled.textarea<IStyledTextArea>`
 
     ::placeholder {
         color: ${FormColors.Default.placeholder};
+        opacity: 1;
     }
 
     :disabled {
