@@ -20,6 +20,8 @@ const StyledCurrentInput = styled.input<IStyledSelect>`
     color: ${props => props.placeholderFill};
     font-family: 'Varela Round', sans-serif;
     margin: 0 0 0 16px;
+    padding-right: 32px;
+    text-overflow: ellipsis;
     user-select: none;
 
     -moz-appearance: none;

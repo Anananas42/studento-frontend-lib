@@ -24,7 +24,7 @@ const StyledTextArea = styled.textarea<IStyledTextArea>`
     padding: 8px ${props => props.borderRadius} ${props => props.icon ? "8px 50px" : ""};
     font-family: 'Varela Round', sans-serif;
     width: ${props => props.width || "100%"};
-    height: ${props => props.height || "132px"};
+    height: ${props => props.height || ""};
 
     ::placeholder {
         color: ${FormColors.Default.placeholder};

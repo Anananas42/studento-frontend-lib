@@ -12,8 +12,8 @@ const StyledProgressLine = styled.div<IStyleProps>`
     display: flex;
     justify-content: space-between;
     width: 100%;
-    margin-top: 88px;
-    padding-bottom: 48px;
+    margin-top: 64px;
+    padding-bottom: 16px;
 
     > div::before {
         position: absolute;
