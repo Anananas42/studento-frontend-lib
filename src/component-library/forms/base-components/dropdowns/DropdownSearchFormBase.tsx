@@ -136,7 +136,7 @@ const DropdownSearchFormBase:FC<IProps> = (props) => {
     }
 
     return (
-        <FormBase formId={formId} label={label} isDisabled={isDisabled} errorMessage={errorMessage} {...rest}>
+        <FormBase formId={formId} label={label} isDisabled={isDisabled} errorMessage={errorMessage} width={width} {...rest}>
             <StyledAccessibleSelect aria-labelledby={label} value={value} onChange={(e) => {setValue(e.target.value)}} id={formId ? formId : label} disabled={isDisabled} {...styleProps}>
                 {Object.keys(options).map(optKey => {
                     return <option key={optKey} value={optKey} onClick={() => setCurrOptionName(options[optKey])} disabled={isDisabled}>{options[optKey]}</option>

@@ -142,7 +142,7 @@ const DropdownGroupedSearchFormBase:FC<IProps> = (props) => {
     }
 
     return (
-        <FormBase formId={formId} label={label} isDisabled={isDisabled} errorMessage={errorMessage} {...rest}>
+        <FormBase formId={formId} label={label} isDisabled={isDisabled} errorMessage={errorMessage} width={width} {...rest}>
             <StyledAccessibleSelect aria-labelledby={label} value={value} onChange={(e) => {setValue(e.target.value)}} id={formId ? formId : label} disabled={isDisabled} {...styleProps}>
                 {Object.values(optionGroups).map(group => {
                     return Object.keys(group.options).map(optKey => {

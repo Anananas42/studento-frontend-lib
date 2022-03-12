@@ -28,6 +28,7 @@ const StyledLabel = styled.label<IStyledLabel>`
 
 interface IStyledWrapper {
     isHorizontal?: boolean;
+    width?: string;
 }
 
 const StyledWrapper = styled.div<IStyledWrapper>`
@@ -35,7 +36,7 @@ const StyledWrapper = styled.div<IStyledWrapper>`
     flex-direction: ${props => props.isHorizontal ? "row" : "column"};
     justify-content: ${props => props.isHorizontal ? "flex-end" : "flex-start"};
     gap: ${props => props.isHorizontal ? "16px" : ""};
-    width: 100%;
+    width: ${props => props.width ? props.width : "100%"};
 `;
 
 const StyledIconAnchor = styled.div`
@@ -75,10 +76,11 @@ export interface IFormProps {
     isDisabled?: boolean;
     children: ReactNode;
     isCompact?: boolean;
+    width?: string;
 }
 
 const FormBase:FC<IFormProps> = (props) => {
-    const { isHorizontal, isDisabled, label, formId, defaultNote, errorMessage, children, isCompact, isOptional } = props;
+    const { isHorizontal, isDisabled, label, formId, defaultNote, errorMessage, children, isCompact, isOptional, width } = props;
     const [formState, setFormState] = useState<IFormState>({type: isDisabled ? StateType.Disabled : StateType.Default, message: defaultNote});
     const { borderRadius, languageMap } = useThemeContext();
 
@@ -93,7 +95,7 @@ const FormBase:FC<IFormProps> = (props) => {
     }, [errorMessage, defaultNote, isDisabled]);
 
     return (
-        <StyledWrapper isHorizontal={isHorizontal}>
+        <StyledWrapper isHorizontal={isHorizontal} width={width}>
             <StyledLabel labelColor={FormColors[formState.type].label} borderRadius={borderRadius} isHorizontal={isHorizontal} htmlFor={formId ? formId : label} isDisabled={isDisabled} isCompact={isCompact}>
                 {label + (isOptional ? ` (${languageMap.Generic.optional})` : "")}
             </StyledLabel>

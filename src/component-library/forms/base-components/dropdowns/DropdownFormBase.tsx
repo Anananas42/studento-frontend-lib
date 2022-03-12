@@ -15,6 +15,7 @@ interface IProps {
     setValue: React.Dispatch<React.SetStateAction<string>>;
     options: IOptions;
     label: string;
+    placeholder?: string;
     formId?: string;
     isHorizontal?: boolean;
     isCompact?: boolean;
@@ -25,12 +26,13 @@ interface IProps {
 };
 
 const DropdownFormBase:FC<IProps> = (props) => {
-    const { value, setValue, options, formId, isDisabled, errorMessage, label, width, ...rest } = props;
+    const { value, setValue, options, formId, isDisabled, errorMessage, label, width, placeholder, ...rest } = props;
     const { borderRadius, colors, languageMap } = useThemeContext();
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const customDropdownRef = useRef<any>();
     const dropdownWrapperRef = useRef<any>();
 
+    const placeholderText = placeholder ? placeholder : (!value ? languageMap.Generic.drpDwnPlaceholder : options[value]);
     const placeholderFill = !value ? FormColors.Default.placeholder : colors.fill;
     const styleProps = { borderRadius, errorMessage, fill: colors.fill, placeholderFill, isOpen, isDisabled, width };
 
@@ -61,7 +63,7 @@ const DropdownFormBase:FC<IProps> = (props) => {
     }, [isDisabled, setValue]);
 
     return (
-        <FormBase formId={formId} label={label} isDisabled={isDisabled} errorMessage={errorMessage} {...rest}>
+        <FormBase formId={formId} label={label} isDisabled={isDisabled} errorMessage={errorMessage} width={width} {...rest}>
             <StyledAccessibleSelect disabled={isDisabled} aria-labelledby={label} value={value} onChange={(e) => {setValue(e.target.value)}} id={formId ? formId : label} {...styleProps}>
             {Object.keys(options).map(optKey => {
                     return <option key={optKey} value={optKey} disabled={isDisabled}>{options[optKey]}</option>
@@ -70,7 +72,7 @@ const DropdownFormBase:FC<IProps> = (props) => {
             </StyledAccessibleSelect>
             <div ref={dropdownWrapperRef}>
                 <StyledCustomDropdown ref={customDropdownRef} aria-hidden={true} onClick={() => {!isDisabled && setIsOpen(!isOpen)}} {...styleProps}>
-                    <StyledCurrentSelection>{isDisabled ? "" : (!value ? languageMap.Generic.drpDwnPlaceholder : options[value])}</StyledCurrentSelection>
+                    <StyledCurrentSelection>{isDisabled ? "" : placeholderText}</StyledCurrentSelection>
                     <StyledChevron {...styleProps}><IconL>expand_more</IconL></StyledChevron>
                 </StyledCustomDropdown>
                 <StyledList {...styleProps} isOpen={isOpen} >

@@ -77,7 +77,7 @@ const TextFormBase:FC<ITextFormProps> = (props) => {
     const { borderRadius, colors } = useThemeContext();
 
     return (
-        <FormBase label={label} errorMessage={errorMessage} isDisabled={isDisabled} isCompact={isCompact} formId={formId} {...rest}>
+        <FormBase label={label} errorMessage={errorMessage} isDisabled={isDisabled} isCompact={isCompact} formId={formId} width={width} {...rest}>
             {icon && 
                 <StyledIconWrapper>
                     <IconL>{icon}</IconL>
