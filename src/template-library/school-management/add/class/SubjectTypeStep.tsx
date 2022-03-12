@@ -5,7 +5,7 @@ const SubjectTypeStep:FC = () => {
 
     return (
         <>
-        
+            subject type step
         </>
     );
 }

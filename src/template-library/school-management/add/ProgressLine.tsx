@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC } from "react";
 import styled from "styled-components";
 import { useThemeContext } from "../../../component-library/ThemeProvider";
 
@@ -12,7 +12,8 @@ const StyledProgressLine = styled.div<IStyleProps>`
     display: flex;
     justify-content: space-between;
     width: 100%;
-    margin-top: 72px;
+    margin-top: 88px;
+    padding-bottom: 48px;
 
     > div::before {
         position: absolute;
@@ -74,31 +75,31 @@ const StyledProgressItem = styled.div<IStyleProps>`
     }
 `;
 
-const steps:Array<string> = [
-    "Details",
-    "Students",
-    "Subject types",
-    "Subjects",
-]
+interface IProgressLineProps {
+    steps: Array<string>;
+    currentStep: number;
+}
 
-const ProgressLine:FC = () => {
-    const [counter, setCounter] = useState<number>(2);
+const ProgressLine:FC<IProgressLineProps> = (props) => {
+    const { steps, currentStep } = props;
     const { colors } = useThemeContext();
 
     const styleProps = { fill: colors.fill, disabled: colors.fillDisabled, secondary: colors.secondary};
 
     return (
-        <StyledProgressLine {...styleProps}>
-            {steps.map((step, i) => {
-                return (
-                <StyledProgressItem key={i} className={i < counter ? "completed" : (i === counter ? "active" : "disabled")} {...styleProps}>
-                    <div>
-                        <span>{step}</span>
-                    </div>
-                </StyledProgressItem>
-                )
-            })}
-        </StyledProgressLine>
+        <>
+            <StyledProgressLine {...styleProps}>
+                {steps.map((step, i) => {
+                    return (
+                    <StyledProgressItem key={i} className={i < currentStep ? "completed" : (i === currentStep ? "active" : "disabled")} {...styleProps}>
+                        <div>
+                            <span>{step}</span>
+                        </div>
+                    </StyledProgressItem>
+                    )
+                })}
+            </StyledProgressLine>
+        </>
     );
 }
 

@@ -5,7 +5,7 @@ const StudentStep:FC = () => {
 
     return (
         <>
-        
+            student step
         </>
     );
 }
