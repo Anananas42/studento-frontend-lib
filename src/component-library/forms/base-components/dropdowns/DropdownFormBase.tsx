@@ -32,7 +32,7 @@ const DropdownFormBase:FC<IProps> = (props) => {
     const customDropdownRef = useRef<any>();
     const dropdownWrapperRef = useRef<any>();
 
-    const placeholderText = placeholder ? placeholder : (!value ? languageMap.Generic.drpDwnPlaceholder : options[value]);
+    const placeholderText = !value ? (placeholder ? placeholder : languageMap.Generic.drpDwnPlaceholder) : options[value];
     const placeholderFill = !value ? FormColors.Default.placeholder : colors.fill;
     const styleProps = { borderRadius, errorMessage, fill: colors.fill, placeholderFill, isOpen, isDisabled, width };
 

@@ -9,7 +9,7 @@ const StyledDetailForm = styled.div`
 const StyledRow = styled.div`
     display: flex;
     justify-content: flex-start;
-    gap: 0px;
+    gap: 32px;
 `;
 
 const DetailForm:FC = () => {
@@ -47,12 +47,12 @@ const DetailForm:FC = () => {
 
     return (
         <StyledDetailForm>
-            <DropdownSearchFormBase  label={"Class teacher"} options={teacherOptions} value={classTeacher} setValue={setClassTeacher} />
             <StyledRow>
-                <DropdownFormBase label={"Class year"} value={classYear} setValue={setClassYear} width={"140px"} options={yearOptions} placeholder={" "}/>
-                <TextFormBase label={"Class code"} value={classCode} setValue={setClassCode} placeholder={""} width={"140px"} />
+                <DropdownFormBase label={"Class year"} value={classYear} setValue={setClassYear} width={"120px"} options={yearOptions} placeholder={" "}/>
+                <TextFormBase label={"Class code"} value={classCode} setValue={setClassCode} placeholder={""} width={"120px"} />
+                <DropdownSearchFormBase label={"Room"} value={room} setValue={setRoom} options={roomOptions} width={"100%"} />
             </StyledRow>
-            <DropdownSearchFormBase label={"Room"} value={room} setValue={setRoom} options={roomOptions} width={"280px"} />
+            <DropdownSearchFormBase  label={"Class teacher"} options={teacherOptions} value={classTeacher} setValue={setClassTeacher} />
         </StyledDetailForm>
     );
 }
