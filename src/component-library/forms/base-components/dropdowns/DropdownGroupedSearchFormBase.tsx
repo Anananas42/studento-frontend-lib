@@ -27,6 +27,10 @@ const StyledCurrentInput = styled.input<IStyledSelect>`
     appearance: none;
 `;
 
+interface IOptionGroups {
+    [key: string]: {title: string, options: IOptions};
+}
+
 interface IOptions {
     [key: string]: string; // key in english, value in local language
 };
@@ -34,7 +38,7 @@ interface IOptions {
 interface IProps {
     value: string;
     setValue: React.Dispatch<React.SetStateAction<string>>;
-    options: IOptions;
+    optionGroups: IOptionGroups;
     label: string;
     formId?: string;
     isHorizontal?: boolean;
@@ -56,8 +60,8 @@ const findClosestOption = (options: {[key: string]: string[][]}, input: string) 
     return (i !== len) ? options.insensitive[i][0] : undefined;
 }
 
-const DropdownSearchFormBase:FC<IProps> = (props) => {
-    const { value, setValue, options, formId, isDisabled, errorMessage, label, width, ...rest } = props;
+const DropdownGroupedSearchFormBase:FC<IProps> = (props) => {
+    const { value, setValue, optionGroups, formId, isDisabled, errorMessage, label, width, ...rest } = props;
     const { borderRadius, colors, languageMap } = useThemeContext();
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const [currOptionName, setCurrOptionName] = useState<string>();
@@ -73,7 +77,9 @@ const DropdownSearchFormBase:FC<IProps> = (props) => {
     const styleProps = { borderRadius, errorMessage, fill: colors.fill, placeholderFill, isOpen, isDisabled, width };
 
     useEffect(() => {
-        const optionsUnsorted = Object.keys(options).map(key => [key, options[key]]);
+        const optionsUnsorted = Object.values(optionGroups).flatMap(group => {
+            return Object.keys(group.options).map(optKey => [optKey, group.options[optKey]]);
+        });
 
         allOptions.current = Object.fromEntries(optionsUnsorted);
 
@@ -98,7 +104,7 @@ const DropdownSearchFormBase:FC<IProps> = (props) => {
         return () => {
             window.removeEventListener('click', checkClickOutside);
         }
-    }, [options]);
+    }, [optionGroups]);
 
     const processInput = (input: string) => {
         if (allOptionsSorted.current && input) {
@@ -138,8 +144,10 @@ const DropdownSearchFormBase:FC<IProps> = (props) => {
     return (
         <FormBase formId={formId} label={label} isDisabled={isDisabled} errorMessage={errorMessage} {...rest}>
             <StyledAccessibleSelect aria-labelledby={label} value={value} onChange={(e) => {setValue(e.target.value)}} id={formId ? formId : label} disabled={isDisabled} {...styleProps}>
-                {Object.keys(options).map(optKey => {
-                    return <option key={optKey} value={optKey} onClick={() => setCurrOptionName(options[optKey])} disabled={isDisabled}>{options[optKey]}</option>
+                {Object.values(optionGroups).map(group => {
+                    return Object.keys(group.options).map(optKey => {
+                        return <option key={optKey} value={optKey} onClick={() => setCurrOptionName(group.options[optKey])} disabled={isDisabled}>{group.options[optKey]}</option>
+                    })
                 })}
             </StyledAccessibleSelect>
             <div ref={dropdownWrapperRef}>
@@ -150,14 +158,21 @@ const DropdownSearchFormBase:FC<IProps> = (props) => {
                     <StyledChevron {...styleProps}><IconL>expand_more</IconL></StyledChevron>
                 </StyledCustomDropdown>
                 <StyledList ref={listRef} {...styleProps} isOpen={isOpen} >
-                    {Object.keys(options).map(optKey => {
-                        return (
-                        <OptionFocusable key={optKey} guess={guess} value={optKey} listRef={listRef} className={optKey === guess ? "guessed" : ""}
-                            onClick={() => {if (!isDisabled) {setValue(optKey); setCurrOptionName(options[optKey]); setIsOpen(false)}}} {...styleProps}>
-                                {options[optKey]}
-                        </OptionFocusable>
+                        {Object.values(optionGroups).map(group => {
+                            return (
+                                <div key={group.title + "div"}>
+                                    <StyledGroupTitle key={group.title} {...styleProps}>{group.title}</StyledGroupTitle>
+                                    {Object.keys(group.options).map(optKey => {
+                                        return (
+                                        <OptionFocusable key={optKey} guess={guess} value={optKey} listRef={listRef} className={optKey === guess ? "guessed" : ""}
+                                         onClick={() => {if (!isDisabled) {setValue(optKey); setCurrOptionName(group.options[optKey]); setIsOpen(false)}}} {...styleProps}>
+                                             {group.options[optKey]}
+                                        </OptionFocusable>
+                                            )
+                                    })}
+                                </div>
                             )
-                    })}
+                        })}
                 </StyledList>
             </div>
         </FormBase>
@@ -182,4 +197,4 @@ const OptionFocusable:FC<any> = (props) => {
     )
 }
 
-export default DropdownSearchFormBase;
+export default DropdownGroupedSearchFormBase;

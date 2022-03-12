@@ -9,6 +9,7 @@ import ProgressLine from "../../../template-library/school-management/add/Progre
 const StyledAdminAddClass = styled.div`
     display: flex;
     flex-direction: column;
+    align-items: center;
     width: 1400px;
 `;
 

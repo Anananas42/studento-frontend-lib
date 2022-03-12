@@ -17,6 +17,11 @@ const StyledDetailStep = styled.div<IStyleProps>`
     box-shadow: ${props => props.sectionShadow};
     border-radius: ${props => props.sectionRadius};
     padding: ${props => props.sectionPadding};
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: fit-content;
+    gap: 16px;
 `;
 
 const StyledTitle = styled.div<IStyleProps>`
@@ -38,10 +43,11 @@ const DetailStep:FC<IDetailStepProps> = (props) => {
 
     return (
         <>
-            <StyledTitle {...styleProps}>
-                {`${title} - details`}
-            </StyledTitle>
+            
             <StyledDetailStep {...styleProps}>
+                <StyledTitle {...styleProps}>
+                    {`${title} - details`}
+                </StyledTitle>
                 <DetailForm />
             </StyledDetailStep>
         </>
