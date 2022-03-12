@@ -1,6 +1,6 @@
 const PrimaryColors = {
-    shadow: "rgba(115, 80, 27, 0.25)",
-    txtShadow: "rgba(69, 60, 48, 0.12)",
+    shadow: "rgba(115, 80, 27, 0.11)",
+    txtShadow: "rgba(69, 60, 48, 0.06)",
     Default: {
         bg1: "#FFBB3D",
         bg2: "#FFD53D",
