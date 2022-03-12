@@ -1,8 +1,8 @@
 import { FC } from "react";
 import styled from "styled-components";
-import { useThemeContext } from "../../component-library/ThemeProvider";
-import { Icon } from "../../component-library/utilities/Icon";
-import StyledLink from "../../component-library/utilities/StyledLink";
+import { useThemeContext } from "../../../component-library/ThemeProvider";
+import { Icon } from "../../../component-library/utilities/Icon";
+import StyledLink from "../../../component-library/utilities/StyledLink";
 
 interface IStyledProps {
     fill: string;

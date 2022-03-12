@@ -1,9 +1,9 @@
 import { FC } from "react"
 import styled from "styled-components";
-import { useThemeContext } from "../../component-library/ThemeProvider";
-import { useUserContext } from "../../component-library/UserProvider";
-import { IconL } from "../../component-library/utilities/Icon";
-import StyledLink from "../../component-library/utilities/StyledLink";
+import { useThemeContext } from "../../../component-library/ThemeProvider";
+import { useUserContext } from "../../../component-library/UserProvider";
+import { IconL } from "../../../component-library/utilities/Icon";
+import StyledLink from "../../../component-library/utilities/StyledLink";
 import { AddIconMap } from "./AddMenu";
 
 enum AddedItemType {

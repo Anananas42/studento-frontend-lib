@@ -41,7 +41,7 @@ export const colorsLightMode: IColorSet = {
     linkActive: "#5C92FF",
     fill: "#453C30",
     fillSecondary: "rgba(69, 60, 48, 0.6)",
-    fillDisabled: "#453C3042",
+    fillDisabled: "#c9c6c2",
     bg: "#F7F6F5",
     descBg: "#C5E3FA",
     descTxt: "#186AA8",

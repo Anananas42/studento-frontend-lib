@@ -31,6 +31,7 @@ const StyledNavbarBase = styled.nav<IStyleProps>`
     align-items: stretch;
     justify-content: space-between;
     background-color: ${props => props.navbarBg};
+    z-index: 100;
 `;
 
 const StyledLeftNavbar = styled.div`
