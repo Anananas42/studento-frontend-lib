@@ -47,7 +47,7 @@ const StudentStep:FC<IStudentStepProps> = (props) => {
             <StyledTitle {...styleProps}>
                 {`${title} - students`}
             </StyledTitle>
-            <DetailForm />
+            
             {ButtonRow}
         </StyledStudentStep>
     );
