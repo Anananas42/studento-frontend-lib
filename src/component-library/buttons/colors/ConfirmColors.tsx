@@ -1,6 +1,6 @@
 const ConfirmColors = {
     shadow: "rgba(71, 153, 37, 0.22)",
-    txtShadow: "rgba(69, 60, 48, 0.15)",
+    txtShadow: "rgba(69, 60, 48, 0.06)",
     Default: {
         bg1: "#4AA33E",
         bg2: "#5EDB4D",
