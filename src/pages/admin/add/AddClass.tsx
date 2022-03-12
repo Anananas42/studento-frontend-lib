@@ -1,5 +1,6 @@
 import { FC, useState } from "react";
 import styled from "styled-components";
+import { BtnConfirmL, BtnPrimaryL, BtnSecondaryL } from "../../../component-library/buttons/components";
 import DetailStep from "../../../template-library/school-management/add/class/DetailStep";
 import StudentStep from "../../../template-library/school-management/add/class/StudentStep";
 import SubjectStep from "../../../template-library/school-management/add/class/SubjectStep";
@@ -11,6 +12,16 @@ const StyledAdminAddClass = styled.div`
     flex-direction: column;
     align-items: center;
     width: 1400px;
+`;
+
+const StyledButtonRow = styled.div`
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+
+    > div:only-child {
+        margin-left: auto;
+    }
 `;
 
 const steps:Array<string> = [
@@ -33,7 +44,13 @@ const AdminAddClass:FC = () => {
 
     const title = "New class";
 
-    const stepProps = { title };
+    const ButtonRow = <StyledButtonRow>
+        {currentStep > 0 && <BtnSecondaryL icon={"arrow_back"} onClick={() => setCurrentStep((currentStep - 1) % steps.length)}>Back</BtnSecondaryL>}
+        {currentStep < steps.length && <BtnPrimaryL icon={"arrow_forward"} isAfter={true} onClick={() => setCurrentStep((currentStep + 1) % steps.length)}>Next</BtnPrimaryL>}
+        {currentStep === steps.length - 1 && <BtnConfirmL icon={"done"} onClick={() => console.log("done")}>Done</BtnConfirmL>}
+    </StyledButtonRow>;
+
+    const stepProps = { title, ButtonRow };
 
     return ( 
         <StyledAdminAddClass>

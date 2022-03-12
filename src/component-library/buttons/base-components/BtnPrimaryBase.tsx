@@ -57,7 +57,7 @@ interface CTAProps {
 
 const BtnPrimaryBase:FC<CTAProps> = (props) => {
 
-    return <BtnBase {...props} StyledButton={StyledPrimary} forceUppercase={true}/>
+    return <BtnBase {...props} StyledButton={StyledPrimary}/>
 }
 
 export default BtnPrimaryBase;

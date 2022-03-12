@@ -5,7 +5,7 @@ import { IconL } from "../../../utilities/Icon";
 import FormBase from "../../shared/FormBase";
 import FormColors from "../../shared/FormColors";
 import StyledAccessibleSelect, { IStyledSelect } from "./styled/StyledAccessibleSelect";
-import { StyledChevron, StyledCustomDropdown, StyledGroupTitle, StyledList, StyledOption } from "./styled/StyledCustomDropdown";
+import { StyledChevron, StyledCustomDropdown, StyledList, StyledOption } from "./styled/StyledCustomDropdown";
 
 const StyledCurrentInput = styled.input<IStyledSelect>`
     width: 88%;

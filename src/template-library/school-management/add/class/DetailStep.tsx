@@ -33,24 +33,23 @@ const StyledTitle = styled.div<IStyleProps>`
 
 interface IDetailStepProps {
     title: string;
+    ButtonRow: JSX.Element;
 }
 
 const DetailStep:FC<IDetailStepProps> = (props) => {
-    const { title } = props;
+    const { title, ButtonRow } = props;
     const { colors, borderRadius, sectionPadding, sectionRadius } = useThemeContext();
 
     const styleProps = {fill: colors.fill, sectionPadding, sectionRadius, sectionShadow: colors.sectionShadow, borderRadius};
 
     return (
-        <>
-            
-            <StyledDetailStep {...styleProps}>
-                <StyledTitle {...styleProps}>
-                    {`${title} - details`}
-                </StyledTitle>
-                <DetailForm />
-            </StyledDetailStep>
-        </>
+        <StyledDetailStep {...styleProps}>
+            <StyledTitle {...styleProps}>
+                {`${title} - details`}
+            </StyledTitle>
+            <DetailForm />
+            {ButtonRow}
+        </StyledDetailStep>
     );
 }
 
