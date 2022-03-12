@@ -24,6 +24,11 @@ const StyledLabel = styled.label<IStyledLabel>`
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+
+    > span {
+        padding-left: 4px;
+        color: ${FormColors.Default.placeholder};
+    }
 `;
 
 interface IStyledWrapper {
@@ -97,7 +102,7 @@ const FormBase:FC<IFormProps> = (props) => {
     return (
         <StyledWrapper isHorizontal={isHorizontal} width={width}>
             <StyledLabel labelColor={FormColors[formState.type].label} borderRadius={borderRadius} isHorizontal={isHorizontal} htmlFor={formId ? formId : label} isDisabled={isDisabled} isCompact={isCompact}>
-                {label + (isOptional ? ` (${languageMap.Generic.optional})` : "")}
+                {label}<span>{isOptional ? ` (${languageMap.Generic.optional})` : ""}</span>
             </StyledLabel>
             <StyledMessageWrapper msgColor={FormColors[formState.type].note} borderRadius={borderRadius} isCompact={isCompact} isMessage={defaultNote || errorMessage}>
                 <StyledIconAnchor>

@@ -52,11 +52,11 @@ const DetailForm:FC = () => {
             <StyledRow>
                 <DropdownFormBase label={"Class year"} value={classYear} setValue={setClassYear} width={"110px"} options={yearOptions} placeholder={" "}/>
                 <TextFormBase label={"Class code"} value={classCode} setValue={setClassCode} placeholder={""} width={"110px"} />
-                <DropdownSearchFormBase label={"Room"} value={room} setValue={setRoom} options={roomOptions} width={"100%"} />
+                <DropdownSearchFormBase label={"Room"} value={room} setValue={setRoom} options={roomOptions} width={"100%"} isOptional={true} />
             </StyledRow>
             <DropdownSearchFormBase  label={"Class teacher"} options={teacherOptions} value={classTeacher} setValue={setClassTeacher} />
-            <DropdownSearchFormBase  label={"Backup teacher"} options={teacherOptions} value={secondTeacher} setValue={setSecondTeacher} />
-            <TextAreaFormBase label={"Note"} value={note} setValue={setNote} placeholder={"Additional information..."}/>
+            <DropdownSearchFormBase  label={"Backup teacher"} options={teacherOptions} value={secondTeacher} setValue={setSecondTeacher} isOptional={true} />
+            <TextAreaFormBase label={"Note"} value={note} setValue={setNote} placeholder={"Additional information..."} isOptional={true} />
         </StyledDetailForm>
     );
 }

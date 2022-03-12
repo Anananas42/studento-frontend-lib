@@ -27,7 +27,7 @@ const StyledDetailStep = styled.div<IStyleProps>`
 const StyledTitle = styled.div<IStyleProps>`
     font-size: 32px;
     color: ${props => props.fill};
-    padding-bottom: 8px;
+    padding-bottom: 16px;
     text-align: center;
 `;
 

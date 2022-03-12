@@ -39,6 +39,7 @@ interface IProps {
     formId?: string;
     isHorizontal?: boolean;
     isCompact?: boolean;
+    isOptional?: boolean;
     defaultNote?: string;
     errorMessage?: string;
     isDisabled?: boolean;
