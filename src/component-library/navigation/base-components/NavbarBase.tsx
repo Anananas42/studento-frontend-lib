@@ -41,6 +41,7 @@ const StyledLeftNavbar = styled.div`
     gap: 16px;
     width: fit-content;
     height: 100%;
+    padding-left: 16px;
 `;
 
 const StyledRightNavbar = styled.div`
