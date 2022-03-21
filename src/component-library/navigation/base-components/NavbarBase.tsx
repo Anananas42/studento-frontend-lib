@@ -63,7 +63,7 @@ const StyledMiddleButton = styled.div<IStyleProps>`
     border-radius: ${props => props.borderRadius};
     user-select: none;
     cursor: pointer;
-    padding: 16px;
+    padding: 12px;
     font-size: 20px;
     line-height: 20px;
     white-space: nowrap;
