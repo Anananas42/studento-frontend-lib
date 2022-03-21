@@ -5,9 +5,9 @@ const StyledFooter = styled.footer`
     bottom: 0;
     width: 100%;
     margin-top: auto;
-    height: 128px;
-    max-height: 128px;
-    padding: 32px;
+    height: fit-content;
+    max-height: fit-content;
+    padding: 24px 0 40px 0;
     border-top: 2px solid rgba(69, 60, 48, 0.08);
     font-size: 2rem;
     color: rgba(69, 60, 48, 0.57);
