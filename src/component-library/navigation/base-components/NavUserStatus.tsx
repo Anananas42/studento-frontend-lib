@@ -31,7 +31,7 @@ const StyledUserButton = styled.div<IStyleProps>`
     display: flex;
     align-items: center;
     border-radius: ${props => props.borderRadius};
-    padding: 8px 16px 4px 16px;
+    padding: 8px 4px 4px 16px;
     cursor: pointer;
 
     > div:first-child {
