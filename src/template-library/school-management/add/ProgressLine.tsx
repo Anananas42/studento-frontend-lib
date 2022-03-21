@@ -12,7 +12,7 @@ const StyledProgressLine = styled.div<IStyleProps>`
     display: flex;
     justify-content: space-between;
     width: 100%;
-    margin-top: 64px;
+    margin-top: 32px;
     padding-bottom: 16px;
 
     > div::before {
@@ -43,17 +43,16 @@ const StyledProgressItem = styled.div<IStyleProps>`
         border-radius: 50%;
         background-color: ${props => props.disabled};
         margin-bottom: 6px;
-        transform: rotate(-45deg);
         z-index: 1;
 
         > span {
             user-select: none;
             position: absolute;
-            top: 3px;
-            left: 130%;
-            max-width: 90px;
+            bottom: 120%;
+            left: 40%;
+            transform: translateX(-50%);
+            white-space: nowrap;
             font-size: 20px;
-            text-align: right;
             color: ${props => props.fill};
         }
     }
