@@ -23,9 +23,13 @@ const StyledContent = styled.div<{bg: string}>`
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 16px;
     padding-top: 90px;
     min-height: 100vh;
+
+    > div:last-of-type {
+      margin-bottom: 16px;
+    }
+
   }
 
 `;
