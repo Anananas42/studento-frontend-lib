@@ -58,11 +58,11 @@ const StyledProgressItem = styled.div<IStyleProps>`
     }
 
     &.completed > div {
-        background: #4AA33E;
+        background: #26B013;
     }
 
     &.completed::before {
-        border-color: #4AA33E;
+        border-color: #26B013;
     }
 
     &.active > div {
@@ -70,7 +70,7 @@ const StyledProgressItem = styled.div<IStyleProps>`
     }
 
     &.active::before {
-        border-color: #4AA33E;
+        border-color: #26B013;
     }
 `;
 

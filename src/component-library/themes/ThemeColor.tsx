@@ -62,7 +62,7 @@ export const colorsLightMode: IColorSet = {
             light: "#E5F4FF"
         },
         Success: {
-            dark: "#2AAD18",
+            dark: "#26B013",
             light: "#E9FFE5"
         }
     }

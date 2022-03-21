@@ -2,18 +2,18 @@ const ConfirmColors = {
     shadow: "rgba(71, 153, 37, 0.22)",
     txtShadow: "rgba(69, 60, 48, 0.06)",
     Default: {
-        bg1: "#4AA33E",
-        bg2: "#5EDB4D",
+        bg1: "#26B013",
+        bg2: "#26B013",
         txt: "#FFF",
     },
     Hover: {
-        bg1: "#26B013",
-        bg2: "#27DB0D",
+        bg1: "#1DC208",
+        bg2: "#1DC208",
         txt: "#FFF",
     },
     Active: {
-        bg1: "#37E01F",
-        bg2: "#3DB82C",
+        bg1: "#1FCF08",
+        bg2: "#1FCF08",
         txt: "#FFF",
     },
     Disabled: {
