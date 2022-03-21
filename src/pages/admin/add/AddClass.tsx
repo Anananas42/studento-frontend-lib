@@ -5,7 +5,7 @@ import DetailStep from "../../../page-components/school-management/add/class/Det
 import StudentStep from "../../../page-components/school-management/add/class/StudentStep";
 import SubjectStep from "../../../page-components/school-management/add/class/SubjectStep";
 import SubjectTypeStep from "../../../page-components/school-management/add/class/SubjectTypeStep";
-import ProgressLine from "../../../page-components/school-management/add/ProgressLine";
+import ProgressLine from "../../../template-library/ProgressLine";
 
 const StyledAdminAddClass = styled.div`
     display: flex;
