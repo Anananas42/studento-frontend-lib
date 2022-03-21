@@ -38,7 +38,7 @@ const StyledLeftNavbar = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 16px;
+    gap: 8px;
     width: fit-content;
     height: 100%;
     padding-left: 16px;
