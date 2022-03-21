@@ -8,7 +8,6 @@ interface IStyledLabel {
     borderRadius: string;
     isHorizontal?: boolean;
     isDisabled?: boolean;
-    isCompact?: boolean;
 }
 
 const StyledLabel = styled.label<IStyledLabel>`
@@ -19,7 +18,7 @@ const StyledLabel = styled.label<IStyledLabel>`
     line-height: 2rem;
     width: ${props => props.isHorizontal ? "auto" : "fit-content"};
     padding-top: ${props => props.isHorizontal ? "0.9rem" : 0};
-    padding-bottom: ${props => props.isHorizontal ? 0 : (props.isCompact ? "1.2rem" : "1.6rem")};
+    padding-bottom: ${props => props.isHorizontal ? 0 : "1.9rem"};
     padding-right: ${props => props.isHorizontal ? "1.6rem" : 0};
     white-space: nowrap;
     overflow: hidden;
@@ -51,7 +50,7 @@ const StyledIconAnchor = styled.div`
 interface IStyledMessageWrapper {
     msgColor: string;
     borderRadius: string;
-    isCompact?: boolean;
+    isCompact: boolean;
     isMessage?: string;
 }
 
@@ -62,7 +61,7 @@ const StyledMessageWrapper = styled.div<IStyledMessageWrapper>`
         padding-top: 0.8rem;
         font-size: 1.7rem;
         line-height: 1.2rem;
-        padding-bottom: 1.8rem;
+        padding-bottom: ${props => props.isCompact ? "2.0rem" : "1.8rem"};
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -83,9 +82,10 @@ export interface IFormProps {
 }
 
 const FormBase:FC<IFormProps> = (props) => {
-    const { isHorizontal, isDisabled, label, formId, defaultNote, errorMessage, children, isCompact, isOptional, width } = props;
+    const { isHorizontal, isDisabled, label, formId, defaultNote, errorMessage, children, isOptional, width } = props;
     const [formState, setFormState] = useState<IFormState>({type: isDisabled ? StateType.Disabled : StateType.Default, message: defaultNote});
     const { borderRadius, languageMap } = useThemeContext();
+    const isCompact = props.isCompact || (props.isCompact === undefined && !errorMessage);
 
     useEffect(() => {
         if (isDisabled) {
@@ -99,14 +99,14 @@ const FormBase:FC<IFormProps> = (props) => {
 
     return (
         <StyledWrapper isHorizontal={isHorizontal} width={width}>
-            <StyledLabel labelColor={FormColors[formState.type].label} borderRadius={borderRadius} isHorizontal={isHorizontal} htmlFor={formId ? formId : label} isDisabled={isDisabled} isCompact={isCompact}>
+            <StyledLabel labelColor={FormColors[formState.type].label} borderRadius={borderRadius} isHorizontal={isHorizontal} htmlFor={formId ? formId : label} isDisabled={isDisabled}>
                 {label}<span>{isOptional ? ` (${languageMap.Generic.optional})` : ""}</span>
             </StyledLabel>
-            <StyledMessageWrapper msgColor={FormColors[formState.type].note} borderRadius={borderRadius} isCompact={isCompact} isMessage={defaultNote || errorMessage}>
+            <StyledMessageWrapper msgColor={FormColors[formState.type].note} borderRadius={borderRadius} isMessage={defaultNote || errorMessage} isCompact={isCompact}>
                 <StyledIconAnchor>
                     {children}
                 </StyledIconAnchor>
-                <div className={"message"}>{formState.message ? formState.message : (isCompact ? "" : "|")}</div>
+                <div className={"message"}>{formState.message ? formState.message : (isCompact || isCompact === undefined ? "" : "|")}</div>
             </StyledMessageWrapper>
         </StyledWrapper>
     )

@@ -24,13 +24,14 @@ const StyledNavbarBase = styled.nav<IStyleProps>`
     max-width: 100vw;
     margin: 0 32px;
     z-index: 5;
-    height: 74px;
+    height: 82px;
     font-size: 20px;
     line-height: 20px;
     display: flex;
     align-items: stretch;
     justify-content: space-between;
     background-color: ${props => props.navbarBg};
+    padding-bottom: 8px;
     z-index: 100;
 `;
 
