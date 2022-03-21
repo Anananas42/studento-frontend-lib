@@ -21,7 +21,8 @@ const StyledContent = styled.div<{bg: string}>`
 
   > div {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
     padding-top: 90px;
     min-height: 100vh;
   }
