@@ -34,7 +34,7 @@ const AdminAddClass:FC = () => {
 
     const title = "New class";
 
-    const stepProps = { title, currentStep, maxStep: steps.length, setCurrentStep };
+    const stepProps = { title, currentStep, maxStep: steps.length, setCurrentStep, abortDestination: "/admin/add" };
 
     return ( 
         <StyledAdminAddClass>

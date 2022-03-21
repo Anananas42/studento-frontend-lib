@@ -24,15 +24,15 @@ const StyledButtons = styled.div`
 
 const PopupConfirm:FC<IPopupConfirm> = (props) => {
     const { title, children, btnText, event, sidenote } = props;
-    const [ isOpened, setIsOpened ] = useState<boolean>(true);
+    const [ isOpen, setIsOpen ] = useState<boolean>(true);
     const { languageMap } = useThemeContext();
 
     return (
-        <PopupBase title={title} isOpened={isOpened} setIsOpened={setIsOpened} sidenote={sidenote}>
+        <PopupBase title={title} isOpen={isOpen} setIsOpen={setIsOpen} sidenote={sidenote}>
             <div style={{textAlign: "center"}}>{children}</div>
             <StyledButtons>
-                <BtnTertiaryL onClick={() => setIsOpened(false)}>{languageMap.Generic.cancel}</BtnTertiaryL>
-                <BtnConfirmL icon={"check"} onClick={() => {setIsOpened(false); event()}}>{btnText}</BtnConfirmL>
+                <BtnTertiaryL onClick={() => setIsOpen(false)}>{languageMap.Generic.cancel}</BtnTertiaryL>
+                <BtnConfirmL icon={"check"} onClick={() => {setIsOpen(false); event()}}>{btnText}</BtnConfirmL>
             </StyledButtons>
         </PopupBase>
     )

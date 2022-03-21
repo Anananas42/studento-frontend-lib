@@ -23,15 +23,15 @@ const StyledButtons = styled.div`
 
 const PopupDelete:FC<IPopupDelete> = (props) => {
     const { title, children, event, sidenote } = props;
-    const [ isOpened, setIsOpened ] = useState<boolean>(true);
+    const [ isOpen, setIsOpen ] = useState<boolean>(true);
     const { languageMap } = useThemeContext();
 
     return (
-        <PopupBase title={title} isOpened={isOpened} setIsOpened={setIsOpened} sidenote={sidenote} width={"360px"}>
+        <PopupBase title={title} isOpen={isOpen} setIsOpen={setIsOpen} sidenote={sidenote} width={"360px"}>
             <div style={{textAlign: "center"}}>{children}</div>
             <StyledButtons>
-                <BtnTertiaryL onClick={() => setIsOpened(false)}>{languageMap.Generic.cancel}</BtnTertiaryL>
-                <BtnDangerL icon={"delete"} onClick={() => {setIsOpened(false); event()}}>{languageMap.Generic.delete}</BtnDangerL>
+                <BtnTertiaryL onClick={() => setIsOpen(false)}>{languageMap.Generic.cancel}</BtnTertiaryL>
+                <BtnDangerL icon={"delete"} onClick={() => {setIsOpen(false); event()}}>{languageMap.Generic.delete}</BtnDangerL>
             </StyledButtons>
         </PopupBase>
     )

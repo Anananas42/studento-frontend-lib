@@ -16,13 +16,13 @@ const StyledButton = styled.div`
 
 const PopupSuccess:FC<IPopupSuccess> = (props) => {
     const { title, children, btnText, sidenote } = props;
-    const [ isOpened, setIsOpened ] = useState<boolean>(true);
+    const [ isOpen, setIsOpen ] = useState<boolean>(true);
 
     return (
-        <PopupBase title={title} isOpened={isOpened} setIsOpened={setIsOpened} sidenote={sidenote}>
+        <PopupBase title={title} isOpen={isOpen} setIsOpen={setIsOpen} sidenote={sidenote}>
             <div style={{textAlign: "center"}}>{children}</div>
             <StyledButton>
-                <BtnConfirmL onClick={() => setIsOpened(false)}>{btnText}</BtnConfirmL>
+                <BtnConfirmL onClick={() => setIsOpen(false)}>{btnText}</BtnConfirmL>
             </StyledButton>
         </PopupBase>
     )

@@ -8,7 +8,7 @@ const StyledClose = styled.button<IStyledBtn>`
     position: absolute;
     top: 8px;
     right: 8px;
-    border-radius: ${props => props.borderRadius};
+    border-radius: 16px;
     color: ${CloseColors.Default.txt};
     background-color: ${CloseColors.Default.bg};
     font-family: 'Roboto', sans-serif;

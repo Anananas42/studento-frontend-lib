@@ -153,9 +153,9 @@ const EnSet:ILanguageSet = {
     Generic: {
         accountCreate: "Create new account",
         accountNew: "New account",
-        cancel: "CANCEL",
+        cancel: "Cancel",
         date: "Date",
-        delete: "DELETE",
+        delete: "Delete",
         drpDwnPlaceholder: "Choose one",
         login: "Log In",
         logout: "Logout",
@@ -304,9 +304,9 @@ const CzSet:ILanguageSet = {
     Generic: {
         accountCreate: "Vytvořit účet",
         accountNew: "Nový účet",
-        cancel: "ZRUŠIT",
+        cancel: "Zrušit",
         date: "Datum",
-        delete: "SMAZAT",
+        delete: "Smazat",
         drpDwnPlaceholder: "Vybrat možnost",
         login: "Přihlásit",
         logout: "Odhlásit",

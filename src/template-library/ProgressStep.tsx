@@ -1,6 +1,8 @@
-import { FC, SetStateAction } from "react";
+import { FC, SetStateAction, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { BtnConfirmL, BtnPrimaryL, BtnTertiaryL } from "../component-library/buttons/components";
+import { BtnCloseL, BtnConfirmL, BtnPrimaryL, BtnTertiaryL } from "../component-library/buttons/components";
+import PopupLeaveProgress from "../component-library/popups/components/PopupLeaveProgress";
 import { useThemeContext } from "../component-library/ThemeProvider";
 
 interface IStyleProps {
@@ -12,6 +14,7 @@ interface IStyleProps {
 }
 
 const StyledProgressStep = styled.div<IStyleProps>`
+    position: relative;
     color: ${props => props.fill};
     background-color: #fff;
     box-shadow: ${props => props.sectionShadow};
@@ -27,7 +30,7 @@ const StyledProgressStep = styled.div<IStyleProps>`
 const StyledTitle = styled.div<IStyleProps>`
     font-size: 32px;
     color: ${props => props.fill};
-    padding-bottom: 16px;
+    padding: 0 48px 16px 48px;
     text-align: center;
 `;
 
@@ -47,16 +50,25 @@ export interface IProgressStepProps {
     currentStep: number;
     maxStep: number;
     setCurrentStep: React.Dispatch<SetStateAction<number>>;
+    abortDestination: string;
+
 }
 
 const ProgressStep:FC<IProgressStepProps> = (props) => {
-    const { title, currentStep, maxStep, setCurrentStep } = props;
+    const { title, currentStep, maxStep, setCurrentStep, abortDestination } = props;
+    const navigate = useNavigate();
     const { colors, borderRadius, sectionPadding, sectionRadius } = useThemeContext();
+
+    const [isAbortPopup, setIsAbortPopup] = useState<boolean>(false);
 
     const styleProps = {fill: colors.fill, sectionPadding, sectionRadius, sectionShadow: colors.sectionShadow, borderRadius};
 
     return (
         <StyledProgressStep {...styleProps}>
+            <BtnCloseL onClick={() => setIsAbortPopup(true)} />
+            {isAbortPopup && <PopupLeaveProgress event={() => navigate(abortDestination)} isOpen={isAbortPopup} setIsOpen={setIsAbortPopup}>
+                    All your progress will be lost. <br/> Do you really want to leave?
+                </PopupLeaveProgress>}
             <StyledTitle {...styleProps}>
                 {title}
             </StyledTitle>

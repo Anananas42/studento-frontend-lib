@@ -7,6 +7,8 @@ import { BtnCloseL } from '../../buttons/components/BtnClose';
 interface IStyledPopupProps {
     borderRadius: string;
     fill: string;
+    sectionPadding: string;
+    sectionRadius: string;
 }
 
 interface IStyledPopupWrapper {
@@ -43,14 +45,14 @@ const StyledPopupContent = styled.div<IStyledPopupProps>`
     display: flex;
     flex-flow: column nowrap;
     align-items: center;
-    border-radius: ${props => props.borderRadius};
+    border-radius: ${props => props.sectionRadius};
     color: ${props => props.fill};
     background-color: #fff;
     box-shadow: 2px 2px 8px -2px rgba(69, 65, 59, 0.26);
-    padding: 32px;
+    padding: ${props => props.sectionPadding};
     width: 100%;
     height: fit-content;
-    font-size: 18px;
+    font-size: 2rem;
 
     & > button:first-of-type {
         position: absolute;
@@ -60,8 +62,7 @@ const StyledPopupContent = styled.div<IStyledPopupProps>`
 `;
 
 const StyledTitle = styled.h2`
-    font-size: 32px;
-    line-height: 22px;
+    font-size: 3.2rem;
     margin-top: 0;
     margin-bottom: 24px;
 `;
@@ -70,14 +71,14 @@ interface IPopupBaseProps {
     title: string;
     sidenote?: string;
     children: ReactNode;
-    isOpened: boolean;
-    setIsOpened: React.Dispatch<React.SetStateAction<boolean>>;
+    isOpen: boolean;
+    setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
     width?: string;
 }
 
 const PopupBase:FC<IPopupBaseProps> = (props) => {
-    const { borderRadius, colors } = useThemeContext();
-    const { title, sidenote, children, isOpened, setIsOpened, width } = props;
+    const { borderRadius, colors, sectionPadding, sectionRadius } = useThemeContext();
+    const { title, sidenote, children, isOpen, setIsOpen, width } = props;
 
     const PopupBaseRef = useRef<any>();
 
@@ -89,7 +90,7 @@ const PopupBase:FC<IPopupBaseProps> = (props) => {
             }
     
             if (!PopupBaseRef.current.contains(e.target)) {
-                setIsOpened(false);
+                setIsOpen(false);
                 window.removeEventListener('click', checkClickOutside);
             }
         }
@@ -99,16 +100,16 @@ const PopupBase:FC<IPopupBaseProps> = (props) => {
         return () => {
             window.removeEventListener('click', checkClickOutside);
         }
-    }, [setIsOpened]);
+    }, [setIsOpen]);
 
     return (
         <>
-            {isOpened &&
+            {isOpen &&
             <StyledBackground>
                 <StyledPopupWrapper ref={PopupBaseRef} width={width}>
-                    <StyledPopupContent borderRadius={borderRadius} fill={colors.fill}>
+                    <StyledPopupContent borderRadius={borderRadius} fill={colors.fill} sectionPadding={sectionPadding} sectionRadius={sectionRadius}>
                         <StyledTitle>{title}</StyledTitle>
-                        <BtnCloseL onClick={() => setIsOpened(false)}/>
+                        <BtnCloseL onClick={() => setIsOpen(false)}/>
                         {children}
                     </StyledPopupContent>
                     {sidenote && <Sidenote>{sidenote}</Sidenote>}

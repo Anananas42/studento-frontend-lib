@@ -68,7 +68,7 @@ interface IPopupUpload {
 const PopupUpload:FC<IPopupUpload> = (props) => {
     const { borderRadius, colors, pushSystemNotification, clearSystemNotifications, languageMap } = useThemeContext();
     const { title, fileHandler, sidenote, maxSizeMB } = props;
-    const [isOpened, setIsOpened] = useState<boolean>(true);
+    const [isOpen, setIsOpen] = useState<boolean>(true);
     const [isDragOver, setIsDragOver] = useState<boolean>(false);
     const [file, setFile] = useState<File>();
 
@@ -97,7 +97,7 @@ const PopupUpload:FC<IPopupUpload> = (props) => {
         }
 
         pushSystemNotification({text: "File Uploaded.", type: NotificationType.Success}, true);
-        setIsOpened(false);
+        setIsOpen(false);
     }
 
     useEffect(() => {
@@ -106,8 +106,8 @@ const PopupUpload:FC<IPopupUpload> = (props) => {
     }, [UploadRef]);
 
     return (
-        <>{!file && isOpened}
-            <PopupBase title={title ? title : languageMap.Generic.PopupUpload.title} isOpened={isOpened} setIsOpened={setIsOpened} sidenote={sidenote}>
+        <>{!file && isOpen}
+            <PopupBase title={title ? title : languageMap.Generic.PopupUpload.title} isOpen={isOpen} setIsOpen={setIsOpen} sidenote={sidenote}>
                 <FileDragAndDrop setIsDragOver={setIsDragOver} fileHandler={(files:any) => setFile(files[0])}>
                     <StyledUpload ref={UploadRef} borderRadius={borderRadius} fill={colors.fill} isDragOver={isDragOver} width={initWidth} height={initHeight} onClick={inputClick}>
                         <StyledHiddenInput ref={HiddenInputRef} type="file" name="file" onChange={e => e.target.files && e.target.files.length > 0 && setFile(e.target.files[0])}/>
@@ -115,7 +115,7 @@ const PopupUpload:FC<IPopupUpload> = (props) => {
                     </StyledUpload>
                 </FileDragAndDrop>
                 <StyledButtons>
-                    <BtnTertiaryL onClick={() => {setIsOpened(false); clearSystemNotifications()}}>{languageMap.Generic.cancel}</BtnTertiaryL>
+                    <BtnTertiaryL onClick={() => {setIsOpen(false); clearSystemNotifications()}}>{languageMap.Generic.cancel}</BtnTertiaryL>
                     <BtnPrimaryL icon={"upload"} onClick={() => file && onUploadClick(file)} isDisabled={file === undefined}>{languageMap.Generic.upload}</BtnPrimaryL>
                 </StyledButtons>
             </PopupBase>
