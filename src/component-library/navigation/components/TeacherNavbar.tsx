@@ -16,6 +16,7 @@ const TeacherNavbar:FC<ITeacherNavbarProps> = (props) => {
     const featureTiles = {
         subjects: {title: translations.subjects, description: descTranslations.subjectsDesc, url: "subjects", icon: "school"},
         homework: {title: translations.homework, description: descTranslations.homeworkDesc, url: "homework", icon: "assignment"},
+        ...(className ? {class: {title: translations.class, description: descTranslations.classDesc, icon: "groups", url: "class"}} : {}),
         ...(className ? {diplomas: {title: translations.diplomas, description: descTranslations.diplomasDesc, url: "diplomas", icon: "workspace_premium"}} : {}),
         parentMeetings: {title: translations.parentMeetings, description: descTranslations.parentMeetingsDesc, url: "parent-meetings", icon: "meeting_room"},
         find: {title: translations.find, description: descTranslations.findDesc, url: "find", icon: "search"},
@@ -28,7 +29,6 @@ const TeacherNavbar:FC<ITeacherNavbarProps> = (props) => {
         timetable: {title: translations.timetable, icon: "calendar_month", url: "timetable"},
         substitutions: {title: translations.substitutions, icon: "edit_calendar", url: "substitutions"},
         grades: {title: translations.grades, icon: "star_rate", url: "grades"},
-        ...(className ? {class: {title: translations.class, icon: "groups", url: "class"}} : {}),
     };
 
     return (

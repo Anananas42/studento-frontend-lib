@@ -88,6 +88,7 @@ export interface ILanguageSet {
 
         },
         Parent: {
+            classDesc: string;
             diplomasDesc: string;
             eventsDesc: string;
             homeworkDesc: string;
@@ -104,6 +105,7 @@ export interface ILanguageSet {
             subjectsDesc: string;
         },
         Teacher: {
+            classDesc: string;
             eventsDesc: string;
             findDesc: string;
             diplomasDesc: string;
@@ -236,6 +238,7 @@ const EnSet:ILanguageSet = {
 
         },
         Parent: {
+            classDesc: "Class information and actions to take",
             diplomasDesc: "Diplomas and current prediction",
             eventsDesc: "Upcoming and past events",
             homeworkDesc: "Student's homework",
@@ -252,6 +255,7 @@ const EnSet:ILanguageSet = {
             subjectsDesc: "Explore your subjects and statistics",
         },
         Teacher: {
+            classDesc: "View and manage your class",
             eventsDesc: "View and manage all your events",
             findDesc: "Find a person or anything about your school",
             diplomasDesc: "Prepare and print your class' diplomas",
@@ -385,6 +389,7 @@ const CzSet:ILanguageSet = {
 
         },
         Parent: {
+            classDesc: "Informace o třídě a požadované akce",
             diplomasDesc: "Vysvědčení a budoucí predikce",
             eventsDesc: "Nadcházející a minulé události",
             homeworkDesc: "Nadcházející a minulé úkoly",
@@ -401,6 +406,7 @@ const CzSet:ILanguageSet = {
             subjectsDesc: "Tvé předměty a souhrnné statistiky",
         },
         Teacher: {
+            classDesc: "Správa a komplexní přehled tvé třídy",
             eventsDesc: "Přehled tvých nadcházejících událostí",
             findDesc: "Najdi osobu nebo cokoliv o tvé škole",
             diplomasDesc: "Příprava a tisk vysvědčení pro tvou třídu",
