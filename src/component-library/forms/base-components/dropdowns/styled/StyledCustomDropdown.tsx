@@ -72,7 +72,6 @@ export const StyledOption = styled.div<IStyledSelect>`
     font-size: 20px;
     line-height: 20px;
     padding: 12px 16px;
-    border-bottom: 1px solid ${FormColors.Default.border};
     user-select: none;
 
     :hover {
