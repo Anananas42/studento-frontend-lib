@@ -65,8 +65,8 @@ const LoginForm:FC = (props) => {
     return (
         <StyledLoginForm {...styleProps}>
             <StyledTitle {...styleProps}><img alt={"Studento logo"} src={logo} />Studento</StyledTitle>
-            <UsernameForm value={username} setValue={setUsername} />
-            <PasswordForm value={password} setValue={setPassword} />
+            <UsernameForm value={username} setValue={setUsername} isCompact={true}/>
+            <PasswordForm value={password} setValue={setPassword} isCompact={true}/>
             <CheckboxRow value={rememberPassword} setValue={setRememberPassword} label={languageMap.Generic.passwordRemember} />
             <BtnCTAL onClick={() => login(username, password)} width={"100%"}>{languageMap.Generic.login}</BtnCTAL>
             <StyledLinkRow {...styleProps}>

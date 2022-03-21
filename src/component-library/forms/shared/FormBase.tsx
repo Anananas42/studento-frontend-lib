@@ -56,8 +56,6 @@ interface IStyledMessageWrapper {
 }
 
 const StyledMessageWrapper = styled.div<IStyledMessageWrapper>`
-    padding-bottom: ${props => props.isCompact ? "2.4rem" : 0};
-
     .message {
         color: ${props => props.isMessage ? props.msgColor : "transparent"};
         padding-left: ${props => `${parseInt(props.borderRadius.split("px", 1)[0])/1.5}px`};
@@ -108,7 +106,7 @@ const FormBase:FC<IFormProps> = (props) => {
                 <StyledIconAnchor>
                     {children}
                 </StyledIconAnchor>
-                {!isCompact && <div className={"message"}>{formState.message ? formState.message : "|"}</div>}
+                <div className={"message"}>{formState.message ? formState.message : (isCompact ? "" : "|")}</div>
             </StyledMessageWrapper>
         </StyledWrapper>
     )
