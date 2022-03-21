@@ -21,7 +21,7 @@ const StyledDetailStep = styled.div<IStyleProps>`
     flex-direction: column;
     align-items: center;
     width: fit-content;
-    gap: 16px;
+    gap: 8px;
 `;
 
 const StyledTitle = styled.div<IStyleProps>`

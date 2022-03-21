@@ -21,9 +21,9 @@ interface IThemeContextValue {
 
 const ThemeContext = createContext<IThemeContextValue | undefined>(undefined);
 
-const borderRadius = "10px";
-const sectionPadding = "48px";
-const sectionRadius = "24px";
+const borderRadius = "1rem";
+const sectionPadding = "3.2rem";
+const sectionRadius = "2.4rem";
 
 export const useThemeContext = () => {
     const context = useContext(ThemeContext);

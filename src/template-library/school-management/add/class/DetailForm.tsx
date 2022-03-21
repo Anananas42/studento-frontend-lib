@@ -9,7 +9,7 @@ const StyledDetailForm = styled.div`
 const StyledRow = styled.div`
     display: flex;
     justify-content: flex-start;
-    gap: 24px;
+    gap: 16px;
 `;
 
 const DetailForm:FC = () => {
