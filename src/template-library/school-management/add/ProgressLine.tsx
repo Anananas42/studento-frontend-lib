@@ -71,7 +71,7 @@ const StyledProgressItem = styled.div<IStyleProps>`
     }
 
     &.active::before {
-        border-color: ${props => props.secondary};
+        border-color: #4AA33E;
     }
 `;
 
