@@ -1,5 +1,5 @@
 const CTAColors = {
-    shadow: "rgba(16, 45, 115, 0.4)",
+    shadow: "rgba(16, 45, 115, 0.1)",
     txtShadow: "rgba(16, 45, 115, 0.08)",
     Default: {
         bg1: "#1C5FFF",
