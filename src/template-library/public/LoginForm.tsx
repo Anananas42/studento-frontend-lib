@@ -34,7 +34,7 @@ const StyledTitle = styled.div<IStyleProps>`
     justify-content: center;
     width: 100%;
     font-size: 32px;
-    padding: 16px 0 48px 0;
+    padding: 16px 0;
     font-weight: 700;
 
     img {

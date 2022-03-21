@@ -8,6 +8,7 @@ const StyledFooter = styled.footer`
     height: 128px;
     padding: 32px;
     border-top: 2px solid rgba(69, 60, 48, 0.08);
+    font-size: 2rem;
     color: rgba(69, 60, 48, 0.57);
     display: flex;
     align-items: flex-start;
