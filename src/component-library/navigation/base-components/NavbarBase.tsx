@@ -51,7 +51,7 @@ const StyledRightNavbar = styled.div`
     padding-left: 8px;
 
     > div:last-child {
-        padding-left: 16px;
+        padding-left: 8px;
     }
 `;
 
