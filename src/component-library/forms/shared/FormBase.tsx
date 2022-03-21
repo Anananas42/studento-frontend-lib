@@ -19,7 +19,7 @@ const StyledLabel = styled.label<IStyledLabel>`
     line-height: 2rem;
     width: ${props => props.isHorizontal ? "auto" : "fit-content"};
     padding-top: ${props => props.isHorizontal ? "0.9rem" : 0};
-    padding-bottom: ${props => props.isHorizontal ? 0 : (props.isCompact ? "1.2rem" : "1.9rem")};
+    padding-bottom: ${props => props.isHorizontal ? 0 : (props.isCompact ? "1.2rem" : "1.6rem")};
     padding-right: ${props => props.isHorizontal ? "1.6rem" : 0};
     white-space: nowrap;
     overflow: hidden;
