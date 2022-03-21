@@ -23,7 +23,7 @@ const StyledUserStatus = styled.div<IStyleProps>`
     color: ${props => props.fill};
     background-color: ${props => props.bg};
     border-radius: 0 0 16px 16px;
-    padding: 8px 16px;
+    padding: 8px 12px;
 `;
 
 const StyledUserButton = styled.div<IStyleProps>`
