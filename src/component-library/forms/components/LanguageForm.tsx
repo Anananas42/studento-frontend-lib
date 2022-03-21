@@ -11,6 +11,7 @@ interface IStyledProps {
     fill: string;
     isOpen?: boolean;
     width?: string;
+    sectionShadow: string;
 };
 
 const StyledLanguageForm = styled.div`
@@ -56,11 +57,9 @@ const StyledList = styled.div<IStyledProps>`
     width: ${props => props.width ? props.width : "100%"};
     background-color: white;
     color: ${props => props.fill};
-    border: 1px solid ${TextColors.Hover.bg};
     border-top: 0;
-    outline: 1px solid ${TextColors.Hover.bg};
     border-radius: ${props => props.borderRadius};
-    box-shadow: 2px 8px 16px -2px ${FormColors.Default.dropdownShadow};
+    box-shadow: ${props => props.sectionShadow};
     user-select: none;
     overflow-y: auto;
     max-height: 400px;
@@ -99,7 +98,7 @@ const LanguageForm:FC = () => {
 
     const options:IOption = {en: "English", cz: "Česky"};
 
-    const styleProps = { borderRadius, fill: colors.fill, placeholderFill: FormColors.Default.placeholder };
+    const styleProps = { borderRadius, fill: colors.fill, placeholderFill: FormColors.Default.placeholder, sectionShadow: colors.sectionShadow };
 
     return (
         <StyledLanguageForm>
