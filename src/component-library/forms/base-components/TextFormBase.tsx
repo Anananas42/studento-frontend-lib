@@ -20,7 +20,7 @@ export const StyledInput = styled.input<IStyledInput>`
     box-shadow: inset 0 4px 8px ${FormColors.Default.innerShadow};
     line-height: 14px;
     font-size: 20px;
-    padding: 8px ${props => props.borderRadius} ${props => props.icon ? "8px 46px" : ""};
+    padding: 8px ${props => props.borderRadius} ${props => props.icon ? "8px 40px" : ""};
     font-family: 'Varela Round', sans-serif;
     width: ${props => props.width || "100%"};
 
@@ -49,7 +49,7 @@ export const StyledInput = styled.input<IStyledInput>`
 
 export const StyledIconWrapper = styled.div`
     position: absolute;
-    left: -0px;
+    left: -4px;
     top: -5px;
     color: ${FormColors.Default.icon};
     user-select: none;
