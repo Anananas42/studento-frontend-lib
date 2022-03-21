@@ -2,7 +2,7 @@ import { FC } from "react"
 import styled from "styled-components";
 import { useThemeContext } from "../../../component-library/ThemeProvider";
 import { useUserContext } from "../../../component-library/UserProvider";
-import { IconL } from "../../../component-library/utilities/Icon";
+import { IconL, IconM } from "../../../component-library/utilities/Icon";
 import StyledLink from "../../../component-library/utilities/StyledLink";
 import { AddIconMap } from "./AddMenu";
 
@@ -32,11 +32,11 @@ const StyledRecentlyAdded = styled.div<IStyleProps>`
     height: fit-content;
     color: ${props => props.fill};
     width: fit-content;
-    gap: 16px;
+    gap: 8px;
 `;
 
 const StyledTitle = styled.div`
-    font-size: 28px;
+    font-size: 2.8rem;
     padding-bottom: 8px;
 `;
 
@@ -46,20 +46,20 @@ const StyledItem = styled.div<IStyleProps>`
     align-items: center;
     border-radius: ${props => props.borderRadius};
     background-color: #fff;
-    padding: 8px;
+    padding: 2px;
     box-shadow: 2px 2px 8px -2px #453c3042;
-    width: 360px;
+    width: 320px;
     cursor: pointer;
     transition: all 0.1s ease-in-out;
     user-select: none;
 
     > div:first-child {
-        padding-bottom: 4px;
+        padding-bottom: 0px;
         min-width: 50px;
     }
 
     > span {
-        font-size: 20px;
+        font-size: 1.8rem;
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
@@ -70,7 +70,7 @@ const StyledItem = styled.div<IStyleProps>`
         position: absolute;
         color: ${props => props.fill};
         right: 8px;
-        top: 7px;
+        top: 2px;
         opacity: 0;
         transition: all 0.15s ease-in-out;
     }
@@ -121,9 +121,9 @@ const RecentlyAdded:FC = () => {
                 return (
                     <StyledLink key={item.type + item.id} to={`/${userStatus?.userMode}/find/${item.type}/${item.id}`}>
                         <StyledItem {...styleProps}>
-                            <IconL>{AddIconMap[item.type]}</IconL>
+                            <IconM>{AddIconMap[item.type]}</IconM>
                             <span>{item.name}</span>
-                            <IconL>arrow_forward</IconL>
+                            <IconM>arrow_forward</IconM>
                         </StyledItem>
                     </StyledLink>
                 )

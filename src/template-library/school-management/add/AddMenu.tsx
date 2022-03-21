@@ -17,7 +17,7 @@ const StyledAddMenu = styled.div<IStyledProps>`
     height: fit-content;
     grid-template-columns: repeat(3, 1fr);
     grid-auto-flow: row;
-    gap: 32px;
+    gap: 3.2rem;
     color: ${props => props.fill};
 `;
 
@@ -26,8 +26,8 @@ const StyledTile = styled.div<IStyledProps>`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    width: 320px;
-    height: 240px;
+    width: 28rem;
+    height: 20rem;
     border-radius: ${props => props.sectionRadius};
     box-shadow: ${props => props.sectionShadow};
     padding: ${props => props.sectionPadding};
@@ -40,11 +40,11 @@ const StyledTile = styled.div<IStyledProps>`
 `;
 
 const StyledOptionTitle = styled.div<IStyledProps>`
-    font-size: 28px;
+    font-size: 2.6rem;
     display: flex;
     white-space: nowrap;
     align-items: center;
-    gap: 8px;
+    gap: 0.8rem;
 
     > div {
         padding-top: 6px;
