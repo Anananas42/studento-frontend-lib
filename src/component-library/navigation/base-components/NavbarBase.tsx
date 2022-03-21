@@ -48,6 +48,7 @@ const StyledRightNavbar = styled.div`
     display: flex;
     width: fit-content;
     padding-right: 64px;
+    padding-left: 8px;
 
     > div:last-child {
         padding-left: 16px;
