@@ -3,12 +3,9 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { BtnCTAL } from "../../component-library/buttons/components";
 import { BtnLinkS } from "../../component-library/buttons/components/BtnLink";
-import { CheckboxRow } from "../../component-library/forms/base-components";
-import { UsernameForm, PasswordForm, EmailForm } from "../../component-library/forms/components";
+import { PasswordForm, EmailForm } from "../../component-library/forms/components";
 import FormColors from "../../component-library/forms/shared/FormColors";
 import { useThemeContext } from "../../component-library/ThemeProvider";
-import { useUserContext } from "../../component-library/UserProvider";
-import logo from '../../media/logo.png';
 
 interface IStyleProps {
     fill: string;

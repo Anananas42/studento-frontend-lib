@@ -1,7 +1,6 @@
 import { FC } from "react";
 import styled from "styled-components";
 import { useThemeContext } from "../../../../component-library/ThemeProvider";
-import DetailForm from "./DetailForm";
 
 interface IStyleProps {
     fill: string;
@@ -11,7 +10,7 @@ interface IStyleProps {
     borderRadius: string;
 }
 
-const StyledSubjectStep = styled.div<IStyleProps>`
+const StyledSubjectTypeStep = styled.div<IStyleProps>`
     color: ${props => props.fill};
     background-color: #fff;
     box-shadow: ${props => props.sectionShadow};
@@ -31,26 +30,25 @@ const StyledTitle = styled.div<IStyleProps>`
     text-align: center;
 `;
 
-interface ISubjectStepProps {
+interface ISubjectTypeStepProps {
     title: string;
     ButtonRow: JSX.Element;
 }
 
-const SubjectStep:FC<ISubjectStepProps> = (props) => {
+const SubjectTypeStep:FC<ISubjectTypeStepProps> = (props) => {
     const { title, ButtonRow } = props;
     const { colors, borderRadius, sectionPadding, sectionRadius } = useThemeContext();
 
     const styleProps = {fill: colors.fill, sectionPadding, sectionRadius, sectionShadow: colors.sectionShadow, borderRadius};
 
     return (
-        <StyledSubjectStep {...styleProps}>
+        <StyledSubjectTypeStep {...styleProps}>
             <StyledTitle {...styleProps}>
-                {`${title} - subjects`}
+                {`${title} - subject types`}
             </StyledTitle>
-            
             {ButtonRow}
-        </StyledSubjectStep>
+        </StyledSubjectTypeStep>
     );
 }
 
-export default SubjectStep;
+export default SubjectTypeStep;

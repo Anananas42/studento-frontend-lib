@@ -1,6 +1,6 @@
 import { FC } from "react";
 import styled from "styled-components";
-import LoginForm from "../../template-library/public/LoginForm";
+import LoginForm from "../../page-components/public/LoginForm";
 
 const StyledLogin = styled.div`
     padding-top: min(max(calc(100vh - 900px), 0px), 64px);

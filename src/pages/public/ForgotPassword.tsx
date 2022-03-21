@@ -1,6 +1,6 @@
 import { FC } from "react";
 import styled from "styled-components";
-import ForgotPasswordForm from "../../template-library/public/ForgotPasswordForm";
+import ForgotPasswordForm from "../../page-components/public/ForgotPasswordForm";
 
 const StyledForgotPassword = styled.div`
     padding-top: min(max(calc(100vh - 900px), 0px), 64px);

@@ -1,7 +1,7 @@
 import { FC } from "react";
 import styled from "styled-components";
-import AddMenu from "../../../template-library/school-management/add/AddMenu";
-import RecentlyAdded from "../../../template-library/school-management/add/RecentlyAdded";
+import AddMenu from "../../../page-components/school-management/add/AddMenu";
+import RecentlyAdded from "../../../page-components/school-management/add/RecentlyAdded";
 
 const StyledAdminAdd = styled.div`
     display: flex;

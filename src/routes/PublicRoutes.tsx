@@ -7,7 +7,7 @@ import CreateAccount from "../pages/public/CreateAccount";
 import ForgotPassword from "../pages/public/ForgotPassword";
 import Home from "../pages/public/Home";
 import Login from "../pages/public/Login";
-import Footer from "../template-library/Footer";
+import Footer from "../page-components/Footer";
 
 const PublicRoutes:FC = () => {
     const navigate = useNavigate();
