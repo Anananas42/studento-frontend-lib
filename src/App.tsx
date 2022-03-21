@@ -13,6 +13,7 @@ const StyledContent = styled.div<{bg: string}>`
   font-style: 'normal';
   font-weight: 'normal';
   background-color: ${props => props.bg};
+  overflow-x: hidden;
 
   *, *::after, *::before {
     box-sizing: border-box;
