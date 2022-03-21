@@ -23,7 +23,7 @@ const StyledContent = styled.div<{bg: string}>`
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 8px;
+    gap: 16px;
     padding-top: 90px;
     min-height: 100vh;
   }
