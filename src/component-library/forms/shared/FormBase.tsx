@@ -15,12 +15,12 @@ const StyledLabel = styled.label<IStyledLabel>`
     color: ${props => props.labelColor};
     padding-left: ${props => props.isHorizontal ? 0 : `${parseInt(props.borderRadius.split("px", 1)[0])/1.5}px`};
     text-align: ${props => props.isHorizontal ? "right" : "left"};
-    font-size: 18px;
-    line-height: 20px;
+    font-size: 1.8rem;
+    line-height: 2rem;
     width: ${props => props.isHorizontal ? "auto" : "fit-content"};
-    padding-top: ${props => props.isHorizontal ? "9px" : 0};
-    padding-bottom: ${props => props.isHorizontal ? 0 : (props.isCompact ? "12px" : "19px")};
-    padding-right: ${props => props.isHorizontal ? "16px" : 0};
+    padding-top: ${props => props.isHorizontal ? "0.9rem" : 0};
+    padding-bottom: ${props => props.isHorizontal ? 0 : (props.isCompact ? "1.2rem" : "1.9rem")};
+    padding-right: ${props => props.isHorizontal ? "1.6rem" : 0};
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -56,15 +56,15 @@ interface IStyledMessageWrapper {
 }
 
 const StyledMessageWrapper = styled.div<IStyledMessageWrapper>`
-    padding-bottom: ${props => props.isCompact ? "24px" : 0};
+    padding-bottom: ${props => props.isCompact ? "2.4rem" : 0};
 
     .message {
         color: ${props => props.isMessage ? props.msgColor : "transparent"};
         padding-left: ${props => `${parseInt(props.borderRadius.split("px", 1)[0])/1.5}px`};
-        padding-top: 8px;
-        font-size: 17px;
-        line-height: 12px;
-        padding-bottom: 18px;
+        padding-top: 0.8rem;
+        font-size: 1.7rem;
+        line-height: 1.2rem;
+        padding-bottom: 1.8rem;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
