@@ -3,7 +3,7 @@ import styled from "styled-components";
 import TextColors from "../../buttons/colors/TextColors";
 import { borderRadius, useThemeContext } from "../../ThemeProvider";
 import { Icon } from "../../utilities/Icon";
-import StyledLink from "../../utilities/StyledLink";
+import StyledLink from "../../styles/StyledLink";
 
 interface IStyleProps {
     fill: string;

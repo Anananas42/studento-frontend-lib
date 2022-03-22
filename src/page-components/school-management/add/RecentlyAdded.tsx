@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { borderRadius, sectionPadding, sectionRadius, useThemeContext } from "../../../component-library/ThemeProvider";
 import { useUserContext } from "../../../component-library/UserProvider";
 import { IconM } from "../../../component-library/utilities/Icon";
-import StyledLink from "../../../component-library/utilities/StyledLink";
+import StyledLink from "../../../component-library/styles/StyledLink";
 import { AddIconMap } from "./AddMenu";
 
 enum AddedItemType {

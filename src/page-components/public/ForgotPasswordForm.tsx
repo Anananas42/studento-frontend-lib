@@ -5,7 +5,7 @@ import { BtnCTAL } from "../../component-library/buttons/components";
 import { BtnLinkS } from "../../component-library/buttons/components/BtnLink";
 import { EmailForm } from "../../component-library/forms/components";
 import FormColors from "../../component-library/forms/shared/FormColors";
-import { borderRadius, sectionPadding, sectionRadius, useThemeContext } from "../../component-library/ThemeProvider";
+import { borderRadius, sectionPadding, sectionRadius, sectionTitleSize, useThemeContext } from "../../component-library/ThemeProvider";
 
 interface IStyleProps {
     fill: string;
@@ -31,7 +31,7 @@ const StyledTitle = styled.div<IStyleProps>`
     align-items: center;
     justify-content: center;
     width: 100%;
-    font-size: 24px;
+    font-size: ${sectionTitleSize};
     padding: 16px 0 48px 0;
     font-weight: 500;
 `;

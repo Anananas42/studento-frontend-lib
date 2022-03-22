@@ -4,7 +4,7 @@ import TextColors from "../../buttons/colors/TextColors";
 import logo from '../../../media/logo.png';
 import { borderRadius, useThemeContext } from "../../ThemeProvider";
 import { useUserContext } from "../../UserProvider";
-import StyledLink from "../../utilities/StyledLink";
+import StyledLink from "../../styles/StyledLink";
 
 interface IStyledProps {
     fill: string;

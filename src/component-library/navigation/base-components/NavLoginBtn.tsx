@@ -2,7 +2,7 @@ import { FC } from "react";
 import styled from "styled-components";
 import { BtnTextL } from "../../buttons/components/BtnText";
 import { borderRadius, useThemeContext } from "../../ThemeProvider";
-import StyledLink from "../../utilities/StyledLink";
+import StyledLink from "../../styles/StyledLink";
 
 interface IStyledNavLoginBtn {
     bg: string;

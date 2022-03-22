@@ -5,7 +5,7 @@ import LanguageForm from "../../forms/components/LanguageForm";
 import { borderRadius, useThemeContext } from "../../ThemeProvider";
 import { useUserContext } from "../../UserProvider";
 import { Icon } from "../../utilities/Icon";
-import StyledLink from "../../utilities/StyledLink";
+import StyledLink from "../../styles/StyledLink";
 import NavFeatureTiles, { IFeatureTiles } from "./NavFeatureTiles";
 import NavLoginBtn from "./NavLoginBtn";
 import NavLogoBtn from "./NavLogoBtn";

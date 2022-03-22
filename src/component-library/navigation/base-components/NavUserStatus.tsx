@@ -5,7 +5,7 @@ import { BtnTextL } from "../../buttons/components/BtnText";
 import { borderRadius, useThemeContext } from "../../ThemeProvider";
 import { useUserContext } from "../../UserProvider";
 import { IconL } from "../../utilities/Icon";
-import StyledLink from "../../utilities/StyledLink";
+import StyledLink from "../../styles/StyledLink";
 
 
 interface IStyleProps {

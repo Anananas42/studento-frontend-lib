@@ -2,7 +2,7 @@ import { FC } from "react";
 import styled from "styled-components";
 import { sectionPadding, sectionRadius, useThemeContext } from "../../../component-library/ThemeProvider";
 import { Icon } from "../../../component-library/utilities/Icon";
-import StyledLink from "../../../component-library/utilities/StyledLink";
+import StyledLink from "../../../component-library/styles/StyledLink";
 
 interface IStyledProps {
     fill: string;
