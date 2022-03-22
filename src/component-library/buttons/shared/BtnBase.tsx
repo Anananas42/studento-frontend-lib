@@ -1,6 +1,6 @@
 import { IBtnSizes } from './ButtonSizes';
 import { FC, ReactElement } from 'react';
-import { useThemeContext } from '../../ThemeProvider';
+import { borderRadius, useThemeContext } from '../../ThemeProvider';
 import styled, { StyledComponent } from 'styled-components';
 
 export interface IStyledBtn {
@@ -31,7 +31,6 @@ const StyledButtonBase = styled.div<{width?: string}>`
 `;
 
 const BtnBase:FC<BtnProps> = (props) => {
-    const { borderRadius } = useThemeContext();
     const { Icon, isAfter, Sizes, children, StyledButton, forceUppercase, ...rest } = props;
     const padH = Sizes.paddingH;
     const padV = Sizes.paddingV;

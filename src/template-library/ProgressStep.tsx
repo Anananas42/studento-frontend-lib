@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { BtnCloseL, BtnConfirmL, BtnPrimaryL, BtnTertiaryL } from "../component-library/buttons/components";
 import PopupLeaveProgress from "../component-library/popups/components/PopupLeaveProgress";
-import { useThemeContext } from "../component-library/ThemeProvider";
+import { borderRadius, sectionPadding, sectionRadius, useThemeContext } from "../component-library/ThemeProvider";
 
 interface IStyleProps {
     fill: string;
@@ -57,7 +57,7 @@ export interface IProgressStepProps {
 const ProgressStep:FC<IProgressStepProps> = (props) => {
     const { title, currentStep, maxStep, setCurrentStep, abortDestination } = props;
     const navigate = useNavigate();
-    const { colors, borderRadius, sectionPadding, sectionRadius } = useThemeContext();
+    const { colors } = useThemeContext();
 
     const [isAbortPopup, setIsAbortPopup] = useState<boolean>(false);
 

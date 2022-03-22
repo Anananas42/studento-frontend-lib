@@ -1,7 +1,7 @@
 import { FC } from "react";
 import styled from "styled-components";
 import { BtnTextL } from "../../buttons/components/BtnText";
-import { useThemeContext } from "../../ThemeProvider";
+import { borderRadius, useThemeContext } from "../../ThemeProvider";
 import StyledLink from "../../utilities/StyledLink";
 
 interface IStyledNavLoginBtn {
@@ -21,7 +21,7 @@ const StyledNavLoginBtn = styled.div<IStyledNavLoginBtn>`
 `;
 
 const NavLoginBtn:FC = () => {
-    const { colors, borderRadius, languageMap } = useThemeContext();
+    const { colors, languageMap } = useThemeContext();
 
     return (
         <StyledLink to={'/login'}>

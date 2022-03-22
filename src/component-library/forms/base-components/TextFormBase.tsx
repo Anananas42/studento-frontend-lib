@@ -1,6 +1,6 @@
 import { FC } from "react";
 import styled from "styled-components";
-import { useThemeContext } from "../../ThemeProvider";
+import { borderRadius, useThemeContext } from "../../ThemeProvider";
 import { IconL } from "../../utilities/Icon";
 import FormBase from "../shared/FormBase";
 import FormColors from "../shared/FormColors";
@@ -75,7 +75,7 @@ interface ITextFormProps {
 
 const TextFormBase:FC<ITextFormProps> = (props) => {
     const { label, errorMessage, isDisabled, placeholder, width, icon, value, setValue, onKeyDown, isCompact, formId, ...rest } = props;
-    const { borderRadius, colors } = useThemeContext();
+    const { colors } = useThemeContext();
 
     return (
         <FormBase label={label} errorMessage={errorMessage} isDisabled={isDisabled} isCompact={isCompact} formId={formId} width={width} {...rest}>

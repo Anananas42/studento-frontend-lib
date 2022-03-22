@@ -1,6 +1,6 @@
 import { FC, useRef, useState } from "react";
 import styled from "styled-components";
-import { useThemeContext } from "../../ThemeProvider";
+import { borderRadius, useThemeContext } from "../../ThemeProvider";
 import { IconL } from "../../utilities/Icon";
 import { StyledIconWrapper, StyledInput } from "../base-components/TextFormBase";
 import FormBase from "../shared/FormBase";
@@ -50,7 +50,7 @@ const getUpdatedValue = (value: string, e: React.ChangeEvent<HTMLInputElement>) 
 
 const PasswordForm:FC<IFormProps> = (props) => {
     const { isDisabled, value, setValue, onKeyDown, formId, width, errorMessage, isConfirmPassword, ...rest } = props;
-    const { borderRadius, colors, languageMap } = useThemeContext();
+    const { colors, languageMap } = useThemeContext();
     const [isVisible, setIsVisible] = useState<boolean>(false);
     const formRef = useRef<any>();
     const label = isConfirmPassword ? languageMap.Generic.passwordConfirm : languageMap.Generic.password;

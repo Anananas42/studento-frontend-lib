@@ -3,7 +3,7 @@ import PopupBase from "../base-components/PopupBase";
 import { BtnPrimaryL } from "../../buttons/components/BtnPrimary";
 import { BtnTertiaryL } from "../../buttons/components/BtnTertiary";
 import styled from "styled-components";
-import { useThemeContext } from "../../ThemeProvider";
+import { borderRadius, useThemeContext } from "../../ThemeProvider";
 import FileDragAndDrop from '../../utilities/FileDragAndDrop';
 import { NotificationType } from "../../utilities/SystemNotification";
 
@@ -66,7 +66,7 @@ interface IPopupUpload {
 }
 
 const PopupUpload:FC<IPopupUpload> = (props) => {
-    const { borderRadius, colors, pushSystemNotification, clearSystemNotifications, languageMap } = useThemeContext();
+    const { colors, pushSystemNotification, clearSystemNotifications, languageMap } = useThemeContext();
     const { title, fileHandler, sidenote, maxSizeMB } = props;
     const [isOpen, setIsOpen] = useState<boolean>(true);
     const [isDragOver, setIsDragOver] = useState<boolean>(false);

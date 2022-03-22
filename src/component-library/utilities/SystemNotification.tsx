@@ -1,5 +1,5 @@
 import { FC, memo, ReactNode, useEffect, useRef, useState } from 'react';
-import { useThemeContext } from '../ThemeProvider';
+import { borderRadius, useThemeContext } from '../ThemeProvider';
 import styled from 'styled-components';
 
 interface IStyledSystemNotification {
@@ -78,7 +78,7 @@ const SystemNotification:FC<IProps> = memo((props) => {
     const { type, isFading, removeCallback } = props;
     const [isHidden, setIsHidden] = useState<boolean>(false);
     const [isTransitioning, setIsTransitioning] = useState<boolean>(false);
-    const { colors, borderRadius } = useThemeContext();
+    const { colors } = useThemeContext();
     const isMounted = useRef(false);
 
     const heightRef = useRef<any>();

@@ -1,7 +1,7 @@
 import { FC } from "react";
 import styled from "styled-components";
 import TextColors from "../../buttons/colors/TextColors";
-import { useThemeContext } from "../../ThemeProvider";
+import { borderRadius, useThemeContext } from "../../ThemeProvider";
 import { Icon } from "../../utilities/Icon";
 import StyledLink from "../../utilities/StyledLink";
 
@@ -125,7 +125,7 @@ interface IProps {
 
 const NavFeatureTiles:FC<IProps> = (props) => {
     const { featureTiles } = props;
-    const { colors, borderRadius } = useThemeContext();
+    const { colors } = useThemeContext();
     const IstyleProps = { fill: colors.fill, fillSecondary: colors.fillSecondary, borderRadius, sectionShadow: colors.sectionShadow, primary: colors.primary };
 
     return (

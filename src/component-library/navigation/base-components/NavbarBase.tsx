@@ -2,7 +2,7 @@ import { FC } from "react";
 import styled from "styled-components";
 import TextColors from "../../buttons/colors/TextColors";
 import LanguageForm from "../../forms/components/LanguageForm";
-import { useThemeContext } from "../../ThemeProvider";
+import { borderRadius, useThemeContext } from "../../ThemeProvider";
 import { useUserContext } from "../../UserProvider";
 import { Icon } from "../../utilities/Icon";
 import StyledLink from "../../utilities/StyledLink";
@@ -101,7 +101,7 @@ interface INavbarProps {
 
 const NavbarBase:FC<INavbarProps> = (props) => {
     const { featureTiles, navButtons } = props;
-    const { colors, borderRadius } = useThemeContext();
+    const { colors } = useThemeContext();
     const { userStatus } = useUserContext();
 
     const styleProps = { fill: colors.fill, borderRadius, navbarBg: colors.navbarBg };

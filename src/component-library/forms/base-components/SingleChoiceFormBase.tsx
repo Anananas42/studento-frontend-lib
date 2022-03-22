@@ -1,6 +1,6 @@
 import { FC } from "react";
 import styled from "styled-components";
-import { useThemeContext } from "../../ThemeProvider";
+import { borderRadius, useThemeContext } from "../../ThemeProvider";
 import FormBase from "../shared/FormBase";
 import FormColors from "../shared/FormColors";
 import FormStyles from "../shared/FormStyles";
@@ -84,7 +84,7 @@ interface IProps {
 
 const SingleChoiceFormBase:FC<IProps> = (props) => {
     const { value, setValue, formId, isDisabled, label, choices, ...rest } = props;
-    const { borderRadius, colors } = useThemeContext();
+    const { colors } = useThemeContext();
 
     return (
         <FormBase formId={formId} label={label} isDisabled={isDisabled} {...rest}>

@@ -1,6 +1,6 @@
 import { FC, SetStateAction } from "react";
 import styled from "styled-components";
-import { useThemeContext } from "../../ThemeProvider";
+import { borderRadius, useThemeContext } from "../../ThemeProvider";
 import FormColors from "../shared/FormColors";
 import FormStyles from "../shared/FormStyles";
 import StyledCheckbox from "../shared/StyledCheckbox";
@@ -39,7 +39,7 @@ interface ICheckboxRowProps {
 
 const CheckboxRow:FC<ICheckboxRowProps> = (props) => {
     const { value, setValue, isDisabled, formId, label, isGrouped } = props;
-    const { borderRadius, colors } = useThemeContext();
+    const { colors } = useThemeContext();
 
     const identifier = formId ? formId : label;
 

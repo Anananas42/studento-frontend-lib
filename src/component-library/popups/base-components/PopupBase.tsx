@@ -1,5 +1,5 @@
 import { FC, ReactNode, useEffect, useRef } from "react";
-import { useThemeContext } from "../../ThemeProvider";
+import { borderRadius, sectionPadding, sectionRadius, useThemeContext } from "../../ThemeProvider";
 import styled from "styled-components";
 import Sidenote from '../../utilities/Sidenote';
 import { BtnCloseL } from '../../buttons/components/BtnClose';
@@ -77,7 +77,7 @@ interface IPopupBaseProps {
 }
 
 const PopupBase:FC<IPopupBaseProps> = (props) => {
-    const { borderRadius, colors, sectionPadding, sectionRadius } = useThemeContext();
+    const { colors } = useThemeContext();
     const { title, sidenote, children, isOpen, setIsOpen, width } = props;
 
     const PopupBaseRef = useRef<any>();

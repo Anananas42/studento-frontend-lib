@@ -1,6 +1,6 @@
 import { FC, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
-import { useThemeContext } from "../../../ThemeProvider";
+import { borderRadius, useThemeContext } from "../../../ThemeProvider";
 import { IconL } from "../../../utilities/Icon";
 import FormBase from "../../shared/FormBase";
 import FormColors from "../../shared/FormColors";
@@ -61,7 +61,7 @@ const findClosestOption = (options: {[key: string]: string[][]}, input: string) 
 
 const DropdownSearchFormBase:FC<IProps> = (props) => {
     const { value, setValue, options, formId, isDisabled, errorMessage, label, width, ...rest } = props;
-    const { borderRadius, colors, languageMap } = useThemeContext();
+    const { colors, languageMap } = useThemeContext();
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const [currOptionName, setCurrOptionName] = useState<string>();
     const [input, setInput] = useState<string>();

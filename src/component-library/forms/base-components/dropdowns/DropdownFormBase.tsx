@@ -1,5 +1,5 @@
 import { FC, useEffect, useRef, useState } from "react";
-import { useThemeContext } from "../../../ThemeProvider";
+import { borderRadius, useThemeContext } from "../../../ThemeProvider";
 import { IconL } from "../../../utilities/Icon";
 import FormBase from "../../shared/FormBase";
 import FormColors from "../../shared/FormColors";
@@ -27,7 +27,7 @@ interface IProps {
 
 const DropdownFormBase:FC<IProps> = (props) => {
     const { value, setValue, options, formId, isDisabled, errorMessage, label, width, placeholder, ...rest } = props;
-    const { borderRadius, colors, languageMap } = useThemeContext();
+    const { colors, languageMap } = useThemeContext();
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const customDropdownRef = useRef<any>();
     const dropdownWrapperRef = useRef<any>();

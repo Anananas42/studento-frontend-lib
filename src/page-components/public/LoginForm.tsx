@@ -6,7 +6,7 @@ import { BtnLinkS } from "../../component-library/buttons/components/BtnLink";
 import { CheckboxRow } from "../../component-library/forms/base-components";
 import { UsernameForm, PasswordForm } from "../../component-library/forms/components";
 import FormColors from "../../component-library/forms/shared/FormColors";
-import { useThemeContext } from "../../component-library/ThemeProvider";
+import { borderRadius, sectionPadding, sectionRadius, useThemeContext } from "../../component-library/ThemeProvider";
 import { useUserContext } from "../../component-library/UserProvider";
 import logo from '../../media/logo.png';
 
@@ -52,7 +52,7 @@ const StyledLinkRow = styled.div<IStyleProps>`
 
 const LoginForm:FC = (props) => {
     const { login } = useUserContext();
-    const { languageMap, colors, borderRadius, sectionPadding, sectionRadius } = useThemeContext();
+    const { languageMap, colors } = useThemeContext();
     const navigate = useNavigate();
     
     const [username, setUsername] = useState<string>("");

@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { IColorSet } from '../themes/ThemeColor';
-import { useThemeContext } from '../ThemeProvider';
+import { borderRadius, useThemeContext } from '../ThemeProvider';
 import styled from 'styled-components';
 
 interface ISidenote {
@@ -21,7 +21,7 @@ const StyledSidenote = styled.div<ISidenote>`
 `;
 
 const Sidenote:FC = (props) => {
-    const { colors, borderRadius } = useThemeContext();
+    const { colors } = useThemeContext();
 
     return (
         <StyledSidenote colors={colors} borderRadius={borderRadius}>

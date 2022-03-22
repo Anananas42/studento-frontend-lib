@@ -6,9 +6,6 @@ import SystemNotificationManager, { INewEntry, INotification } from './managers/
 type ThemeMode = "light" | "dark";
 
 interface IThemeContextValue {
-    borderRadius: string;
-    sectionPadding: string;
-    sectionRadius: string;
     mode: ThemeMode;
     setMode: React.Dispatch<SetStateAction<ThemeMode>>;
     language: Language;
@@ -21,9 +18,10 @@ interface IThemeContextValue {
 
 const ThemeContext = createContext<IThemeContextValue | undefined>(undefined);
 
-const borderRadius = "10px";
-const sectionPadding = "24px";
-const sectionRadius = "24px";
+export const borderRadius = "10px";
+export const sectionPadding = "24px";
+export const sectionRadius = "24px";
+export const sectionTitleSize = "30px";
 
 export const useThemeContext = () => {
     const context = useContext(ThemeContext);
@@ -57,7 +55,7 @@ const ThemeProvider:FC<IProviderProps> = (props) => {
     }
 
     return (
-        <ThemeContext.Provider value={{ mode, setMode, language, languageMap, setLanguage, colors, borderRadius, sectionPadding, sectionRadius, pushSystemNotification, clearSystemNotifications}}>
+        <ThemeContext.Provider value={{ mode, setMode, language, languageMap, setLanguage, colors, pushSystemNotification, clearSystemNotifications}}>
             <SystemNotificationManager newEntry={systemNotification}/>
             { props.children }
         </ThemeContext.Provider>

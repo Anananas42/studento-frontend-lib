@@ -1,6 +1,6 @@
 import { FC, useRef } from "react";
 import styled from "styled-components";
-import { useThemeContext } from "../../ThemeProvider";
+import { borderRadius, useThemeContext } from "../../ThemeProvider";
 import { IconL } from "../../utilities/Icon";
 import FormBase from "../shared/FormBase";
 import FormColors from "../shared/FormColors";
@@ -70,7 +70,7 @@ export interface IDateFormProps {
 
 const DateForm:FC<IDateFormProps> = (props) => {
     const { formId, errorMessage, isDisabled, setValue, value, width, min, max, label, ...rest } = props;
-    const { borderRadius, colors, languageMap } = useThemeContext();
+    const { colors, languageMap } = useThemeContext();
     const datePickerRef = useRef<any>();
     const localLabel = label ? label : languageMap.Generic.date;
     const id = formId ? formId : localLabel;

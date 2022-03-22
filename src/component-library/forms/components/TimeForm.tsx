@@ -1,6 +1,6 @@
 import { FC, useRef } from "react";
 import styled from "styled-components";
-import { useThemeContext } from "../../ThemeProvider";
+import { borderRadius, useThemeContext } from "../../ThemeProvider";
 import { IconL } from "../../utilities/Icon";
 import FormBase from "../shared/FormBase";
 import FormColors from "../shared/FormColors";
@@ -56,7 +56,7 @@ interface ITimeFormProps {
 
 const TimeForm:FC<ITimeFormProps> = (props) => {
     const { value, setValue, formId, isDisabled, errorMessage, min, max, ...rest} = props;
-    const { borderRadius, colors, languageMap } = useThemeContext();
+    const { colors, languageMap } = useThemeContext();
     const formRef = useRef<any>();
     const label = languageMap.Generic.time;
 

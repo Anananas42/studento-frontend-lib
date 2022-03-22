@@ -1,6 +1,6 @@
 import { FC } from "react";
 import styled from "styled-components";
-import { useThemeContext } from "../../../component-library/ThemeProvider";
+import { sectionPadding, sectionRadius, useThemeContext } from "../../../component-library/ThemeProvider";
 import { Icon } from "../../../component-library/utilities/Icon";
 import StyledLink from "../../../component-library/utilities/StyledLink";
 
@@ -72,7 +72,7 @@ export const AddIconMap:any = {
 }
 
 const AddMenu:FC = () => {
-    const { sectionRadius, sectionPadding, colors, languageMap } = useThemeContext();
+    const { colors, languageMap } = useThemeContext();
     const styleProps = { sectionRadius, sectionPadding, sectionShadow: colors.sectionShadow, fill: colors.fill, primary: colors.primary };
 
     const translations:any = languageMap.SchoolManagement;

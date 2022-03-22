@@ -1,6 +1,6 @@
 import { FC, ReactNode, useEffect, useState } from "react";
 import styled from "styled-components";
-import { useThemeContext } from "../../ThemeProvider";
+import { borderRadius, useThemeContext } from "../../ThemeProvider";
 import FormColors, { IFormState, StateType } from "./FormColors";
 import FormStyles from "./FormStyles";
 
@@ -84,7 +84,7 @@ export interface IFormProps {
 const FormBase:FC<IFormProps> = (props) => {
     const { isHorizontal, isDisabled, label, formId, defaultNote, errorMessage, children, isOptional, width } = props;
     const [formState, setFormState] = useState<IFormState>({type: isDisabled ? StateType.Disabled : StateType.Default, message: defaultNote});
-    const { borderRadius, languageMap } = useThemeContext();
+    const { languageMap } = useThemeContext();
     const isCompact = props.isCompact || (props.isCompact === undefined && !errorMessage);
 
     useEffect(() => {

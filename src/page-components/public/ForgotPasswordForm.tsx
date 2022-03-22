@@ -5,7 +5,7 @@ import { BtnCTAL } from "../../component-library/buttons/components";
 import { BtnLinkS } from "../../component-library/buttons/components/BtnLink";
 import { EmailForm } from "../../component-library/forms/components";
 import FormColors from "../../component-library/forms/shared/FormColors";
-import { useThemeContext } from "../../component-library/ThemeProvider";
+import { borderRadius, sectionPadding, sectionRadius, useThemeContext } from "../../component-library/ThemeProvider";
 
 interface IStyleProps {
     fill: string;
@@ -45,7 +45,7 @@ const StyledLinkRow = styled.div<IStyleProps>`
 `;
 
 const ForgotPasswordForm:FC = (props) => {
-    const { languageMap, colors, borderRadius, sectionPadding, sectionRadius } = useThemeContext();
+    const { languageMap, colors } = useThemeContext();
     const navigate = useNavigate();
     
     const [email, setEmail] = useState<string>("");

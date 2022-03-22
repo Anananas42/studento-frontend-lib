@@ -2,7 +2,7 @@ import { FC } from "react";
 import styled from "styled-components";
 import TextColors from "../../buttons/colors/TextColors";
 import { BtnTextL } from "../../buttons/components/BtnText";
-import { useThemeContext } from "../../ThemeProvider";
+import { borderRadius, useThemeContext } from "../../ThemeProvider";
 import { useUserContext } from "../../UserProvider";
 import { IconL } from "../../utilities/Icon";
 import StyledLink from "../../utilities/StyledLink";
@@ -139,7 +139,7 @@ const StyledUserMode = styled.div<IStyleProps>`
 `;
 
 const NavUserStatus:FC = () => {
-    const { colors, borderRadius, languageMap } = useThemeContext();
+    const { colors, languageMap } = useThemeContext();
     const { userStatus, setUserMode, logout } = useUserContext();
 
     if (!userStatus) throw new Error("[NavUserStatus] Trying to display NavUserStatus while the user isn't fetched.");

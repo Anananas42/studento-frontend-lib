@@ -1,7 +1,7 @@
 import { FC, useState } from "react";
 import styled from "styled-components";
 import TextColors from "../../buttons/colors/TextColors";
-import { useThemeContext } from "../../ThemeProvider";
+import { borderRadius, useThemeContext } from "../../ThemeProvider";
 import { Language } from "../../themes/ThemeLanguage";
 import { IconL } from "../../utilities/Icon";
 import FormColors from "../shared/FormColors";
@@ -93,7 +93,7 @@ type IOption = {
 };
 
 const LanguageForm:FC = () => {
-    const { borderRadius, colors, language, setLanguage } = useThemeContext();
+    const { colors, language, setLanguage } = useThemeContext();
     const [isOpen, setIsOpen] = useState<boolean>(false);
 
     const options:IOption = {en: "English", cz: "Česky"};

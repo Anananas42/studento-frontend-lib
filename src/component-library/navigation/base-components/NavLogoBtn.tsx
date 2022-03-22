@@ -2,7 +2,7 @@ import { FC } from "react";
 import styled from "styled-components";
 import TextColors from "../../buttons/colors/TextColors";
 import logo from '../../../media/logo.png';
-import { useThemeContext } from "../../ThemeProvider";
+import { borderRadius, useThemeContext } from "../../ThemeProvider";
 import { useUserContext } from "../../UserProvider";
 import StyledLink from "../../utilities/StyledLink";
 
@@ -42,7 +42,7 @@ const StyledNavLogoBtn = styled.div<IStyledProps>`
 `;
 
 const NavLogoBtn:FC = () => {
-    const { colors, borderRadius } = useThemeContext();
+    const { colors } = useThemeContext();
     const { userStatus } = useUserContext();
 
     const baseUrl = userStatus?.userMode;

@@ -1,6 +1,6 @@
 import { FC } from "react"
 import styled from "styled-components";
-import { useThemeContext } from "../../../component-library/ThemeProvider";
+import { borderRadius, sectionPadding, sectionRadius, useThemeContext } from "../../../component-library/ThemeProvider";
 import { useUserContext } from "../../../component-library/UserProvider";
 import { IconM } from "../../../component-library/utilities/Icon";
 import StyledLink from "../../../component-library/utilities/StyledLink";
@@ -108,7 +108,7 @@ const items:Array<IItem> = [
 ];
 
 const RecentlyAdded:FC = () => {
-    const { sectionRadius, colors, sectionPadding, borderRadius, languageMap } = useThemeContext();
+    const { colors, languageMap } = useThemeContext();
     const { userStatus } = useUserContext();
     const styleProps = { sectionRadius, sectionPadding, sectionShadow: colors.sectionShadow, fill: colors.fill, primary: colors.primary, primaryAlt: colors.primaryAlt, borderRadius };
 

@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import styled from "styled-components";
-import { useThemeContext } from "../../ThemeProvider";
+import { borderRadius, useThemeContext } from "../../ThemeProvider";
 import FormBase from "../shared/FormBase";
 import FormStyles from "../shared/FormStyles";
 import StyledRadioButton from "../shared/StyledRadioButton";
@@ -72,7 +72,6 @@ interface IRadioButtonFormProps {
 
 const RadioButtonFormBase:FC<IRadioButtonFormProps> = (props) => {
     const { value, setValue, options, formId, ...rest} = props;
-    const { borderRadius } = useThemeContext();
 
     return (
         <FormBase formId={formId} {...rest}>
