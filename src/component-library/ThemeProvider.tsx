@@ -22,7 +22,7 @@ export const borderRadius = "10px";
 export const sectionPadding = "24px";
 export const sectionRadius = "24px";
 export const sectionTitleSize = "30px";
-export const sectionTitlePadding = "0 48px 16px 48px";
+export const sectionTitlePadding = "0px 48px 24px 48px";
 
 export const useThemeContext = () => {
     const context = useContext(ThemeContext);

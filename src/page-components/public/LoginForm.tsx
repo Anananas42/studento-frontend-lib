@@ -6,7 +6,7 @@ import { BtnLinkS } from "../../component-library/buttons/components/BtnLink";
 import { CheckboxRow } from "../../component-library/forms/base-components";
 import { UsernameForm, PasswordForm } from "../../component-library/forms/components";
 import FormColors from "../../component-library/forms/shared/FormColors";
-import { borderRadius, sectionPadding, sectionRadius, useThemeContext } from "../../component-library/ThemeProvider";
+import { borderRadius, sectionPadding, sectionRadius, sectionTitlePadding, sectionTitleSize, useThemeContext } from "../../component-library/ThemeProvider";
 import { useUserContext } from "../../component-library/UserProvider";
 import logo from '../../media/logo.png';
 
@@ -33,8 +33,8 @@ const StyledTitle = styled.div<IStyleProps>`
     align-items: center;
     justify-content: center;
     width: 100%;
-    font-size: 32px;
-    padding: 0 0 24px 0;
+    font-size: ${sectionTitleSize};
+    padding: ${sectionTitlePadding};
 
     img {
         padding-bottom: 4px;

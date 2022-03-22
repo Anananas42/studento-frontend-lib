@@ -3,7 +3,8 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { BtnCloseL, BtnConfirmL, BtnPrimaryL, BtnTertiaryL } from "../component-library/buttons/components";
 import PopupLeaveProgress from "../component-library/popups/components/PopupLeaveProgress";
-import { borderRadius, sectionPadding, sectionRadius, useThemeContext } from "../component-library/ThemeProvider";
+import StyledSectionTitle from "../component-library/styles/StyledSectionTitle";
+import { borderRadius, sectionPadding, sectionRadius, sectionTitlePadding, sectionTitleSize, useThemeContext } from "../component-library/ThemeProvider";
 
 interface IStyleProps {
     fill: string;
@@ -24,15 +25,9 @@ const StyledProgressStep = styled.div<IStyleProps>`
     flex-direction: column;
     align-items: center;
     width: fit-content;
-    gap: 8px;
 `;
 
-const StyledTitle = styled.div<IStyleProps>`
-    font-size: 30px;
-    color: ${props => props.fill};
-    padding: 0 48px 16px 48px;
-    text-align: center;
-`;
+
 
 const StyledButtonRow = styled.div`
     display: flex;
@@ -69,9 +64,9 @@ const ProgressStep:FC<IProgressStepProps> = (props) => {
             {isAbortPopup && <PopupLeaveProgress event={() => navigate(abortDestination)} isOpen={isAbortPopup} setIsOpen={setIsAbortPopup}>
                     All your progress will be lost. <br/> Do you really want to leave?
                 </PopupLeaveProgress>}
-            <StyledTitle {...styleProps}>
+            <StyledSectionTitle>
                 {title}
-            </StyledTitle>
+            </StyledSectionTitle>
                 {props.children}
             <StyledButtonRow>
                 {currentStep > 0 && <BtnTertiaryL icon={"arrow_back"} onClick={() => setCurrentStep((currentStep - 1) % maxStep)}>Back</BtnTertiaryL>}
