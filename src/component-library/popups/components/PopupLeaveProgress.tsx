@@ -4,7 +4,6 @@ import { BtnDangerL } from '../../buttons/components/BtnDanger';
 import { BtnTertiaryL } from "../../buttons/components/BtnTertiary";
 import styled from "styled-components";
 import { useThemeContext } from "../../ThemeProvider";
-import { JsxElement } from "typescript";
 
 interface IPopupWarning {
     title?: string;

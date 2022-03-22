@@ -1,6 +1,6 @@
 import { IBtnSizes } from './ButtonSizes';
 import { FC, ReactElement } from 'react';
-import { borderRadius, useThemeContext } from '../../ThemeProvider';
+import { borderRadius } from '../../ThemeProvider';
 import styled, { StyledComponent } from 'styled-components';
 
 export interface IStyledBtn {

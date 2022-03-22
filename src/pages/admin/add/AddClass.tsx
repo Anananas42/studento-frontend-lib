@@ -1,6 +1,5 @@
 import { FC, useState } from "react";
 import styled from "styled-components";
-import { BtnConfirmL, BtnPrimaryL, BtnTertiaryL } from "../../../component-library/buttons/components";
 import DetailStep from "../../../page-components/school-management/add/class/DetailStep";
 import StudentStep from "../../../page-components/school-management/add/class/StudentStep";
 import SubjectStep from "../../../page-components/school-management/add/class/SubjectStep";
