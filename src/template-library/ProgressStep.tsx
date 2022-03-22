@@ -28,7 +28,7 @@ const StyledProgressStep = styled.div<IStyleProps>`
 `;
 
 const StyledTitle = styled.div<IStyleProps>`
-    font-size: 32px;
+    font-size: 30px;
     color: ${props => props.fill};
     padding: 0 48px 16px 48px;
     text-align: center;
