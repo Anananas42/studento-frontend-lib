@@ -3,31 +3,8 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { BtnCloseL, BtnConfirmL, BtnPrimaryL, BtnTertiaryL } from "../component-library/buttons/components";
 import PopupLeaveProgress from "../component-library/popups/components/PopupLeaveProgress";
+import StyledSection from "../component-library/styles/StyledSection";
 import StyledSectionTitle from "../component-library/styles/StyledSectionTitle";
-import { borderRadius, sectionPadding, sectionRadius, sectionTitlePadding, sectionTitleSize, useThemeContext } from "../component-library/ThemeProvider";
-
-interface IStyleProps {
-    fill: string;
-    sectionPadding: string;
-    sectionShadow: string;
-    sectionRadius: string;
-    borderRadius: string;
-}
-
-const StyledProgressStep = styled.div<IStyleProps>`
-    position: relative;
-    color: ${props => props.fill};
-    background-color: #fff;
-    box-shadow: ${props => props.sectionShadow};
-    border-radius: ${props => props.sectionRadius};
-    padding: ${props => props.sectionPadding};
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: fit-content;
-`;
-
-
 
 const StyledButtonRow = styled.div`
     display: flex;
@@ -52,14 +29,11 @@ export interface IProgressStepProps {
 const ProgressStep:FC<IProgressStepProps> = (props) => {
     const { title, currentStep, maxStep, setCurrentStep, abortDestination } = props;
     const navigate = useNavigate();
-    const { colors } = useThemeContext();
 
     const [isAbortPopup, setIsAbortPopup] = useState<boolean>(false);
 
-    const styleProps = {fill: colors.fill, sectionPadding, sectionRadius, sectionShadow: colors.sectionShadow, borderRadius};
-
     return (
-        <StyledProgressStep {...styleProps}>
+        <StyledSection>
             <BtnCloseL onClick={() => setIsAbortPopup(true)} />
             {isAbortPopup && <PopupLeaveProgress event={() => navigate(abortDestination)} isOpen={isAbortPopup} setIsOpen={setIsAbortPopup}>
                     All your progress will be lost. <br/> Do you really want to leave?
@@ -73,7 +47,7 @@ const ProgressStep:FC<IProgressStepProps> = (props) => {
                 {currentStep < maxStep - 1 && <BtnPrimaryL icon={"arrow_forward"} isAfter={true} onClick={() => setCurrentStep((currentStep + 1) % maxStep)}>Next</BtnPrimaryL>}
                 {currentStep === maxStep - 1 && <BtnConfirmL icon={"done"} onClick={() => console.log("done")}>Done</BtnConfirmL>}
             </StyledButtonRow>
-        </StyledProgressStep>
+        </StyledSection>
     );
 }
 
