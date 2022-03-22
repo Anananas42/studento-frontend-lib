@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { useThemeContext } from "../../ThemeProvider";
 import FormBase from "../shared/FormBase";
 import FormColors from "../shared/FormColors";
+import FormStyles from "../shared/FormStyles";
 
 interface IStyleProps {
     borderRadius: string;
@@ -17,8 +18,7 @@ const StyledSingleChoiceForm = styled.div<IStyleProps>`
     div {
         position: relative;
         padding: 12px 16px;
-        font-size: 20px;
-        line-height: 20px;
+        font-size: ${FormStyles.fontSize};
         user-select: none;
         border-radius: 0;
         border: 2px solid ${FormColors.Default.border};

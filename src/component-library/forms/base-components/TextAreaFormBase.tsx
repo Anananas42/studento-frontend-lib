@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { useThemeContext } from "../../ThemeProvider";
 import FormBase from "../shared/FormBase";
 import FormColors from "../shared/FormColors";
+import FormStyles from "../shared/FormStyles";
 
 interface IStyledTextArea {
     borderRadius: string;
@@ -19,8 +20,7 @@ const StyledTextArea = styled.textarea<IStyledTextArea>`
     color: ${props => props.fill};
     border: 1px solid ${props => props.isError ? FormColors.Error.border : FormColors.Default.border};
     box-shadow: inset 0 4px 8px ${FormColors.Default.innerShadow};
-    line-height: 28px;
-    font-size: 20px;
+    font-size: ${FormStyles.fontSize};
     padding: 8px ${props => props.borderRadius} ${props => props.icon ? "8px 50px" : ""};
     font-family: 'Varela Round', sans-serif;
     width: ${props => props.width || "100%"};

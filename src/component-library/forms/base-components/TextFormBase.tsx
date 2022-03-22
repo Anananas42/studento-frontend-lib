@@ -4,6 +4,7 @@ import { useThemeContext } from "../../ThemeProvider";
 import { IconL } from "../../utilities/Icon";
 import FormBase from "../shared/FormBase";
 import FormColors from "../shared/FormColors";
+import FormStyles from "../shared/FormStyles";
 
 export interface IStyledInput {
     borderRadius: string;
@@ -18,9 +19,8 @@ export const StyledInput = styled.input<IStyledInput>`
     color: ${props => props.fill};
     border: 1px solid ${props => props.isError ? FormColors.Error.border : FormColors.Default.border};
     box-shadow: inset 0 4px 8px ${FormColors.Default.innerShadow};
-    line-height: 14px;
-    font-size: 20px;
-    padding: 8px ${props => props.borderRadius} ${props => props.icon ? "8px 40px" : ""};
+    font-size: ${FormStyles.fontSize};
+    padding: ${FormStyles.inputPaddingV} ${FormStyles.inputPaddingH} ${props => props.icon ? `${FormStyles.inputPaddingV} 40px` : ""};
     font-family: 'Varela Round', sans-serif;
     width: ${props => props.width || "100%"};
 

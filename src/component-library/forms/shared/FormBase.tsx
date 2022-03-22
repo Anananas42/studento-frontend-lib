@@ -2,6 +2,7 @@ import { FC, ReactNode, useEffect, useState } from "react";
 import styled from "styled-components";
 import { useThemeContext } from "../../ThemeProvider";
 import FormColors, { IFormState, StateType } from "./FormColors";
+import FormStyles from "./FormStyles";
 
 interface IStyledLabel {
     labelColor: string;
@@ -14,11 +15,10 @@ const StyledLabel = styled.label<IStyledLabel>`
     color: ${props => props.labelColor};
     padding-left: ${props => props.isHorizontal ? 0 : `${parseInt(props.borderRadius.split("px", 1)[0])/1.5}px`};
     text-align: ${props => props.isHorizontal ? "right" : "left"};
-    font-size: 1.8rem;
-    line-height: 2rem;
+    font-size: ${FormStyles.labelSize};
     width: ${props => props.isHorizontal ? "auto" : "fit-content"};
     padding-top: ${props => props.isHorizontal ? "0.9rem" : 0};
-    padding-bottom: ${props => props.isHorizontal ? 0 : "1.9rem"};
+    padding-bottom: ${props => props.isHorizontal ? 0 : "1.0rem"};
     padding-right: ${props => props.isHorizontal ? "1.6rem" : 0};
     white-space: nowrap;
     overflow: hidden;
@@ -61,7 +61,7 @@ const StyledMessageWrapper = styled.div<IStyledMessageWrapper>`
         padding-top: 0.8rem;
         font-size: 1.7rem;
         line-height: 1.2rem;
-        padding-bottom: ${props => props.isCompact ? "2.0rem" : "1.8rem"};
+        padding-bottom: ${props => props.isCompact ? "1.4rem" : "1.8rem"};
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;

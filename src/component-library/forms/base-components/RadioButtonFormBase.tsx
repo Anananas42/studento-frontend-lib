@@ -2,6 +2,7 @@ import React, { FC } from "react";
 import styled from "styled-components";
 import { useThemeContext } from "../../ThemeProvider";
 import FormBase from "../shared/FormBase";
+import FormStyles from "../shared/FormStyles";
 import StyledRadioButton from "../shared/StyledRadioButton";
 
 interface IStyledRadioButtonRow {
@@ -16,8 +17,7 @@ const StyledRadioButtonRow = styled.div<IStyledRadioButtonRow>`
     label {
         color: ${props => props.fill};
         padding-bottom: 2px;
-        font-size: 18px;
-        line-height: 20px;
+        font-size: ${FormStyles.checkFontSize};
         padding-left: 8px;
         user-select: none;
     }

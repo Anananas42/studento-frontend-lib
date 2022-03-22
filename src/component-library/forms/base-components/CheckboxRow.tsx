@@ -2,6 +2,7 @@ import { FC, SetStateAction } from "react";
 import styled from "styled-components";
 import { useThemeContext } from "../../ThemeProvider";
 import FormColors from "../shared/FormColors";
+import FormStyles from "../shared/FormStyles";
 import StyledCheckbox from "../shared/StyledCheckbox";
 
 interface IStyleProps {
@@ -20,8 +21,8 @@ const StyledChoiceRow = styled.div<IStyleProps>`
 
     label {
         padding-left: 8px;
-        font-size: 18px;
-        line-height: 18px;
+        font-size: ${FormStyles.checkFontSize};
+        font-family: ${FormStyles.fontFamily};
         user-select: none;
         color: ${props => props.isDisabled ? FormColors.Disabled.label : FormColors.Default.label};
     }

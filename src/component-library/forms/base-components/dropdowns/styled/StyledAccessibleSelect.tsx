@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import FormColors from "../../../shared/FormColors";
+import FormStyles from "../../../shared/FormStyles";
 
 export interface IStyledSelect {
     errorMessage?: string;
@@ -14,10 +15,8 @@ export interface IStyledSelect {
 const StyledAccessibleSelect = styled.select<IStyledSelect>`
     position: relative;
     width: ${props => props.width ? props.width : "100%"};
-    font-size: 20px;
-    line-height: 20px;
-    height: 42px;
-    padding: 8px;
+    font-size: ${FormStyles.fontSize};
+    padding: ${FormStyles.inputPaddingV} ${FormStyles.inputPaddingH};
     border: 1px solid ${props => props.errorMessage ? FormColors.Error.border : FormColors.Default.border};
     border-radius: ${props => props.borderRadius};
     outline: 0;

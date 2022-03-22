@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import FormColors from "../../../shared/FormColors";
+import FormStyles from "../../../shared/FormStyles";
 import { IStyledSelect } from "./StyledAccessibleSelect";
 
 export const StyledCustomDropdown = styled.div<IStyledSelect>`
@@ -7,17 +8,16 @@ export const StyledCustomDropdown = styled.div<IStyledSelect>`
     top: 0;
     left: 0;
     width: ${props => props.width ? props.width : "100%"};
-    font-size: 20px;
-    line-height: 20px;
-    height: 42px;
-    padding: 0;
+    height: 100%;
+    font-size: ${FormStyles.fontSize};
+    padding: ${FormStyles.inputPaddingV} ${FormStyles.inputPaddingH};
     border: 1px solid ${props => props.errorMessage ? FormColors.Error.border : (props.isOpen ? FormColors.Active.border : FormColors.Default.border)};
     border-radius: ${props => props.isOpen? `${props.borderRadius} ${props.borderRadius} 0 0` : props.borderRadius};
     outline: ${props => props.isOpen ? `${FormColors.Active.border} solid 1px` : 0};
     box-shadow: inset 0 4px 8px ${props => props.isOpen ? FormColors.Active.innerShadow : FormColors.Default.innerShadow};
     background-color: white;
     color: ${props => props.placeholderFill};
-    font-family: 'Varela Round', sans-serif;
+    font-family: ${FormStyles.fontFamily};
     margin: 0;
     user-select: none;
     transition: ${props => props.isOpen ? "box-shadow 0.2s ease-in-out" : ""};
@@ -40,8 +40,8 @@ export const StyledCustomDropdown = styled.div<IStyledSelect>`
 export const StyledChevron = styled.div<IStyledSelect>`
     position: absolute;
     color: ${props => props.isDisabled ? FormColors.Disabled.placeholder : props.fill};
-    top: -4px;
-    right: 0;
+    top: -6px;
+    right: -2px;
     user-select: none;
     transform: ${props => props.isOpen ? "rotate(180deg)" : "rotate(0deg)"};
     transition: transform 0.25s ease-in-out;
@@ -69,9 +69,9 @@ export const StyledList = styled.div<IStyledSelect>`
 `;
 
 export const StyledOption = styled.div<IStyledSelect>`
-    font-size: 20px;
-    line-height: 20px;
-    padding: 12px 16px;
+    font-size: ${FormStyles.fontSize};
+    font-family: ${FormStyles.fontFamily};
+    padding: ${FormStyles.dropdownOptionPadding};
     user-select: none;
 
     :hover {
@@ -88,17 +88,15 @@ export const StyledOption = styled.div<IStyledSelect>`
 `;
 
 export const StyledGroupTitle = styled.div<IStyledSelect>`
-    font-size: 17px;
-    line-height: 17px;
+    font-size: ${FormStyles.dropdownGroupTitleSize};
     font-weight: bold;
+    font-family: ${FormStyles.fontFamily};
     color: ${FormColors.Default.placeholder};
-    padding: 8px 16px;
+    padding: ${FormStyles.dropdownGroupTitlePadding};
     background-color: ${FormColors.Default.innerShadow};
 `;
 
 export const StyledCurrentSelection = styled.div`
     width: 100%;
     height: 100%;
-    padding: 10px 0 0 16px;
-    line-height: 20px;
 `;

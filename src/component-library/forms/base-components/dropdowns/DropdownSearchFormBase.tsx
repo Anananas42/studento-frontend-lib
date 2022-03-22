@@ -4,22 +4,22 @@ import { useThemeContext } from "../../../ThemeProvider";
 import { IconL } from "../../../utilities/Icon";
 import FormBase from "../../shared/FormBase";
 import FormColors from "../../shared/FormColors";
+import FormStyles from "../../shared/FormStyles";
 import StyledAccessibleSelect, { IStyledSelect } from "./styled/StyledAccessibleSelect";
 import { StyledChevron, StyledCustomDropdown, StyledList, StyledOption } from "./styled/StyledCustomDropdown";
 
 const StyledCurrentInput = styled.input<IStyledSelect>`
-    width: 88%;
+    width: 100%;
     height: 100%;
     padding: 0;
-    line-height: 20px;
-    font-size: 20px;
+    font-size: ${FormStyles.fontSize};
     border: 0;
     border-radius: ${props => props.isOpen? `${props.borderRadius} ${props.borderRadius} 0 0` : props.borderRadius};
     outline: 0;
     background: transparent;
     color: ${props => props.placeholderFill};
-    font-family: 'Varela Round', sans-serif;
-    margin: 0 0 0 16px;
+    font-family: ${FormStyles.fontFamily};
+    margin: 0;
     padding-right: 32px;
     text-overflow: ellipsis;
     user-select: none;
