@@ -13,14 +13,14 @@ const StyledProgressLine = styled.div<IStyleProps>`
     justify-content: space-between;
     width: 100%;
     margin-top: 32px;
-    padding-bottom: 16px;
+    padding-bottom: 8px;
 
     > div::before {
         position: absolute;
         content: "";
         border-bottom: 4px solid ${props => props.disabled};
         width: 100%;
-        top: 14px;
+        top: 12px;
         left: -50%;
     }
 
@@ -38,11 +38,11 @@ const StyledProgressItem = styled.div<IStyleProps>`
 
     > div {
         position: relative;
-        width: 32px;
-        height: 32px;
+        width: 28px;
+        height: 28px;
         border-radius: 50%;
         background-color: ${props => props.disabled};
-        margin-bottom: 6px;
+        margin-bottom: 16px;
         z-index: 1;
 
         > span {
