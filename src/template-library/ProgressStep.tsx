@@ -11,6 +11,7 @@ const StyledButtonRow = styled.div`
     justify-content: space-between;
     width: 100%;
     gap: 16px;
+    padding-top: 16px;
 
     > div:only-child {
         margin-left: auto;
