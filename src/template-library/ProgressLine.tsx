@@ -11,7 +11,8 @@ interface IStyleProps {
 const StyledProgressLine = styled.div<IStyleProps>`
     display: flex;
     justify-content: space-between;
-    width: 100%;
+    width: min(100%, 80vw);
+    min-width: 600px;
     margin-top: 32px;
     padding-bottom: 8px;
 
