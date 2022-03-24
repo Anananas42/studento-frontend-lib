@@ -14,29 +14,36 @@ const ToggleColors = {
     }
 }
 
-const StyledToggle = styled.input`
+interface IStyleProps {
+    width?: string;
+    height?: string;
+    fill: string;
+    fillDisabled: string;
+    isDisabled?: boolean;
+}
+
+const StyledToggle = styled.input<IStyleProps>`
     height: 0;
 	width: 0;
 	visibility: hidden;
     position: absolute;
 
     &:checked + label {
-        background: ${ToggleColors.On.bg};
+        background-color: ${ToggleColors.On.bg};
     }
 
     &:checked + label:after {
         left: calc(100% - 3px);
         transform: translateX(-100%);
     }
+
+    &:disabled + label {
+        background-color: ${props => props.fillDisabled};
+        color: ${props => props.fillDisabled};
+    }
 `;
 
-interface IStyledToggleRow {
-    width?: string;
-    height?: string;
-    fill: string;
-}
-
-const StyledToggleRow = styled.div<IStyledToggleRow>`
+const StyledToggleRow = styled.div<IStyleProps>`
     display: flex;
 	justify-content: flex-start;
 	align-items: center;
@@ -44,7 +51,7 @@ const StyledToggleRow = styled.div<IStyledToggleRow>`
     width: ${props => props.width ? props.width : "fit-content"};
 
     div:last-child {
-        color: ${props => props.fill};
+        color: ${props => props.isDisabled ? props.fillDisabled : props.fill};
         padding-bottom: 2px;
         font-size: 18px;
         line-height: 20px;
@@ -53,8 +60,8 @@ const StyledToggleRow = styled.div<IStyledToggleRow>`
     }
 `;
 
-const StyledLabelToggle = styled.label`
-    cursor: pointer;
+const StyledLabelToggle = styled.label<IStyleProps>`
+    cursor: ${props => !props.isDisabled && "pointer"};
 	width: 40px;
 	height: 24px;
 	background: ${ToggleColors.Off.bg};
@@ -76,9 +83,12 @@ const StyledLabelToggle = styled.label`
     };
 
     &:active:after {
-        width: 24px;
-        background: ${ToggleColors.On.toggle};
+        ${props => !props.isDisabled && `
+            width: 24px;
+            background: ${ToggleColors.On.toggle};
+        `}
     }
+
 `;
 
 interface IToggleRowProps {
@@ -87,19 +97,21 @@ interface IToggleRowProps {
     label: string;
     height?: string;
     width?: string;
+    isDisabled?: boolean;
 }
 
 const ToggleRow:FC<IToggleRowProps> = (props) => {
-    const { value, setValue, width, height, label } = props;
+    const { value, setValue, width, height, label, isDisabled } = props;
     const { colors } = useThemeContext();
+    const styleProps = { width, height, fill: colors.fill, fillDisabled: colors.fillDisabled, isDisabled}
 
     return (
-        <StyledToggleRow width={width} height={height} fill={colors.fill}>
+        <StyledToggleRow {...styleProps}>
             <div>
-                <StyledToggle type={"checkbox"} checked={value} onChange={() => 0}/>
-                <StyledLabelToggle onClick={() => setValue(!value)}/>
+                <StyledToggle type={"checkbox"} checked={value} onChange={() => 0} disabled={isDisabled} {...styleProps}/>
+                <StyledLabelToggle onClick={() => {!isDisabled && setValue(!value)}} {...styleProps} />
             </div>
-            <div onClick={() => setValue(!value)}>{label}</div>
+            <div onClick={() => {!isDisabled && setValue(!value)}}>{label}</div>
         </StyledToggleRow>
 
     )
