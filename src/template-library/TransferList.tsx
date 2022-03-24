@@ -1,6 +1,7 @@
 import { FC, useState } from "react";
 import styled from "styled-components";
 import TextColors from "../component-library/buttons/colors/TextColors";
+import { BtnOutlineM, BtnOutlineS } from "../component-library/buttons/components";
 import FormColors from "../component-library/forms/shared/FormColors";
 import { borderRadius, useThemeContext } from "../component-library/ThemeProvider";
 import { Icon, IconL, IconM, IconXL } from "../component-library/utilities/Icon";
@@ -11,6 +12,7 @@ interface IStyleProps {
     sectionShadow: string;
     primary: string;
     primaryAlt: string;
+    isChosenEmpty: boolean;
 }
 
 const StyledTransferList = styled.div<IStyleProps>`
@@ -35,6 +37,11 @@ const StyledMiddle = styled.div<IStyleProps>`
     flex-direction: column;
     align-items: center;
     font-size: 2rem;
+    gap: 8px;
+
+    button {
+        visibility: ${props => props.isChosenEmpty ? "hidden" : "visible"};
+    }
 `;
 
 const StyledList = styled.div<IStyleProps>`
@@ -262,11 +269,11 @@ interface IItem {
 }
 
 const TransferList:FC = (props) => {
-    const { colors } = useThemeContext();
-    const styleProps = { fill: colors.fill, borderRadius, sectionShadow: colors.sectionShadow, primary: colors.primary, primaryAlt: colors.primaryAlt };
-
     const [chosenItems, setChosenItems] = useState<Array<IItem>>([]); // Will be managed by parent
-    const [search, setSearch] = useState<string>("");
+    const [search, setSearch] = useState<string>(""); // Will be managed by parent
+
+    const { colors } = useThemeContext();
+    const styleProps = { fill: colors.fill, borderRadius, sectionShadow: colors.sectionShadow, primary: colors.primary, primaryAlt: colors.primaryAlt, isChosenEmpty: chosenItems.length === 0 };
 
     return (
         <>
@@ -290,6 +297,7 @@ const TransferList:FC = (props) => {
                 <StyledMiddle {...styleProps}>
                     <span>{chosenItems.length}</span>
                     <IconXL>arrow_forward</IconXL>
+                    <BtnOutlineS icon={"close"} onClick={() => setChosenItems([])}>Clear All</BtnOutlineS>
                 </StyledMiddle>
                 <StyledList {...styleProps}>
                     {chosenItems.sort((a, b) => {return a.name < b.name ? -1 : 1}).map((i, id) => {
