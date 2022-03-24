@@ -1,6 +1,7 @@
 import { FC, useState } from "react";
 import styled from "styled-components";
 import { CheckboxRow, DropdownSearchFormBase, ToggleRow } from "../../../../component-library/forms/base-components";
+import DropdownGroupedSearchFormBase from "../../../../component-library/forms/base-components/dropdowns/DropdownGroupedSearchFormBase";
 import { useThemeContext } from "../../../../component-library/ThemeProvider";
 import ProgressStep, { IProgressStepProps } from "../../../../template-library/ProgressStep";
 import TransferList, { IItem } from "../../../../template-library/TransferList";
@@ -38,10 +39,17 @@ const StyledSubjectTitle = styled.div<IStyleProps>`
 
 const StyledSubjectForms = styled.div<IStyleProps>`
     padding-top: 8px;
-    width: 44ch;
+    
+    > div { 
+        width: 44ch;
+    }
 `;
 
 const StyledDisciplineList = styled.div<IStyleProps>`
+
+`;
+
+const StyledGroupList = styled.div<IStyleProps>`
 
 `;
 
@@ -51,6 +59,25 @@ const dummyItems = [
 
 const dummyTeachers = {
     123: "Jan Amos Komensky"
+};
+
+const dummyOptionGroups = {
+    Cz: {
+        title: "Czech Language",
+        options: {
+            lit: "Cz - Literature",
+            gram: "Cz - Grammar",
+        }
+    },
+    Fr: {
+        title: "French Language",
+        options: {
+            lit: "Fr - Literature",
+            gram: "Fr - Grammar",
+            spch: "Fr - Speech",
+        }
+    }
+
 };
 
 interface ISubjectStepProps extends IProgressStepProps {
@@ -68,6 +95,7 @@ const SubjectStep:FC<ISubjectStepProps> = (props) => {
     const [hasMultiple, setHasMultiple] = useState<boolean>(false);
     const [hasGroups, setHasGroups] = useState<boolean>(false);
     const [teacher, setTeacher] = useState<string>("");
+    const [group, setGroup] = useState<string>("");
 
     const styleProps = { fill: colors.fill, hasMultiple, hasGroups };
 
@@ -85,6 +113,9 @@ const SubjectStep:FC<ISubjectStepProps> = (props) => {
                     {!hasMultiple && 
                         <StyledSubjectForms {...styleProps}>
                             <DropdownSearchFormBase value={teacher} setValue={setTeacher} label={"Teacher"} options={dummyTeachers} />
+                            {hasGroups && 
+                                <DropdownGroupedSearchFormBase value={group} setValue={setGroup} label={"Group Pattern"} optionGroups={dummyOptionGroups} isOptional={true}/>
+                            }
                         </StyledSubjectForms>
                     }
                     {!hasMultiple && hasGroups &&

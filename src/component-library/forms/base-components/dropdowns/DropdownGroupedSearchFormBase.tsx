@@ -11,6 +11,7 @@ import { StyledChevron, StyledCustomDropdown, StyledGroupTitle, StyledList, Styl
 const StyledCurrentInput = styled.input<IStyledSelect>`
     width: 100%;
     height: 100%;
+    padding: 0;
     padding-right: 32px;
     font-size: ${FormStyles.fontSize};
     border: 0;
@@ -19,7 +20,7 @@ const StyledCurrentInput = styled.input<IStyledSelect>`
     background: transparent;
     color: ${props => props.placeholderFill};
     font-family: ${FormStyles.fontFamily};
-    margin: 0 0 0 16px;
+    margin: 0;
     user-select: none;
 
     -moz-appearance: none;
@@ -46,6 +47,7 @@ interface IProps {
     defaultNote?: string;
     errorMessage?: string;
     isDisabled?: boolean;
+    isOptional?: boolean;
     width?: string;
 };
 
