@@ -6,6 +6,8 @@ interface IconSizedProps {
     children: string;
     isDisabled?: boolean;
     isWhite?: boolean;
+    className?: string;
+    [key: string]: any;
 }
 
 interface IconProps {
@@ -15,6 +17,8 @@ interface IconProps {
     isWhite?: boolean;
     width?: string;
     height?: string;
+    className?: string;
+    [key: string]: any;
 }
 
 interface IStyledIcon {
@@ -43,23 +47,24 @@ const StyledWrapper = styled.div<IStyledWrapper>`
 
 export const Icon:FC<IconProps> = (props) => {
     const { colors } = useThemeContext();
+    const { isWhite, isDisabled, className, width, height, fontSize, children, ...rest } = props;
 
     let fill: string;
 
-    if (props.isWhite || props.isDisabled) {
+    if (isWhite || isDisabled) {
         if (props.isDisabled){
-            fill = props.isWhite ? "rgba(255, 255, 255, 0.3)" : colors.fillDisabled;
+            fill = isWhite ? "rgba(255, 255, 255, 0.3)" : colors.fillDisabled;
         }else {
-            fill = props.isWhite ? "#fff" : colors.fill;
+            fill = isWhite ? "#fff" : colors.fill;
         }
     }else {
         fill = "inherit";
     }
 
     return (
-        <StyledWrapper width={props.width} height={props.height}>
-            <StyledIcon className={"material-icons-round"} fill={fill} fontSize={props.fontSize}>
-                {props.children}
+        <StyledWrapper className={`icon ${className}`} width={width} height={height} {...rest}>
+            <StyledIcon className={"material-icons-round"} fill={fill} fontSize={fontSize}>
+                {children}
             </StyledIcon>
         </StyledWrapper>
     )
