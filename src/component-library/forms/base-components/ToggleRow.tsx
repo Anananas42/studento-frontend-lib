@@ -25,7 +25,7 @@ const StyledToggle = styled.input`
     }
 
     &:checked + label:after {
-        left: calc(100% - 4px);
+        left: calc(100% - 3px);
         transform: translateX(-100%);
     }
 `;
@@ -66,12 +66,12 @@ const StyledLabelToggle = styled.label`
     &:after {
         content: '';
         position: absolute;
-        top: 4px;
-        left: 4px;
-        width: 16px;
-	    height: 16px;
+        top: 3px;
+        left: 3px;
+        width: 18px;
+	    height: 18px;
         background: ${ToggleColors.Off.toggle};
-        border-radius: 16px;
+        border-radius: 18px;
         transition: 0.2s;
     };
 
