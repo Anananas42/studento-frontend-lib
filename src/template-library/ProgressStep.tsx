@@ -10,6 +10,7 @@ const StyledButtonRow = styled.div`
     display: flex;
     justify-content: space-between;
     width: 100%;
+    max-height: 100%;
     gap: 16px;
     padding-top: 16px;
 
@@ -24,17 +25,17 @@ export interface IProgressStepProps {
     maxStep: number;
     setCurrentStep: React.Dispatch<SetStateAction<number>>;
     abortDestination: string;
-
+    isStretched?: boolean;
 }
 
 const ProgressStep:FC<IProgressStepProps> = (props) => {
-    const { title, currentStep, maxStep, setCurrentStep, abortDestination } = props;
+    const { title, currentStep, maxStep, setCurrentStep, abortDestination, isStretched } = props;
     const navigate = useNavigate();
 
     const [isAbortPopup, setIsAbortPopup] = useState<boolean>(false);
 
     return (
-        <StyledSection>
+        <StyledSection isStretched={isStretched}>
             <BtnCloseL onClick={() => setIsAbortPopup(true)} />
             {isAbortPopup && <PopupLeaveProgress event={() => navigate(abortDestination)} isOpen={isAbortPopup} setIsOpen={setIsAbortPopup}>
                     All your progress will be lost. <br/> Do you really want to leave?

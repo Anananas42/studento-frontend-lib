@@ -23,11 +23,12 @@ const StyledContent = styled.div<{bg: string}>`
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: 100px;
     min-height: 100vh;
-
-    > div:last-of-type {
+    padding-top: 100px;
+    
+    > div:last-of-type { // Page content
       margin-bottom: 16px;
+      height: calc(100vh - 210px);
     }
 
   }

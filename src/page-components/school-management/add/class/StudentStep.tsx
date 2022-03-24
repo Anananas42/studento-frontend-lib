@@ -6,7 +6,7 @@ const StudentStep:FC<IProgressStepProps> = (props) => {
     const { title, ...rest } = props;
 
     return (
-        <ProgressStep title={title + " - students"} {...rest}>
+        <ProgressStep title={title + " - students"} isStretched={true} {...rest}>
             <TransferList />
         </ProgressStep>
     );

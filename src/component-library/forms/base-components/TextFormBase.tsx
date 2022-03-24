@@ -14,7 +14,7 @@ export interface IStyledInput {
     icon?: string;
 }
 
-export const StyledInput = styled.input<IStyledInput>`
+export const StyledTextInput = styled.input<IStyledInput>`
     border-radius: ${props => props.borderRadius};
     color: ${props => props.fill};
     border: 1px solid ${props => props.isError ? FormColors.Error.border : FormColors.Default.border};
@@ -85,7 +85,7 @@ const TextFormBase:FC<ITextFormProps> = (props) => {
                 </StyledIconWrapper>
             }
 
-            <StyledInput type={"text"} id={formId ? formId : label} value={value} onChange={(e) => setValue(e.target.value)} onKeyDown={onKeyDown} borderRadius={borderRadius}
+            <StyledTextInput type={"text"} id={formId ? formId : label} value={value} onChange={(e) => setValue(e.target.value)} onKeyDown={onKeyDown} borderRadius={borderRadius}
              fill={colors.fill} isError={errorMessage} disabled={isDisabled} placeholder={isDisabled ? "" : placeholder} width={width} icon={icon} />
              
         </FormBase>

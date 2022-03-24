@@ -2,7 +2,7 @@ import { FC, useRef, useState } from "react";
 import styled from "styled-components";
 import { borderRadius, useThemeContext } from "../../ThemeProvider";
 import { IconL } from "../../utilities/Icon";
-import { StyledIconWrapper, StyledInput } from "../base-components/TextFormBase";
+import { StyledIconWrapper, StyledTextInput } from "../base-components/TextFormBase";
 import FormBase from "../shared/FormBase";
 import FormColors from "../shared/FormColors";
 
@@ -60,7 +60,7 @@ const PasswordForm:FC<IFormProps> = (props) => {
             <StyledIconWrapper onClick={() => formRef.current.focus()}>
                 <IconL>lock</IconL>
             </StyledIconWrapper>
-            <StyledInput ref={formRef} type={"text"} id={formId ? formId : label} value={isVisible ? value : '●'.repeat(value.length)}
+            <StyledTextInput ref={formRef} type={"text"} id={formId ? formId : label} value={isVisible ? value : '●'.repeat(value.length)}
              onChange={(e) => setValue(getUpdatedValue(value, e))} onKeyDown={onKeyDown} borderRadius={borderRadius}
                 fill={colors.fill} isError={errorMessage} disabled={isDisabled} placeholder={isDisabled ? "" : languageMap.Generic.passwordPlaceholder} width={width ? width : "400px"} icon={"lock"} style={{paddingRight: "48px"}}/>
             {!isConfirmPassword && <StyledViewIcon onMouseDown={() => setIsVisible(true)} onMouseUp={() => {setIsVisible(false); formRef.current.focus()}} onMouseLeave={() => setIsVisible(false)}>

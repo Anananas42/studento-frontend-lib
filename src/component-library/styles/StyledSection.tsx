@@ -4,6 +4,7 @@ import { sectionPadding, sectionRadius, useThemeContext } from "../ThemeProvider
 
 interface IStyleProps {
     sectionShadow: string;
+    isStretched?: boolean;
 }
 
 const StyledSectionComponent = styled.div<IStyleProps>`
@@ -16,13 +17,18 @@ const StyledSectionComponent = styled.div<IStyleProps>`
     flex-direction: column;
     align-items: center;
     width: fit-content;
+    min-height: ${props => props.isStretched ? "max(100%, 300px)" : "fit-content"};
 `;
 
-const StyledSection:FC = (props) => {
+interface ISectionProps {
+    isStretched?: boolean;
+}
+
+const StyledSection:FC<ISectionProps> = (props) => {
     const { colors } = useThemeContext();
 
     return (
-        <StyledSectionComponent sectionShadow={colors.sectionShadow}>
+        <StyledSectionComponent sectionShadow={colors.sectionShadow} isStretched={props.isStretched}>
             {props.children}
         </StyledSectionComponent>
     )
