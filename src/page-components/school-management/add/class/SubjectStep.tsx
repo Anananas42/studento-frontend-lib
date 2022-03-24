@@ -20,6 +20,10 @@ const StyledSubjectDetail = styled.div`
     min-height: 100%;
 `;
 
+const dummyItems = [
+    {id: 5, name: "xd"},
+]
+
 const SubjectStep:FC<IProgressStepProps> = (props) => {
     const { title, ...rest } = props;
     const [currSubject, setCurrSubject] = useState<number>(0);
@@ -36,7 +40,7 @@ const SubjectStep:FC<IProgressStepProps> = (props) => {
                 </StyledSubjectList>
                 <StyledSubjectDetail>
                         dsadsa
-                    <TransferList availableItems={[{id: 5, name: "xd"}]} chosenItems={chosenItems} setChosenItems={setChosenItems} search={search} setSearch={setSearch} height={"100%"}/>
+                    <TransferList availableItems={dummyItems} chosenItems={chosenItems} setChosenItems={setChosenItems} search={search} setSearch={setSearch} height={"100%"}/>
                 </StyledSubjectDetail>
             </StyledSubjectStep>
         </ProgressStep>

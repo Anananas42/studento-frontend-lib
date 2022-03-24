@@ -116,6 +116,10 @@ const StyledItem = styled.div<IStyleProps>`
         }
     }
 
+    &:first-child {
+        margin-top: 8px;
+    }
+
     :hover {
         background-color: ${TextColors.Hover.bg};
 
