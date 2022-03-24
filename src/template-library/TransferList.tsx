@@ -26,6 +26,10 @@ const StyledTransferList = styled.div<IStyleProps>`
     }
 `;
 
+const StyledListHeader = styled.div`
+
+`;
+
 const StyledMiddle = styled.div<IStyleProps>`
     display: flex;
     flex-direction: column;
@@ -216,35 +220,40 @@ const TransferList:FC = (props) => {
     const [chosenItems, setChosenItems] = useState<Array<IItem>>([]); // Will be managed by parent
 
     return (
-        <StyledTransferList {...styleProps}>
-            <StyledList {...styleProps}>
-                {dummyItems.filter(d => !chosenItems.includes(d)).map(i => {
-                    return (
-                        <StyledItem key={i.id} {...styleProps} onClick={() => setChosenItems([...chosenItems, i])}>
-                            <span>{i.name}</span>
-                            <Icon fontSize={"2rem"} height={"2rem"}>add</Icon>
-                        </StyledItem>
-                    )
-                })}
-            </StyledList>
-            <StyledMiddle {...styleProps}>
-                <span>{chosenItems.length}</span>
-                <IconXL>arrow_forward</IconXL>
-            </StyledMiddle>
-            <StyledList {...styleProps}>
-                {chosenItems.sort((a, b) => {return a.name < b.name ? -1 : 1}).map((i, id) => {
-                    return (
-                        <StyledItemRemove key={i.id} {...styleProps} onClick={() => setChosenItems(chosenItems.filter(ch => ch.id !== i.id))}>
-                            <span>
-                                <span>{id+1}.</span>
+        <>
+            <StyledListHeader>
+
+            </StyledListHeader>
+            <StyledTransferList {...styleProps}>
+                <StyledList {...styleProps}>
+                    {dummyItems.filter(d => !chosenItems.includes(d)).map(i => {
+                        return (
+                            <StyledItem key={i.id} {...styleProps} onClick={() => setChosenItems([...chosenItems, i])}>
                                 <span>{i.name}</span>
-                            </span>
-                            <Icon fontSize={"2rem"} height={"2rem"}>close</Icon>
-                        </StyledItemRemove>
-                    )
-                })}
-            </StyledList>
-        </StyledTransferList>
+                                <Icon fontSize={"2rem"} height={"2rem"}>add</Icon>
+                            </StyledItem>
+                        )
+                    })}
+                </StyledList>
+                <StyledMiddle {...styleProps}>
+                    <span>{chosenItems.length}</span>
+                    <IconXL>arrow_forward</IconXL>
+                </StyledMiddle>
+                <StyledList {...styleProps}>
+                    {chosenItems.sort((a, b) => {return a.name < b.name ? -1 : 1}).map((i, id) => {
+                        return (
+                            <StyledItemRemove key={i.id} {...styleProps} onClick={() => setChosenItems(chosenItems.filter(ch => ch.id !== i.id))}>
+                                <span>
+                                    <span>{id+1}.</span>
+                                    <span>{i.name}</span>
+                                </span>
+                                <Icon fontSize={"2rem"} height={"2rem"}>close</Icon>
+                            </StyledItemRemove>
+                        )
+                    })}
+                </StyledList>
+            </StyledTransferList>
+        </>
     )
 };
 
