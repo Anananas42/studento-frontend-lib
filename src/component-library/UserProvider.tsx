@@ -64,7 +64,7 @@ const UserProvider:FC<IProviderProps> = (props) => {
         setUserStatus({
             username: "Leonhard Euler",
             school: "University of Venice",
-            userMode: UserMode.TEACHER,
+            userMode: UserMode.ADMIN,
             authorizedUserModes: [UserMode.PARENT, UserMode.TEACHER, UserMode.PRINCIPAL, UserMode.ADMIN, UserMode.STUDENT],
         });
 

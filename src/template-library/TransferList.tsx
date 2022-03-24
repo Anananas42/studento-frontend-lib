@@ -1,7 +1,7 @@
-import { FC, useState } from "react";
+import { FC } from "react";
 import styled from "styled-components";
 import TextColors from "../component-library/buttons/colors/TextColors";
-import { BtnOutlineM, BtnOutlineS } from "../component-library/buttons/components";
+import { BtnOutlineS } from "../component-library/buttons/components";
 import FormColors from "../component-library/forms/shared/FormColors";
 import { borderRadius, useThemeContext } from "../component-library/ThemeProvider";
 import { Icon, IconL, IconM, IconXL } from "../component-library/utilities/Icon";
@@ -13,23 +13,20 @@ interface IStyleProps {
     primary: string;
     primaryAlt: string;
     isChosenEmpty: boolean;
+    height?: string;
 }
 
 const StyledTransferList = styled.div<IStyleProps>`
     color: ${props => props.fill};
     display: flex;
     align-items: stretch;
-    height: calc(100% - 126px);
+    height: ${props => props.height ? props.height : "calc(100% - 126px)"};
     gap: 24px;
 
     > div:nth-child(2) {
         align-self: center;
         user-select: none;
     }
-`;
-
-const StyledListHeader = styled.div`
-
 `;
 
 const StyledMiddle = styled.div<IStyleProps>`
@@ -50,7 +47,7 @@ const StyledList = styled.div<IStyleProps>`
     border-radius: ${props => props.borderRadius};
     display: flex;
     flex-direction: column;
-    width: 50ch;
+    width: 40ch;
     overflow-y: auto;
     overflow-x: hidden;
 
@@ -143,149 +140,34 @@ const StyledItemRemove = styled(StyledItem)`
     }
 `;
 
-const dummyItems = [
-    {
-        id: 42,
-        name: "Christopher Nolan",
-    },
-    {
-        id: 43,
-        name: "Jonathan Nolan",
-    },
-    {
-        id: 45,
-        name: "Milos Forman",
-    },
-    {
-        id: 85,
-        name: "Ridley Scott",
-    },
-    {
-        id: 48,
-        name: "Bogdan Random",
-    },
-    {
-        id: 25,
-        name: "Your Name",
-    },
-    {
-        id: 35,
-        name: "What is",
-    },
-    {
-        id: 12,
-        name: "Wow Random",
-    },
-    {
-        id: 13,
-        name: "Incredible Name",
-    },
-    {
-        id: 14,
-        name: "Shrek Swamply",
-    },
-    {
-        id: 19,
-        name: "Wow Random",
-    },
-    {
-        id: 2,
-        name: "Incredible Very",
-    },
-    {
-        id: 3,
-        name: "Shrek Greene",
-    },
-    {
-        id: 4,
-        name: "Shrek Big",
-    },
-    {
-        id: 100,
-        name: "Name Name",
-    },
-    {
-        id: 1001,
-        name: "Swamply Swamply",
-    },
-    {
-        id: 1002,
-        name: "Wow Uga",
-    },
-    {
-        id: 10002,
-        name: "Incredible Incredible",
-    },
-    {
-        id: 100003,
-        name: "Shrek Shrek",
-    },
-    {
-        id: 4300,
-        name: "Jonathan Jonathan",
-    },
-    {
-        id: 4500,
-        name: "Milos Milos",
-    },
-    {
-        id: 8500,
-        name: "Ridley Ridley",
-    },
-    {
-        id: 2243,
-        name: "Nolan Nolan",
-    },
-    {
-        id: 2245,
-        name: "Forman Forman",
-    },
-    {
-        id: 2285,
-        name: "Scott Scott",
-    },
-    {
-        id: 34444,
-        name: "Shrek Scott",
-    },
-    {
-        id: 4444,
-        name: "Scott Big",
-    },
-    {
-        id: 10440,
-        name: "Name Forman",
-    },
-    {
-        id: 10041,
-        name: "Nolan Swamply",
-    },
-];
-
-interface IItem {
+export interface IItem {
     id: number,
     name: string,
     [key: string]: any,
 }
 
-const TransferList:FC = (props) => {
-    const [chosenItems, setChosenItems] = useState<Array<IItem>>([]); // Will be managed by parent
-    const [search, setSearch] = useState<string>(""); // Will be managed by parent
+interface IProps {
+    availableItems: Array<IItem>;
+    chosenItems: Array<IItem>;
+    setChosenItems: React.Dispatch<React.SetStateAction<IItem[]>>;
+    search: string;
+    setSearch: React.Dispatch<React.SetStateAction<string>>;
+    height?: string;
+}
 
+const TransferList:FC<IProps> = (props) => {
+    const { availableItems, chosenItems, setChosenItems, search, setSearch, height } = props;
     const { colors } = useThemeContext();
-    const styleProps = { fill: colors.fill, borderRadius, sectionShadow: colors.sectionShadow, primary: colors.primary, primaryAlt: colors.primaryAlt, isChosenEmpty: chosenItems.length === 0 };
+    const styleProps = { fill: colors.fill, borderRadius, sectionShadow: colors.sectionShadow, primary: colors.primary, primaryAlt: colors.primaryAlt, isChosenEmpty: chosenItems.length === 0, height };
 
     return (
         <>
-            <StyledListHeader>
-                
-            </StyledListHeader>
             <StyledTransferList {...styleProps}>
                 <StyledList {...styleProps}>
                     <IconL>search</IconL>
                     <IconM className={search.length > 0 ? "visible" : ""} onClick={() => setSearch("")}>cancel</IconM>
                     <StyledListSearch {...styleProps} value={search} onChange={e => setSearch(e.target.value)}/>
-                    {dummyItems.filter(d => !chosenItems.includes(d)).map(i => {
+                    {availableItems.filter(d => !chosenItems.includes(d)).map(i => {
                         return (
                             <StyledItem key={i.id} {...styleProps} onClick={() => setChosenItems([...chosenItems, i])}>
                                 <span>{i.name}</span>
