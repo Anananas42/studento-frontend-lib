@@ -33,7 +33,7 @@ const AdminAddClass:FC = () => {
 
     const title = "New class";
 
-    const stepProps = { title, currentStep, maxStep: steps.length, setCurrentStep, abortDestination: "/admin/add" };
+    const stepProps = { title, currentStep, maxStep: steps.length, setCurrentStep, abortDestination: "/admin/add", subjectTypes: [{id: 5, name: "Mathematics"}] };
 
     return ( 
         <StyledAdminAddClass>

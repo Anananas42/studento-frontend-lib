@@ -47,7 +47,7 @@ const StyledList = styled.div<IStyleProps>`
     border-radius: ${props => props.borderRadius};
     display: flex;
     flex-direction: column;
-    width: 40ch;
+    width: 44ch;
     overflow-y: auto;
     overflow-x: hidden;
 
