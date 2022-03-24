@@ -1,8 +1,9 @@
 import { FC, useState } from "react";
 import styled from "styled-components";
 import TextColors from "../component-library/buttons/colors/TextColors";
+import FormColors from "../component-library/forms/shared/FormColors";
 import { borderRadius, useThemeContext } from "../component-library/ThemeProvider";
-import { Icon, IconXL } from "../component-library/utilities/Icon";
+import { Icon, IconL, IconM, IconXL } from "../component-library/utilities/Icon";
 
 interface IStyleProps {
     fill: string;
@@ -13,7 +14,6 @@ interface IStyleProps {
 }
 
 const StyledTransferList = styled.div<IStyleProps>`
-    padding: 8px;
     color: ${props => props.fill};
     display: flex;
     align-items: stretch;
@@ -38,20 +38,64 @@ const StyledMiddle = styled.div<IStyleProps>`
 `;
 
 const StyledList = styled.div<IStyleProps>`
+    position: relative;
     border: 2px solid ${props => props.primary};
     border-radius: ${props => props.borderRadius};
     display: flex;
     flex-direction: column;
     width: 50ch;
-    padding: 8px;
     overflow-y: auto;
     overflow-x: hidden;
+
+    > .icon {
+        position: absolute;
+        color: ${FormColors.Default.icon};
+        user-select: none;
+    }
+
+    > .icon:nth-of-type(1) {
+        top: -6px;
+        left: -6px;
+        pointer-events: none;
+    }
+
+    > .icon:nth-of-type(2) {
+        visibility: hidden;
+        top: -2px;
+        right: -2px;
+
+        :hover {
+            color: ${FormColors.Active.icon};
+            cursor: pointer;
+        }
+
+        &.visible {
+            visibility: visible;
+        }
+    }
+`;
+
+const StyledListSearch = styled.input.attrs({ type: 'text'})<IStyleProps>`
+    border: 2px solid ${FormColors.Default.border};
+    outline: 0;
+    box-shadow: inset 0 4px 8px ${FormColors.Default.innerShadow};
+    margin: -2px -2px 8px -2px;
+    padding: 8px 36px;
+    font-size: 1.8rem;
+
+    :focus {
+        box-shadow: inset 0 4px 8px ${FormColors.Active.innerShadow};
+        border-color: ${FormColors.Active.border};
+        outline: none;
+        transition: box-shadow 0.2s ease-in-out;
+    }
 `;
 
 const StyledItem = styled.div<IStyleProps>`
     color: ${props => props.fill};
     border-radius: ${props => props.borderRadius};
     padding: 8px;
+    margin: 0 8px;
     font-size: 1.6rem;
     user-select: none;
     display: flex;
@@ -74,6 +118,10 @@ const StyledItem = styled.div<IStyleProps>`
         > div {
             visibility: visible;
         }
+    }
+
+    :active {
+        background-color: ${TextColors.Active.bg};
     }
 
     > div {
@@ -218,14 +266,18 @@ const TransferList:FC = (props) => {
     const styleProps = { fill: colors.fill, borderRadius, sectionShadow: colors.sectionShadow, primary: colors.primary, primaryAlt: colors.primaryAlt };
 
     const [chosenItems, setChosenItems] = useState<Array<IItem>>([]); // Will be managed by parent
+    const [search, setSearch] = useState<string>("");
 
     return (
         <>
             <StyledListHeader>
-
+                
             </StyledListHeader>
             <StyledTransferList {...styleProps}>
                 <StyledList {...styleProps}>
+                    <IconL>search</IconL>
+                    <IconM className={search.length > 0 ? "visible" : ""} onClick={() => setSearch("")}>cancel</IconM>
+                    <StyledListSearch {...styleProps} value={search} onChange={e => setSearch(e.target.value)}/>
                     {dummyItems.filter(d => !chosenItems.includes(d)).map(i => {
                         return (
                             <StyledItem key={i.id} {...styleProps} onClick={() => setChosenItems([...chosenItems, i])}>
