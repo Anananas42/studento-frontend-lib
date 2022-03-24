@@ -34,10 +34,12 @@ const StyledMiddle = styled.div<IStyleProps>`
 `;
 
 const StyledList = styled.div<IStyleProps>`
+    border: 2px solid ${props => props.primary};
+    border-radius: ${props => props.borderRadius};
     display: flex;
     flex-direction: column;
     width: 50ch;
-    padding-right: 8px;
+    padding: 8px;
     overflow-y: auto;
     overflow-x: hidden;
 `;
