@@ -62,10 +62,15 @@ const StyledGroupListHeader = styled.div<IStyleProps>`
     gap: 16px;
 
     > div:first-child {
-        width: 16ch;
+        width: 44ch;
     }
 
     > div:nth-of-type(2) {
+        min-width: 16ch;
+        max-width: 16ch;
+    }
+
+    > div:last-child {
         width: fit-content;
     }
 
@@ -188,15 +193,13 @@ const SubjectStep:FC<ISubjectStepProps> = (props) => {
                             {!hasMultiple &&
                                 <div>
                                     <DropdownSearchFormBase value={teacher} setValue={setTeacher} label={"Teacher"} options={dummyTeachers} />
-                                    {hasGroups && 
-                                        <DropdownGroupedSearchFormBase value={groupPattern} setValue={setGroupPattern} label={"Group Pattern"} optionGroups={dummyOptionGroups} isOptional={true}/>
-                                    }
                                 </div>
                             }
                         </StyledSubjectForms>
                     {!hasMultiple && hasGroups &&
                         <>
                             <StyledGroupListHeader {...styleProps}>
+                                <DropdownGroupedSearchFormBase value={groupPattern} setValue={setGroupPattern} label={"Group Pattern"} optionGroups={dummyOptionGroups} isOptional={true}/>
                                 <DropdownFormBase value={groupAmount} setValue={setGroupAmount} label={"# Groups"} options={{1: "1", 2: "2", 3: "3", 4: "4"}} />
                                 {parseInt(groupAmount) > 1 && <SingleChoiceFormBase value={group} setValue={setGroup} label={"Group"} options={Object.fromEntries(Array.from(Array(parseInt(groupAmount)), (e, i) => [i+1, `${i+1}`]))}/>}
                             </StyledGroupListHeader>   
