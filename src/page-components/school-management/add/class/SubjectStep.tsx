@@ -1,6 +1,6 @@
 import { FC, useState } from "react";
 import styled from "styled-components";
-import { CheckboxRow, DropdownSearchFormBase, ToggleRow } from "../../../../component-library/forms/base-components";
+import { CheckboxRow, DropdownFormBase, DropdownSearchFormBase, SingleChoiceFormBase, ToggleRow } from "../../../../component-library/forms/base-components";
 import DropdownGroupedSearchFormBase from "../../../../component-library/forms/base-components/dropdowns/DropdownGroupedSearchFormBase";
 import { useThemeContext } from "../../../../component-library/ThemeProvider";
 import ProgressStep, { IProgressStepProps } from "../../../../template-library/ProgressStep";
@@ -38,18 +38,42 @@ const StyledSubjectTitle = styled.div<IStyleProps>`
 `;
 
 const StyledSubjectForms = styled.div<IStyleProps>`
-    padding-top: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    > div {
+        display: flex;
+        flex-direction: row;
+        gap: 16px;
+    }
+
+    > div:first-child {
+        
+    }
+
+    > div:last-child {
+        > div {
+            max-width: 48ch;
+        }
+    }
     
-    > div { 
-        width: 44ch;
+`;
+
+const StyledGroupListHeader = styled.div<IStyleProps>`
+    display: flex;
+    gap: 16px;
+
+    > div:first-child {
+        width: fit-content;
+    }
+
+    > div:last-child {
+        width: 18ch;
     }
 `;
 
 const StyledDisciplineList = styled.div<IStyleProps>`
-
-`;
-
-const StyledGroupList = styled.div<IStyleProps>`
 
 `;
 
@@ -95,7 +119,9 @@ const SubjectStep:FC<ISubjectStepProps> = (props) => {
     const [hasMultiple, setHasMultiple] = useState<boolean>(false);
     const [hasGroups, setHasGroups] = useState<boolean>(false);
     const [teacher, setTeacher] = useState<string>("");
+    const [groupPattern, setGroupPattern] = useState<string>("");
     const [group, setGroup] = useState<string>("");
+    const [groupAmount, setGroupAmount] = useState<string>("1");
 
     const styleProps = { fill: colors.fill, hasMultiple, hasGroups };
 
@@ -108,18 +134,29 @@ const SubjectStep:FC<ISubjectStepProps> = (props) => {
                 </StyledSubjectList>
                 <StyledSubjectDetail {...styleProps}>
                     <StyledSubjectTitle {...styleProps}>{subjectTypes[currSubject].name}</StyledSubjectTitle>
-                    <ToggleRow value={hasMultiple} setValue={setHasMultiple} label={"Has multiple disciplines"}/>
-                    <ToggleRow value={hasGroups} setValue={setHasGroups} label={"Has groups"} isDisabled={hasMultiple}/>
-                    {!hasMultiple && 
+                     
                         <StyledSubjectForms {...styleProps}>
-                            <DropdownSearchFormBase value={teacher} setValue={setTeacher} label={"Teacher"} options={dummyTeachers} />
-                            {hasGroups && 
-                                <DropdownGroupedSearchFormBase value={group} setValue={setGroup} label={"Group Pattern"} optionGroups={dummyOptionGroups} isOptional={true}/>
+                            <div>
+                                <ToggleRow value={hasMultiple} setValue={setHasMultiple} label={"Has multiple disciplines"}/>
+                                <ToggleRow value={hasGroups} setValue={setHasGroups} label={"Has groups"} isDisabled={hasMultiple}/>
+                            </div>
+                            {!hasMultiple &&
+                                <div>
+                                    <DropdownSearchFormBase value={teacher} setValue={setTeacher} label={"Teacher"} options={dummyTeachers} />
+                                    {hasGroups && 
+                                        <DropdownGroupedSearchFormBase value={groupPattern} setValue={setGroupPattern} label={"Group Pattern"} optionGroups={dummyOptionGroups} isOptional={true}/>
+                                    }
+                                </div>
                             }
                         </StyledSubjectForms>
-                    }
                     {!hasMultiple && hasGroups &&
-                        <TransferList availableItems={dummyItems} chosenItems={chosenItems} setChosenItems={setChosenItems} search={search} setSearch={setSearch} height={"100%"}/>
+                        <>
+                            <StyledGroupListHeader {...styleProps}>
+                            <SingleChoiceFormBase value={group} setValue={setGroup} label={"Group"} options={Object.fromEntries(Array.from(Array(parseInt(groupAmount)), (e, i) => [i+1, `${i+1}`]))}/>
+                                <DropdownFormBase value={groupAmount} setValue={setGroupAmount} label={"# Groups"} options={{1: "1", 2: "2", 3: "3", 4: "4"}} />
+                            </StyledGroupListHeader>   
+                            <TransferList availableItems={dummyItems} chosenItems={chosenItems} setChosenItems={setChosenItems} search={search} setSearch={setSearch} height={"100%"}/>
+                        </>
                     }
                     {hasMultiple &&
                         <StyledDisciplineList {...styleProps}>
