@@ -1,6 +1,6 @@
 import { FC, useState } from "react";
 import styled from "styled-components";
-import { CheckboxRow, DropdownFormBase, DropdownSearchFormBase, SingleChoiceFormBase, ToggleRow } from "../../../../component-library/forms/base-components";
+import { DropdownFormBase, DropdownSearchFormBase, SingleChoiceFormBase, ToggleRow } from "../../../../component-library/forms/base-components";
 import DropdownGroupedSearchFormBase from "../../../../component-library/forms/base-components/dropdowns/DropdownGroupedSearchFormBase";
 import { useThemeContext } from "../../../../component-library/ThemeProvider";
 import ProgressStep, { IProgressStepProps } from "../../../../template-library/ProgressStep";
@@ -28,6 +28,7 @@ const StyledSubjectDetail = styled.div<IStyleProps>`
     display: flex;
     flex-direction: column;
     min-height: 100%;
+    min-width: 750px;
     gap: 8px;
 `;
 
@@ -65,12 +66,13 @@ const StyledGroupListHeader = styled.div<IStyleProps>`
     gap: 16px;
 
     > div:first-child {
+        width: 16ch;
+    }
+
+    > div:nth-of-type(2) {
         width: fit-content;
     }
 
-    > div:last-child {
-        width: 18ch;
-    }
 `;
 
 const StyledDisciplineList = styled.div<IStyleProps>`
@@ -152,8 +154,8 @@ const SubjectStep:FC<ISubjectStepProps> = (props) => {
                     {!hasMultiple && hasGroups &&
                         <>
                             <StyledGroupListHeader {...styleProps}>
-                            {parseInt(groupAmount) > 1 && <SingleChoiceFormBase value={group} setValue={setGroup} label={"Group"} options={Object.fromEntries(Array.from(Array(parseInt(groupAmount)), (e, i) => [i+1, `${i+1}`]))}/>}
-                            <DropdownFormBase value={groupAmount} setValue={setGroupAmount} label={"# Groups"} options={{1: "1", 2: "2", 3: "3", 4: "4"}} />
+                                <DropdownFormBase value={groupAmount} setValue={setGroupAmount} label={"# Groups"} options={{1: "1", 2: "2", 3: "3", 4: "4"}} />
+                                {parseInt(groupAmount) > 1 && <SingleChoiceFormBase value={group} setValue={setGroup} label={"Group"} options={Object.fromEntries(Array.from(Array(parseInt(groupAmount)), (e, i) => [i+1, `${i+1}`]))}/>}
                             </StyledGroupListHeader>   
                             <TransferList availableItems={dummyItems} chosenItems={chosenItems} setChosenItems={setChosenItems} search={search} setSearch={setSearch} height={"100%"}/>
                         </>
