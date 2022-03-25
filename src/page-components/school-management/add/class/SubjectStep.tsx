@@ -1,15 +1,18 @@
 import { FC, useState } from "react";
 import styled from "styled-components";
+import TextColors from "../../../../component-library/buttons/colors/TextColors";
 import { BtnSecondaryS } from "../../../../component-library/buttons/components";
 import { DropdownFormBase, DropdownSearchFormBase, SingleChoiceFormBase, TextFormBase, ToggleRow } from "../../../../component-library/forms/base-components";
 import DropdownGroupedSearchFormBase from "../../../../component-library/forms/base-components/dropdowns/DropdownGroupedSearchFormBase";
-import { useThemeContext } from "../../../../component-library/ThemeProvider";
+import { borderRadius, useThemeContext } from "../../../../component-library/ThemeProvider";
 import { IconS } from "../../../../component-library/utilities/Icon";
 import ProgressStep, { IProgressStepProps } from "../../../../template-library/ProgressStep";
 import TransferList, { IItem } from "../../../../template-library/TransferList";
 
 interface IStyleProps {
     fill: string;
+    fillDisabled: string;
+    borderRadius: string;
     hasMultiple: boolean;
     hasGroups: boolean;
 }
@@ -104,15 +107,40 @@ const StyledDisciplineList = styled.div<IStyleProps>`
     > .disciplines {
         display: flex;
         flex-wrap: wrap;
+        gap: 8px;
         max-width: 120ch;
     }
 `;
 
 const StyledDiscipline = styled.div<IStyleProps>`
     color: ${props => props.fill};
+    display: flex;
+    align-items: center;
+    padding-left: 8px;
+    border-radius: ${props => props.borderRadius};
+    user-select: none;
+    background-color: ${TextColors.Hover.bg};
+
+    > span {
+        font-size: 2rem;
+    }
+
+    :hover {
+        background-color: ${TextColors.Active.bg};
+        cursor: pointer;
+
+        > div {
+            color: ${props => props.fill};
+        }
+    }
+
+    :active {
+        background-color: ${TextColors.Hover.bg};
+    }
 
     > div {
-        user-select: none;
+        padding-bottom: 2px;
+        color: ${TextColors.Active.bg};
     }
 `;
 
@@ -166,7 +194,7 @@ const SubjectStep:FC<ISubjectStepProps> = (props) => {
     const [discipline, setDiscipline] = useState<string>("");
     const [disciplines, setDisciplines] = useState<Array<string>>([]);
 
-    const styleProps = { fill: colors.fill, hasMultiple, hasGroups };
+    const styleProps = { fill: colors.fill, fillDisabled: colors.fillDisabled, borderRadius, hasMultiple, hasGroups };
 
     const addDiscipline = (e?: React.KeyboardEvent<any>) => {
         if (e !== undefined && e.key !== 'Enter') return;
@@ -216,9 +244,9 @@ const SubjectStep:FC<ISubjectStepProps> = (props) => {
                                 <div className={"disciplines"}>
                                     {disciplines.map(d => {
                                         return (
-                                            <StyledDiscipline {...styleProps} key={d}>
+                                            <StyledDiscipline {...styleProps} key={d} onClick={() => setDisciplines(disciplines.filter(disc => disc !== d))}>
                                                 <span>{d}</span>
-                                                <IconS onClick={() => setDisciplines(disciplines.filter(disc => disc !== d))}>cancel</IconS>
+                                                <IconS>cancel</IconS>
                                             </StyledDiscipline>
                                         )
                                     })}
