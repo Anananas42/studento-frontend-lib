@@ -119,7 +119,7 @@ const SubjectStep:FC<ISubjectStepProps> = (props) => {
     const [hasMultiple, setHasMultiple] = useState<boolean>(false);
     const [hasGroups, setHasGroups] = useState<boolean>(false);
     const [teacher, setTeacher] = useState<string>("");
-    const [groupPattern, setGroupPattern] = useState<string>("");
+    const [groupPattern, setGroupPattern] = useState<string>(""); // Changes to null value on any change to the selected pattern
     const [group, setGroup] = useState<string>("");
     const [groupAmount, setGroupAmount] = useState<string>("1");
 
@@ -138,7 +138,7 @@ const SubjectStep:FC<ISubjectStepProps> = (props) => {
                         <StyledSubjectForms {...styleProps}>
                             <div>
                                 <ToggleRow value={hasMultiple} setValue={setHasMultiple} label={"Has multiple disciplines"}/>
-                                <ToggleRow value={hasGroups} setValue={setHasGroups} label={"Has groups"} isDisabled={hasMultiple}/>
+                                {!hasMultiple && <ToggleRow value={hasGroups} setValue={setHasGroups} label={"Has groups"} isDisabled={hasMultiple}/>}
                             </div>
                             {!hasMultiple &&
                                 <div>
@@ -152,8 +152,8 @@ const SubjectStep:FC<ISubjectStepProps> = (props) => {
                     {!hasMultiple && hasGroups &&
                         <>
                             <StyledGroupListHeader {...styleProps}>
-                            <SingleChoiceFormBase value={group} setValue={setGroup} label={"Group"} options={Object.fromEntries(Array.from(Array(parseInt(groupAmount)), (e, i) => [i+1, `${i+1}`]))}/>
-                                <DropdownFormBase value={groupAmount} setValue={setGroupAmount} label={"# Groups"} options={{1: "1", 2: "2", 3: "3", 4: "4"}} />
+                            {parseInt(groupAmount) > 1 && <SingleChoiceFormBase value={group} setValue={setGroup} label={"Group"} options={Object.fromEntries(Array.from(Array(parseInt(groupAmount)), (e, i) => [i+1, `${i+1}`]))}/>}
+                            <DropdownFormBase value={groupAmount} setValue={setGroupAmount} label={"# Groups"} options={{1: "1", 2: "2", 3: "3", 4: "4"}} />
                             </StyledGroupListHeader>   
                             <TransferList availableItems={dummyItems} chosenItems={chosenItems} setChosenItems={setChosenItems} search={search} setSearch={setSearch} height={"100%"}/>
                         </>
