@@ -65,14 +65,14 @@ const StyledSingleChoiceForm = styled.div<IStyleProps>`
 
 `;
 
-interface IChoices {
+interface IOptions {
     [key: string]: string;
 }
 
 interface IProps {
     value: string;
     setValue: React.Dispatch<React.SetStateAction<string>>;
-    choices: IChoices;
+    options: IOptions;
     isHorizontal?: boolean;
     label: string;
     defaultNote?: string;
@@ -83,14 +83,14 @@ interface IProps {
 }
 
 const SingleChoiceFormBase:FC<IProps> = (props) => {
-    const { value, setValue, formId, isDisabled, label, choices, ...rest } = props;
+    const { value, setValue, formId, isDisabled, label, options, ...rest } = props;
     const { colors } = useThemeContext();
 
     return (
         <FormBase formId={formId} label={label} isDisabled={isDisabled} {...rest}>
             <StyledSingleChoiceForm borderRadius={borderRadius} fill={colors.fill}>
-                {Object.keys(choices).map(choice => {
-                    return <div key={formId ? formId + choice : label + choice} onClick={() => setValue(choice)} className={isDisabled ? "formDisabled" : (choice === value ? "selected" : "")}>{choices[choice]}</div>
+                {Object.keys(options).map(choice => {
+                    return <div key={formId ? formId + choice : label + choice} onClick={() => setValue(choice)} className={isDisabled ? "formDisabled" : (choice === value ? "selected" : "")}>{options[choice]}</div>
                 })}
             </StyledSingleChoiceForm>
         </FormBase>
