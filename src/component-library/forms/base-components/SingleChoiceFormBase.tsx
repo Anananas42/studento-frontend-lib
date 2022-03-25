@@ -17,7 +17,7 @@ const StyledSingleChoiceForm = styled.div<IStyleProps>`
 
     div {
         position: relative;
-        padding: 12px 16px;
+        padding: 7px 16px;
         font-size: ${FormStyles.fontSize};
         user-select: none;
         border-radius: 0;
@@ -33,7 +33,7 @@ const StyledSingleChoiceForm = styled.div<IStyleProps>`
             border-left: 2px solid ${FormColors.Default.border};
 
             &.selected {
-                padding: 14px 17px 14px ${props => `${18 + parseInt(props.borderRadius.split("px", 1)[0])/2}px`};
+                padding: 8px 17px 8px ${props => `${18 + parseInt(props.borderRadius.split("px", 1)[0])/2}px`};
             }
         }
 
@@ -43,14 +43,14 @@ const StyledSingleChoiceForm = styled.div<IStyleProps>`
             border-right: 2px solid ${FormColors.Default.border};;
 
             &.selected {
-                padding: 14px ${props => `${18 + parseInt(props.borderRadius.split("px", 1)[0])/2}px`} 14px 17px;
+                padding: 8px ${props => `${18 + parseInt(props.borderRadius.split("px", 1)[0])/2}px`} 8px 17px;
             }
         }
 
         &.selected {
             background: linear-gradient(0, ${FormColors.SecondaryGrad.bg1}, ${FormColors.SecondaryGrad.bg2});
             border: 0;
-            padding: 14px 17px;
+            padding: 8px 17px;
             color: #fff;
             box-shadow: 2px 2px 8px -2px ${FormColors.Default.dropdownShadow};
         }
