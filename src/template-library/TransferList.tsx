@@ -95,7 +95,7 @@ const StyledListSearch = styled.input.attrs({ type: 'text'})<IStyleProps>`
     }
 `;
 
-const StyledItem = styled.div<IStyleProps>`
+export const StyledItem = styled.div<IStyleProps>`
     color: ${props => props.fill};
     border-radius: ${props => props.borderRadius};
     padding: 8px;

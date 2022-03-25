@@ -1,8 +1,10 @@
 import { FC, useState } from "react";
 import styled from "styled-components";
-import { DropdownFormBase, DropdownSearchFormBase, SingleChoiceFormBase, ToggleRow } from "../../../../component-library/forms/base-components";
+import { BtnSecondaryS } from "../../../../component-library/buttons/components";
+import { DropdownFormBase, DropdownSearchFormBase, SingleChoiceFormBase, TextFormBase, ToggleRow } from "../../../../component-library/forms/base-components";
 import DropdownGroupedSearchFormBase from "../../../../component-library/forms/base-components/dropdowns/DropdownGroupedSearchFormBase";
 import { useThemeContext } from "../../../../component-library/ThemeProvider";
+import { IconS } from "../../../../component-library/utilities/Icon";
 import ProgressStep, { IProgressStepProps } from "../../../../template-library/ProgressStep";
 import TransferList, { IItem } from "../../../../template-library/TransferList";
 
@@ -16,12 +18,6 @@ const StyledSubjectStep = styled.div`
     display: flex;
     min-height: calc(100% - 127px);
     gap: 32px;
-`;
-
-const StyledSubjectList = styled.div`
-    display: flex;
-    flex-direction: column;
-    min-height: 100%;
 `;
 
 const StyledSubjectDetail = styled.div<IStyleProps>`
@@ -75,9 +71,47 @@ const StyledGroupListHeader = styled.div<IStyleProps>`
 
 `;
 
-const StyledDisciplineList = styled.div<IStyleProps>`
-
+const StyledSubjectList = styled.div`
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
 `;
+
+const StyledDisciplineList = styled.div<IStyleProps>`
+    display: flex;
+    flex-direction: column;
+    padding-top: 8px;
+
+    > .add-row {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+
+        > div:first-child {
+            width: 40ch;
+        }
+
+        button {
+            margin-top: 0.8rem;
+        }
+    }
+
+    > .disciplines {
+        display: flex;
+        flex-wrap: wrap;
+        max-width: 120ch;
+    }
+`;
+
+const StyledDiscipline = styled.div<IStyleProps>`
+    color: ${props => props.fill};
+
+    > div {
+        user-select: none;
+    }
+`;
+
+
 
 const dummyItems = [
     {id: 5, name: "xd"},
@@ -124,8 +158,17 @@ const SubjectStep:FC<ISubjectStepProps> = (props) => {
     const [groupPattern, setGroupPattern] = useState<string>(""); // Changes to null value on any change to the selected pattern
     const [group, setGroup] = useState<string>("");
     const [groupAmount, setGroupAmount] = useState<string>("1");
+    const [discipline, setDiscipline] = useState<string>("");
+    const [disciplines, setDisciplines] = useState<Array<string>>([]);
 
     const styleProps = { fill: colors.fill, hasMultiple, hasGroups };
+
+    const addDiscipline = (e?: React.KeyboardEvent<any>) => {
+        if (e !== undefined && e.key !== 'Enter') return;
+
+        if (!disciplines.includes(discipline)) setDisciplines([...disciplines, discipline]);
+        setDiscipline("");
+    }
 
     return (
         <ProgressStep title={title + " - subjects"} {...rest}>
@@ -161,9 +204,25 @@ const SubjectStep:FC<ISubjectStepProps> = (props) => {
                         </>
                     }
                     {hasMultiple &&
-                        <StyledDisciplineList {...styleProps}>
-                            asdkjhsdfghjkjfhkfdsjhsdfjksdf DISCIPLINES
-                        </StyledDisciplineList>
+                        <>
+                            <StyledDisciplineList {...styleProps}>
+                                <div className={"add-row"}>
+                                    <TextFormBase label={"New discipline"} value={discipline} setValue={setDiscipline} placeholder={""} onKeyDown={(e) => addDiscipline(e)}/>
+                                    <BtnSecondaryS onClick={() => addDiscipline()} icon={"add"}></BtnSecondaryS>
+                                </div>
+                                <div className={"disciplines"}>
+                                    {disciplines.map(d => {
+                                        return (
+                                            <StyledDiscipline {...styleProps} key={d}>
+                                                <span>{d}</span>
+                                                <IconS onClick={() => setDisciplines(disciplines.filter(disc => disc !== d))}>cancel</IconS>
+                                            </StyledDiscipline>
+                                        )
+                                    })}
+
+                                </div>
+                            </StyledDisciplineList>
+                        </>
                     }
                 </StyledSubjectDetail>
             </StyledSubjectStep>
