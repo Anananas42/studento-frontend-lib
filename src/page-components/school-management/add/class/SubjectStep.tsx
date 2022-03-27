@@ -1,7 +1,7 @@
 import { FC, useState } from "react";
 import styled from "styled-components";
 import TextColors from "../../../../component-library/buttons/colors/TextColors";
-import { BtnSecondaryS } from "../../../../component-library/buttons/components";
+import { BtnPrimaryS, BtnSecondaryS, BtnTertiaryS } from "../../../../component-library/buttons/components";
 import { DropdownFormBase, DropdownSearchFormBase, SingleChoiceFormBase, TextFormBase, ToggleRow } from "../../../../component-library/forms/base-components";
 import DropdownGroupedSearchFormBase from "../../../../component-library/forms/base-components/dropdowns/DropdownGroupedSearchFormBase";
 import { borderRadius, useThemeContext } from "../../../../component-library/ThemeProvider";
@@ -32,6 +32,9 @@ const StyledSubjectDetail = styled.div<IStyleProps>`
 `;
 
 const StyledSubjectTitle = styled.div<IStyleProps>`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     font-size: 2.8rem;
     color: ${props => props.fill};
     padding-bottom: 8px;
@@ -77,6 +80,11 @@ const StyledGroupListHeader = styled.div<IStyleProps>`
         width: fit-content;
     }
 
+`;
+
+const StyledSubjectDetailButtonRow = styled.div`
+    display: flex;
+    gap: 8px;
 `;
 
 const StyledSubjectList = styled.div`
@@ -257,7 +265,13 @@ const SubjectStep:FC<ISubjectStepProps> = (props) => {
                     })}
                 </StyledSubjectList>
                 <StyledSubjectDetail {...styleProps}>
-                    <StyledSubjectTitle {...styleProps}>{subjectTypes[currSubject].name}</StyledSubjectTitle>
+                    <StyledSubjectTitle {...styleProps}>
+                        {subjectTypes[currSubject].name}
+                        <StyledSubjectDetailButtonRow>
+                            <BtnTertiaryS onClick={() => 0} icon={"arrow_backward"}>Previous subject</BtnTertiaryS>
+                            <BtnPrimaryS onClick={() => 0} icon={"arrow_forward"} isAfter={true}>Next subject</BtnPrimaryS>
+                        </StyledSubjectDetailButtonRow>
+                    </StyledSubjectTitle>
                      
                         <StyledSubjectForms {...styleProps}>
                             <div>
@@ -301,6 +315,7 @@ const SubjectStep:FC<ISubjectStepProps> = (props) => {
                             </StyledDisciplineList>
                         </>
                     }
+                    
                 </StyledSubjectDetail>
             </StyledSubjectStep>
         </ProgressStep>
