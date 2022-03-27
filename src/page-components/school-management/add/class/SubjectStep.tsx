@@ -83,6 +83,33 @@ const StyledSubjectList = styled.div`
     display: flex;
     flex-direction: column;
     min-height: 100%;
+    width: 36ch;
+    margin-top: 1px;
+
+    * {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        margin-top: -1px;
+    }
+`;
+
+const StyledSubjectRow = styled.div<IStyleProps>`
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: ${props => props.fill};
+    border: 1px solid ${props => props.fill};
+    padding: 8px;
+
+`;
+
+const StyledDisciplineRow = styled.div<IStyleProps>`
+    font-size: 1.6rem;
+    color: ${props => props.fill};
+    border: 1px solid ${props => props.fill};
+    width: calc(100% - 3ch);
+    padding: 8px;
+    align-self: flex-end;
 `;
 
 const StyledDisciplineList = styled.div<IStyleProps>`
@@ -144,7 +171,12 @@ const StyledDiscipline = styled.div<IStyleProps>`
     }
 `;
 
-
+const dummySubjectTypes = [
+    "Mathematics",
+    "Czech Language",
+    "French Language",
+    "Physics",
+]
 
 const dummyItems = [
     {id: 5, name: "xd"},
@@ -207,8 +239,22 @@ const SubjectStep:FC<ISubjectStepProps> = (props) => {
         <ProgressStep title={title + " - subjects"} {...rest}>
             <StyledSubjectStep>
                 <StyledSubjectList>
-                        SUBJECT LIST
-
+                    {dummySubjectTypes.map(s => {
+                        return (
+                        <>
+                            <StyledSubjectRow {...styleProps}>
+                                {s}
+                            </StyledSubjectRow>
+                            {disciplines.map(d => {
+                                return (
+                                <StyledDisciplineRow {...styleProps}>
+                                    {d}
+                                </StyledDisciplineRow>
+                                )
+                            })}
+                        </>
+                        )
+                    })}
                 </StyledSubjectList>
                 <StyledSubjectDetail {...styleProps}>
                     <StyledSubjectTitle {...styleProps}>{subjectTypes[currSubject].name}</StyledSubjectTitle>
