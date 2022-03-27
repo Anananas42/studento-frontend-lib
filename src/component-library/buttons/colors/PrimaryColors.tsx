@@ -12,7 +12,7 @@ const PrimaryColors = {
         txt: "#453C30",
     },
     Active: {
-        bg1: "#FFD53D",
+        bg1: "#FFBB3D",
         bg2: "#FFBB3D",
         txt: "#453C30",
     },
