@@ -12,6 +12,9 @@ import TransferList, { IItem } from "../../../../template-library/TransferList";
 interface IStyleProps {
     fill: string;
     fillDisabled: string;
+    currentBg: string;
+    completeBg: string;
+    skipBg: string;
     borderRadius: string;
     hasMultiple: boolean;
     hasGroups: boolean;
@@ -82,12 +85,12 @@ const StyledGroupListHeader = styled.div<IStyleProps>`
 
 `;
 
-const StyledSubjectDetailButtonRow = styled.div`
+const StyledSubjectButtons = styled.div`
     display: flex;
     gap: 8px;
 `;
 
-const StyledSubjectList = styled.div`
+const StyledSubjectList = styled.div<IStyleProps>`
     display: flex;
     flex-direction: column;
     min-height: 100%;
@@ -98,7 +101,21 @@ const StyledSubjectList = styled.div`
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
+        user-select: none;
         margin-top: -1px;
+    }
+
+    .current {
+        background-color: ${props => props.currentBg};
+    }
+
+    .skipped {
+        background-color: ${props => props.skipBg};
+    }
+
+    .completed {
+        background-color: ${props => props.completeBg};
+        
     }
 `;
 
@@ -234,7 +251,8 @@ const SubjectStep:FC<ISubjectStepProps> = (props) => {
     const [discipline, setDiscipline] = useState<string>("");
     const [disciplines, setDisciplines] = useState<Array<string>>([]);
 
-    const styleProps = { fill: colors.fill, fillDisabled: colors.fillDisabled, borderRadius, hasMultiple, hasGroups };
+    const styleProps = { fill: colors.fill, fillDisabled: colors.fillDisabled, currentBg: colors.primary, completeBg: colors.System.Success.light, skipBg: colors.fillDisabled,
+         borderRadius, hasMultiple, hasGroups };
 
     const addDiscipline = (e?: React.KeyboardEvent<any>) => {
         if (e !== undefined && e.key !== 'Enter') return;
@@ -246,11 +264,11 @@ const SubjectStep:FC<ISubjectStepProps> = (props) => {
     return (
         <ProgressStep title={title + " - subjects"} {...rest}>
             <StyledSubjectStep>
-                <StyledSubjectList>
+                <StyledSubjectList {...styleProps}>
                     {dummySubjectTypes.map(s => {
                         return (
                         <>
-                            <StyledSubjectRow {...styleProps}>
+                            <StyledSubjectRow {...styleProps} className={""}>
                                 {s}
                             </StyledSubjectRow>
                             {disciplines.map(d => {
@@ -267,10 +285,10 @@ const SubjectStep:FC<ISubjectStepProps> = (props) => {
                 <StyledSubjectDetail {...styleProps}>
                     <StyledSubjectTitle {...styleProps}>
                         {subjectTypes[currSubject].name}
-                        <StyledSubjectDetailButtonRow>
+                        <StyledSubjectButtons>
                             <BtnTertiaryS onClick={() => 0} icon={"arrow_backward"}>Previous subject</BtnTertiaryS>
                             <BtnPrimaryS onClick={() => 0} icon={"arrow_forward"} isAfter={true}>Next subject</BtnPrimaryS>
-                        </StyledSubjectDetailButtonRow>
+                        </StyledSubjectButtons>
                     </StyledSubjectTitle>
                      
                         <StyledSubjectForms {...styleProps}>
