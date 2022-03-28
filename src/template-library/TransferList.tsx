@@ -153,9 +153,9 @@ export interface IItem {
 interface IProps {
     availableItems: Array<IItem>;
     chosenItems: Array<IItem>;
-    setChosenItems: React.Dispatch<React.SetStateAction<IItem[]>>;
+    setChosenItems: React.Dispatch<React.SetStateAction<IItem[]>> | ((value: Array<IItem>) => void);
     search: string;
-    setSearch: React.Dispatch<React.SetStateAction<string>>;
+    setSearch: React.Dispatch<React.SetStateAction<string>> | ((value: string) => void);
     height?: string;
 }
 

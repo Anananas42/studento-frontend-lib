@@ -12,7 +12,7 @@ interface IOptions {
 
 interface IProps {
     value: string;
-    setValue: React.Dispatch<React.SetStateAction<string>>;
+    setValue: React.Dispatch<React.SetStateAction<string>> | ((value: string) => void);
     options: IOptions;
     label: string;
     placeholder?: string;

@@ -93,7 +93,7 @@ const StyledLabelToggle = styled.label<IStyleProps>`
 
 interface IToggleRowProps {
     value: boolean;
-    setValue: React.Dispatch<React.SetStateAction<boolean>>;
+    setValue: React.Dispatch<React.SetStateAction<boolean>> | ((value: boolean) => void);
     label: string;
     height?: string;
     width?: string;
