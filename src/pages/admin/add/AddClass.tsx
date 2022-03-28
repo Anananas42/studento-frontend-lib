@@ -1,6 +1,6 @@
 import { FC, useState } from "react";
 import styled from "styled-components";
-import DetailStep from "../../../page-components/school-management/add/class/DetailStep";
+import DetailStep from "../../../page-components/school-management/add/class/DetailStep/DetailStep";
 import StudentStep from "../../../page-components/school-management/add/class/StudentStep";
 import SubjectStep from "../../../page-components/school-management/add/class/SubjectStep";
 import SubjectTypeStep from "../../../page-components/school-management/add/class/SubjectTypeStep";

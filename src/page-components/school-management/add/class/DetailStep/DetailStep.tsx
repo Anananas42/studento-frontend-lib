@@ -1,5 +1,5 @@
 import { FC } from "react";
-import ProgressStep, { IProgressStepProps } from "../../../../template-library/ProgressStep";
+import ProgressStep, { IProgressStepProps } from "../../../../../template-library/ProgressStep";
 import DetailForm from "./DetailForm";
 
 const DetailStep:FC<IProgressStepProps> = (props) => {
