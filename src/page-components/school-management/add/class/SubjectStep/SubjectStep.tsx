@@ -89,7 +89,7 @@ const SubjectStep:FC<IAddClassStepProps> = (props) => {
                     {state.subjects.map((s, id) => {
                         return (
                         <React.Fragment key={s.code}>
-                            <StyledSubjectRow {...styleProps} className={state.displayedSubject === id ? "current" : ""}>
+                            <StyledSubjectRow {...styleProps} className={state.displayedSubject === id && !state.discipline ? "current" : ""}>
                                 {s.title}
                             </StyledSubjectRow>
                             {s.disciplines.map(d => {

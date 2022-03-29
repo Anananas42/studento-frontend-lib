@@ -371,7 +371,10 @@ const addClassReducer = (state: IAddClassReducerState, action: AddClassReducerAc
             if (state.displayedSubject !== 0 && !state.displayedSubject) return {...state };
             const subj = state.subjects[state.displayedSubject];
             const discId = subj.disciplines.indexOf(state.discipline);
-            if (subj.disciplines.length === 0 || discId === 0) {
+            if (discId === 0) {
+                return {...state, discipline: ""};
+            }
+            if (state.discipline === "") {
                 const prevSubject = state.subjects[state.displayedSubject - 1];
                 if (prevSubject.disciplines.length > 0) {
                     return {...state, displayedSubject: state.displayedSubject - 1, discipline: prevSubject.disciplines[prevSubject.disciplines.length - 1]};
