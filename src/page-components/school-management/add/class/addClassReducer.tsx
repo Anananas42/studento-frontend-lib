@@ -340,7 +340,7 @@ const addClassReducer = (state: IAddClassReducerState, action: AddClassReducerAc
                 const subj = state.subjects[state.displayedSubject];
                 if (!state.disciplineInput || subj.disciplines.includes(state.disciplineInput)) return {...state };
                 const subjectsUpdated = [...state.subjects.slice(0, state.displayedSubject), {...subj, disciplines: [...subj.disciplines, state.disciplineInput]}];
-                return {...state, subjects: subjectsUpdated};
+                return {...state, subjects: subjectsUpdated, disciplineInput: ""};
             }
         case "ENTER_STUDENTS_STEP":
             {
