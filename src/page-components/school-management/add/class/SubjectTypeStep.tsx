@@ -51,7 +51,7 @@ const dummyItems = [
 ];
 
 const SubjectTypeStep:FC<IAddClassStepProps> = (props) => {
-    const { title, ...rest } = props;
+    const { title, state, dispatch, ...rest } = props;
     const [chosenItems, setChosenItems] = useState<Array<IItem>>([]);
     const [search, setSearch] = useState<string>("");
 

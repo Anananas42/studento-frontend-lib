@@ -123,13 +123,12 @@ const dummyItems = [
 ];
 
 const StudentStep:FC<IAddClassStepProps> = (props) => {
-    const { title, ...rest } = props;
-    const [chosenItems, setChosenItems] = useState<Array<IItem>>([]);
+    const { title, state, dispatch, ...rest } = props;
     const [search, setSearch] = useState<string>("");
 
     return (
         <ProgressStep title={title + " - students"} isStretched={true} {...rest}>
-            <TransferList availableItems={dummyItems} chosenItems={chosenItems} setChosenItems={setChosenItems} search={search} setSearch={setSearch}/>
+            <TransferList availableItems={state.studentOptions} chosenItems={state.classStudents} setChosenItems={(value: Array<IItem>) => dispatch({type: "SET_CHOSEN_STUDENTS", payload: value})} search={search} setSearch={setSearch}/>
         </ProgressStep>
     );
 }
