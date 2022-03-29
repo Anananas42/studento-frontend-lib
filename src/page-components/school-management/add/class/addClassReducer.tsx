@@ -255,11 +255,11 @@ const dummyRoomOptions = {
 
 const initState:IAddClassReducerState = {
     backupTeacher: "",
-    backupTeacherOptions: {},
+    backupTeacherOptions: dummyTeacherOptions,
     chosenSubjectTypes: [],
     classStudents: [],
     classTeacher: "",
-    classTeacherOptions: {},
+    classTeacherOptions: dummyTeacherOptions,
     code: "",
     displayedSubject: null,
     discipline: "",
@@ -270,11 +270,11 @@ const initState:IAddClassReducerState = {
     group: 0,
     note: "",
     room: "",
-    roomOptions: {},
-    studentOptions: [],
+    roomOptions: dummyRoomOptions,
+    studentOptions: dummyStudentOptions,
     studentSearch: "",
     subjects: [],
-    subjectTypeOptions: [],
+    subjectTypeOptions: dummySubjectTypes,
 };
 
 export type AddClassReducerActionType =
@@ -362,7 +362,7 @@ const addClassReducer = (state: IAddClassReducerState, action: AddClassReducerAc
             if (state.displayedSubject !== 0 && !state.displayedSubject) return {...state };
             const subj = state.subjects[state.displayedSubject];
             const discId = subj.disciplines.indexOf(state.discipline);
-            if (subj.disciplines.length !== 0 && discId === subj.disciplines.length - 1) return {...state, displayedSubject: state.displayedSubject + 1, discipline: ""};
+            if (subj.disciplines.length === 0 || discId === subj.disciplines.length - 1) return {...state, displayedSubject: state.displayedSubject + 1, discipline: ""};
 
             return {...state, discipline: subj.disciplines[discId + 1]};
             }
@@ -371,7 +371,14 @@ const addClassReducer = (state: IAddClassReducerState, action: AddClassReducerAc
             if (state.displayedSubject !== 0 && !state.displayedSubject) return {...state };
             const subj = state.subjects[state.displayedSubject];
             const discId = subj.disciplines.indexOf(state.discipline);
-            if (subj.disciplines.length !== 0 && discId === 0) return {...state, displayedSubject: state.displayedSubject - 1, discipline: ""};
+            if (subj.disciplines.length === 0 || discId === 0) {
+                const prevSubject = state.subjects[state.displayedSubject - 1];
+                if (prevSubject.disciplines.length > 0) {
+                    return {...state, displayedSubject: state.displayedSubject - 1, discipline: prevSubject.disciplines[prevSubject.disciplines.length - 1]};
+                }else{
+                    return {...state, displayedSubject: state.displayedSubject - 1, discipline: ""};
+                }
+            } 
 
             return {...state, discipline: subj.disciplines[discId - 1]};
             }

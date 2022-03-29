@@ -175,10 +175,10 @@ const SubjectDetail:FC<IProps> = (props) => {
             <StyledSubjectTitle {...styleProps}>
                 {subject.title}
                 <StyledSubjectButtons>
-                    {(state.displayedSubject > 0 || subject.disciplines.indexOf(state.discipline) > 0) &&
-                     <BtnTertiaryS onClick={() => dispatch({type: "GOTO_NEXT",})} icon={"arrow_backward"}>Previous subject</BtnTertiaryS>}
+                    {(state.displayedSubject > 0 || state.discipline) &&
+                     <BtnTertiaryS onClick={() => dispatch({type: "GOTO_PREV"})} icon={"arrow_backward"}>Previous subject</BtnTertiaryS>}
                     {!(state.displayedSubject === state.subjects.length - 1 && subject.disciplines.indexOf(state.discipline) === subject.disciplines.length - 1) &&
-                     <BtnPrimaryS onClick={() => dispatch({type: "GOTO_PREV"})} icon={"arrow_forward"} isAfter={true}>Next subject</BtnPrimaryS>}
+                     <BtnPrimaryS onClick={() => dispatch({type: "GOTO_NEXT"})} icon={"arrow_forward"} isAfter={true}>Next subject</BtnPrimaryS>}
                 </StyledSubjectButtons>
             </StyledSubjectTitle>
                 
