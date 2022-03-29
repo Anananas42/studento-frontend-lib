@@ -8,7 +8,7 @@ const DetailStep:FC<IAddClassStepProps> = (props) => {
 
     return (
         <ProgressStep title={title + " - details"} {...rest}>
-            <DetailForm />
+            <DetailForm state={state} dispatch={dispatch} />
         </ProgressStep>
     );
 }

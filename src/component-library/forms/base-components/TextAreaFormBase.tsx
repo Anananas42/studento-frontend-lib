@@ -52,7 +52,7 @@ const StyledTextArea = styled.textarea<IStyledTextArea>`
 
 interface ITextAreaFormBaseProps {
     value: string;
-    setValue: React.Dispatch<React.SetStateAction<string>>;
+    setValue: React.Dispatch<React.SetStateAction<string>> | ((value: string) => void);
     isHorizontal?: boolean; // Place label to the left
     label: string;
     formId?: string; // To link label and input

@@ -42,9 +42,12 @@ interface ISubject {
 export interface IAddClassReducerState {
     grade: string;
     code: string;
-    room: IItem | null;
-    classTeacher: IItem | null;
-    backupTeacher: IItem | null;
+    room: string;
+    roomOptions: IOptions;
+    classTeacher: string;
+    backupTeacher: string;
+    classTeacherOptions: IOptions;
+    backupTeacherOptions: IOptions;
     note: string;
     subjects: Array<ISubject>;
     chosenSubjectTypes: Array<IItem>;
@@ -63,9 +66,12 @@ export interface IAddClassReducerState {
 const initState:IAddClassReducerState = {
     grade: "",
     code: "",
-    room: null,
-    classTeacher: null,
-    backupTeacher: null,
+    room: "",
+    roomOptions: {},
+    classTeacher: "",
+    backupTeacher: "",
+    classTeacherOptions: {},
+    backupTeacherOptions: {},
     note: "",
     subjects: [],
     chosenSubjectTypes: [],
@@ -82,18 +88,24 @@ const initState:IAddClassReducerState = {
 };
 
 export type AddClassReducerActionType =
-    | { type: "SET_HAS_MULTIPLE", payload: boolean }
-    | { type: "SET_HAS_GROUPS", payload: boolean }
-    | { type: "SET_DISCIPLINE_INPUT", payload: string }
-    | { type: "SET_GROUP_PATTERN", payload: IGroupPattern }
-    | { type: "SET_GROUP_AMOUNT", payload: number }
-    | { type: "SET_GROUP", payload: number }
-    | { type: "SET_TEACHER", payload: string }
-    | { type: "SET_STUDENT_SEARCH", payload: string }
-    | { type: "SET_CHOSEN_SUBJECT_TYPES", payload: Array<IItem> }
-    | { type: "SET_CHOSEN_STUDENTS", payload: Array<IItem> }
-    | { type: "REMOVE_DISCIPLINE", payload: string }
     | { type: "ADD_DISCIPLINE" }
+    | { type: "SET_BACKUP_TEACHER", payload: string }
+    | { type: "SET_CHOSEN_STUDENTS", payload: Array<IItem> }
+    | { type: "SET_CHOSEN_SUBJECT_TYPES", payload: Array<IItem> }
+    | { type: "SET_CLASS_TEACHER", payload: string }
+    | { type: "SET_CODE", payload: string }
+    | { type: "SET_DISCIPLINE_INPUT", payload: string }
+    | { type: "SET_GRADE", payload: string }
+    | { type: "SET_GROUP", payload: number }
+    | { type: "SET_GROUP_AMOUNT", payload: number }
+    | { type: "SET_GROUP_PATTERN", payload: IGroupPattern }
+    | { type: "SET_HAS_GROUPS", payload: boolean }
+    | { type: "SET_HAS_MULTIPLE", payload: boolean }
+    | { type: "SET_NOTE", payload: string }
+    | { type: "SET_ROOM", payload: string }
+    | { type: "SET_STUDENT_SEARCH", payload: string }
+    | { type: "SET_TEACHER", payload: string }
+    | { type: "REMOVE_DISCIPLINE", payload: string }
 ;
 
 
