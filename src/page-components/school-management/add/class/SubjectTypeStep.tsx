@@ -52,12 +52,11 @@ const dummyItems = [
 
 const SubjectTypeStep:FC<IAddClassStepProps> = (props) => {
     const { title, state, dispatch, ...rest } = props;
-    const [chosenItems, setChosenItems] = useState<Array<IItem>>([]);
     const [search, setSearch] = useState<string>("");
 
     return (
         <ProgressStep title={title + " - subject types"} isStretched={true} {...rest}>
-            <TransferList availableItems={dummyItems} chosenItems={chosenItems} setChosenItems={setChosenItems} search={search} setSearch={setSearch}/>
+            <TransferList availableItems={state.subjectTypeOptions} chosenItems={state.chosenSubjectTypes} setChosenItems={(value: Array<IItem>) => dispatch({type: "SET_CHOSEN_SUBJECT_TYPES", payload: value})} search={search} setSearch={setSearch}/>
         </ProgressStep>
     );
 }

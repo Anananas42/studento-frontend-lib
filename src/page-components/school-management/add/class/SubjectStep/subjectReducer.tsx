@@ -47,7 +47,8 @@ export interface IAddClassReducerState {
     backupTeacher: IItem | null;
     note: string;
     subjects: Array<ISubject>;
-    subjectTypes: Array<IItem>;
+    chosenSubjectTypes: Array<IItem>;
+    subjectTypeOptions: Array<IItem>;
     displayedSubject: number | null;
     discipline: string;
     groupPatterns: IGroupPatterns;
@@ -67,7 +68,8 @@ const initState:IAddClassReducerState = {
     backupTeacher: null,
     note: "",
     subjects: [],
-    subjectTypes: [],
+    chosenSubjectTypes: [],
+    subjectTypeOptions: [],
     displayedSubject: null,
     discipline: "",
     groupPatterns: {},
@@ -88,6 +90,7 @@ export type AddClassReducerActionType =
     | { type: "SET_GROUP", payload: number }
     | { type: "SET_TEACHER", payload: string }
     | { type: "SET_STUDENT_SEARCH", payload: string }
+    | { type: "SET_CHOSEN_SUBJECT_TYPES", payload: Array<IItem> }
     | { type: "SET_CHOSEN_STUDENTS", payload: Array<IItem> }
     | { type: "REMOVE_DISCIPLINE", payload: string }
     | { type: "ADD_DISCIPLINE" }
