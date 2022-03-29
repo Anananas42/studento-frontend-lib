@@ -41,27 +41,27 @@ interface ISubject {
 };
 
 export interface IAddClassReducerState {
-    grade: string;
-    code: string;
-    room: string;
-    roomOptions: IOptions;
-    classTeacher: string;
     backupTeacher: string;
-    classTeacherOptions: IOptions;
     backupTeacherOptions: IOptions;
-    note: string;
-    subjects: Array<ISubject>;
     chosenSubjectTypes: Array<IItem>;
-    subjectTypeOptions: Array<IItem>;
+    classStudents: Array<IItem>;
+    classTeacher: string;
+    classTeacherOptions: IOptions;
+    code: string;
     displayedSubject: number | null;
     discipline: string;
+    disciplineInput: string;
+    grade: string;
     groupPatterns: IGroupPatterns;
     groupPatternOptions: IGroupPatternOptions;
     group: number;
-    classStudents: Array<IItem>;
+    note: string;
+    room: string;
+    roomOptions: IOptions;
     studentOptions: Array<IItem>;
     studentSearch: string;
-    disciplineInput: string;
+    subjects: Array<ISubject>;
+    subjectTypeOptions: Array<IItem>;
 };
 
 const dummySubjectTypes = [
@@ -254,27 +254,27 @@ const dummyRoomOptions = {
 }
 
 const initState:IAddClassReducerState = {
-    grade: "",
-    code: "",
-    room: "",
-    roomOptions: dummyRoomOptions,
-    classTeacher: "",
     backupTeacher: "",
-    classTeacherOptions: dummyTeacherOptions,
-    backupTeacherOptions: dummyTeacherOptions,
-    note: "",
-    subjects: [],
+    backupTeacherOptions: {},
     chosenSubjectTypes: [],
-    subjectTypeOptions: dummySubjectTypes,
+    classStudents: [],
+    classTeacher: "",
+    classTeacherOptions: {},
+    code: "",
     displayedSubject: null,
     discipline: "",
+    disciplineInput: "",
+    grade: "",
     groupPatterns: {},
     groupPatternOptions: {},
     group: 0,
-    classStudents: [],
-    studentOptions: dummyStudentOptions,
+    note: "",
+    room: "",
+    roomOptions: {},
+    studentOptions: [],
     studentSearch: "",
-    disciplineInput: "",
+    subjects: [],
+    subjectTypeOptions: [],
 };
 
 export type AddClassReducerActionType =
@@ -282,6 +282,8 @@ export type AddClassReducerActionType =
     | { type: "ENTER_STUDENTS_STEP" }
     | { type: "ENTER_SUBJECT_TYPES_STEP" }
     | { type: "ENTER_SUBJECTS_STEP" }
+    | { type: "GOTO_NEXT" }
+    | { type: "GOTO_PREV" }
     | { type: "SET_BACKUP_TEACHER", payload: string }
     | { type: "SET_CHOSEN_STUDENTS", payload: Array<IItem> }
     | { type: "SET_CHOSEN_SUBJECT_TYPES", payload: Array<IItem> }
@@ -354,6 +356,24 @@ const addClassReducer = (state: IAddClassReducerState, action: AddClassReducerAc
             {
                 const updatedSubjects = initSubjects(state.subjects, state.chosenSubjectTypes);
                 return {...state, subjects: updatedSubjects, displayedSubject: updatedSubjects.length > 0 ? 0 : null};
+            }
+        case "GOTO_NEXT":
+            {
+            if (state.displayedSubject !== 0 && !state.displayedSubject) return {...state };
+            const subj = state.subjects[state.displayedSubject];
+            const discId = subj.disciplines.indexOf(state.discipline);
+            if (subj.disciplines.length !== 0 && discId === subj.disciplines.length - 1) return {...state, displayedSubject: state.displayedSubject + 1, discipline: ""};
+
+            return {...state, discipline: subj.disciplines[discId + 1]};
+            }
+        case "GOTO_PREV":
+            {
+            if (state.displayedSubject !== 0 && !state.displayedSubject) return {...state };
+            const subj = state.subjects[state.displayedSubject];
+            const discId = subj.disciplines.indexOf(state.discipline);
+            if (subj.disciplines.length !== 0 && discId === 0) return {...state, displayedSubject: state.displayedSubject - 1, discipline: ""};
+
+            return {...state, discipline: subj.disciplines[discId - 1]};
             }
         case "SET_BACKUP_TEACHER":
             return {...state, backupTeacher: action.payload};

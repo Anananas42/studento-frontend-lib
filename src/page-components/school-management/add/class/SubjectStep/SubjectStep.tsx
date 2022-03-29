@@ -86,10 +86,10 @@ const SubjectStep:FC<IAddClassStepProps> = (props) => {
         <ProgressStep title={title + " - subjects"} {...rest}>
             <StyledSubjectStep>
                 <StyledSubjectList {...styleProps}>
-                    {state.subjects.map(s => {
+                    {state.subjects.map((s, id) => {
                         return (
                         <React.Fragment key={s.code}>
-                            <StyledSubjectRow {...styleProps} className={""}>
+                            <StyledSubjectRow {...styleProps} className={state.displayedSubject === id ? "current" : ""}>
                                 {s.title}
                             </StyledSubjectRow>
                             {s.disciplines.map(d => {
