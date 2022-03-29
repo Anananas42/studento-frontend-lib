@@ -94,7 +94,7 @@ const SubjectStep:FC<IAddClassStepProps> = (props) => {
                             </StyledSubjectRow>
                             {s.disciplines.map(d => {
                                 return (
-                                <StyledDisciplineRow key={d} {...styleProps}>
+                                <StyledDisciplineRow key={d} {...styleProps} className={state.displayedSubject === id && state.discipline === d ? "current" : ""}>
                                     {d}
                                 </StyledDisciplineRow>
                                 )
