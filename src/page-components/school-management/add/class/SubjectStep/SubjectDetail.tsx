@@ -206,7 +206,7 @@ const SubjectDetail:FC<IProps> = (props) => {
                 <>
                     <StyledDisciplineList {...styleProps}>
                         <div className={"add-row"}>
-                            <TextFormBase label={"New discipline"} value={state.discipline} setValue={(value: string) => dispatch({type: "SET_DISCIPLINE_INPUT", payload: value})} placeholder={""} onKeyDown={(e) => addDiscipline(e)}/>
+                            <TextFormBase label={"New discipline"} value={state.disciplineInput} setValue={(value: string) => dispatch({type: "SET_DISCIPLINE_INPUT", payload: value})} placeholder={""} onKeyDown={(e) => addDiscipline(e)}/>
                             <BtnSecondaryS onClick={() => addDiscipline()} icon={"add"}></BtnSecondaryS>
                         </div>
                         <div className={"disciplines"}>
