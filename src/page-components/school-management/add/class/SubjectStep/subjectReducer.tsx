@@ -108,29 +108,70 @@ export type AddClassReducerActionType =
     | { type: "REMOVE_DISCIPLINE", payload: string }
 ;
 
+const updateSubject = (subjects: Array<ISubject>, displayedSubject: number | null, key: string, value: any) => {
+    if (!displayedSubject) return subjects;
+    const subj = subjects[displayedSubject];
+    const subjectsUpdated = [...subjects.slice(0, displayedSubject), {...subj, [key]: value}, ...subjects.slice(displayedSubject + 1)];
+    return subjectsUpdated;
+}
 
 const addClassReducer = (state: IAddClassReducerState, action: AddClassReducerActionType) => {
-
     switch (action.type) {
-        case "ADD_DISCIPLINE": {
-            if (!state.displayedSubject) return {...state };
-            const subj = state.subjects[state.displayedSubject];
-            if (!state.disciplineInput || subj.disciplines.includes(state.disciplineInput)) return {...state };
-            const subjectsUpdated = [...state.subjects.slice(0, state.displayedSubject), {...subj, disciplines: [...subj.disciplines, state.disciplineInput]}];
-            return {...state, subjects: subjectsUpdated};
-        }
+        case "ADD_DISCIPLINE": 
+            {
+                if (!state.displayedSubject) return {...state };
+                const subj = state.subjects[state.displayedSubject];
+                if (!state.disciplineInput || subj.disciplines.includes(state.disciplineInput)) return {...state };
+                const subjectsUpdated = [...state.subjects.slice(0, state.displayedSubject), {...subj, disciplines: [...subj.disciplines, state.disciplineInput]}];
+                return {...state, subjects: subjectsUpdated};
+            }
+        case "SET_BACKUP_TEACHER":
+            return {...state, backupTeacher: action.payload};
+        case "SET_CHOSEN_STUDENTS":
+            return {...state, chosenStudents: action.payload};
+        case "SET_CHOSEN_SUBJECT_TYPES":
+            return {...state, chosenSubjectTypes: action.payload};
+        case "SET_CLASS_TEACHER":
+            return {...state, classTeacher: action.payload};
+        case "SET_CODE":
+            return {...state, code: action.payload};
+        case "SET_DISCIPLINE_INPUT":
+            return {...state, disciplineInput: action.payload};
+        case "SET_GRADE":
+            return {...state, grade: action.payload};
+        case "SET_GROUP":
+            return {...state, group: action.payload};
+        case "SET_GROUP_AMOUNT":
+            {
+                const subjectsUpdated = updateSubject(state.subjects, state.displayedSubject, "groupAmount", action.payload);
+                return {...state, subjects: subjectsUpdated};
+            }
+        case "SET_GROUP_PATTERN":
+            {
+                const subjectsUpdated = updateSubject(state.subjects, state.displayedSubject, "groupPattern", action.payload);
+                return {...state, subjects: subjectsUpdated};
+            }
+        case "SET_HAS_GROUPS":
+            return {...state, hasGroups: action.payload};
+        case "SET_HAS_MULTIPLE":
+            return {...state, hasMultiple: action.payload};
+        case "SET_NOTE":
+            return {...state, note: action.payload};
+        case "SET_ROOM":
+            return {...state, room: action.payload};
+        case "SET_STUDENT_SEARCH":
+            return {...state, studentSearch: action.payload};
+        case "SET_TEACHER":
+            {
+                const subjectsUpdated = updateSubject(state.subjects, state.displayedSubject, "teacher", action.payload);
+                return {...state, subjects: subjectsUpdated};
+            }
         case "REMOVE_DISCIPLINE": {
             if (!state.displayedSubject) return {...state };
             const subj = state.subjects[state.displayedSubject];
             const subjectsUpdated = [...state.subjects.slice(0, state.displayedSubject), {...subj, disciplines: subj.disciplines.filter(d => d !== action.payload)}, ...state.subjects.slice(state.displayedSubject + 1)];
             return {...state, subjects: subjectsUpdated};
         }
-        case "SET_DISCIPLINE_INPUT":
-            return {...state, disciplineInput: action.payload};
-        case "SET_HAS_GROUPS":
-            return {...state, hasGroups: action.payload};
-        case "SET_HAS_MULTIPLE":
-            return {...state, hasMultiple: action.payload};
         default: 
             return {...state};
     }
