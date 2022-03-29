@@ -7,7 +7,7 @@ import DropdownGroupedSearchFormBase from "../../../../../component-library/form
 import { borderRadius, useThemeContext } from "../../../../../component-library/ThemeProvider";
 import { IconS } from "../../../../../component-library/utilities/Icon";
 import TransferList, { IItem } from "../../../../../template-library/TransferList";
-import { IAddClassReducerState, AddClassReducerActionType } from "./subjectReducer";
+import { IAddClassReducerState, AddClassReducerActionType } from "../addClassReducer";
 
 interface IStyleProps {
     fill: string;
@@ -152,7 +152,7 @@ const SubjectDetail:FC<IProps> = (props) => {
     const { state, dispatch } = props;
     const { colors } = useThemeContext();
 
-    if (!state.displayedSubject) return <></>;
+    if (state.displayedSubject !== 0 && !state.displayedSubject) return <></>;
 
     const subject = state.subjects[state.displayedSubject];
     const { hasMultiple, hasGroups } = subject;
@@ -198,7 +198,7 @@ const SubjectDetail:FC<IProps> = (props) => {
                         <DropdownFormBase value={`${subject.groupAmount}`} setValue={(value: string) => dispatch({type: "SET_GROUP_AMOUNT", payload: parseInt(value)})} label={"# Groups"} options={{1: "1", 2: "2", 3: "3", 4: "4"}} />
                         {subject.groupAmount > 1 && <SingleChoiceFormBase value={`${state.group}`} setValue={(value: string) => dispatch({type: "SET_GROUP", payload: parseInt(value)})} label={"Group"} options={Object.fromEntries(Array.from(Array(subject.groupAmount), (e, i) => [i+1, `${i+1}`]))}/>}
                     </StyledGroupListHeader>   
-                    <TransferList availableItems={state.studentOptions} chosenItems={subject.chosenStudents[state.group]} setChosenItems={(value: Array<IItem>) => dispatch({ type: "SET_CHOSEN_STUDENTS", payload: value })}
+                    <TransferList availableItems={state.classStudents} chosenItems={subject.chosenStudents[state.group] ? subject.chosenStudents[state.group] : []} setChosenItems={(value: Array<IItem>) => dispatch({ type: "SET_CHOSEN_STUDENTS", payload: value })}
                      search={state.studentSearch} setSearch={(value: string) => dispatch({type: "SET_STUDENT_SEARCH", payload: value})} height={"100%"}/>
                 </>
             }

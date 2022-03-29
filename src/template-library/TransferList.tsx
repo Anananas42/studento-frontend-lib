@@ -120,6 +120,10 @@ export const StyledItem = styled.div<IStyleProps>`
         margin-top: 8px;
     }
 
+    &:last-child {
+        margin-bottom: 8px;
+    }
+
     :hover {
         background-color: ${TextColors.Hover.bg};
 

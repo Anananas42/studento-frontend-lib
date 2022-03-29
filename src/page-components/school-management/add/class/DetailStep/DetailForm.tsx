@@ -1,7 +1,7 @@
-import { FC, useState } from "react";
+import { FC } from "react";
 import styled from "styled-components";
 import { DropdownFormBase, DropdownSearchFormBase, TextAreaFormBase, TextFormBase } from "../../../../../component-library/forms/base-components";
-import { AddClassReducerActionType, IAddClassReducerState } from "../SubjectStep/subjectReducer";
+import { AddClassReducerActionType, IAddClassReducerState } from "../addClassReducer";
 
 const StyledDetailForm = styled.div`
     width: 480px;
@@ -18,12 +18,6 @@ interface IProps {
     dispatch: React.Dispatch<AddClassReducerActionType>;
 }
 
-const teacherOptions = {
-    randomGuy1: "Alfred Nobel",
-    randomGuy2: "Diogenes",
-    randomGuy3: "Mike Ehrmentraut",
-}
-
 const yearOptions = {
     1: "1",
     2: "2",
@@ -37,12 +31,6 @@ const yearOptions = {
     10: "10",
     11: "11",
     12: "12",
-}
-
-const roomOptions = {
-    1: "420",
-    2: "69",
-    3: "3141",
 }
 
 const DetailForm:FC<IProps> = (props) => {

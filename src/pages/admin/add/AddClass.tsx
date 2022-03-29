@@ -2,7 +2,7 @@ import { FC, useState } from "react";
 import styled from "styled-components";
 import DetailStep from "../../../page-components/school-management/add/class/DetailStep/DetailStep";
 import StudentStep from "../../../page-components/school-management/add/class/StudentStep";
-import useAddClassReducer, { AddClassReducerActionType, IAddClassReducerState } from "../../../page-components/school-management/add/class/SubjectStep/subjectReducer";
+import useAddClassReducer, { AddClassReducerActionType, IAddClassReducerState } from "../../../page-components/school-management/add/class/addClassReducer";
 import SubjectStep from "../../../page-components/school-management/add/class/SubjectStep/SubjectStep";
 import SubjectTypeStep from "../../../page-components/school-management/add/class/SubjectTypeStep";
 import ProgressLine from "../../../template-library/ProgressLine";
