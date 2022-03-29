@@ -1,4 +1,4 @@
-import { FC, SetStateAction } from "react";
+import { FC, useState } from "react";
 import styled from "styled-components";
 import TextColors from "../../../../../component-library/buttons/colors/TextColors";
 import { BtnPrimaryS, BtnSecondaryS, BtnTertiaryS } from "../../../../../component-library/buttons/components";
@@ -150,8 +150,12 @@ interface IProps {
 
 const SubjectDetail:FC<IProps> = (props) => {
     const { state, dispatch } = props;
-    const { hasMultiple, hasGroups } = state;
+    const subject = state.subject;
     const { colors } = useThemeContext();
+    
+    if (!subject) return <></>;
+
+    const { hasMultiple, hasGroups } = subject;
 
     const styleProps = { fill: colors.fill, fillDisabled: colors.fillDisabled, currentBg: colors.primary, completeBg: colors.System.Success.light, skipBg: colors.fillDisabled,
         borderRadius, hasMultiple, hasGroups };
@@ -159,7 +163,7 @@ const SubjectDetail:FC<IProps> = (props) => {
     const addDiscipline = (e?: React.KeyboardEvent<any>) => {
         if (e !== undefined && e.key !== 'Enter') return;
 
-        if (!state.disciplines.includes(state.discipline)) dispatch({type: "ADD_DISCIPLINE" });
+        if (!subject.disciplines.includes(state.discipline)) dispatch({type: "ADD_DISCIPLINE" });
     }
 
     const setGroupPattern = (pattern: string) => {
@@ -169,7 +173,7 @@ const SubjectDetail:FC<IProps> = (props) => {
     return (
         <StyledSubjectDetail {...styleProps}>
             <StyledSubjectTitle {...styleProps}>
-                {state.subjectTitle}
+                {subject.title}
                 <StyledSubjectButtons>
                     <BtnTertiaryS onClick={() => 0} icon={"arrow_backward"}>Previous subject</BtnTertiaryS>
                     <BtnPrimaryS onClick={() => 0} icon={"arrow_forward"} isAfter={true}>Next subject</BtnPrimaryS>
@@ -178,35 +182,35 @@ const SubjectDetail:FC<IProps> = (props) => {
                 
                 <StyledSubjectForms {...styleProps}>
                     <div>
-                        <ToggleRow value={state.hasMultiple} setValue={(value: boolean) => dispatch({type: "SET_HAS_MULTIPLE", payload: value})} label={"Has multiple disciplines"}/>
+                        <ToggleRow value={subject.hasMultiple} setValue={(value: boolean) => dispatch({type: "SET_HAS_MULTIPLE", payload: value})} label={"Has multiple disciplines"}/>
                         {!hasMultiple && <ToggleRow value={hasGroups} setValue={(value: boolean) => dispatch({type: "SET_HAS_GROUPS", payload: value})} label={"Has groups"} isDisabled={hasMultiple}/>}
                     </div>
                     {!hasMultiple &&
                         <div>
-                            <DropdownSearchFormBase value={state.teacher} setValue={(value: string) => dispatch({type: "SET_TEACHER", payload: value})} label={"Teacher"} options={state.teacherOptions} />
+                            <DropdownSearchFormBase value={`${subject.teacher}`} setValue={(value: string) => dispatch({type: "SET_TEACHER", payload: value})} label={"Teacher"} options={subject.teachers} />
                         </div>
                     }
                 </StyledSubjectForms>
             {!hasMultiple && hasGroups &&
                 <>
                     <StyledGroupListHeader {...styleProps}>
-                        <DropdownGroupedSearchFormBase value={state.groupPattern ? state.groupPattern.title : ""} setValue={setGroupPattern} label={"Group Pattern"} optionGroups={state.groupPatternOptions} isOptional={true}/>
-                        <DropdownFormBase value={`${state.groupAmount}`} setValue={(value: string) => dispatch({type: "SET_GROUP_AMOUNT", payload: parseInt(value)})} label={"# Groups"} options={{1: "1", 2: "2", 3: "3", 4: "4"}} />
-                        {state.groupAmount > 1 && <SingleChoiceFormBase value={`${state.group}`} setValue={(value: string) => dispatch({type: "SET_GROUP", payload: parseInt(value)})} label={"Group"} options={Object.fromEntries(Array.from(Array(state.groupAmount), (e, i) => [i+1, `${i+1}`]))}/>}
+                        <DropdownGroupedSearchFormBase value={subject.groupPattern ? subject.groupPattern.title : ""} setValue={setGroupPattern} label={"Group Pattern"} optionGroups={state.groupPatternOptions} isOptional={true}/>
+                        <DropdownFormBase value={`${subject.groupAmount}`} setValue={(value: string) => dispatch({type: "SET_GROUP_AMOUNT", payload: parseInt(value)})} label={"# Groups"} options={{1: "1", 2: "2", 3: "3", 4: "4"}} />
+                        {subject.groupAmount > 1 && <SingleChoiceFormBase value={`${state.group}`} setValue={(value: string) => dispatch({type: "SET_GROUP", payload: parseInt(value)})} label={"Group"} options={Object.fromEntries(Array.from(Array(subject.groupAmount), (e, i) => [i+1, `${i+1}`]))}/>}
                     </StyledGroupListHeader>   
-                    <TransferList availableItems={state.itemOptions} chosenItems={state.chosenItems} setChosenItems={(value: Array<IItem>) => dispatch({ type: "SET_CHOSEN_ITEMS", payload: value })}
-                     search={state.itemSearch} setSearch={(value: string) => dispatch({type: "SET_ITEM_SEARCH", payload: value})} height={"100%"}/>
+                    <TransferList availableItems={state.studentOptions} chosenItems={subject.chosenStudents[state.group]} setChosenItems={(value: Array<IItem>) => dispatch({ type: "SET_CHOSEN_STUDENTS", payload: value })}
+                     search={state.studentSearch} setSearch={(value: string) => dispatch({type: "SET_STUDENT_SEARCH", payload: value})} height={"100%"}/>
                 </>
             }
             {hasMultiple &&
                 <>
                     <StyledDisciplineList {...styleProps}>
                         <div className={"add-row"}>
-                            <TextFormBase label={"New discipline"} value={state.discipline} setValue={(value: string) => dispatch({type: "SET_DISCIPLINE", payload: value})} placeholder={""} onKeyDown={(e) => addDiscipline(e)}/>
+                            <TextFormBase label={"New discipline"} value={state.discipline} setValue={(value: string) => dispatch({type: "SET_DISCIPLINE_INPUT", payload: value})} placeholder={""} onKeyDown={(e) => addDiscipline(e)}/>
                             <BtnSecondaryS onClick={() => addDiscipline()} icon={"add"}></BtnSecondaryS>
                         </div>
                         <div className={"disciplines"}>
-                            {state.disciplines.map(d => {
+                            {subject.disciplines.map(d => {
                                 return (
                                     <StyledDiscipline {...styleProps} key={d} onClick={() => dispatch({type: "REMOVE_DISCIPLINE", payload: d})}>
                                         <span>{d}</span>

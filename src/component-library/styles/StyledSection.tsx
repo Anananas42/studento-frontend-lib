@@ -18,6 +18,7 @@ const StyledSectionComponent = styled.div<IStyleProps>`
     align-items: center;
     width: fit-content;
     min-height: ${props => props.isStretched ? "max(100%, 300px)" : "fit-content"};
+    max-height: max(100%, 300px);
 `;
 
 interface ISectionProps {

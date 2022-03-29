@@ -1,12 +1,8 @@
-import React, { FC, useState } from "react";
+import React, { FC } from "react";
 import styled from "styled-components";
-import { BtnPrimaryS, BtnSecondaryS, BtnTertiaryS } from "../../../../../component-library/buttons/components";
-import { DropdownFormBase, DropdownSearchFormBase, SingleChoiceFormBase, TextFormBase, ToggleRow } from "../../../../../component-library/forms/base-components";
-import DropdownGroupedSearchFormBase from "../../../../../component-library/forms/base-components/dropdowns/DropdownGroupedSearchFormBase";
 import { borderRadius, useThemeContext } from "../../../../../component-library/ThemeProvider";
-import { IconS } from "../../../../../component-library/utilities/Icon";
 import ProgressStep, { IProgressStepProps } from "../../../../../template-library/ProgressStep";
-import TransferList, { IItem } from "../../../../../template-library/TransferList";
+import { IItem } from "../../../../../template-library/TransferList";
 import SubjectDetail from "./SubjectDetail";
 import useSubjectStepReducer from "./subjectReducer";
 
@@ -30,7 +26,7 @@ const StyledSubjectStep = styled.div`
 const StyledSubjectList = styled.div<IStyleProps>`
     display: flex;
     flex-direction: column;
-    min-height: 100%;
+    min-height: 200px;
     width: 36ch;
     margin-top: 1px;
 
@@ -62,7 +58,7 @@ const StyledSubjectRow = styled.div<IStyleProps>`
     color: ${props => props.fill};
     border: 1px solid ${props => props.fill};
     padding: 8px;
-
+    cursor: pointer;
 `;
 
 const StyledDisciplineRow = styled.div<IStyleProps>`
@@ -72,6 +68,7 @@ const StyledDisciplineRow = styled.div<IStyleProps>`
     width: calc(100% - 3ch);
     padding: 8px;
     align-self: flex-end;
+    cursor: pointer;
 `;
 
 const dummySubjectTypes = [
@@ -117,21 +114,26 @@ const SubjectStep:FC<ISubjectStepProps> = (props) => {
     const { colors } = useThemeContext();
 
     const [state, dispatch] = useSubjectStepReducer();
+    const subject = state.subject;
+
+    if (!subject) return <>Loading...</>;
+
+    const { hasMultiple, hasGroups } = subject;
 
     const styleProps = { fill: colors.fill, fillDisabled: colors.fillDisabled, currentBg: colors.primary, completeBg: colors.System.Success.light, skipBg: colors.fillDisabled,
-         borderRadius, hasMultiple: state.hasMultiple, hasGroups: state.hasGroups };
+         borderRadius, hasMultiple, hasGroups };
 
     return (
         <ProgressStep title={title + " - subjects"} {...rest}>
             <StyledSubjectStep>
                 <StyledSubjectList {...styleProps}>
-                    {dummySubjectTypes.map(s => {
+                    {state.subjects.map(s => {
                         return (
-                        <React.Fragment key={s}>
+                        <React.Fragment key={s.code}>
                             <StyledSubjectRow {...styleProps} className={""}>
-                                {s}
+                                {s.title}
                             </StyledSubjectRow>
-                            {state.disciplines.map(d => {
+                            {s.disciplines.map(d => {
                                 return (
                                 <StyledDisciplineRow key={d} {...styleProps}>
                                     {d}
