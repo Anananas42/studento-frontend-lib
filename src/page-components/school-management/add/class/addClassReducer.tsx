@@ -339,7 +339,7 @@ const addClassReducer = (state: IAddClassReducerState, action: AddClassReducerAc
                 if (state.displayedSubject !== 0 && !state.displayedSubject) return {...state };
                 const subj = state.subjects[state.displayedSubject];
                 if (!state.disciplineInput || subj.disciplines.includes(state.disciplineInput)) return {...state };
-                const subjectsUpdated = [...state.subjects.slice(0, state.displayedSubject), {...subj, disciplines: [...subj.disciplines, state.disciplineInput]}];
+                const subjectsUpdated = [...state.subjects.slice(0, state.displayedSubject), {...subj, disciplines: [...subj.disciplines, state.disciplineInput]}, ...state.subjects.slice(state.displayedSubject + 1)];
                 return {...state, subjects: subjectsUpdated, disciplineInput: ""};
             }
         case "ENTER_STUDENTS_STEP":
