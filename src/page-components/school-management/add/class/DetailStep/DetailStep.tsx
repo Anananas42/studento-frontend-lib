@@ -1,8 +1,9 @@
 import { FC } from "react";
-import ProgressStep, { IProgressStepProps } from "../../../../../template-library/ProgressStep";
+import { IAddClassStepProps } from "../../../../../pages/admin/add/AddClass";
+import ProgressStep from "../../../../../template-library/ProgressStep";
 import DetailForm from "./DetailForm";
 
-const DetailStep:FC<IProgressStepProps> = (props) => {
+const DetailStep:FC<IAddClassStepProps> = (props) => {
     const { title, ...rest } = props;
 
     return (

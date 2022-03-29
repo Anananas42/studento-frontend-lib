@@ -1,10 +1,9 @@
 import React, { FC } from "react";
 import styled from "styled-components";
 import { borderRadius, useThemeContext } from "../../../../../component-library/ThemeProvider";
-import ProgressStep, { IProgressStepProps } from "../../../../../template-library/ProgressStep";
-import { IItem } from "../../../../../template-library/TransferList";
+import { IAddClassStepProps } from "../../../../../pages/admin/add/AddClass";
+import ProgressStep from "../../../../../template-library/ProgressStep";
 import SubjectDetail from "./SubjectDetail";
-import useSubjectStepReducer from "./subjectReducer";
 
 interface IStyleProps {
     fill: string;
@@ -71,53 +70,13 @@ const StyledDisciplineRow = styled.div<IStyleProps>`
     cursor: pointer;
 `;
 
-const dummySubjectTypes = [
-    "Mathematics",
-    "Czech Language",
-    "French Language",
-    "Physics",
-]
-
-const dummyItems = [
-    {id: 5, name: "xd"},
-]
-
-const dummyTeachers = {
-    123: "Jan Amos Komensky"
-};
-
-const dummyOptionGroups = {
-    Cz: {
-        title: "Czech Language",
-        options: {
-            lit: "Cz - Literature",
-            gram: "Cz - Grammar",
-        }
-    },
-    Fr: {
-        title: "French Language",
-        options: {
-            lit: "Fr - Literature",
-            gram: "Fr - Grammar",
-            spch: "Fr - Speech",
-        }
-    }
-
-};
-
-interface ISubjectStepProps extends IProgressStepProps {
-    subjectTypes: Array<IItem>;
-}
-
-const SubjectStep:FC<ISubjectStepProps> = (props) => {
-    const { title, subjectTypes, ...rest } = props;
+const SubjectStep:FC<IAddClassStepProps> = (props) => {
+    const { title, state, dispatch, ...rest } = props;
     const { colors } = useThemeContext();
 
-    const [state, dispatch] = useSubjectStepReducer();
-    const subject = state.subject;
+    if (!state.displayedSubject) return <ProgressStep {...{...props, title: `${props.title} - subjects`}}>No subject types added.</ProgressStep>;
 
-    if (!subject) return <>Loading...</>;
-
+    const subject = state.subjects[state.displayedSubject];
     const { hasMultiple, hasGroups } = subject;
 
     const styleProps = { fill: colors.fill, fillDisabled: colors.fillDisabled, currentBg: colors.primary, completeBg: colors.System.Success.light, skipBg: colors.fillDisabled,

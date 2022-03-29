@@ -39,33 +39,47 @@ interface ISubject {
     chosenStudents: Array<Array<IItem>>; // Students in each group - (index + 1) indicates group number
 };
 
-export interface ISubjectReducerState {
+export interface IAddClassReducerState {
+    grade: string;
+    code: string;
+    room: IItem | null;
+    classTeacher: IItem | null;
+    backupTeacher: IItem | null;
+    note: string;
     subjects: Array<ISubject>;
-    subject: ISubject | null;
+    subjectTypes: Array<IItem>;
+    displayedSubject: number | null;
     discipline: string;
     groupPatterns: IGroupPatterns;
     groupPatternOptions: IGroupPatternOptions;
     group: number;
+    classStudents: Array<IItem>;
     studentOptions: Array<IItem>;
     studentSearch: string;
     disciplineInput: string;
-    isFetching: boolean;
 };
 
-const initState:ISubjectReducerState = {
+const initState:IAddClassReducerState = {
+    grade: "",
+    code: "",
+    room: null,
+    classTeacher: null,
+    backupTeacher: null,
+    note: "",
     subjects: [],
-    subject: null,
+    subjectTypes: [],
+    displayedSubject: null,
     discipline: "",
     groupPatterns: {},
     groupPatternOptions: {},
     group: 0,
+    classStudents: [],
     studentOptions: [],
     studentSearch: "",
     disciplineInput: "",
-    isFetching: true,
 };
 
-export type SubjectReducerActionType =
+export type AddClassReducerActionType =
     | { type: "SET_HAS_MULTIPLE", payload: boolean }
     | { type: "SET_HAS_GROUPS", payload: boolean }
     | { type: "SET_DISCIPLINE_INPUT", payload: string }
@@ -80,12 +94,22 @@ export type SubjectReducerActionType =
 ;
 
 
-const subjectStepReducer = (state: ISubjectReducerState, action: SubjectReducerActionType) => {
+const addClassReducer = (state: IAddClassReducerState, action: AddClassReducerActionType) => {
+
     switch (action.type) {
-        case "ADD_DISCIPLINE":
-            return {...state};
-        case "REMOVE_DISCIPLINE":
-            return {...state};
+        case "ADD_DISCIPLINE": {
+            if (!state.displayedSubject) return {...state };
+            const subj = state.subjects[state.displayedSubject];
+            if (!state.disciplineInput || subj.disciplines.includes(state.disciplineInput)) return {...state };
+            const subjectsUpdated = [...state.subjects.slice(0, state.displayedSubject), {...subj, disciplines: [...subj.disciplines, state.disciplineInput]}];
+            return {...state, subjects: subjectsUpdated};
+        }
+        case "REMOVE_DISCIPLINE": {
+            if (!state.displayedSubject) return {...state };
+            const subj = state.subjects[state.displayedSubject];
+            const subjectsUpdated = [...state.subjects.slice(0, state.displayedSubject), {...subj, disciplines: subj.disciplines.filter(d => d !== action.payload)}, ...state.subjects.slice(state.displayedSubject + 1)];
+            return {...state, subjects: subjectsUpdated};
+        }
         case "SET_DISCIPLINE_INPUT":
             return {...state, disciplineInput: action.payload};
         case "SET_HAS_GROUPS":
@@ -97,8 +121,8 @@ const subjectStepReducer = (state: ISubjectReducerState, action: SubjectReducerA
     }
 }
 
-const useSubjectStepReducer = () => {
-    return useReducer(subjectStepReducer, initState);
+const useAddClassReducer = () => {
+    return useReducer(addClassReducer, initState);
 }
 
-export default useSubjectStepReducer;
+export default useAddClassReducer;

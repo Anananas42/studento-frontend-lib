@@ -1,5 +1,6 @@
 import { FC, useState } from "react";
-import ProgressStep, { IProgressStepProps } from "../../../../template-library/ProgressStep";
+import { IAddClassStepProps } from "../../../../pages/admin/add/AddClass";
+import ProgressStep from "../../../../template-library/ProgressStep";
 import TransferList, { IItem } from "../../../../template-library/TransferList";
 
 const dummyItems = [
@@ -121,7 +122,7 @@ const dummyItems = [
     },
 ];
 
-const StudentStep:FC<IProgressStepProps> = (props) => {
+const StudentStep:FC<IAddClassStepProps> = (props) => {
     const { title, ...rest } = props;
     const [chosenItems, setChosenItems] = useState<Array<IItem>>([]);
     const [search, setSearch] = useState<string>("");

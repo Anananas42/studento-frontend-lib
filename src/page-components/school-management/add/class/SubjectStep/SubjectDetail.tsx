@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC } from "react";
 import styled from "styled-components";
 import TextColors from "../../../../../component-library/buttons/colors/TextColors";
 import { BtnPrimaryS, BtnSecondaryS, BtnTertiaryS } from "../../../../../component-library/buttons/components";
@@ -7,7 +7,7 @@ import DropdownGroupedSearchFormBase from "../../../../../component-library/form
 import { borderRadius, useThemeContext } from "../../../../../component-library/ThemeProvider";
 import { IconS } from "../../../../../component-library/utilities/Icon";
 import TransferList, { IItem } from "../../../../../template-library/TransferList";
-import { ISubjectReducerState, SubjectReducerActionType } from "./subjectReducer";
+import { IAddClassReducerState, AddClassReducerActionType } from "./subjectReducer";
 
 interface IStyleProps {
     fill: string;
@@ -144,17 +144,17 @@ const StyledDiscipline = styled.div<IStyleProps>`
 `;
 
 interface IProps {
-    state: ISubjectReducerState;
-    dispatch: React.Dispatch<SubjectReducerActionType>;
+    state: IAddClassReducerState;
+    dispatch: React.Dispatch<AddClassReducerActionType>;
 }
 
 const SubjectDetail:FC<IProps> = (props) => {
     const { state, dispatch } = props;
-    const subject = state.subject;
     const { colors } = useThemeContext();
-    
-    if (!subject) return <></>;
 
+    if (!state.displayedSubject) return <></>;
+
+    const subject = state.subjects[state.displayedSubject];
     const { hasMultiple, hasGroups } = subject;
 
     const styleProps = { fill: colors.fill, fillDisabled: colors.fillDisabled, currentBg: colors.primary, completeBg: colors.System.Success.light, skipBg: colors.fillDisabled,
