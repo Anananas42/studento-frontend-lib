@@ -173,7 +173,7 @@ const SubjectDetail:FC<IProps> = (props) => {
     return (
         <StyledSubjectDetail {...styleProps}>
             <StyledSubjectTitle {...styleProps}>
-                {subject.title}
+                {state.discipline ? `${subject.code} - ${state.discipline}` : subject.title}
                 <StyledSubjectButtons>
                     {(state.displayedSubject > 0 || state.discipline) &&
                      <BtnTertiaryS onClick={() => dispatch({type: "GOTO_PREV"})} icon={"arrow_backward"}>Previous subject</BtnTertiaryS>}
@@ -184,16 +184,16 @@ const SubjectDetail:FC<IProps> = (props) => {
                 
                 <StyledSubjectForms {...styleProps}>
                     <div>
-                        <ToggleRow value={subject.hasMultiple} setValue={(value: boolean) => dispatch({type: "SET_HAS_MULTIPLE", payload: value})} label={"Has multiple disciplines"}/>
-                        {!hasMultiple && <ToggleRow value={hasGroups} setValue={(value: boolean) => dispatch({type: "SET_HAS_GROUPS", payload: value})} label={"Has groups"} isDisabled={hasMultiple}/>}
+                        {!state.discipline && <ToggleRow value={subject.hasMultiple} setValue={(value: boolean) => dispatch({type: "SET_HAS_MULTIPLE", payload: value})} label={"Has multiple disciplines"}/>}
+                        {(state.discipline || !hasMultiple) && <ToggleRow value={state.discipline ? Boolean(subject.disciplinesHasGroups[state.discipline]) : hasGroups} setValue={(value: boolean) => dispatch({type: "SET_HAS_GROUPS", payload: value})} label={"Has groups"} />}
                     </div>
-                    {!hasMultiple &&
+                    {(state.discipline || !hasMultiple) &&
                         <div>
                             <DropdownSearchFormBase value={`${subject.teacher}`} setValue={(value: string) => dispatch({type: "SET_TEACHER", payload: value})} label={"Teacher"} options={subject.teachers} />
                         </div>
                     }
                 </StyledSubjectForms>
-            {!hasMultiple && hasGroups &&
+            {((state.discipline && subject.disciplinesHasGroups[state.discipline]) || (!hasMultiple && hasGroups)) &&
                 <>
                     <StyledGroupListHeader {...styleProps}>
                         <DropdownGroupedSearchFormBase value={subject.groupPattern ? subject.groupPattern.title : ""} setValue={setGroupPattern} label={"Group Pattern"} optionGroups={state.groupPatternOptions} isOptional={true}/>
@@ -204,7 +204,7 @@ const SubjectDetail:FC<IProps> = (props) => {
                      search={state.studentSearch} setSearch={(value: string) => dispatch({type: "SET_STUDENT_SEARCH", payload: value})} height={"100%"}/>
                 </>
             }
-            {hasMultiple &&
+            {(!state.discipline && hasMultiple) &&
                 <>
                     <StyledDisciplineList {...styleProps}>
                         <div className={"add-row"}>

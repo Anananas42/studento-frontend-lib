@@ -35,6 +35,7 @@ interface ISubject {
     teacher: string; // teacherId
     teachers: IOptions; // Teachers with relevant approbations
     disciplines: Array<string>;
+    disciplinesHasGroups: {[key: string]: boolean};
     groupPattern: IGroupPattern | null; // Copy group arrangement from an existing pattern
     groupAmount: number;
     chosenStudents: Array<Array<IItem>>; // Students in each group - (index + 1) indicates group number
@@ -325,6 +326,7 @@ const initSubjects = (subjects: Array<ISubject>, chosenSubjectTypes: Array<IItem
             teachers: dummyTeacherOptions,
             groupPattern: null,
             disciplines: [],
+            disciplinesHasGroups: {},
             groupAmount: 0,
             chosenStudents: [],
 
@@ -413,8 +415,15 @@ const addClassReducer = (state: IAddClassReducerState, action: AddClassReducerAc
             }
         case "SET_HAS_GROUPS":
             {
-                const subjectsUpdated = updateSubject(state.subjects, state.displayedSubject, "hasGroups", action.payload);
-                return {...state, subjects: subjectsUpdated};
+                if (state.displayedSubject !== 0 && !state.displayedSubject) return {...state };
+                if (state.discipline) {
+                    const subj = state.subjects[state.displayedSubject];
+                    const subjectsUpdated = updateSubject(state.subjects, state.displayedSubject, "disciplinesHasGroups", {...subj.disciplinesHasGroups, [state.discipline]: action.payload});
+                    return {...state, subjects: subjectsUpdated};
+                }else{
+                    const subjectsUpdated = updateSubject(state.subjects, state.displayedSubject, "hasGroups", action.payload);
+                    return {...state, subjects: subjectsUpdated};
+                }
             }
         case "SET_HAS_MULTIPLE":
             {
