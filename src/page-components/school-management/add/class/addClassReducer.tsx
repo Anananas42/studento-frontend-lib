@@ -358,7 +358,7 @@ const addClassReducer = (state: IAddClassReducerState, action: AddClassReducerAc
         case "SET_BACKUP_TEACHER":
             return {...state, backupTeacher: action.payload};
         case "SET_CHOSEN_STUDENTS":
-            return {...state, classStudents: action.payload};
+            return {...state, classStudents: action.payload.sort((a, b) => {return a.name < b.name ? -1 : 1})};
         case "SET_CHOSEN_SUBJECT_TYPES":
             return {...state, chosenSubjectTypes: action.payload.sort((a, b) => {return a.name < b.name ? -1 : 1})};
         case "SET_CLASS_TEACHER":
