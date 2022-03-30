@@ -20,7 +20,7 @@ const StyledTransferList = styled.div<IStyleProps>`
     color: ${props => props.fill};
     display: flex;
     align-items: stretch;
-    height: ${props => props.height ? props.height : "calc(100% - 126px)"};
+    height: ${props => props.height ? props.height : "calc(100% - 127px)"};
     gap: 24px;
 
     > div:nth-child(2) {

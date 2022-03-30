@@ -53,6 +53,7 @@ const StyledSubjectList = styled.div<IStyleProps>`
 
 const StyledSubjectRow = styled.div<IStyleProps>`
     font-size: 1.8rem;
+    min-height: 4rem;
     font-weight: 700;
     color: ${props => props.fill};
     border: 1px solid ${props => props.fill};
@@ -62,6 +63,7 @@ const StyledSubjectRow = styled.div<IStyleProps>`
 
 const StyledDisciplineRow = styled.div<IStyleProps>`
     font-size: 1.6rem;
+    min-height: 4rem;
     color: ${props => props.fill};
     border: 1px solid ${props => props.fill};
     width: calc(100% - 3ch);
