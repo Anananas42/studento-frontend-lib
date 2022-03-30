@@ -18,7 +18,7 @@ interface IStyleProps {
 
 const StyledSubjectStep = styled.div`
     display: flex;
-    min-height: calc(100% - 127px);
+    max-height: calc(100% - 127px);
     gap: 32px;
 `;
 
@@ -85,7 +85,7 @@ const SubjectStep:FC<IAddClassStepProps> = (props) => {
          borderRadius, hasMultiple, hasGroups };
 
     return (
-        <ProgressStep title={title + " - subjects"} {...rest}>
+        <ProgressStep title={title + " - subjects"} isStretched={true} {...rest}>
             <StyledSubjectStep>
                 <StyledSubjectList {...styleProps}>
                     {state.subjects.map((s, id) => {

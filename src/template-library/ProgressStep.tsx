@@ -19,6 +19,12 @@ const StyledButtonRow = styled.div`
     }
 `;
 
+const StyledContent = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+`;
+
 export interface IProgressStepProps {
     title: string;
     currentStep: number;
@@ -40,19 +46,23 @@ const ProgressStep:FC<IProgressStepProps> = (props) => {
 
     return (
         <StyledSection isStretched={isStretched}>
-            <BtnCloseL onClick={() => setIsAbortPopup(true)} />
-            {isAbortPopup && <PopupLeaveProgress event={() => navigate(abortDestination)} isOpen={isAbortPopup} setIsOpen={setIsAbortPopup}>
-                    All your progress will be lost. <br/> Do you really want to leave?
-                </PopupLeaveProgress>}
-            <StyledSectionTitle>
-                {title}
-            </StyledSectionTitle>
-                {props.children}
-            <StyledButtonRow>
-                {currentStep > 0 && <BtnTertiaryL icon={"arrow_back"} onClick={() => {prevCallback(); setCurrentStep(currentStep - 1)}}>Back</BtnTertiaryL>}
-                {currentStep < maxStep - 1 && <BtnPrimaryL icon={"arrow_forward"} isAfter={true} onClick={() => {nextCallback(); setCurrentStep(currentStep + 1)}}>Next</BtnPrimaryL>}
-                {currentStep === maxStep - 1 && <BtnConfirmL icon={"done"} onClick={() => console.log("done")}>Done</BtnConfirmL>}
-            </StyledButtonRow>
+            <StyledContent>
+                <div>
+                    <BtnCloseL onClick={() => setIsAbortPopup(true)} />
+                    {isAbortPopup && <PopupLeaveProgress event={() => navigate(abortDestination)} isOpen={isAbortPopup} setIsOpen={setIsAbortPopup}>
+                            All your progress will be lost. <br/> Do you really want to leave?
+                        </PopupLeaveProgress>}
+                    <StyledSectionTitle>
+                        {title}
+                    </StyledSectionTitle>
+                    {props.children}
+                </div>
+                <StyledButtonRow>
+                    {currentStep > 0 && <BtnTertiaryL icon={"arrow_back"} onClick={() => {prevCallback(); setCurrentStep(currentStep - 1)}}>Back</BtnTertiaryL>}
+                    {currentStep < maxStep - 1 && <BtnPrimaryL icon={"arrow_forward"} isAfter={true} onClick={() => {nextCallback(); setCurrentStep(currentStep + 1)}}>Next</BtnPrimaryL>}
+                    {currentStep === maxStep - 1 && <BtnConfirmL icon={"done"} onClick={() => console.log("done")}>Done</BtnConfirmL>}
+                </StyledButtonRow>
+            </StyledContent>
         </StyledSection>
     );
 }
