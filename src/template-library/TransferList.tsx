@@ -175,7 +175,7 @@ const TransferList:FC<IProps> = (props) => {
                     <IconL>search</IconL>
                     <IconM className={search.length > 0 ? "visible" : ""} onClick={() => setSearch("")}>cancel</IconM>
                     <StyledListSearch {...styleProps} value={search} onChange={e => setSearch(e.target.value)}/>
-                    {availableItems.filter(d => !chosenItems.includes(d)).map(i => {
+                    {availableItems.filter(d => !chosenItems.includes(d)).sort((a, b) => {return a.name < b.name ? -1 : 1}).map(i => {
                         return (
                             <StyledItem key={i.id} {...styleProps} onClick={() => setChosenItems([...chosenItems, i])}>
                                 <span>{i.name}</span>
