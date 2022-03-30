@@ -290,6 +290,7 @@ export type AddClassReducerActionType =
     | { type: "SET_CHOSEN_SUBJECT_TYPES", payload: Array<IItem> }
     | { type: "SET_CLASS_TEACHER", payload: string }
     | { type: "SET_CODE", payload: string }
+    | { type: "SET_CURRENT_SUBJECT", payload: [number, string] }
     | { type: "SET_DISCIPLINE_INPUT", payload: string }
     | { type: "SET_GRADE", payload: string }
     | { type: "SET_GROUP", payload: number }
@@ -397,6 +398,8 @@ const addClassReducer = (state: IAddClassReducerState, action: AddClassReducerAc
             return {...state, classTeacher: action.payload};
         case "SET_CODE":
             return {...state, code: action.payload};
+        case "SET_CURRENT_SUBJECT":
+            return {...state, displayedSubject: action.payload[0], discipline: action.payload[1]};
         case "SET_DISCIPLINE_INPUT":
             return {...state, disciplineInput: action.payload};
         case "SET_GRADE":
