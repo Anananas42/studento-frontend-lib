@@ -27,7 +27,7 @@ const StyledSubjectList = styled.div<IStyleProps>`
     flex-direction: column;
     min-height: 200px;
     width: 36ch;
-    margin-top: 1px;
+    padding-top: 1px;
 
     * {
         white-space: nowrap;
