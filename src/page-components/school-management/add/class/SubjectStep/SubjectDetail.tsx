@@ -23,8 +23,9 @@ interface IStyleProps {
 const StyledSubjectDetail = styled.div<IStyleProps>`
     display: flex;
     flex-direction: column;
+    min-height: 100%;
     max-height: 100%;
-    min-width: 750px;
+    min-width: 765px;
     gap: 8px;
     overflow-y: auto;
     padding: 8px;
@@ -77,6 +78,10 @@ const StyledGroupListHeader = styled.div<IStyleProps>`
 
     > div:last-child {
         width: fit-content;
+    }
+
+    + div:last-child {
+        max-height: calc(100% - 296px);
     }
 
 `;
@@ -209,7 +214,7 @@ const SubjectDetail:FC<IProps> = (props) => {
                         {subject.groupAmount > 1 && <SingleChoiceFormBase value={`${state.group}`} setValue={(value: string) => dispatch({type: "SET_GROUP", payload: parseInt(value)})} label={"Group"} options={Object.fromEntries(Array.from(Array(subject.groupAmount), (e, i) => [i+1, `${i+1}`]))}/>}
                     </StyledGroupListHeader>   
                     <TransferList availableItems={state.classStudents} chosenItems={subject.chosenStudents[state.group] ? subject.chosenStudents[state.group] : []} setChosenItems={(value: Array<IItem>) => dispatch({ type: "SET_CHOSEN_STUDENTS", payload: value })}
-                     search={state.studentSearch} setSearch={(value: string) => dispatch({type: "SET_STUDENT_SEARCH", payload: value})} height={"calc(100% - 300px)"}/>
+                     search={state.studentSearch} setSearch={(value: string) => dispatch({type: "SET_STUDENT_SEARCH", payload: value})} />
                 </>
             }
             {(!state.discipline && hasMultiple) &&

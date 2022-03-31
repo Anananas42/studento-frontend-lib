@@ -19,8 +19,9 @@ interface IStyleProps {
 const StyledSubjectStep = styled.div`
     display: flex;
     max-height: 100%;
+    min-height: 100%;
     gap: 16px;
-    margin-top: -8px
+    margin-top: -8px;
 `;
 
 const StyledSubjectList = styled.div<IStyleProps>`
