@@ -1,4 +1,3 @@
-import { stat } from "fs";
 import { FC } from "react";
 import styled from "styled-components";
 import TextColors from "../../../../../component-library/buttons/colors/TextColors";
@@ -186,7 +185,7 @@ const SubjectDetail:FC<IProps> = (props) => {
 
     const groupAmount = state.discipline ? subject.disciplineGroupAmounts[state.discipline] : subject.groupAmount;
     const currGroups = state.discipline ? subject.disciplineGroupPatterns[state.discipline].groups : (subject.groupPattern ? subject.groupPattern.groups : []);
-    const studentsInOtherGroups = currGroups.slice(0, groupAmount).filter((i, id) => id != state.group).flat();
+    const studentsInOtherGroups = currGroups.slice(0, groupAmount).filter((i, id) => id !== state.group).flat();
 
     return (
         <StyledSubjectDetail {...styleProps}>

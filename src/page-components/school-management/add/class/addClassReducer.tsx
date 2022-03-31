@@ -413,7 +413,7 @@ const addClassReducer = (state: IAddClassReducerState, action: AddClassReducerAc
         case "SET_CODE":
             return {...state, code: action.payload};
         case "SET_CURRENT_SUBJECT":
-            return {...state, displayedSubject: action.payload[0], discipline: action.payload[1]};
+            return {...state, displayedSubject: action.payload[0], discipline: action.payload[1], group: 0};
         case "SET_DISCIPLINE_INPUT":
             return {...state, disciplineInput: action.payload};
         case "SET_GRADE":
@@ -457,16 +457,33 @@ const addClassReducer = (state: IAddClassReducerState, action: AddClassReducerAc
                 if (state.displayedSubject !== 0 && !state.displayedSubject) return {...state };
                 if (state.discipline) {
                     const subj = state.subjects[state.displayedSubject];
-                    const subjectsUpdated = updateSubject(state.subjects, state.displayedSubject, {disciplinesHasGroups: {...subj.disciplinesHasGroups, [state.discipline]: action.payload}});
+                    const subjectsUpdated = updateSubject(state.subjects, state.displayedSubject, 
+                        {disciplinesHasGroups: {...subj.disciplinesHasGroups, [state.discipline]: action.payload},
+                        ...(!action.payload ? {disciplineGroupPatterns: {}} : {})});
                     return {...state, subjects: subjectsUpdated};
                 }else{
-                    const subjectsUpdated = updateSubject(state.subjects, state.displayedSubject, {hasGroups: action.payload});
-                    return {...state, subjects: subjectsUpdated};
+                    const subj = state.subjects[state.displayedSubject];
+                    const subjectsUpdated = updateSubject(state.subjects, state.displayedSubject,
+                        {hasGroups: action.payload,
+                        ...(!action.payload ? 
+                            {groupPattern: {...subj.groupPattern, groups: [[], [], [], [], []]},
+                                groupAmount: 1,
+                            } : {})});
+                    return {...state, subjects: subjectsUpdated, ...(!action.payload ? {group: 0} : {})};
                 }
             }
         case "SET_HAS_MULTIPLE":
             {
-                const subjectsUpdated = updateSubject(state.subjects, state.displayedSubject, {hasMultiple: action.payload});
+                const subjectsUpdated = updateSubject(state.subjects, state.displayedSubject, 
+                    {hasMultiple: action.payload,
+                        ...(!action.payload ? {
+                                disciplines: [],
+                                disciplinesHasGroups: {},
+                                disciplineGroupAmounts: {},
+                                disciplineGroupPatterns: {},
+                                disciplineTeachers: {},
+                        } : {}),
+                    });
                 return {...state, subjects: subjectsUpdated};
             }
         case "SET_NOTE":
