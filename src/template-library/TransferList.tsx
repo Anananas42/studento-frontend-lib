@@ -171,13 +171,25 @@ const TransferList:FC<IProps> = (props) => {
 
     const searchProcessed = search.toLowerCase().split(",").map(s => s.trim());
 
+    const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        const filteredItems = availableItems.filter(d => !chosenItems.includes(d) && (excludedItems ? !excludedItems.includes(d) : true) && searchProcessed.every(s => d.name.toLowerCase().includes(s)));
+        if (e.key === "Enter" && filteredItems.length === 1) {
+            setChosenItems([...chosenItems, filteredItems[0]]);
+            setSearch("");
+        };
+        if (e.key === "Escape") {
+            setSearch("");
+        }
+    
+    };
+
     return (
         <>
             <StyledTransferList {...styleProps}>
                 <StyledList {...styleProps}>
                     <IconL>search</IconL>
                     <IconM className={search.length > 0 ? "visible" : ""} onClick={() => setSearch("")}>cancel</IconM>
-                    <StyledListSearch {...styleProps} value={search} onChange={e => setSearch(e.target.value)}/>
+                    <StyledListSearch {...styleProps} value={search} onChange={e => setSearch(e.target.value)} onKeyDown={onKeyDown}/>
                     {availableItems.filter(d => !chosenItems.includes(d) && (excludedItems ? !excludedItems.includes(d) : true) && searchProcessed.every(s => d.name.toLowerCase().includes(s))).sort((a, b) => {return a.name < b.name ? -1 : 1}).map(i => {
                         return (
                             <StyledItem key={i.id} {...styleProps} onClick={() => setChosenItems([...chosenItems, i])}>
