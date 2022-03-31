@@ -103,6 +103,11 @@ const DropdownSearchFormBase:FC<IProps> = (props) => {
         }
     }, [options]);
 
+    useEffect(() => {
+        setInput(allOptions.current[value]);
+        setCurrOptionName(allOptions.current[value]);
+    }, [value, setInput, setCurrOptionName]);
+
     const processInput = (input: string) => {
         if (allOptionsSorted.current && input) {
             setGuess(findClosestOption(allOptionsSorted.current, input));
