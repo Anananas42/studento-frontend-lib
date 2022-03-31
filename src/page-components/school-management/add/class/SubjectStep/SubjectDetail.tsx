@@ -81,7 +81,7 @@ const StyledGroupListHeader = styled.div<IStyleProps>`
     }
 
     + div:last-child {
-        max-height: calc(100% - 296px);
+        max-height: max(calc(100% - 296px), 220px);
     }
 
 `;
