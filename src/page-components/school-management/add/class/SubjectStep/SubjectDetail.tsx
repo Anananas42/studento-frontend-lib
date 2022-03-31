@@ -26,6 +26,8 @@ const StyledSubjectDetail = styled.div<IStyleProps>`
     max-height: 100%;
     min-width: 750px;
     gap: 8px;
+    overflow-y: auto;
+    padding: 8px;
 `;
 
 const StyledSubjectTitle = styled.div<IStyleProps>`
@@ -119,9 +121,15 @@ const StyledDiscipline = styled.div<IStyleProps>`
     border-radius: ${props => props.borderRadius};
     user-select: none;
     background-color: ${TextColors.Hover.bg};
+    max-width: 100%;
+    
 
     > span {
         font-size: 2rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: calc(100% - 40px);
     }
 
     :hover {

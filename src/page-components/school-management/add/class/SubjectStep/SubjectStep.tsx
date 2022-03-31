@@ -18,8 +18,9 @@ interface IStyleProps {
 
 const StyledSubjectStep = styled.div`
     display: flex;
-    max-height: calc(100% - 127px);
-    gap: 32px;
+    max-height: 100%;
+    gap: 16px;
+    margin-top: -8px
 `;
 
 const StyledSubjectList = styled.div<IStyleProps>`
@@ -28,6 +29,8 @@ const StyledSubjectList = styled.div<IStyleProps>`
     min-height: 200px;
     width: 36ch;
     padding-top: 1px;
+    overflow-y: auto;
+    padding: 8px;
 
     * {
         white-space: nowrap;

@@ -6,11 +6,15 @@ import PopupLeaveProgress from "../component-library/popups/components/PopupLeav
 import StyledSection from "../component-library/styles/StyledSection";
 import StyledSectionTitle from "../component-library/styles/StyledSectionTitle";
 
+interface IStyleProps {
+    isStretched?: boolean;
+}
+
 const StyledButtonRow = styled.div`
     display: flex;
     justify-content: space-between;
     width: 100%;
-    max-height: 100%;
+    flex: 0 0 auto;
     gap: 16px;
     padding-top: 16px;
 
@@ -19,11 +23,13 @@ const StyledButtonRow = styled.div`
     }
 `;
 
-const StyledContent = styled.div`
+const StyledContent = styled.div<IStyleProps>`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: 100%;
+    min-height: ${props => props.isStretched ? "calc(100% - 127px)" : "fit-content"};
+    max-height: calc(100% - 127px);
+    flex: 0 1 auto;
 `;
 
 export interface IProgressStepProps {
@@ -47,23 +53,21 @@ const ProgressStep:FC<IProgressStepProps> = (props) => {
 
     return (
         <StyledSection isStretched={isStretched}>
-            <StyledContent>
-                <div>
-                    <BtnCloseL onClick={() => setIsAbortPopup(true)} />
-                    {isAbortPopup && <PopupLeaveProgress event={() => navigate(abortDestination)} isOpen={isAbortPopup} setIsOpen={setIsAbortPopup}>
-                            All your progress will be lost. <br/> Do you really want to leave?
-                        </PopupLeaveProgress>}
-                    <StyledSectionTitle>
-                        {title}
-                    </StyledSectionTitle>
-                    {props.children}
-                </div>
-                <StyledButtonRow>
-                    {currentStep > 0 && <BtnTertiaryL icon={"arrow_back"} onClick={() => {prevCallback(); setCurrentStep(currentStep - 1)}}>Back</BtnTertiaryL>}
-                    {currentStep < maxStep - 1 && <BtnPrimaryL icon={"arrow_forward"} isAfter={true} onClick={() => {nextCallback(); setCurrentStep(currentStep + 1)}}>Next</BtnPrimaryL>}
-                    {currentStep === maxStep - 1 && <BtnConfirmL icon={"done"} onClick={() => console.log("done")}>Done</BtnConfirmL>}
-                </StyledButtonRow>
+            <BtnCloseL onClick={() => setIsAbortPopup(true)} />
+            {isAbortPopup && <PopupLeaveProgress event={() => navigate(abortDestination)} isOpen={isAbortPopup} setIsOpen={setIsAbortPopup}>
+                    All your progress will be lost. <br/> Do you really want to leave?
+                </PopupLeaveProgress>}
+            <StyledSectionTitle>
+                {title}
+            </StyledSectionTitle>
+            <StyledContent isStretched={isStretched}>
+                {props.children}
             </StyledContent>
+            <StyledButtonRow>
+                {currentStep > 0 && <BtnTertiaryL icon={"arrow_back"} onClick={() => {prevCallback(); setCurrentStep(currentStep - 1)}}>Back</BtnTertiaryL>}
+                {currentStep < maxStep - 1 && <BtnPrimaryL icon={"arrow_forward"} isAfter={true} onClick={() => {nextCallback(); setCurrentStep(currentStep + 1)}}>Next</BtnPrimaryL>}
+                {currentStep === maxStep - 1 && <BtnConfirmL icon={"done"} onClick={() => console.log("done")}>Done</BtnConfirmL>}
+            </StyledButtonRow>
         </StyledSection>
     );
 }
