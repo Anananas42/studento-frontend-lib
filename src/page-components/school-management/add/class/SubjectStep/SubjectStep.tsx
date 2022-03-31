@@ -80,7 +80,7 @@ const SubjectStep:FC<IAddClassStepProps> = (props) => {
     const { title, state, dispatch, ...rest } = props;
     const { colors } = useThemeContext();
 
-    if (state.displayedSubject !== 0 && !state.displayedSubject) return <ProgressStep {...{...props, title: `${props.title} - subjects`}}>No subject types added.</ProgressStep>;
+    if (state.displayedSubject !== 0 && !state.displayedSubject) return <ProgressStep {...{...props, title: `${props.title} - subjects`}}><span style={{fontWeight: "500", fontSize: "1.8rem", padding: "64px"}}>No subject types added.</span></ProgressStep>;
 
     const subject = state.subjects[state.displayedSubject];
     const { hasMultiple, hasGroups } = subject;
