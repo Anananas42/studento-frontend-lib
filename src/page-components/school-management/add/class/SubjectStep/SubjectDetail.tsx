@@ -211,9 +211,9 @@ const SubjectDetail:FC<IProps> = (props) => {
                     <StyledGroupListHeader {...styleProps}>
                         <DropdownGroupedSearchFormBase value={subject.groupPattern ? subject.groupPattern.title : ""} setValue={setGroupPattern} label={"Group Pattern"} optionGroups={state.groupPatternOptions} isOptional={true}/>
                         <DropdownFormBase value={`${subject.groupAmount}`} setValue={(value: string) => dispatch({type: "SET_GROUP_AMOUNT", payload: parseInt(value)})} label={"# Groups"} options={{1: "1", 2: "2", 3: "3", 4: "4"}} />
-                        {subject.groupAmount > 1 && <SingleChoiceFormBase value={`${state.group}`} setValue={(value: string) => dispatch({type: "SET_GROUP", payload: parseInt(value)})} label={"Group"} options={Object.fromEntries(Array.from(Array(subject.groupAmount), (e, i) => [i+1, `${i+1}`]))}/>}
+                        {subject.groupAmount > 1 && <SingleChoiceFormBase value={`${state.group+1}`} setValue={(value: string) => dispatch({type: "SET_GROUP", payload: parseInt(value)-1})} label={"Group"} options={Object.fromEntries(Array.from(Array(subject.groupAmount), (e, i) => [i+1, `${i+1}`]))}/>}
                     </StyledGroupListHeader>   
-                    <TransferList availableItems={state.classStudents} chosenItems={subject.chosenStudents[state.group] ? subject.chosenStudents[state.group] : []} setChosenItems={(value: Array<IItem>) => dispatch({ type: "SET_CHOSEN_STUDENTS", payload: value })}
+                    <TransferList availableItems={state.classStudents} chosenItems={subject.chosenStudents[state.group] ? subject.chosenStudents[state.group] : []} setChosenItems={(value: Array<IItem>) => dispatch({ type: "SET_GROUP_STUDENTS", payload: value })}
                      search={state.studentSearch} setSearch={(value: string) => dispatch({type: "SET_STUDENT_SEARCH", payload: value})} />
                 </>
             }

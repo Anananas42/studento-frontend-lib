@@ -9,7 +9,7 @@ const StudentStep:FC<IAddClassStepProps> = (props) => {
 
     return (
         <ProgressStep title={title + " - students"} isStretched={true} {...rest}>
-            <TransferList availableItems={state.studentOptions} chosenItems={state.classStudents} setChosenItems={(value: Array<IItem>) => dispatch({type: "SET_CHOSEN_STUDENTS", payload: value})} search={search} setSearch={setSearch}/>
+            <TransferList availableItems={state.studentOptions} chosenItems={state.classStudents} setChosenItems={(value: Array<IItem>) => dispatch({type: "SET_CLASS_STUDENTS", payload: value})} search={search} setSearch={setSearch}/>
         </ProgressStep>
     );
 }

@@ -289,6 +289,7 @@ export type AddClassReducerActionType =
     | { type: "SET_CHOSEN_STUDENTS", payload: Array<IItem> }
     | { type: "SET_CHOSEN_SUBJECT_TYPES", payload: Array<IItem> }
     | { type: "SET_CLASS_TEACHER", payload: string }
+    | { type: "SET_CLASS_STUDENTS", payload: Array<IItem> }
     | { type: "SET_CODE", payload: string }
     | { type: "SET_CURRENT_SUBJECT", payload: [number, string] }
     | { type: "SET_DISCIPLINE_INPUT", payload: string }
@@ -296,6 +297,7 @@ export type AddClassReducerActionType =
     | { type: "SET_GROUP", payload: number }
     | { type: "SET_GROUP_AMOUNT", payload: number }
     | { type: "SET_GROUP_PATTERN", payload: IGroupPattern }
+    | { type: "SET_GROUP_STUDENTS", payload: Array<IItem> }
     | { type: "SET_HAS_GROUPS", payload: boolean }
     | { type: "SET_HAS_MULTIPLE", payload: boolean }
     | { type: "SET_NOTE", payload: string }
@@ -328,7 +330,7 @@ const initSubjects = (subjects: Array<ISubject>, chosenSubjectTypes: Array<IItem
             groupPattern: null,
             disciplines: [],
             disciplinesHasGroups: {},
-            groupAmount: 0,
+            groupAmount: 1,
             chosenStudents: [],
 
         })
@@ -390,10 +392,10 @@ const addClassReducer = (state: IAddClassReducerState, action: AddClassReducerAc
             }
         case "SET_BACKUP_TEACHER":
             return {...state, backupTeacher: action.payload};
-        case "SET_CHOSEN_STUDENTS":
-            return {...state, classStudents: action.payload.sort((a, b) => {return a.name < b.name ? -1 : 1})};
         case "SET_CHOSEN_SUBJECT_TYPES":
             return {...state, chosenSubjectTypes: action.payload.sort((a, b) => {return a.name < b.name ? -1 : 1})};
+        case "SET_CLASS_STUDENTS":
+            return {...state, classStudents: action.payload.sort((a, b) => {return a.name < b.name ? -1 : 1})};
         case "SET_CLASS_TEACHER":
             return {...state, classTeacher: action.payload};
         case "SET_CODE":
@@ -414,6 +416,15 @@ const addClassReducer = (state: IAddClassReducerState, action: AddClassReducerAc
         case "SET_GROUP_PATTERN":
             {
                 const subjectsUpdated = updateSubject(state.subjects, state.displayedSubject, "groupPattern", action.payload);
+                return {...state, subjects: subjectsUpdated};
+            }
+        case "SET_GROUP_STUDENTS":
+            {
+                if (state.displayedSubject !== 0 && !state.displayedSubject) return {...state };
+                const subj = state.subjects[state.displayedSubject];
+                const groups = subj.chosenStudents;
+                groups[state.group] = action.payload;
+                const subjectsUpdated = updateSubject(state.subjects, state.displayedSubject, "groupStudents", groups);
                 return {...state, subjects: subjectsUpdated};
             }
         case "SET_HAS_GROUPS":
