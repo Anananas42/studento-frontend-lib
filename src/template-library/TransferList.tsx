@@ -169,6 +169,8 @@ const TransferList:FC<IProps> = (props) => {
     const { colors } = useThemeContext();
     const styleProps = { fill: colors.fill, borderRadius, sectionShadow: colors.sectionShadow, primary: colors.primary, primaryAlt: colors.primaryAlt, isChosenEmpty: chosenItems.length === 0, height };
 
+    const searchProcessed = search.toLowerCase().split(",").map(s => s.trim());
+
     return (
         <>
             <StyledTransferList {...styleProps}>
@@ -176,7 +178,7 @@ const TransferList:FC<IProps> = (props) => {
                     <IconL>search</IconL>
                     <IconM className={search.length > 0 ? "visible" : ""} onClick={() => setSearch("")}>cancel</IconM>
                     <StyledListSearch {...styleProps} value={search} onChange={e => setSearch(e.target.value)}/>
-                    {availableItems.filter(d => !chosenItems.includes(d) && (excludedItems ? !excludedItems.includes(d) : true)).sort((a, b) => {return a.name < b.name ? -1 : 1}).map(i => {
+                    {availableItems.filter(d => !chosenItems.includes(d) && (excludedItems ? !excludedItems.includes(d) : true) && searchProcessed.every(s => d.name.toLowerCase().includes(s))).sort((a, b) => {return a.name < b.name ? -1 : 1}).map(i => {
                         return (
                             <StyledItem key={i.id} {...styleProps} onClick={() => setChosenItems([...chosenItems, i])}>
                                 <span>{i.name}</span>
