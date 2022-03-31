@@ -1,3 +1,4 @@
+import { stat } from "fs";
 import { FC } from "react";
 import styled from "styled-components";
 import TextColors from "../../../../../component-library/buttons/colors/TextColors";
@@ -183,7 +184,9 @@ const SubjectDetail:FC<IProps> = (props) => {
         dispatch({type: "SET_GROUP_PATTERN", payload: state.groupPatterns[pattern]});
     }
 
-    
+    const groupAmount = state.discipline ? subject.disciplineGroupAmounts[state.discipline] : subject.groupAmount;
+    const currGroups = state.discipline ? subject.disciplineGroupPatterns[state.discipline].groups : (subject.groupPattern ? subject.groupPattern.groups : []);
+    const studentsInOtherGroups = currGroups.slice(0, groupAmount).filter((i, id) => id != state.group).flat();
 
     return (
         <StyledSubjectDetail {...styleProps}>
@@ -212,11 +215,11 @@ const SubjectDetail:FC<IProps> = (props) => {
                 <>
                     <StyledGroupListHeader {...styleProps}>
                         <DropdownGroupedSearchFormBase value={subject.groupPattern ? subject.groupPattern.title : ""} setValue={setGroupPattern} label={"Group Pattern"} optionGroups={state.groupPatternOptions} isOptional={true}/>
-                        <DropdownFormBase value={`${subject.groupAmount}`} setValue={(value: string) => dispatch({type: "SET_GROUP_AMOUNT", payload: parseInt(value)})} label={"# Groups"} options={{1: "1", 2: "2", 3: "3", 4: "4"}} />
-                        {subject.groupAmount > 1 && <SingleChoiceFormBase value={`${state.group+1}`} setValue={(value: string) => dispatch({type: "SET_GROUP", payload: parseInt(value)-1})} label={"Group"} options={Object.fromEntries(Array.from(Array(subject.groupAmount), (e, i) => [i+1, `${i+1}`]))}/>}
+                        <DropdownFormBase value={`${groupAmount}`} setValue={(value: string) => dispatch({type: "SET_GROUP_AMOUNT", payload: parseInt(value)})} label={"# Groups"} options={{1: "1", 2: "2", 3: "3", 4: "4"}} />
+                        {groupAmount > 1 && <SingleChoiceFormBase value={`${state.group+1}`} setValue={(value: string) => dispatch({type: "SET_GROUP", payload: parseInt(value)-1})} label={"Group"} options={Object.fromEntries(Array.from(Array(groupAmount), (e, i) => [i+1, `${i+1}`]))}/>}
                     </StyledGroupListHeader>   
-                    <TransferList availableItems={state.classStudents} chosenItems={subject.chosenStudents[state.group] ? subject.chosenStudents[state.group] : []} setChosenItems={(value: Array<IItem>) => dispatch({ type: "SET_GROUP_STUDENTS", payload: value })}
-                     search={state.studentSearch} setSearch={(value: string) => dispatch({type: "SET_STUDENT_SEARCH", payload: value})} />
+                    <TransferList availableItems={state.classStudents} chosenItems={(state.discipline ? subject.disciplineGroupPatterns[state.discipline].groups[state.group] : subject.groupPattern.groups[state.group]) || []} setChosenItems={(value: Array<IItem>) => dispatch({ type: "SET_GROUP_STUDENTS", payload: value })}
+                     excludedItems={studentsInOtherGroups} search={state.studentSearch} setSearch={(value: string) => dispatch({type: "SET_STUDENT_SEARCH", payload: value})} />
                 </>
             }
             {(!state.discipline && hasMultiple) &&

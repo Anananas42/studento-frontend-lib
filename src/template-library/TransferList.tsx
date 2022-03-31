@@ -157,6 +157,7 @@ export interface IItem {
 interface IProps {
     availableItems: Array<IItem>;
     chosenItems: Array<IItem>;
+    excludedItems?: Array<IItem>;
     setChosenItems: React.Dispatch<React.SetStateAction<IItem[]>> | ((value: Array<IItem>) => void);
     search: string;
     setSearch: React.Dispatch<React.SetStateAction<string>> | ((value: string) => void);
@@ -164,7 +165,7 @@ interface IProps {
 }
 
 const TransferList:FC<IProps> = (props) => {
-    const { availableItems, chosenItems, setChosenItems, search, setSearch, height } = props;
+    const { availableItems, chosenItems, excludedItems, setChosenItems, search, setSearch, height } = props;
     const { colors } = useThemeContext();
     const styleProps = { fill: colors.fill, borderRadius, sectionShadow: colors.sectionShadow, primary: colors.primary, primaryAlt: colors.primaryAlt, isChosenEmpty: chosenItems.length === 0, height };
 
@@ -175,7 +176,7 @@ const TransferList:FC<IProps> = (props) => {
                     <IconL>search</IconL>
                     <IconM className={search.length > 0 ? "visible" : ""} onClick={() => setSearch("")}>cancel</IconM>
                     <StyledListSearch {...styleProps} value={search} onChange={e => setSearch(e.target.value)}/>
-                    {availableItems.filter(d => !chosenItems.includes(d)).sort((a, b) => {return a.name < b.name ? -1 : 1}).map(i => {
+                    {availableItems.filter(d => !chosenItems.includes(d) && (excludedItems ? !excludedItems.includes(d) : true)).sort((a, b) => {return a.name < b.name ? -1 : 1}).map(i => {
                         return (
                             <StyledItem key={i.id} {...styleProps} onClick={() => setChosenItems([...chosenItems, i])}>
                                 <span>{i.name}</span>
