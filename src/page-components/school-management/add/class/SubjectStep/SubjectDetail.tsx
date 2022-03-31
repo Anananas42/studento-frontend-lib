@@ -183,6 +183,8 @@ const SubjectDetail:FC<IProps> = (props) => {
         dispatch({type: "SET_GROUP_PATTERN", payload: state.groupPatterns[pattern]});
     }
 
+    
+
     return (
         <StyledSubjectDetail {...styleProps}>
             <StyledSubjectTitle {...styleProps}>
