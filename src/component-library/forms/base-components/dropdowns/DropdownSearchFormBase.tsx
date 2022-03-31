@@ -129,7 +129,13 @@ const DropdownSearchFormBase:FC<IProps> = (props) => {
                 setGuess(undefined);
                 inputRef.current.blur();
             }else{
-                setInput(allOptions.current[value]);
+                if (!input) {
+                    setValue("");
+                    setInput("");
+                    setCurrOptionName("");
+                }else{
+                    setInput(allOptions.current[value]);
+                }
                 setIsOpen(false);
                 inputRef.current.blur();
             }
