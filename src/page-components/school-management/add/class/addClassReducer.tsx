@@ -460,7 +460,7 @@ const addClassReducer = (state: IAddClassReducerState, action: AddClassReducerAc
                     const subjectsUpdated = updateSubject(state.subjects, state.displayedSubject, 
                         {disciplinesHasGroups: {...subj.disciplinesHasGroups, [state.discipline]: action.payload},
                         ...(!action.payload ? {disciplineGroupPatterns: {}} : {})});
-                    return {...state, subjects: subjectsUpdated};
+                    return {...state, subjects: subjectsUpdated, ...(!action.payload ? {group: 0} : {})};
                 }else{
                     const subj = state.subjects[state.displayedSubject];
                     const subjectsUpdated = updateSubject(state.subjects, state.displayedSubject,
