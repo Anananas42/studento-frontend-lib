@@ -183,6 +183,9 @@ const SubjectDetail:FC<IProps> = (props) => {
         dispatch({type: "SET_GROUP_PATTERN", payload: state.groupPatterns[pattern]});
     }
 
+    const groupPattern = state.discipline ? subject.disciplineGroupPatterns[state.discipline] : subject.groupPattern;
+    const isOwnGroup = groupPattern.title.includes(subject.code) || groupPattern.title.includes(subject.title);
+
     const groupAmount = state.discipline ? subject.disciplineGroupAmounts[state.discipline] : subject.groupAmount;
     const currGroups = state.discipline ? subject.disciplineGroupPatterns[state.discipline].groups : (subject.groupPattern ? subject.groupPattern.groups : []);
     const studentsInOtherGroups = currGroups.slice(0, groupAmount).filter((i, id) => id !== state.group).flat();
@@ -213,7 +216,7 @@ const SubjectDetail:FC<IProps> = (props) => {
             {((state.discipline && subject.disciplinesHasGroups[state.discipline]) || (!hasMultiple && hasGroups)) &&
                 <>
                     <StyledGroupListHeader {...styleProps}>
-                        <DropdownGroupedSearchFormBase value={subject.groupPattern ? subject.groupPattern.title : ""} setValue={setGroupPattern} label={"Group Pattern"} optionGroups={state.groupPatternOptions} isOptional={true}/>
+                        <DropdownGroupedSearchFormBase value={isOwnGroup ? "" : groupPattern.title} setValue={setGroupPattern} label={"Group Pattern"} optionGroups={state.groupPatternOptions} isOptional={true}/>
                         <DropdownFormBase value={`${groupAmount}`} setValue={(value: string) => dispatch({type: "SET_GROUP_AMOUNT", payload: parseInt(value)})} label={"# Groups"} options={{1: "1", 2: "2", 3: "3", 4: "4"}} />
                         {groupAmount > 1 && <SingleChoiceFormBase value={`${state.group+1}`} setValue={(value: string) => dispatch({type: "SET_GROUP", payload: parseInt(value)-1})} label={"Group"} options={Object.fromEntries(Array.from(Array(groupAmount), (e, i) => [i+1, `${i+1}`]))}/>}
                     </StyledGroupListHeader>   
