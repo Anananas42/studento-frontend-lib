@@ -494,8 +494,16 @@ const addClassReducer = (state: IAddClassReducerState, action: AddClassReducerAc
             return {...state, studentSearch: action.payload};
         case "SET_TEACHER":
             {
-                const subjectsUpdated = updateSubject(state.subjects, state.displayedSubject, {teacher: action.payload});
-                return {...state, subjects: subjectsUpdated};
+                if (state.displayedSubject !== 0 && !state.displayedSubject) return {...state };
+                if (state.discipline){
+                    const subj = state.subjects[state.displayedSubject];
+                    const subjectsUpdated = updateSubject(state.subjects, state.displayedSubject,
+                        {disciplineTeachers: {...subj.disciplineTeachers, [state.discipline]: action.payload}});
+                    return {...state, subjects: subjectsUpdated};
+                }else{
+                    const subjectsUpdated = updateSubject(state.subjects, state.displayedSubject, {teacher: action.payload});
+                    return {...state, subjects: subjectsUpdated};
+                }
             }
         case "REMOVE_DISCIPLINE": {
             if (state.displayedSubject !== 0 && !state.displayedSubject) return {...state };

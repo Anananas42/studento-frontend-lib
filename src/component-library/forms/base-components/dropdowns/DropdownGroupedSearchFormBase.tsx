@@ -75,7 +75,6 @@ const DropdownGroupedSearchFormBase:FC<IProps> = (props) => {
     const allOptions = useRef<{[key: string]: string}>({});
     const allOptionsSorted = useRef<{[key: string]: string[][]}>({});
 
-    console.log(value);
     const placeholderFill = !input && !value ? FormColors.Default.placeholder : colors.fill;
     const styleProps = { borderRadius, errorMessage, fill: colors.fill, placeholderFill, isOpen, isDisabled, width };
 

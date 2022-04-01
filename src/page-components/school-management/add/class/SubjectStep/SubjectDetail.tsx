@@ -185,6 +185,7 @@ const SubjectDetail:FC<IProps> = (props) => {
 
     const groupPattern = state.discipline ? subject.disciplineGroupPatterns[state.discipline] : subject.groupPattern;
     const isOwnGroup = groupPattern.title.includes(subject.code) || groupPattern.title.includes(subject.title);
+    const teacher = state.discipline ? subject.disciplineTeachers[state.discipline] : subject.teacher;
 
     const groupAmount = state.discipline ? subject.disciplineGroupAmounts[state.discipline] : subject.groupAmount;
     const currGroups = state.discipline ? subject.disciplineGroupPatterns[state.discipline].groups : (subject.groupPattern ? subject.groupPattern.groups : []);
@@ -209,7 +210,7 @@ const SubjectDetail:FC<IProps> = (props) => {
                     </div>
                     {(state.discipline || !hasMultiple) &&
                         <div>
-                            <DropdownSearchFormBase value={`${subject.teacher}`} setValue={(value: string) => dispatch({type: "SET_TEACHER", payload: value})} label={"Teacher"} options={subject.teachers} />
+                            <DropdownSearchFormBase value={teacher} setValue={(value: string) => dispatch({type: "SET_TEACHER", payload: value})} label={"Teacher"} options={subject.teachers} />
                         </div>
                     }
                 </StyledSubjectForms>
