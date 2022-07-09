@@ -28,7 +28,7 @@ const StyledContent = styled.div<{bg: string}>`
     
     > div:last-of-type { // Page content
       margin-bottom: 16px;
-      height: calc(100vh - 210px);
+      min-height: calc(100vh - 210px);
     }
 
   }
