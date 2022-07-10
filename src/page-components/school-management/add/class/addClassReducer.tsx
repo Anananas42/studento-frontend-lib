@@ -501,7 +501,8 @@ const addClassReducer = (state: IAddClassReducerState, action: AddClassReducerAc
                     const groupPatterns = subj.disciplineGroupPatterns[state.discipline];
                     const subjectsUpdated = updateSubject(state.subjects, state.displayedSubject, 
                         {disciplinesHasOwnGroupPatterns: {...subj.disciplinesHasOwnGroupPatterns, [state.discipline]: action.payload},
-                        ...(!action.payload ? {disciplineGroupPatterns: {...subj.disciplineGroupPatterns, [state.discipline]: {...groupPatterns, groups: []}}} : {})});
+                        ...(!action.payload ? {disciplineGroupPatterns: {...subj.disciplineGroupPatterns, [state.discipline]: {...groupPatterns, groups: []}}}
+                             : {disciplineGroupPatterns: {...subj.disciplineGroupPatterns, [state.discipline]: {...groupPatterns, groups: [[], [], [], [], []]}}})});
                     return {...state, subjects: subjectsUpdated, ...(!action.payload ? {group: 0} : {})};
                 }else{
                     const subjectsUpdated = updateSubject(state.subjects, state.displayedSubject, 
