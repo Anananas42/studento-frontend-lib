@@ -184,12 +184,12 @@ const SubjectDetail:FC<IProps> = (props) => {
     }
 
     const groupPattern = state.discipline ? subject.disciplineGroupPatterns[state.discipline] : subject.groupPattern;
-    const isOwnGroup = groupPattern.title.includes(subject.code) || groupPattern.title.includes(subject.title);
+    const isOwnGroup = state.discipline ? subject.disciplinesHasOwnGroupPatterns[state.discipline] : subject.hasOwnGroupPattern;
     const teacher = state.discipline ? subject.disciplineTeachers[state.discipline] : subject.teacher;
 
     const groupAmount = state.discipline ? subject.disciplineGroupAmounts[state.discipline] : subject.groupAmount;
     const currGroups = state.discipline ? subject.disciplineGroupPatterns[state.discipline].groups : (subject.groupPattern ? subject.groupPattern.groups : []);
-    const studentsInOtherGroups = currGroups.slice(0, groupAmount).filter((i, id) => id !== state.group).flat();
+    const studentsInOtherGroups = currGroups ? currGroups.slice(0, groupAmount).filter((i, id) => id !== state.group).flat() : [];
 
     return (
         <StyledSubjectDetail {...styleProps}>
@@ -207,6 +207,8 @@ const SubjectDetail:FC<IProps> = (props) => {
                     <div>
                         {!state.discipline && <ToggleRow value={subject.hasMultiple} setValue={(value: boolean) => dispatch({type: "SET_HAS_MULTIPLE", payload: value})} label={"Has multiple disciplines"}/>}
                         {(state.discipline || !hasMultiple) && <ToggleRow value={state.discipline ? Boolean(subject.disciplinesHasGroups[state.discipline]) : hasGroups} setValue={(value: boolean) => dispatch({type: "SET_HAS_GROUPS", payload: value})} label={"Has groups"} />}
+                        {((state.discipline && subject.disciplinesHasGroups[state.discipline]) || ((!state.discipline && !hasMultiple && hasGroups))) &&
+                         <ToggleRow value={isOwnGroup} setValue={(value: boolean) => dispatch({type: "SET_HAS_OWN_GROUP_PATTERN", payload: value})} label={"Has own group pattern"} />}
                     </div>
                     {(state.discipline || !hasMultiple) &&
                         <div>
@@ -217,12 +219,12 @@ const SubjectDetail:FC<IProps> = (props) => {
             {((state.discipline && subject.disciplinesHasGroups[state.discipline]) || (!hasMultiple && hasGroups)) &&
                 <>
                     <StyledGroupListHeader {...styleProps}>
-                        <DropdownGroupedSearchFormBase value={isOwnGroup ? "" : groupPattern.title} setValue={setGroupPattern} label={"Group Pattern"} optionGroups={state.groupPatternOptions} isOptional={true}/>
-                        <DropdownFormBase value={`${groupAmount}`} setValue={(value: string) => dispatch({type: "SET_GROUP_AMOUNT", payload: parseInt(value)})} label={"# Groups"} options={{1: "1", 2: "2", 3: "3", 4: "4"}} />
-                        {groupAmount > 1 && <SingleChoiceFormBase value={`${state.group+1}`} setValue={(value: string) => dispatch({type: "SET_GROUP", payload: parseInt(value)-1})} label={"Group"} options={Object.fromEntries(Array.from(Array(groupAmount), (e, i) => [i+1, `${i+1}`]))}/>}
+                        {!isOwnGroup && <DropdownGroupedSearchFormBase value={!isOwnGroup ? "" : groupPattern.title} setValue={setGroupPattern} label={"Group Pattern"} optionGroups={state.groupPatternOptions} width={"22ch"}/>}
+                        {isOwnGroup && <DropdownFormBase value={`${groupAmount}`} setValue={(value: string) => dispatch({type: "SET_GROUP_AMOUNT", payload: parseInt(value)})} label={"# Groups"} options={{1: "1", 2: "2", 3: "3", 4: "4"}} />}
+                        {(isOwnGroup && groupAmount > 1) && <SingleChoiceFormBase value={`${state.group+1}`} setValue={(value: string) => dispatch({type: "SET_GROUP", payload: parseInt(value)-1})} label={"Group"} options={Object.fromEntries(Array.from(Array(groupAmount), (e, i) => [i+1, `${i+1}`]))}/>}
                     </StyledGroupListHeader>   
-                    <TransferList availableItems={state.classStudents} chosenItems={(state.discipline ? subject.disciplineGroupPatterns[state.discipline].groups[state.group] : subject.groupPattern.groups[state.group]) || []} setChosenItems={(value: Array<IItem>) => dispatch({ type: "SET_GROUP_STUDENTS", payload: value })}
-                     excludedItems={studentsInOtherGroups} search={state.studentSearch} setSearch={(value: string) => dispatch({type: "SET_STUDENT_SEARCH", payload: value})} />
+                    {isOwnGroup && <TransferList availableItems={state.classStudents} chosenItems={(state.discipline ? subject.disciplineGroupPatterns[state.discipline].groups[state.group] : subject.groupPattern.groups[state.group]) || []} setChosenItems={(value: Array<IItem>) => dispatch({ type: "SET_GROUP_STUDENTS", payload: value })}
+                     excludedItems={studentsInOtherGroups} search={state.studentSearch} setSearch={(value: string) => dispatch({type: "SET_STUDENT_SEARCH", payload: value})} />}
                 </>
             }
             {(!state.discipline && hasMultiple) &&

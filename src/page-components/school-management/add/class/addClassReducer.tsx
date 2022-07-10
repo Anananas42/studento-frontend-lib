@@ -32,10 +32,12 @@ interface ISubject {
     code: string; // M
     hasMultiple: boolean; // Subject is divided into multiple disciplines
     hasGroups: boolean; // Subject or disciplines are divided into multiple exclusive groups
+    hasOwnGroupPattern: boolean; // Subject or disciplines have own group pattern
     teacher: string; // teacherId
     teachers: IOptions; // Teachers with relevant approbations
     disciplines: Array<string>;
     disciplinesHasGroups: {[key: string]: boolean};
+    disciplinesHasOwnGroupPatterns: {[key: string]: boolean};
     disciplineGroupAmounts: {[key: string]: number};
     disciplineGroupPatterns: {[key: string]: IGroupPattern};
     disciplineTeachers: {[key: string]: string};
@@ -302,6 +304,7 @@ export type AddClassReducerActionType =
     | { type: "SET_GROUP_STUDENTS", payload: Array<IItem> }
     | { type: "SET_HAS_GROUPS", payload: boolean }
     | { type: "SET_HAS_MULTIPLE", payload: boolean }
+    | { type: "SET_HAS_OWN_GROUP_PATTERN", payload: boolean }
     | { type: "SET_NOTE", payload: string }
     | { type: "SET_ROOM", payload: string }
     | { type: "SET_STUDENT_SEARCH", payload: string }
@@ -327,11 +330,13 @@ const initSubjects = (subjects: Array<ISubject>, chosenSubjectTypes: Array<IItem
             code: st.code,
             hasMultiple: false,
             hasGroups: false,
+            hasOwnGroupPattern: false,
             teacher: "",
             teachers: dummyTeacherOptions,
             groupPattern: {title: st.name, groups: [[], [], [], [], []]},
             disciplines: [],
             disciplinesHasGroups: {},
+            disciplinesHasOwnGroupPatterns: {},
             disciplineGroupAmounts: {},
             disciplineGroupPatterns: {},
             disciplineTeachers: {},
@@ -353,6 +358,7 @@ const addClassReducer = (state: IAddClassReducerState, action: AddClassReducerAc
                 const subjectsUpdated = [...state.subjects.slice(0, state.displayedSubject),
                         {...subj,
                             disciplines: [...subj.disciplines, state.disciplineInput],
+                            disciplinesHasOwnGroupPatterns: {...subj.disciplinesHasOwnGroupPatterns, [state.disciplineInput]: false},
                             disciplineGroupPatterns: {...subj.disciplineGroupPatterns, [state.disciplineInput]: {title: groupName, groups: []}},
                             disciplineGroupAmounts: {...subj.disciplineGroupAmounts, [state.disciplineInput]: 1},
                             disciplineTeachers: {...subj.disciplineTeachers, [state.disciplineInput]: ""},
@@ -459,7 +465,7 @@ const addClassReducer = (state: IAddClassReducerState, action: AddClassReducerAc
                     const subj = state.subjects[state.displayedSubject];
                     const subjectsUpdated = updateSubject(state.subjects, state.displayedSubject, 
                         {disciplinesHasGroups: {...subj.disciplinesHasGroups, [state.discipline]: action.payload},
-                        ...(!action.payload ? {disciplineGroupPatterns: {}} : {})});
+                        ...(!action.payload ? {disciplineGroupPatterns: {...subj.disciplineGroupPatterns, [state.discipline]: {}}, disciplinesHasOwnGroupPatterns: {...subj.disciplinesHasOwnGroupPatterns, [state.discipline]: false}} : {})});
                     return {...state, subjects: subjectsUpdated, ...(!action.payload ? {group: 0} : {})};
                 }else{
                     const subj = state.subjects[state.displayedSubject];
@@ -468,6 +474,7 @@ const addClassReducer = (state: IAddClassReducerState, action: AddClassReducerAc
                         ...(!action.payload ? 
                             {groupPattern: {...subj.groupPattern, groups: [[], [], [], [], []]},
                                 groupAmount: 1,
+                                hasOwnGroupPattern: false,
                             } : {})});
                     return {...state, subjects: subjectsUpdated, ...(!action.payload ? {group: 0} : {})};
                 }
@@ -485,6 +492,22 @@ const addClassReducer = (state: IAddClassReducerState, action: AddClassReducerAc
                         } : {}),
                     });
                 return {...state, subjects: subjectsUpdated};
+            }
+        case "SET_HAS_OWN_GROUP_PATTERN": 
+            {
+                if (state.displayedSubject !== 0 && !state.displayedSubject) return {...state };
+                if (state.discipline) {
+                    const subj = state.subjects[state.displayedSubject];
+                    const groupPatterns = subj.disciplineGroupPatterns[state.discipline];
+                    const subjectsUpdated = updateSubject(state.subjects, state.displayedSubject, 
+                        {disciplinesHasOwnGroupPatterns: {...subj.disciplinesHasOwnGroupPatterns, [state.discipline]: action.payload},
+                        ...(!action.payload ? {disciplineGroupPatterns: {...subj.disciplineGroupPatterns, [state.discipline]: {...groupPatterns, groups: []}}} : {})});
+                    return {...state, subjects: subjectsUpdated, ...(!action.payload ? {group: 0} : {})};
+                }else{
+                    const subjectsUpdated = updateSubject(state.subjects, state.displayedSubject, 
+                        {hasOwnGroupPattern: action.payload});
+                    return {...state, subjects: subjectsUpdated};
+                }
             }
         case "SET_NOTE":
             return {...state, note: action.payload};
