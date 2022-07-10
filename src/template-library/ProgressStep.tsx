@@ -41,6 +41,7 @@ export interface IProgressStepProps {
     isStretched?: boolean;
     nextCallback?: () => void;
     prevCallback?: () => void;
+    doneCallback?: () => void;
 }
 
 const ProgressStep:FC<IProgressStepProps> = (props) => {
@@ -48,6 +49,7 @@ const ProgressStep:FC<IProgressStepProps> = (props) => {
     const navigate = useNavigate();
     const nextCallback = props.nextCallback || (() => {});
     const prevCallback = props.prevCallback || (() => {});
+    const doneCallback = props.doneCallback || (() => {});
 
     const [isAbortPopup, setIsAbortPopup] = useState<boolean>(false);
 
@@ -66,7 +68,7 @@ const ProgressStep:FC<IProgressStepProps> = (props) => {
             <StyledButtonRow>
                 {currentStep > 0 && <BtnTertiaryL icon={"arrow_back"} onClick={() => {prevCallback(); setCurrentStep(currentStep - 1)}}>Back</BtnTertiaryL>}
                 {currentStep < maxStep - 1 && <BtnPrimaryL icon={"arrow_forward"} isAfter={true} onClick={() => {nextCallback(); setCurrentStep(currentStep + 1)}}>Next</BtnPrimaryL>}
-                {currentStep === maxStep - 1 && <BtnConfirmL icon={"done"} onClick={() => console.log("done")}>Done</BtnConfirmL>}
+                {currentStep === maxStep - 1 && <BtnConfirmL icon={"done"} onClick={() => doneCallback()}>Done</BtnConfirmL>}
             </StyledButtonRow>
         </StyledSection>
     );

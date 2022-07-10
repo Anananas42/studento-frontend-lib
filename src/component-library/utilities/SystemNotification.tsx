@@ -20,6 +20,8 @@ const StyledSystemNotification = styled.div<IStyledSystemNotification>`
     font-size: 20px;
     line-height: 14px;
     font-weight: 700;
+    font-family: 'Varela Round', sans-serif;
+    font-style: 'normal';
     text-align: center;
     padding: 18px 36px;
     border: 2px solid ${props => props.colors.dark};
@@ -127,7 +129,7 @@ const SystemNotification:FC<IProps> = memo((props) => {
     )
 })
 
-export enum NotificationType {
+export const enum NotificationType {
     Error = "Error",
     Neutral = "Neutral",
     Success = "Success",

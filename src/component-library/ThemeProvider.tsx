@@ -2,6 +2,8 @@ import React, { useState, createContext, FC, SetStateAction, useContext, ReactNo
 import { IColorSet, colorsLightMode, colorsDarkMode } from './themes/ThemeColor';
 import { ILanguageSet, Language, LanguageSets } from './themes/ThemeLanguage';
 import SystemNotificationManager, { INewEntry, INotification } from './managers/SystemNotificationManager';
+import { NotificationType } from './utilities/SystemNotification';
+export { NotificationType };
 
 type ThemeMode = "light" | "dark";
 
