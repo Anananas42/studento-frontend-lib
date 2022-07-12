@@ -1,7 +1,7 @@
 import { FC, useState } from "react";
-import { IAddClassStepProps } from "../../../../pages/admin/add/AddClass";
-import ProgressStep from "../../../../template-library/ProgressStep";
-import TransferList, { IItem } from "../../../../template-library/TransferList";
+import { IAddClassStepProps } from "../../../../../pages/admin/add/AddClass";
+import ProgressStep from "../../../../../template-library/ProgressStep";
+import TransferList, { IItem } from "../../../../../template-library/TransferList";
 
 const SubjectTypeStep:FC<IAddClassStepProps> = (props) => {
     const { title, state, dispatch, ...rest } = props;
