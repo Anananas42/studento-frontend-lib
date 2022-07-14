@@ -91,7 +91,7 @@ const FormBase:FC<IFormProps> = (props) => {
         if (isDisabled) {
             setFormState({type: StateType.Disabled, message: defaultNote});
         }else if (errorMessage) {
-            setFormState({type: StateType.Error, message: errorMessage});
+            setFormState({type: StateType.Error, message: (errorMessage === "default" ? languageMap.Generic.required : errorMessage)});
         }else{
             setFormState({type: StateType.Default, message: defaultNote});
         }

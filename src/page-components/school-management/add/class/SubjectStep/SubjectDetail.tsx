@@ -179,8 +179,8 @@ const SubjectDetail:FC<IProps> = (props) => {
         if (!subject.disciplines.includes(state.discipline)) dispatch({type: "ADD_DISCIPLINE" });
     }
 
-    const setGroupPattern = (pattern: string) => {
-        dispatch({type: "SET_GROUP_PATTERN", payload: state.groupPatterns[pattern]});
+    const setReferencedGroupPattern = (name: string) => {
+        dispatch({type: "SET_REFERENCED_GROUP_PATTERN", payload: name});
     }
 
     const groupPattern = state.discipline ? subject.disciplineGroupPatterns[state.discipline] : subject.groupPattern;
@@ -219,7 +219,7 @@ const SubjectDetail:FC<IProps> = (props) => {
             {((state.discipline && subject.disciplinesHasGroups[state.discipline]) || (!hasMultiple && hasGroups)) &&
                 <>
                     <StyledGroupListHeader {...styleProps}>
-                        {!isOwnGroup && <DropdownGroupedSearchFormBase value={!isOwnGroup ? "" : groupPattern.title} setValue={setGroupPattern} label={"Group Pattern"} optionGroups={state.groupPatternOptions} width={"22ch"}/>}
+                        {!isOwnGroup && <DropdownGroupedSearchFormBase value={state.referencedGroupPatterns[state.discipline ? state.discipline : subject.title]} setValue={setReferencedGroupPattern} label={"Group Pattern"} optionGroups={state.groupPatternOptions} width={"22ch"}/>}
                         {isOwnGroup && <DropdownFormBase value={`${groupAmount}`} setValue={(value: string) => dispatch({type: "SET_GROUP_AMOUNT", payload: parseInt(value)})} label={"# Groups"} options={{1: "1", 2: "2", 3: "3", 4: "4"}} />}
                         {(isOwnGroup && groupAmount > 1) && <SingleChoiceFormBase value={`${state.group+1}`} setValue={(value: string) => dispatch({type: "SET_GROUP", payload: parseInt(value)-1})} label={"Group"} options={Object.fromEntries(Array.from(Array(groupAmount), (e, i) => [i+1, `${i+1}`]))}/>}
                     </StyledGroupListHeader>   

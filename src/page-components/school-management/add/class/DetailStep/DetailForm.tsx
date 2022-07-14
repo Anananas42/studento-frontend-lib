@@ -16,6 +16,7 @@ const StyledRow = styled.div`
 interface IProps {
     state: IAddClassReducerState;
     dispatch: React.Dispatch<AddClassReducerActionType>;
+    errors: IErrors;
 }
 
 const yearOptions = {
@@ -33,18 +34,24 @@ const yearOptions = {
     12: "12",
 }
 
+export interface IErrors {
+    gradeError?: string;
+    codeError?: string;
+    classTeacherError?: string;    
+}
+
 const DetailForm:FC<IProps> = (props) => {
-    const { state, dispatch } = props;
+    const { state, dispatch, errors } = props;
 
     return (
         <StyledDetailForm>
             <StyledRow>
-                <DropdownFormBase label={"Grade"} value={state.grade} setValue={(value: string) => dispatch({type: "SET_GRADE", payload: value})} width={"108px"} options={yearOptions} placeholder={" "}/>
-                <TextFormBase label={"Code"} value={state.code} setValue={(value: string) => dispatch({type: "SET_CODE", payload: value})} placeholder={""} width={"108px"} />
+                <DropdownFormBase label={"Grade"} value={state.grade} setValue={(value: string) => dispatch({type: "SET_GRADE", payload: value})} width={"108px"} options={yearOptions} placeholder={" "} errorMessage={errors.gradeError}/>
+                <TextFormBase label={"Code"} value={state.code} setValue={(value: string) => dispatch({type: "SET_CODE", payload: value})} placeholder={""} width={"108px"} errorMessage={errors.codeError}/>
                 <DropdownSearchFormBase label={"Room"} value={state.room} setValue={(value: string) => dispatch({type: "SET_ROOM", payload: value})} options={state.roomOptions} width={"100%"} isOptional={true} />
             </StyledRow>
-            <DropdownSearchFormBase  label={"Class teacher"} options={state.classTeacherOptions} value={state.classTeacher} setValue={(value: string) => dispatch({type: "SET_CLASS_TEACHER", payload: value})} />
-            <DropdownSearchFormBase  label={"Backup teacher"} options={state.backupTeacherOptions} value={state.backupTeacher} setValue={(value: string) => dispatch({type: "SET_BACKUP_TEACHER", payload: value})} isOptional={true} />
+            <DropdownSearchFormBase label={"Class teacher"} options={state.classTeacherOptions} value={state.classTeacher} setValue={(value: string) => dispatch({type: "SET_CLASS_TEACHER", payload: value})} errorMessage={errors.classTeacherError}/>
+            <DropdownSearchFormBase label={"Backup teacher"} options={state.backupTeacherOptions} value={state.backupTeacher} setValue={(value: string) => dispatch({type: "SET_BACKUP_TEACHER", payload: value})} isOptional={true} />
             <TextAreaFormBase label={"Note"} value={state.note} setValue={(value: string) => dispatch({type: "SET_NOTE", payload: value})} placeholder={"Additional information..."} isOptional={true} />
         </StyledDetailForm>
     );

@@ -15,6 +15,7 @@ export interface ILanguageSet {
         passwordPlaceholder: string;
         passwordRemember: string;
         passwordReset: string;
+        required: string;
         time: string;
         upload: string;
         usermode: string;
@@ -165,7 +166,8 @@ const EnSet:ILanguageSet = {
         passwordForgot: "Forgot password",
         passwordPlaceholder: "",
         passwordRemember: "Remember password",
-        passwordReset: "Send password reset email",
+        passwordReset: "Send reset email",
+        required: "Required",
         time: "Time",
         upload: "upload",
         usermode: "User mode",
@@ -317,6 +319,7 @@ const CzSet:ILanguageSet = {
         passwordPlaceholder: "",
         passwordRemember: "Zapamatovat přihlášení",
         passwordReset: "Zaslat resetovací email",
+        required: "Nezbytné",
         time: "Čas",
         upload: "nahrát",
         usermode: "Uživatelský mód",
