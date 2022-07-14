@@ -1,5 +1,4 @@
 import { FC, useState } from "react";
-import styled from "styled-components";
 import DetailStep from "../../../page-components/school-management/add/class/DetailStep/DetailStep";
 import StudentStep from "../../../page-components/school-management/add/class/StudentStep/StudentStep";
 import useAddClassReducer, { AddClassReducerActionType, IAddClassReducerState } from "../../../page-components/school-management/add/class/addClassReducer";
@@ -9,13 +8,7 @@ import ProgressLine from "../../../template-library/ProgressLine";
 import { IProgressStepProps } from "../../../template-library/ProgressStep";
 import { useNavigate } from "react-router-dom";
 import { NotificationType, useThemeContext } from "../../../component-library/ThemeProvider";
-
-const StyledAdminAddClass = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 1400px;
-`;
+import { StyledAdminAddContent } from ".";
 
 const steps:Array<string> = [
     "Details",
@@ -55,10 +48,10 @@ const AdminAddClass:FC = () => {
     };
 
     return ( 
-        <StyledAdminAddClass>
+        <StyledAdminAddContent>
             <ProgressLine steps={steps} currentStep={currentStep} />
             <CurrentStepComponent {...stepProps} doneCallback={doneCallback} />
-        </StyledAdminAddClass>
+        </StyledAdminAddContent>
     );
 }
 

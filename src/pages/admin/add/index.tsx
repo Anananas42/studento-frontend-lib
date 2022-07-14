@@ -9,6 +9,13 @@ const StyledAdminAdd = styled.div`
     padding-top: 64px;
 `
 
+export const StyledAdminAddContent = styled.div`
+display: flex;
+flex-direction: column;
+align-items: center;
+width: 1400px;
+`;
+
 const AdminAdd:FC = () => {
 
     return (
