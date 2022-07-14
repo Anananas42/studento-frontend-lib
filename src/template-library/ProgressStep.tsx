@@ -39,16 +39,16 @@ export interface IProgressStepProps {
     setCurrentStep: React.Dispatch<SetStateAction<number>>;
     abortDestination: string;
     isStretched?: boolean;
-    nextCallback?: () => void;
-    prevCallback?: () => void;
+    nextCallback?: () => boolean;
+    prevCallback?: () => boolean;
     doneCallback?: () => void;
 }
 
 const ProgressStep:FC<IProgressStepProps> = (props) => {
     const { title, currentStep, maxStep, setCurrentStep, abortDestination, isStretched } = props;
     const navigate = useNavigate();
-    const nextCallback = props.nextCallback || (() => {});
-    const prevCallback = props.prevCallback || (() => {});
+    const nextCallback = props.nextCallback || (() => true);
+    const prevCallback = props.prevCallback || (() => true);
     const doneCallback = props.doneCallback || (() => {});
 
     const [isAbortPopup, setIsAbortPopup] = useState<boolean>(false);
@@ -66,8 +66,8 @@ const ProgressStep:FC<IProgressStepProps> = (props) => {
                 {props.children}
             </StyledContent>
             <StyledButtonRow>
-                {currentStep > 0 && <BtnTertiaryL icon={"arrow_back"} onClick={() => {prevCallback(); setCurrentStep(currentStep - 1)}}>Back</BtnTertiaryL>}
-                {currentStep < maxStep - 1 && <BtnPrimaryL icon={"arrow_forward"} isAfter={true} onClick={() => {nextCallback(); setCurrentStep(currentStep + 1)}}>Next</BtnPrimaryL>}
+                {currentStep > 0 && <BtnTertiaryL icon={"arrow_back"} onClick={() => {if(prevCallback()){setCurrentStep(currentStep - 1)}}}>Back</BtnTertiaryL>}
+                {currentStep < maxStep - 1 && <BtnPrimaryL icon={"arrow_forward"} isAfter={true} onClick={() => {if(nextCallback()){setCurrentStep(currentStep + 1)}}}>Next</BtnPrimaryL>}
                 {currentStep === maxStep - 1 && <BtnConfirmL icon={"done"} onClick={() => doneCallback()}>Done</BtnConfirmL>}
             </StyledButtonRow>
         </StyledSection>

@@ -9,6 +9,7 @@ const SubjectTypeStep:FC<IAddClassStepProps> = (props) => {
 
     const nextCallback = () => {
         dispatch({type: "ENTER_SUBJECTS_STEP"});
+        return true;
     }
 
     return (
