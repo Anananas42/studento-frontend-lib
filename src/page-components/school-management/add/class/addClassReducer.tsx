@@ -22,7 +22,7 @@ interface IGroupPatterns { // To retrieve chosen students from a group pattern n
 interface IGroupPatternOptions {
     [key: string]: { // "Czech Language"
         title: string; // Czech Language
-        options: IOptions; // { "Cz - Grammar": "Cz - Grammar", "Cz - Literature": "Cz - Literature"}
+        options: IOptions; // { "Cz - Grammar": "Cz - Grammar", "Cz - Literature": "Cz - Literature"} - left empty if only subject and no disciplines
     }
 };
 
@@ -41,7 +41,7 @@ interface ISubject {
     disciplineGroupAmounts: {[key: string]: number};
     disciplineGroupPatterns: {[key: string]: IGroupPattern};
     disciplineTeachers: {[key: string]: string};
-    groupPattern: IGroupPattern; // Copy group arrangement from an existing pattern
+    groupPattern: IGroupPattern; // Own group pattern
     groupAmount: number;
 };
 
@@ -61,6 +61,7 @@ export interface IAddClassReducerState {
     groupPatternOptions: IGroupPatternOptions;
     group: number;
     note: string;
+    referencedGroupPatterns: IOptions;
     room: string;
     roomOptions: IOptions;
     studentOptions: Array<IItem>;
@@ -274,6 +275,7 @@ const initState:IAddClassReducerState = {
     groupPatternOptions: {},
     group: 0,
     note: "",
+    referencedGroupPatterns: {},
     room: "",
     roomOptions: dummyRoomOptions,
     studentOptions: dummyStudentOptions,
@@ -306,6 +308,7 @@ export type AddClassReducerActionType =
     | { type: "SET_HAS_MULTIPLE", payload: boolean }
     | { type: "SET_HAS_OWN_GROUP_PATTERN", payload: boolean }
     | { type: "SET_NOTE", payload: string }
+    | { type: "SET_REFERENCED_GROUP_PATTERN", payload: string }
     | { type: "SET_ROOM", payload: string }
     | { type: "SET_STUDENT_SEARCH", payload: string }
     | { type: "SET_TEACHER", payload: string }
@@ -446,6 +449,7 @@ const addClassReducer = (state: IAddClassReducerState, action: AddClassReducerAc
             }
         case "SET_GROUP_PATTERN":
             {
+                // TODO handle disciplines
                 const subjectsUpdated = updateSubject(state.subjects, state.displayedSubject, {groupPattern: action.payload});
                 return {...state, subjects: subjectsUpdated};
             }
@@ -481,6 +485,8 @@ const addClassReducer = (state: IAddClassReducerState, action: AddClassReducerAc
             }
         case "SET_HAS_MULTIPLE":
             {
+                if (state.displayedSubject !== 0 && !state.displayedSubject) return {...state };
+                const subj = state.subjects[state.displayedSubject];
                 const subjectsUpdated = updateSubject(state.subjects, state.displayedSubject, 
                     {hasMultiple: action.payload,
                         ...(!action.payload ? {
@@ -491,27 +497,61 @@ const addClassReducer = (state: IAddClassReducerState, action: AddClassReducerAc
                                 disciplineTeachers: {},
                         } : {}),
                     });
-                return {...state, subjects: subjectsUpdated};
+                let updatedGroupPatternOptions = Object.fromEntries(Object.entries(state.groupPatternOptions).filter(([key, value]) => value.title !== subj.title));
+                return {...state, subjects: subjectsUpdated, groupPatternOptions: updatedGroupPatternOptions};
             }
         case "SET_HAS_OWN_GROUP_PATTERN": 
             {
                 if (state.displayedSubject !== 0 && !state.displayedSubject) return {...state };
+                const subj = state.subjects[state.displayedSubject];
+                let updatedGroupPatternOption;
+                const patternName = state.discipline ? (subj.code + ' - ' + state.discipline) : subj.title;
+                if (!state.groupPatternOptions[state.displayedSubject]) {
+                    if (action.payload) {
+                        updatedGroupPatternOption = {title: subj.title, options: (state.discipline ? {} : {[subj.title]: subj.title})};
+                    }else{
+                        updatedGroupPatternOption = {};
+                    }
+                }else{
+                    updatedGroupPatternOption = state.groupPatternOptions[state.displayedSubject];
+                }
+
+                if (state.discipline){
+                    if (action.payload) {
+                        updatedGroupPatternOption = {...updatedGroupPatternOption, options: {...updatedGroupPatternOption.options, [patternName]: patternName}};
+                    }else{
+                        if (updatedGroupPatternOption.options) {
+                            updatedGroupPatternOption = {...updatedGroupPatternOption, options: Object.fromEntries(Object.entries(updatedGroupPatternOption.options).filter(([key]) => key !== patternName))};
+                        }
+                    }
+                }
+                const updatedGroupPatternOptions = {...state.groupPatternOptions, [state.displayedSubject]: updatedGroupPatternOption};
+
                 if (state.discipline) {
-                    const subj = state.subjects[state.displayedSubject];
                     const groupPatterns = subj.disciplineGroupPatterns[state.discipline];
                     const subjectsUpdated = updateSubject(state.subjects, state.displayedSubject, 
                         {disciplinesHasOwnGroupPatterns: {...subj.disciplinesHasOwnGroupPatterns, [state.discipline]: action.payload},
                         ...(!action.payload ? {disciplineGroupPatterns: {...subj.disciplineGroupPatterns, [state.discipline]: {...groupPatterns, groups: []}}}
                              : {disciplineGroupPatterns: {...subj.disciplineGroupPatterns, [state.discipline]: {...groupPatterns, groups: [[], [], [], [], []]}}})});
-                    return {...state, subjects: subjectsUpdated, ...(!action.payload ? {group: 0} : {})};
+                    return {...state, groupPatternOptions: updatedGroupPatternOptions, subjects: subjectsUpdated, ...(!action.payload ? {group: 0} : {})};
                 }else{
                     const subjectsUpdated = updateSubject(state.subjects, state.displayedSubject, 
                         {hasOwnGroupPattern: action.payload});
-                    return {...state, subjects: subjectsUpdated};
+                    return {...state, groupPatternOptions: updatedGroupPatternOptions, subjects: subjectsUpdated};
                 }
             }
         case "SET_NOTE":
             return {...state, note: action.payload};
+        case "SET_REFERENCED_GROUP_PATTERN":
+            {
+                if (state.displayedSubject !== 0 && !state.displayedSubject) return {...state };
+                const subj = state.subjects[state.displayedSubject];
+                if (state.discipline){
+                    return {...state, referencedGroupPatterns: {...state.referencedGroupPatterns, [state.discipline]: action.payload}};
+                }else{
+                    return {...state, referencedGroupPatterns: {...state.referencedGroupPatterns, [subj.title]: action.payload}};
+                }
+            }
         case "SET_ROOM":
             return {...state, room: action.payload};
         case "SET_STUDENT_SEARCH":
