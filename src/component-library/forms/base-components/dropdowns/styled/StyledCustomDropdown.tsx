@@ -52,7 +52,7 @@ export const StyledList = styled.div<IStyledSelect>`
     position: absolute;
     margin: 1px 0 0 0;
     padding: 0;
-    width: ${props => props.width ? props.width : "100%"};
+    width: 100%; //${props => props.width ? props.width : "100%"};
     background-color: white;
     color: ${props => props.fill};
     border: 1px solid ${FormColors.Default.border};
@@ -63,7 +63,7 @@ export const StyledList = styled.div<IStyledSelect>`
     user-select: none;
     overflow-y: auto;
     max-height: 400px;
-    z-index: 5;
+    z-index: 50;
 
     display: ${props => props.isOpen? "block" : "none"};
 `;
