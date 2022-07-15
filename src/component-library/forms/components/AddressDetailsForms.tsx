@@ -4,7 +4,7 @@ import { TextFormBase } from "../base-components";
 
 interface IAddressDetailsProps {
     value: string;
-    setValue: React.Dispatch<React.SetStateAction<string>>;
+    setValue: (inputText:string) => void;
     isHorizontal?: boolean; // Place label to the left
     formId?: string; // To link label and input
     errorMessage?: string; // Trigger error state by setting errorMessage to a value
@@ -12,6 +12,14 @@ interface IAddressDetailsProps {
     isOptional?: boolean;
     width?: string; // Set width manually. Else it's 100%
     onKeyDown?: React.KeyboardEventHandler<any>; // Detect pressed keys while focused on the input (for example confirm something on enter)
+}
+
+export const AddressForm:FC<IAddressDetailsProps> = (props) => {
+    const { languageMap } = useThemeContext();
+
+    return (
+        <TextFormBase label={languageMap.Address.index} placeholder={""} {...props} />
+    )
 }
 
 export const StreetForm:FC<IAddressDetailsProps> = (props) => {

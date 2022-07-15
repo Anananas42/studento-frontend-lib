@@ -434,7 +434,7 @@ const CzSet:ILanguageSet = {
         middleName: "Střední jméno",
         lastName: "Příjmení",
         birthdate: "Datum narození",
-        personalIdentifNumber: "Osobní identifikační číslo",
+        personalIdentifNumber: "Rodné číslo",
         placeOfBirth: "Místo narození",
         startDate: "Datum nastoupení",
         insuranceCompany: "Pojišťovna",

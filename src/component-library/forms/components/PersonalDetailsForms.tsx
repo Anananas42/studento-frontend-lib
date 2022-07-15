@@ -5,7 +5,7 @@ import DateForm from "./DateForm";
 
 interface IPersonalDetailsProps {
     value: string;
-    setValue: React.Dispatch<React.SetStateAction<string>>;
+    setValue: (inputText:string) => void;
     isHorizontal?: boolean; // Place label to the left
     formId?: string; // To link label and input
     errorMessage?: string; // Trigger error state by setting errorMessage to a value
@@ -55,7 +55,7 @@ export const StartdateForm:FC<IPersonalDetailsProps> = (props) => {
     )
 }
 
-export const PersonalIdentifNumberForm:FC<IPersonalDetailsProps> = (props) => {
+export const PersonalIDForm:FC<IPersonalDetailsProps> = (props) => {
     const { languageMap } = useThemeContext();
 
     return (

@@ -4,7 +4,7 @@ import { TextFormBase } from "../base-components";
 
 interface IPhoneNumberForm {
     value: string;
-    setValue: React.Dispatch<React.SetStateAction<string>>;
+    setValue: (inputText: string) => void;
     isHorizontal?: boolean; // Place label to the left
     formId?: string; // To link label and input
     errorMessage?: string; // Trigger error state by setting errorMessage to a value

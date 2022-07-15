@@ -8,6 +8,7 @@ const StyledTitle = styled.div<{fill: string}>`
     padding: ${sectionTitlePadding};
     text-align: center;
     flex: 0 0 auto;
+    align-self: center;
 `;
 
 const StyledSectionTitle:FC = (props) => {

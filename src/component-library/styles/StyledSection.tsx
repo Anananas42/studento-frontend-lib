@@ -15,7 +15,7 @@ const StyledSectionComponent = styled.div<IStyleProps>`
     padding: ${sectionPadding};
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     width: fit-content;
     min-height: ${props => props.isStretched ? "max(100%, 300px)" : "fit-content"};
     ${props => props.isStretched ? "max-height: max(100%, 300px); overflow: hidden; overflow-y: auto;" : ""}

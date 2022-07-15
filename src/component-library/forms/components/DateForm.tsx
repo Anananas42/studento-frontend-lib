@@ -55,7 +55,7 @@ const StyledIconWrapper = styled.div<{borderRadius: string, isDisabled?: boolean
 
 export interface IDateFormProps {
     value: string;
-    setValue: React.Dispatch<React.SetStateAction<string>>;
+    setValue: (inputText:string) => void;
     isHorizontal?: boolean;
     defaultNote?: string;
     formId?: string;

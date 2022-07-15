@@ -27,6 +27,7 @@ const StyledContent = styled.div<IStyleProps>`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    width: 100%;
     min-height: ${props => props.isStretched ? "calc(100% - 127px)" : "fit-content"};
     max-height: calc(100% - 127px);
     flex: 0 1 auto;
