@@ -26,6 +26,7 @@ export const StyledTextInput = styled.input<IStyledInput>`
 
     ::placeholder {
         color: ${FormColors.Default.placeholder};
+        opacity: 1;
     }
 
     :disabled {
