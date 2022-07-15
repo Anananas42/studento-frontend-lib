@@ -18,7 +18,7 @@ export const AddressForm:FC<IAddressDetailsProps> = (props) => {
     const { languageMap } = useThemeContext();
 
     return (
-        <TextFormBase label={languageMap.Address.index} placeholder={""} {...props} />
+        <TextFormBase label={languageMap.Address.index} placeholder={"Evropská 123/1"} {...props} />
     )
 }
 
@@ -26,7 +26,7 @@ export const StreetForm:FC<IAddressDetailsProps> = (props) => {
     const { languageMap } = useThemeContext();
 
     return (
-        <TextFormBase label={languageMap.Address.street} placeholder={""} {...props} />
+        <TextFormBase label={languageMap.Address.street} placeholder={"Evropská"} {...props} />
     )
 }
 
@@ -34,7 +34,7 @@ export const CityForm:FC<IAddressDetailsProps> = (props) => {
     const { languageMap } = useThemeContext();
 
     return (
-        <TextFormBase label={languageMap.Address.city} placeholder={""} {...props} />
+        <TextFormBase label={languageMap.Address.city} placeholder={"Praha"} {...props} />
     )
 }
 
@@ -42,6 +42,6 @@ export const ZipCodeForm:FC<IAddressDetailsProps> = (props) => {
     const { languageMap } = useThemeContext();
 
     return (
-        <TextFormBase label={languageMap.Address.zip} placeholder={""} {...props} />
+        <TextFormBase label={languageMap.Address.zip} placeholder={"12345"} {...props} />
     )
 }

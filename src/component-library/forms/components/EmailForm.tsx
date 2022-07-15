@@ -19,7 +19,7 @@ const EmailForm:FC<IEmailForm> = (props) => {
     const { languageMap } = useThemeContext();
 
     return (
-        <TextFormBase icon={"email"} label={languageMap.Contact.email} placeholder={props.placeholder || ""} {...props} />
+        <TextFormBase icon={"email"} label={languageMap.Contact.email} placeholder={props.placeholder || "alfred@nobel.org"} {...props} />
     )
 }
 

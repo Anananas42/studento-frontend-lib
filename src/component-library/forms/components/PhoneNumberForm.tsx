@@ -18,7 +18,7 @@ const PhoneNumberForm:FC<IPhoneNumberForm> = (props) => {
     const { languageMap } = useThemeContext();
 
     return (
-        <TextFormBase icon={"phone"} label={languageMap.Contact.phoneNumber} placeholder={""} {...props} />
+        <TextFormBase icon={"phone"} label={languageMap.Contact.phoneNumber} placeholder={"+420 123 456 789"} {...props} />
     )
 }
 
