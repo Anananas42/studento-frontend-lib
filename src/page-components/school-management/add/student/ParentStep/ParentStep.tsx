@@ -14,13 +14,8 @@ const StyledRow = styled.div`
 const ParentStep:FC<IAddStudentStepProps> = (props) => {
     const { title, state, dispatch, ...rest } = props;
 
-    const nextCallback = () => {
-        
-        return true;
-    };
-
     return (
-        <ProgressStep title={title + " - parent"} nextCallback={nextCallback} {...rest}>
+        <ProgressStep title={title + " - parent"} {...rest}>
             <StyledRow>
                 <FirstNameForm value={state.parentFirstName} setValue={(value: string) => dispatch({ type: "SET_PARENT_FIRST_NAME", payload: value })} />
                 <LastNameForm value={state.parentLastName} setValue={(value: string) => dispatch({ type: "SET_PARENT_LAST_NAME", payload: value })} />

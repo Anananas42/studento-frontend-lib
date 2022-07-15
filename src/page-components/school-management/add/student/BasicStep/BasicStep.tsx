@@ -38,12 +38,16 @@ const BasicStep:FC<IAddStudentStepProps> = (props) => {
                 <FirstNameForm value={state.firstName} setValue={(value: string) => dispatch({type: "SET_FIRST_NAME", payload: value})}/>
                 <LastNameForm value={state.lastName} setValue={(value: string) => dispatch({type: "SET_LAST_NAME", payload: value})}/>
             </StyledRow>
-            <DropdownFormBase label={"Class"} value={state.class} setValue={(value: string) => dispatch({type: "SET_CLASS", payload: value})} options={dummyClasses} width={"120px"} placeholder={" "}/>
-            <BirthdateForm value={state.birthdate} setValue={(value: string) => dispatch({type: "SET_BIRTHDATE", payload: value})}/>
-            <PersonalIDForm value={state.personalID} setValue={(value: string) => dispatch({type: "SET_PERSONAL_ID", payload: value})} width={"24ch"}/>
-            <div style={{width: "43ch"}}>
-                <DropdownFormBase label={"Insurance company"} value={state.insuranceCompany} setValue={(value: string) => dispatch({type: "SET_INSURANCE_COMPANY", payload: value})} options={dummyInsuranceCompanies} isOptional={true} />
-            </div>
+            <StyledRow>
+                <div style={{width: "43ch"}}>
+                    <DropdownFormBase label={"Insurance company"} value={state.insuranceCompany} setValue={(value: string) => dispatch({type: "SET_INSURANCE_COMPANY", payload: value})} options={dummyInsuranceCompanies} isOptional={true} />
+                </div>
+                <DropdownFormBase label={"Class"} value={state.class} setValue={(value: string) => dispatch({type: "SET_CLASS", payload: value})} options={dummyClasses} width={"120px"} placeholder={"1.A"}/>
+            </StyledRow>
+            <StyledRow>
+                <PersonalIDForm value={state.personalID} setValue={(value: string) => dispatch({type: "SET_PERSONAL_ID", payload: value})}/>
+                <BirthdateForm value={state.birthdate} setValue={(value: string) => dispatch({type: "SET_BIRTHDATE", payload: value})}/>
+            </StyledRow>
         </ProgressStep>
     )
 }

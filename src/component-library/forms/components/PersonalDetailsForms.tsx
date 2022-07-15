@@ -19,7 +19,7 @@ export const FirstNameForm:FC<IPersonalDetailsProps> = (props) => {
     const { languageMap } = useThemeContext();
 
     return (
-        <TextFormBase label={languageMap.PersonalDetails.firstName} placeholder={""} {...props} />
+        <TextFormBase label={languageMap.PersonalDetails.firstName} placeholder={"Alfred"} {...props} />
     )
 }
 
@@ -35,7 +35,7 @@ export const LastNameForm:FC<IPersonalDetailsProps> = (props) => {
     const { languageMap } = useThemeContext();
 
     return (
-        <TextFormBase label={languageMap.PersonalDetails.lastName} placeholder={""} {...props} />
+        <TextFormBase label={languageMap.PersonalDetails.lastName} placeholder={"Nobel"} {...props} />
     )
 }
 
@@ -59,7 +59,7 @@ export const PersonalIDForm:FC<IPersonalDetailsProps> = (props) => {
     const { languageMap } = useThemeContext();
 
     return (
-        <TextFormBase label={languageMap.PersonalDetails.personalIdentifNumber} placeholder={""} {...props} />
+        <TextFormBase label={languageMap.PersonalDetails.personalIdentifNumber} placeholder={"123456/1234"} {...props} />
     )
 }
 
@@ -67,6 +67,6 @@ export const PlaceOfBirthForm:FC<IPersonalDetailsProps> = (props) => {
     const { languageMap } = useThemeContext();
 
     return (
-        <TextFormBase label={languageMap.PersonalDetails.placeOfBirth} placeholder={""} {...props} />
+        <TextFormBase label={languageMap.PersonalDetails.placeOfBirth} placeholder={"FN Motol"} {...props} />
     )
 }
