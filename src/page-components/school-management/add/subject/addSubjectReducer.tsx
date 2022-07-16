@@ -29,6 +29,8 @@ export interface IAddSubjectReducerState {
     hasMultiple: boolean; // Subject is divided into multiple disciplines
     hasGroups: boolean; // Subject or disciplines are divided into multiple exclusive groups
     hasOwnGroupPattern: boolean; // Subject or disciplines have own group pattern
+    isMultipleClasses: boolean; // Students come from multiple classes
+    isCustomSubject: boolean; // Subject is not in subject types
     teacher: string; // teacherId
     teachers: IOptions; // Teachers with relevant approbations
     discipline: string;
@@ -183,6 +185,8 @@ const initState:IAddSubjectReducerState = {
     hasMultiple: false,
     hasGroups: false,
     hasOwnGroupPattern: false,
+    isMultipleClasses: false,
+    isCustomSubject: false,
     teacher: "",
     teachers: {},
     disciplines: [],
@@ -218,11 +222,14 @@ export type AddSubjectReducerActionType =
     | { type: "SET_HAS_GROUPS", payload: boolean }
     | { type: "SET_HAS_MULTIPLE", payload: boolean }
     | { type: "SET_HAS_OWN_GROUP_PATTERN", payload: boolean }
+    | { type: "SET_IS_MULTIPLE_CLASSES", payload: boolean }
+    | { type: "SET_IS_CUSTOM_SUBJECT", payload: boolean }
     | { type: "SET_NOTE", payload: string }
     | { type: "SET_REFERENCED_GROUP_PATTERN", payload: string }
     | { type: "SET_STUDENT_SEARCH", payload: string }
     | { type: "SET_SUBJECT_TYPE", payload: string }
     | { type: "SET_TEACHER", payload: string }
+    | { type: "SET_TITLE", payload: string }
     | { type: "REMOVE_DISCIPLINE", payload: string }
 ;
 
@@ -274,6 +281,14 @@ const addSubjectReducer = (state: IAddSubjectReducerState, action: AddSubjectRed
             {
                 return state;
             }
+        case "SET_IS_MULTIPLE_CLASSES":
+            {
+                return { ...state, isMultipleClasses: action.payload };
+            }
+        case "SET_IS_CUSTOM_SUBJECT":
+            {
+                return { ...state, isCustomSubject: action.payload };
+            }
         case "SET_NOTE":
             return {...state, note: action.payload};
         case "SET_REFERENCED_GROUP_PATTERN":
@@ -281,10 +296,20 @@ const addSubjectReducer = (state: IAddSubjectReducerState, action: AddSubjectRed
                 return state;
             }
         case "SET_STUDENT_SEARCH":
-            return {...state, studentSearch: action.payload};
+            {
+                return {...state, studentSearch: action.payload};
+            }
+        case "SET_SUBJECT_TYPE":
+            {
+                return {...state, subjectType: action.payload};
+            }
         case "SET_TEACHER":
             {
                 return state;
+            }
+        case "SET_TITLE":
+            {
+                return {...state, title: action.payload};
             }
         case "REMOVE_DISCIPLINE": {
             return state;

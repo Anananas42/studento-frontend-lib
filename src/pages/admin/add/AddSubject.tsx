@@ -10,7 +10,7 @@ import useAddSubjectReducer, { AddSubjectReducerActionType, IAddSubjectReducerSt
 
 const steps:Array<string> = [
     "Details",
-    "Disciplines",
+    "Disciplines and groups",
 ];
 
 export interface IAddSubjectStepProps extends IProgressStepProps {
